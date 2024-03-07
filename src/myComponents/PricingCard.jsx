@@ -26,7 +26,7 @@ const PricingCard = () => {
                 <LI attrLI={{ className: 'border-0' }}>{'15 Subdomains'}</LI>
               </UL>
               <div className='pricingtable-Edit'>
-                <Btn attrBtn={{ color: 'primary', size: 'lg' }}>{Edit}</Btn>
+                <Btn attrBtn={{ color: 'success', size: 'lg' }}>{Edit}</Btn>
               </div>
             </div>
           </Col>
@@ -47,7 +47,7 @@ const PricingCard = () => {
                 <LI attrLI={{ className: 'border-0' }}>{'15 Subdomains'}</LI>
               </UL>
               <div className='pricingtable-Edit'>
-                <Btn attrBtn={{ color: 'primary', size: 'lg' }}>{Edit}</Btn>
+                <Btn attrBtn={{ color: 'success', size: 'lg' }}>{Edit}</Btn>
               </div>
             </div>
           </Col>
@@ -68,7 +68,7 @@ const PricingCard = () => {
                 <LI attrLI={{ className: 'border-0' }}>{'15 Subdomains'}</LI>
               </UL>
               <div className='pricingtable-Edit'>
-                <Btn attrBtn={{ color: 'primary', size: 'lg' }}>{Edit}</Btn>
+                <Btn attrBtn={{ color: 'success', size: 'lg' }}>{Edit}</Btn>
               </div>
             </div>
           </Col>
@@ -89,7 +89,7 @@ const PricingCard = () => {
                 <LI attrLI={{ className: 'border-0' }}>{'15 Subdomains'}</LI>
               </UL>
               <div className='pricingtable-Edit'>
-                <Btn attrBtn={{ color: 'primary', size: 'lg' }}>{Edit}</Btn>
+                <Btn attrBtn={{ color: 'success', size: 'lg' }}>{Edit}</Btn>
               </div>
             </div>
           </Col>

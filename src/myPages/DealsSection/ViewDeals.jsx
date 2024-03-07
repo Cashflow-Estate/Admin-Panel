@@ -15,7 +15,7 @@ const ViewDeals = () => {
   
   return (
     <Fragment>
-      <Breadcrumbs mainTitle="Deals" parent="Deals" title="Create Deals" />
+      <Breadcrumbs mainTitle="Deals" parent="Deals" title="All Deals" />
 
       <Container fluid={true}>
         <Row>

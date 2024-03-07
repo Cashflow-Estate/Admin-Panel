@@ -26,7 +26,7 @@ export const supportData = [
       </Media>
     ),
     position: 'System Architect',
-    client: "paidmembers",
+    client: "Members",
     investment: '$320,800',
     location: 'Edinburgh',
     skill: (
@@ -52,7 +52,7 @@ export const supportData = [
       </Media>
     ),
     position: 'System Architect',
-    client: "paidmembers",
+    client: "Members",
     investment: '$320,800',
     location: 'Edinburgh',
     skill: (
@@ -79,7 +79,7 @@ export const supportData = [
       </Media>
     ),
     position: 'Junior Technical Author',
-    client: "paidcustomers",
+    client: "Customers",
     investment: '$86,000',
     location: 'San Francisco',
     skill: (
@@ -106,7 +106,7 @@ export const supportData = [
       </Media>
     ),
     position: 'Junior Technical Author',
-    client: "paidcustomers",
+    client: "Customers",
     investment: '$86,000',
     location: 'San Francisco',
     skill: (
@@ -133,7 +133,7 @@ export const supportData = [
         </Media>
       ),
       position: 'Junior Technical Author',
-      client: "paidcustomers",
+      client: "Customers",
       investment: '$86,000',
       location: 'San Francisco',
       skill: (
@@ -158,7 +158,7 @@ export const supportData = [
       </Media>
     ),
     position: 'Software Engineer',
-    client: "freetrialmembers",
+    client: "Free",
     investment: '$132,000',
     location: 'London',
     skill: (
@@ -185,7 +185,7 @@ export const supportData = [
       </Media>
     ),
     position: 'Integration Specialist',
-    client: "paidmembers",
+    client: "Members",
     investment: '$372,000',
     location: 'New York',
     skill: (
@@ -212,7 +212,7 @@ export const supportData = [
       </Media>
     ),
     position: 'Pre-Sales Support',
-    client: "freetrialmembers",
+    client: "Free",
     investment: '$106,450',
     location: 'New York',
     skill: (
@@ -239,7 +239,7 @@ export const supportData = [
       </Media>
     ),
     position: 'Senior Javascript Developer',
-    client: "paidmembers",
+    client: "Members",
     investment: '$433,060',
     location: 'San Francisco',
     skill: (
@@ -266,7 +266,7 @@ export const supportData = [
       </Media>
     ),
     position: 'Senior Javascript Developer',
-    client: "paidmembers",
+    client: "Members",
     investment: '$433,060',
     location: 'San Francisco',
     skill: (
@@ -293,7 +293,7 @@ export const supportData = [
       </Media>
     ),
     position: 'Senior Javascript Developer',
-    client: "paidmembers",
+    client: "Members",
     investment: '$433,060',
     location: 'San Francisco',
     skill: (

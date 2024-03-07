@@ -1,3 +1,4 @@
+
 import React, { Fragment, useState } from "react";
 import { BrowserRouter as Router, Route, useNavigate } from "react-router-dom";
 import DataTable from "react-data-table-component";
@@ -18,6 +19,7 @@ import { Breadcrumbs, H3 } from "../../AbstractElements";
 
 const AllCustomers = () => {
   const [filter, setFilter] = useState("All");
+  console.log("🚀 ~ AllCustomers ~ filter:", filter);
   const [searchTerm, setSearchTerm] = useState("");
   const [filterOpen, setFilterOpen] = useState(false); // Initially closed
   const [modalOpen, setModalOpen] = useState(false);
@@ -35,7 +37,7 @@ const AllCustomers = () => {
         <ButtonGroup className="mb-0">
           <Button
             className="dropbtn rounded-pill"
-            color="warning"
+            color="info"
             onClick={item.toggle}
           >
             {item.btnText} <FilterIcon />
@@ -78,14 +80,15 @@ const AllCustomers = () => {
   const renderClientBadge = (client) => {
     let color;
     switch (client) {
-      case "paidmembers":
-        color = "primary";
+      case "Members":
+        color = "warning";
         break;
-      case "paidcustomers":
+      case "Customers":
         color = "success";
+
         break;
-      case "freetrialmembers":
-        color = "info";
+      case "Free":
+        color = "danger";
         break;
       default:
         color = "secondary";
@@ -98,38 +101,99 @@ const AllCustomers = () => {
     setModalOpen(!modalOpen);
   };
 
+  // const customColumns = [
+  //   ...supportColumns,
+  //   {
+  //     name: "Client",
+  //     selector: (row) => renderClientBadge(row.client),
+  //     sortable: true,
+  //     center: false,
+  //   },
+  //   {
+  //     name: "Status",
+
+  //     cell: (row) => (
+  //       <>
+  //         <Button
+  //           color={row.blocked ? "danger" : "success"}
+  //           onClick={() => handleToggleModal(row)}
+  //         >
+  //           {row.blocked ? (
+  //             <i className="icon-unlock"></i>
+  //           ) : (
+  //             <i className="icon-lock"></i>
+  //           )}
+  //         </Button>
+  //       </>
+  //     ),
+  //   },
+  //   {
+  //     name: "Action",
+
+  //     cell: (row) => (
+  //       <>
+  //         <Button color={""} onClick={() => handleViewDetails(row)}>
+  //           <i className="icon-more-alt"></i>
+  //         </Button>
+  //         <Button color={""}>
+  //           <i className="icon-trash"></i>
+  //           <i className="icon-pencil"></i>
+  //         </Button>
+  //       </>
+  //     ),
+  //     button: true,
+  //     width: "20%",
+  //   },
+  // ];
   const customColumns = [
     ...supportColumns,
     {
       name: "Client",
-      selector: (row) => renderClientBadge(row.client),
+      selector: (row) => (
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+          {renderClientBadge(row.client)}
+        </div>
+      ),
       sortable: true,
-      center: false,
+      center: true,
     },
     {
       name: "Status",
-
       cell: (row) => (
-        <>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
           <Button
             color={row.blocked ? "danger" : "success"}
             onClick={() => handleToggleModal(row)}
+            style={{ padding: "0.5rem", minWidth: "40px" }} // Adjust padding and width as needed
           >
-            {row.blocked ? "Unblock" : "Block"}
+            {row.blocked ? (
+              <i className="icon-unlock"></i>
+            ) : (
+              <i className="icon-lock"></i>
+            )}
           </Button>
-          <Button color={""} onClick={() => handleViewDetails(row)}>
+        </div>
+      ),
+      center: true,
+    },
+    {
+      name: "Action",
+      cell: (row) => (
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <Button color={""} onClick={() => handleViewDetails(row)} style={{ margin: "0 5px" }}>
             <i className="icon-more-alt"></i>
           </Button>
-        </>
+       
+        </div>
       ),
       button: true,
       width: "20%",
+      center: true,
     },
   ];
-
+  
   const history = useNavigate();
   const handleViewDetails = (user) => {
-    console.log("🚀 ~ handleViewDetails ~ user:", user);
     history(`/user/${user.id}`);
   };
 
@@ -185,16 +249,16 @@ const AllCustomers = () => {
                 toggle: () => setFilterOpen(!filterOpen),
                 items: [
                   { id: 1, item: "All", filterValue: "All" },
-                  { id: 2, item: "Paid Member", filterValue: "paidmembers" },
+                  { id: 2, item: "Paid Member", filterValue: "Members" },
                   {
                     id: 3,
                     item: "Paid Customer",
-                    filterValue: "paidcustomers",
+                    filterValue: "Customers",
                   },
                   {
                     id: 4,
                     item: "Free Trial Member",
-                    filterValue: "freetrialmembers",
+                    filterValue: "Free",
                   },
                 ],
               }}
@@ -257,10 +321,13 @@ export default AllCustomers;
 
 // const AllCustomers = () => {
 //   const [filter, setFilter] = useState("All");
+//   console.log("🚀 ~ AllCustomers ~ filter:", filter);
 //   const [searchTerm, setSearchTerm] = useState("");
 //   const [filterOpen, setFilterOpen] = useState(false); // Initially closed
 //   const [modalOpen, setModalOpen] = useState(false);
 //   const [selectedUser, setSelectedUser] = useState(null);
+//   const [supportData, setSupportData] = useState([]);
+
 
 //   const FilterIcon = () => (
 //     <span>
@@ -274,7 +341,7 @@ export default AllCustomers;
 //         <ButtonGroup className="mb-0">
 //           <Button
 //             className="dropbtn rounded-pill"
-//             color="primary"
+//             color="info"
 //             onClick={item.toggle}
 //           >
 //             {item.btnText} <FilterIcon />
@@ -317,14 +384,14 @@ export default AllCustomers;
 //   const renderClientBadge = (client) => {
 //     let color;
 //     switch (client) {
-//       case "paidmembers":
-//         color = "primary";
+//       case "Members":
+//         color = "warning";
 //         break;
-//       case "paidcustomers":
+//       case "Customers":
 //         color = "success";
 //         break;
-//       case "freetrialmembers":
-//         color = "info";
+//       case "Free":
+//         color = "danger";
 //         break;
 //       default:
 //         color = "secondary";
@@ -337,59 +404,100 @@ export default AllCustomers;
 //     setModalOpen(!modalOpen);
 //   };
 
+//   const toggleBlockedStatus = () => {
+//     const updatedUsers = supportData.map(user => {
+//       if (user.id === selectedUser.id) {
+//         return { ...user, blocked: !user.blocked };
+//       }
+//       return user;
+//     });
+//     // Update the supportData with the modified user
+//     setSupportData(updatedUsers);
+//   };
+  
+
 //   const customColumns = [
 //     ...supportColumns,
 //     {
 //       name: "Client",
-//       selector: (row) => renderClientBadge(row.client),
+//       selector: (row) => (
+//         <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+//           {renderClientBadge(row.client)}
+//         </div>
+//       ),
 //       sortable: true,
-//       center: false,
+//       center: true,
 //     },
 //     {
-//       name: "",
+//       name: "Status",
 //       cell: (row) => (
-//         <>
+//         <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
 //           <Button
 //             color={row.blocked ? "danger" : "success"}
 //             onClick={() => handleToggleModal(row)}
+//             style={{ padding: "0.5rem", minWidth: "40px" }} // Adjust padding and width as needed
 //           >
-//             {row.blocked ? "Unblock" : "Block"}
+//             {row.blocked ? (
+//               <i className="icon-unlock"></i>
+//             ) : (
+//               <i className="icon-lock"></i>
+//             )}
 //           </Button>
-//           <Button onClick={() => handleViewDetails(row)}>
+//         </div>
+//       ),
+//       center: true,
+//     },
+//     {
+//       name: "Action",
+//       cell: (row) => (
+//         <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+//           <Button color={""} onClick={() => handleViewDetails(row)} style={{ margin: "0 5px" }}>
 //             <i className="icon-more-alt"></i>
 //           </Button>
-//         </>
+//         </div>
 //       ),
 //       button: true,
 //       width: "20%",
+//       center: true,
 //     },
-//     // {
-//     //   name: "",
-//     //   cell: (row) => (
-//     //     <>
-//     //       <Button
-//     //         color={row.blocked ? "danger" : "success"}
-//     //         onClick={() => handleToggleModal(row)}
-//     //       >
-//     //         {row.blocked ? "Unblock" : "Block"}
-//     //       </Button>
-//     //       <Button color="info" onClick={() => handleViewDetails(row)}>
-//     //         See More
-//     //       </Button>
-//     //     </>
-//     //   ),
-//     //   button: true,
-//     //   width: "20%",
-//     // },
 //   ];
+  
 //   const history = useNavigate();
 //   const handleViewDetails = (user) => {
-//     console.log("🚀 ~ handleViewDetails ~ user:", user)
 //     history(`/user/${user.id}`);
 //   };
 
 //   return (
 //     <Fragment>
+//       <style>
+//         {`
+//           .primary-color {
+//             background-color: #427b01;
+//             border-color: #427b01;
+//             color: #fff;
+//           }
+//           .secondary-color {
+//             background-color: #000000;
+//             border-color: #000000;
+//             color: #fff;
+//           }
+//           .success-color {
+//             background-color: #28a745;
+//             border-color: #28a745;
+//             color: #fff;
+//           }
+//           .info-color {
+//             background-color: #17a2b8;
+//             border-color: #17a2b8;
+//             color: #fff;
+//           }
+//           .danger-color {
+//             background-color: #dc3545;
+//             border-color: #dc3545;
+//             color: #fff;
+//           }
+//         `}
+//       </style>
 //       <Breadcrumbs mainTitle="All Users" parent="Users" title="View Users" />
 
 //       <div className="container-fluid">
@@ -411,16 +519,16 @@ export default AllCustomers;
 //                 toggle: () => setFilterOpen(!filterOpen),
 //                 items: [
 //                   { id: 1, item: "All", filterValue: "All" },
-//                   { id: 2, item: "Paid Member", filterValue: "paidmembers" },
+//                   { id: 2, item: "Paid Member", filterValue: "Members" },
 //                   {
 //                     id: 3,
 //                     item: "Paid Customer",
-//                     filterValue: "paidcustomers",
+//                     filterValue: "Customers",
 //                   },
 //                   {
 //                     id: 4,
 //                     item: "Free Trial Member",
-//                     filterValue: "freetrialmembers",
+//                     filterValue: "Free",
 //                   },
 //                 ],
 //               }}
@@ -444,13 +552,13 @@ export default AllCustomers;
 //           this user?
 //         </ModalBody>
 //         <ModalFooter>
-//           <Button color="primary" onClick={handleToggleModal}>
+//           <Button color={"black"} onClick={handleToggleModal}>
 //             Cancel
 //           </Button>
 //           <Button
 //             color={selectedUser?.blocked ? "danger" : "success"}
 //             onClick={() => {
-//               // Your logic to block/unblock the user
+//               toggleBlockedStatus();
 //               handleToggleModal(null);
 //             }}
 //           >

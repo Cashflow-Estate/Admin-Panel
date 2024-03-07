@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect, useContext } from "react";
 import { Col, Container, Form, FormGroup, Input, Label, Row } from "reactstrap";
-import { H4, P } from "../../AbstractElements";
+import { Btn, H4, P } from "../../AbstractElements";
 import {
   AlreadyHaveAccount,
   ConfirmPassword,
@@ -108,14 +108,14 @@ const Signup = ({ selected }) => {
                       </div>
                     </div>
                   </FormGroup>
-                  <div className="position-relative form-group mb-0">
-                    <div className="position-relative form-group mt-2 link">
-                      <Link to={`/`}>
-                        {AlreadyHaveAccount}
-                      </Link>
-                    </div>
+                  <FormGroup>
+                    <Btn attrBtn={{ color: 'success', className: 'btn d-block w-100', type: 'submit' }}>Done</Btn>
+                  </FormGroup>
+                  <div className="position-relative form-group mb-0 mt-2 link">
+                    <Link to={`/`}>
+                      {AlreadyHaveAccount}?
+                    </Link>
                   </div>
-                  {/* <OtherWay /> */}
                 </Form>
               </div>
             </div>

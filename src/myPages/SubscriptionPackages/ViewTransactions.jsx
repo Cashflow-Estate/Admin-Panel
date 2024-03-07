@@ -19,7 +19,7 @@ const ViewTransactions = () => {
   };
   return (
     <Fragment>
-      <Breadcrumbs mainTitle="Transactions" parent="Packages" title="Transaction" />
+      <Breadcrumbs mainTitle="Transactions" parent="All" title="Transaction" />
 
       <Card className="recent-order">
         <CardHeader className="card-no-border">

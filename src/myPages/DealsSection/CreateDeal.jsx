@@ -41,7 +41,7 @@ const CreateDeal = () => {
     };
   return (
     <Fragment>
-      <Breadcrumbs parent='Deals' title=' Create Deals' mainTitle='Create Deals' />
+      <Breadcrumbs parent='Deals' title='Create Deals' mainTitle='Create Deals' />
       <Container fluid={true}>
         <Row>
           <Col sm='12'>

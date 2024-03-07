@@ -38,7 +38,7 @@ const ForgetPassword = ({ logoClassMain }) => {
                         </Row>
                       </FormGroup>
                       <FormGroup className='text-end'>
-                        <Btn attrBtn={{ className: 'btn-block ', color: 'primary', type: 'submit' }}>Send</Btn>
+                        <Btn attrBtn={{ className: 'btn-block ', color: 'success', type: 'submit' }}>Send</Btn>
                       </FormGroup>
                       <FormGroup className='mb-4 mt-4'>
                         <span className='reset-password-link'>
@@ -85,7 +85,7 @@ const ForgetPassword = ({ logoClassMain }) => {
                         </div>
                       </FormGroup>
                       <FormGroup>
-                        <Btn attrBtn={{ color: 'primary', className: 'btn d-block w-100', type: 'submit' }}>Done</Btn>
+                        <Btn attrBtn={{ color: 'success', className: 'btn d-block w-100', type: 'submit' }}>Done</Btn>
                       </FormGroup>
                       <P attrPara={{ className: 'text-start' }}>
                         Already have an password?

@@ -10965,8 +10965,8 @@ textarea.form-control-lg {
 
  */
 :root {
-  --theme-deafult: #7366ff;
-  --theme-secondary: #f73164;
+  --theme-default: #62b800;
+  --theme-secondary: #000000;
   --light-background: rgba(242, 243, 247, 0.7);
   --body-font-color: #2f2f3b;
   --chart-border: #ecf3fa;
