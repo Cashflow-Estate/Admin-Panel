@@ -1,6 +1,6 @@
 export const MENUITEMS = [
   {
-    menutitle: "Pages",
+    menutitle: "Dashboards",
     menucontent: "Dashboards",
     Items: [
       // {
@@ -15,17 +15,22 @@ export const MENUITEMS = [
       //     },
       //   ],
       // },
+      // {
+      //   title: "All-Users",
+      //   icon: "user",
+      //   type: "sub",
+      //   children: [
+      //     {
+      //       path: `${process.env.PUBLIC_URL}/users/all-customers`,
+      //       type: "link",
+      //       title: "Users",
+      //     },
+      //   ],
+      // },
       {
-        title: "All-Users",
-        icon: "user",
-        type: "sub",
-        children: [
-          {
-            path: `${process.env.PUBLIC_URL}/users/all-customers`,
-            type: "link",
-            title: "Users",
-          },
-        ],
+        path: `${process.env.PUBLIC_URL}/users/all-customers`,
+        type: "link",
+        title: "Users",
       },
       {
         title: "Subscription Packages",
