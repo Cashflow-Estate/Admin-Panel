@@ -21,7 +21,7 @@ const Logins = ({ selected }) => {
   const [email, setEmail] = useState("test@gmail.com");
   const [password, setPassword] = useState("test123");
   const [togglePassword, setTogglePassword] = useState(false);
-  const history = useNavigate();
+  const navigate = useNavigate();
   const { layoutURL } = useContext(CustomizerContext);
 
   const [value, setValue] = useState(localStorage.getItem("profileURL" || man));
@@ -54,7 +54,7 @@ const Logins = ({ selected }) => {
       toast.success("Successfully logged in!..");
       setTimeout(() => {
         // history.push(`${process.env.PUBLIC_URL}/pages/sample-page/${layoutURL}`);
-        history(`${process.env.PUBLIC_URL}/users/all-customers`);
+        navigate(`/users/all-customers`);
       }, 2000);
     } else {
       toast.error("You entered the wrong password or username!..");
@@ -108,7 +108,7 @@ const Logins = ({ selected }) => {
                         {RememberPassword}
                       </Label>
                     </div>
-                    <Link to={`${process.env.PUBLIC_URL}/forgot-password`}>
+                    <Link to={`/forgot-password`}>
                       {ForgotPassword}
                     </Link>
                     <Btn
@@ -123,7 +123,7 @@ const Logins = ({ selected }) => {
                   </div>
                   {/* <OtherWay /> */}
                   <div className="position-relative form-group mt-2 link">
-                    <Link to={`${process.env.PUBLIC_URL}/signup`}>
+                    <Link to={`/signup`}>
                       {CreateNewAccount}
                     </Link>
                   </div>

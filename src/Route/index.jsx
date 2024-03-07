@@ -1,18 +1,33 @@
-import React, { Fragment } from 'react';
+import React, { Fragment } from "react";
 import { Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Loader from "../Layout/Loader";
 import Signin from "../myPages/myAuth/Signin";
+import ForgetPassword from "../myPages/myAuth/ForgetPassword";
+import ResetPassword from "../myPages/myAuth/ResetPassword";
+import Signup from "../myPages/myAuth/Signup";
+import AllCustomers from "../myPages/myCutomers/AllCustomers";
+import LayoutRoutes from "./LayoutRoutes";
 // setup fake backend
 const Routers = () => {
   return (
     <BrowserRouter basename={"/"}>
       <Suspense fallback={<Loader />}>
         <Routes>
-          <Route exact path={'/'} element={<Signin />} />
+        <Route path={`/*`} element={<LayoutRoutes />} />
+
+          <Route exact path={"/"} element={<Signin />} />
+
+          <Route path={"/signup"} element={<Signup />} />
+          <Route path={"/forgot-password"} element={<ForgetPassword />} />
+          <Route path={"/reset-password"} element={<ResetPassword />} />
+          
+          <Route path={"/users/all-customers"} element={<AllCustomers />} />
+       
+       
         </Routes>
       </Suspense>
     </BrowserRouter>
   );
 };
-export default Routers
+export default Routers;

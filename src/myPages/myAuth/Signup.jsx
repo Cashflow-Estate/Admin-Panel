@@ -110,7 +110,7 @@ const Signup = ({ selected }) => {
                   </FormGroup>
                   <div className="position-relative form-group mb-0">
                     <div className="position-relative form-group mt-2 link">
-                      <Link to={`${process.env.PUBLIC_URL}/login`}>
+                      <Link to={`/`}>
                         {AlreadyHaveAccount}
                       </Link>
                     </div>

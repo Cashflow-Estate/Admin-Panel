@@ -17,7 +17,7 @@ import CreateBanner from "../myPages/myBanners/CreateBanner";
 
 export const routes = [
   {
-    path: `${process.env.PUBLIC_URL}/users/all-customers`,
+    path: `/users/all-customers`,
     Component: <AllCustomers />,
   },
   {

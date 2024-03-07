@@ -89,7 +89,7 @@ const ForgetPassword = ({ logoClassMain }) => {
                       </FormGroup>
                       <P attrPara={{ className: 'text-start' }}>
                         Already have an password?
-                        <Link to={`${process.env.PUBLIC_URL}/login`}>
+                        <Link to={`/`}>
                       {SignIn}
                     </Link>
                       </P>
