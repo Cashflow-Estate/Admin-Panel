@@ -25,62 +25,62 @@ export const routes = [
     Component: <SingleCustomer />,
   },
   {
-    path: `${process.env.PUBLIC_URL}/account/profile`,
+    path: `/account/profile`,
     Component: <Profile />
   },
 
   {
-    path: `${process.env.PUBLIC_URL}/advertisement-banner`,
+    path: `/advertisement-banner`,
     Component: <Banners />
   },
   {
-    path: `${process.env.PUBLIC_URL}/subscription-packages/create`,
+    path: `/subscription-packages/create`,
     Component: <CreateSubscriptionPackage />
   },
 
   {
-    path: `${process.env.PUBLIC_URL}/subscription-packages/view`,
+    path: `/subscription-packages/view`,
     Component: <ViewSubscriptionPackages />
   },
 
   {
-    path: `${process.env.PUBLIC_URL}/subscription-packages/transactions`,
+    path: `/subscription-packages/transactions`,
     Component: <ViewTransactions />
   },
 
   {
-    path: `${process.env.PUBLIC_URL}/deals/create`,
+    path: `/deals/create`,
     Component: <CreateDeal />
   },
   {
-    path: `${process.env.PUBLIC_URL}/deals/send-deals`,
+    path: `/deals/send-deals`,
     Component: <SendDeals />
   },
 
   // {
-  //   path: `${process.env.PUBLIC_URL}/deals/edit`,
+  //   path: `/deals/edit`,
   //   Component: <EditDeal />
   // },
   {
-    path: `${process.env.PUBLIC_URL}/deals/view`,
+    path: `/deals/view`,
     Component: <ViewDeals />
   },
   {
-    path: `${process.env.PUBLIC_URL}/faqs/view`,
+    path: `/faqs/view`,
     Component: <ViewFaqs />
   },
   {
-    path: `${process.env.PUBLIC_URL}/faqs/create`,
+    path: `/faqs/create`,
     Component: <CreateFaqs/>
   },
   {
-    path: `${process.env.PUBLIC_URL}/banners/view`,
+    path: `/banners/view`,
     Component: <ViewBanners/>
 
   },
 
   {
-    path: `${process.env.PUBLIC_URL}/banners/create`,
+    path: `/banners/create`,
     Component: <CreateBanner/>
 
   },

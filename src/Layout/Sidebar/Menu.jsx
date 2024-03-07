@@ -9,7 +9,7 @@ export const MENUITEMS = [
       //   type: "sub",
       //   children: [
       //     {
-      //       path: `${process.env.PUBLIC_URL}/account/profile`,
+      //       path: `/account/profile`,
       //       type: "link",
       //       title: "Profile",
       //     },
@@ -21,7 +21,7 @@ export const MENUITEMS = [
       //   type: "sub",
       //   children: [
       //     {
-      //       path: `${process.env.PUBLIC_URL}/users/all-customers`,
+      //       path: `/users/all-customers`,
       //       type: "link",
       //       title: "Users",
       //     },
@@ -37,19 +37,19 @@ export const MENUITEMS = [
         type: "sub",
         children: [
           {
-            path: `${process.env.PUBLIC_URL}/subscription-packages/create`,
+            path: `/subscription-packages/create`,
             type: "link",
             title: "Create Package",
           },
 
           {
-            path: `${process.env.PUBLIC_URL}/subscription-packages/view`,
+            path: `/subscription-packages/view`,
             type: "link",
             title: "View Packages",
           },
 
           {
-            path: `${process.env.PUBLIC_URL}/subscription-packages/transactions`,
+            path: `/subscription-packages/transactions`,
             type: "link",
             title: "View Transactions",
           },
@@ -66,7 +66,7 @@ export const MENUITEMS = [
             type: "sub",
             children: [
               {
-                path: `${process.env.PUBLIC_URL}/deals/send-deals`,
+                path: `/deals/send-deals`,
                 type: "link",
                 title: "Send Deals",
               },
@@ -74,12 +74,12 @@ export const MENUITEMS = [
           },
 
           {
-            path: `${process.env.PUBLIC_URL}/deals/create`,
+            path: `/deals/create`,
             type: "link",
             title: "Create Deal",
           },
           {
-            path: `${process.env.PUBLIC_URL}/deals/view`,
+            path: `/deals/view`,
             type: "link",
             title: "View Deals",
           },
@@ -91,13 +91,13 @@ export const MENUITEMS = [
         type: "sub",
         children: [
           {
-            path: `${process.env.PUBLIC_URL}/banners/create`,
+            path: `/banners/create`,
             type: "link",
             title: "Create Banners",
           },
 
           {
-            path: `${process.env.PUBLIC_URL}/banners/view`,
+            path: `/banners/view`,
             type: "link",
             title: "View Banners",
           },
@@ -109,13 +109,13 @@ export const MENUITEMS = [
         type: "sub",
         children: [
           {
-            path: `${process.env.PUBLIC_URL}/faqs/create`,
+            path: `/faqs/create`,
             type: "link",
             title: "Create Faq's",
           },
 
           {
-            path: `${process.env.PUBLIC_URL}/faqs/view`,
+            path: `/faqs/view`,
             type: "link",
             title: "View Faq's",
           },
@@ -139,7 +139,7 @@ export const MENUITEMS = [
 //         type: "sub",
 //         children: [
 //           {
-//             path: `${process.env.PUBLIC_URL}/account/profile`,
+//             path: `/account/profile`,
 //             type: "link",
 //             title: "Profile",
 //           },
@@ -151,7 +151,7 @@ export const MENUITEMS = [
 //         type: "sub",
 //         children: [
 //           {
-//             path: `${process.env.PUBLIC_URL}/users/all-customers`,
+//             path: `/users/all-customers`,
 //             type: "link",
 //             title: "Users",
 //           },
@@ -163,7 +163,7 @@ export const MENUITEMS = [
 //         type: "sub",
 //         children: [
 //           {
-//             path: `${process.env.PUBLIC_URL}/faq`,
+//             path: `/faq`,
 //             type: "link",
 //             title: "FAQ",
 //           },
@@ -175,7 +175,7 @@ export const MENUITEMS = [
 //         type: "sub",
 //         children: [
 //           {
-//             path: `${process.env.PUBLIC_URL}/advertisement-banner`,
+//             path: `/advertisement-banner`,
 //             type: "link",
 //             title: "Advertisement Banner",
 //           },
@@ -197,7 +197,7 @@ export const MENUITEMS = [
 // //         children: [
 
 // //           {
-// //             path: `${process.env.PUBLIC_URL}/account/profile`,
+// //             path: `/account/profile`,
 // //             type: "link",
 // //             title: "Profile",
 // //           },
@@ -209,7 +209,7 @@ export const MENUITEMS = [
 // //         type: "sub",
 // //         children: [
 // //           {
-// //             path: `${process.env.PUBLIC_URL}/users/all-customers`,
+// //             path: `/users/all-customers`,
 // //             type: "link",
 // //             title: "Users ",
 // //           },
@@ -226,7 +226,7 @@ export const MENUITEMS = [
 // // //       children: [
 // // //         {
 // // //           active: false,
-// // //           path: `${process.env.PUBLIC_URL}/users/all-customers`,
+// // //           path: `/users/all-customers`,
 // // //           title: "All-Customers",
 // // //           type: "link",
 // // //         },
@@ -243,7 +243,7 @@ export const MENUITEMS = [
 // // //       children: [
 // // //         {
 // // //           active: false,
-// // //           path: `${process.env.PUBLIC_URL}/pages/sample-page`,
+// // //           path: `/pages/sample-page`,
 // // //           title: 'Sample-Page',
 // // //           type: 'link',
 // // //         },
