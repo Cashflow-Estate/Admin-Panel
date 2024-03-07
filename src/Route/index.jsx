@@ -7,14 +7,13 @@ import ForgetPassword from "../myPages/myAuth/ForgetPassword";
 import ResetPassword from "../myPages/myAuth/ResetPassword";
 import Signup from "../myPages/myAuth/Signup";
 import AllCustomers from "../myPages/myCutomers/AllCustomers";
-import LayoutRoutes from "./LayoutRoutes";
 // setup fake backend
 const Routers = () => {
+
   return (
     <BrowserRouter basename={"/"}>
       <Suspense fallback={<Loader />}>
         <Routes>
-        <Route path={`/*`} element={<LayoutRoutes />} />
 
           <Route exact path={"/"} element={<Signin />} />
 
