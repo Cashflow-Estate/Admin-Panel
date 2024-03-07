@@ -79,7 +79,7 @@
     "sweetalert2": "^11.4.8",
     "web-vitals": "^2.1.4"
   },
-  "scripts": {
+ "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts --max_old_space_size=8096 build",
     "test": "react-scripts test",
