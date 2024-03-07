@@ -9,7 +9,7 @@ const Routers = () => {
     <BrowserRouter basename={"/"}>
       <Suspense fallback={<Loader />}>
         <Routes>
-          <Route path={'/login'} element={<Signin />} />
+          <Route exact path={'/'} element={<Signin />} />
         </Routes>
       </Suspense>
     </BrowserRouter>
