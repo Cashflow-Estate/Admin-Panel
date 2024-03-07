@@ -1,5 +1,4 @@
-import React from "react";
-import { Suspense, useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import {
   configureFakeBackend,
@@ -16,24 +15,26 @@ import { authRoutes } from "./AuthRoutes";
 
 // setup fake backend
 configureFakeBackend();
+
 const Routers = () => {
-  const login = useState(JSON.parse(localStorage.getItem("login")))[0];
+  const login = JSON.parse(localStorage.getItem("login"));
   const [authenticated, setAuthenticated] = useState(false);
-  const jwt_token = localStorage.getItem("token");
+  const jwtToken = localStorage.getItem("token");
   const defaultLayoutObj = classes.find(
     (item) => Object.values(item).pop(1) === "compact-wrapper"
   );
-  const layout =
-    localStorage.getItem("layout") || Object.keys(defaultLayoutObj).pop();
+  const layout = localStorage.getItem("layout") || Object.keys(defaultLayoutObj).pop();
 
   useEffect(() => {
-    let abortController = new AbortController();
+    const abortController = new AbortController();
     const requestOptions = { method: "GET", headers: authHeader() };
     fetch("/users", requestOptions).then(handleResponse);
 
     setAuthenticated(JSON.parse(localStorage.getItem("authenticated")));
+
     console.ignoredYellowBox = ["Warning: Each", "Warning: Failed"];
     console.disableYellowBox = true;
+
     return () => {
       abortController.abort();
     };
@@ -41,55 +42,122 @@ const Routers = () => {
 
   return (
     <BrowserRouter basename={"/"}>
-      <>
-        <Suspense fallback={<Loader />}>
-          <Routes>
-            <Route path={"/"} element={<PrivateRoute />}>
-              {login || authenticated || jwt_token ? (
-                <>
-                  <Route exact path={`${process.env.PUBLIC_URL}`} element={<Navigate to={`${process.env.PUBLIC_URL}/login`} />} />
-                  {/* <Route
-                    exact
-                    path={`${process.env.PUBLIC_URL}`}
-                    element={
-                      <Navigate
-                        to={`${process.env.PUBLIC_URL}/all-customers}`}
-                      />
-                    }
-                  /> */}
-                  <Route exact path={`/`} element={<Navigate to={`${process.env.PUBLIC_URL}/login`} />} />
-                  {/* <Route
-                    exact
-                    path={`/`}
-                    element={
-                      <Navigate
-                        to={`${process.env.PUBLIC_URL}/all-customers}`}
-                      />
-                    }
-                  /> */}
-                </>
-              ) : (
-                ""
-              )}
-              <Route path={`/*`} element={<LayoutRoutes />} />
-            </Route>
-            <Route
-              path={`${process.env.PUBLIC_URL}/callback`}
-              render={() => <Callback />}
-            />
-            <Route
-              exact
-              path={`${process.env.PUBLIC_URL}/login`}
-              element={<Signin />}
-            />
-            {authRoutes.map(({ path, Component }, i) => (
-              <Route path={path} element={Component} key={i} />
-            ))}
-          </Routes>
-        </Suspense>
-      </>
+      <Suspense fallback={<Loader />}>
+        <Routes>
+          <Route
+            path="/"
+            element={login || authenticated || jwtToken ? (
+              <Navigate to={`/cuba-context/login`} />
+            ) : (
+              <Navigate to="/cuba-context/login" />
+            )}
+          />
+          <Route path="/cuba-context/callback" element={<Callback />} />
+          <Route exact path="/cuba-context/login" element={<Signin />} />
+          {authRoutes.map(({ path, Component }, i) => (
+            <Route path={path} element={<Component />} key={i} />
+          ))}
+          <Route path="/*" element={<LayoutRoutes />} />
+        </Routes>
+      </Suspense>
     </BrowserRouter>
   );
 };
 
 export default Routers;
+
+// import React from "react";
+// import { Suspense, useEffect, useState } from "react";
+// import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+// import {
+//   configureFakeBackend,
+//   authHeader,
+//   handleResponse,
+// } from "../Services/fack.backend";
+// import Callback from "../Auth/Callback";
+// import Loader from "../Layout/Loader";
+// import LayoutRoutes from "../Route/LayoutRoutes";
+// import Signin from "../myPages/myAuth/Signin";
+// import PrivateRoute from "./PrivateRoute";
+// import { classes } from "../Data/Layouts";
+// import { authRoutes } from "./AuthRoutes";
+
+// // setup fake backend
+// configureFakeBackend();
+// const Routers = () => {
+//   const login = useState(JSON.parse(localStorage.getItem("login")))[0];
+//   const [authenticated, setAuthenticated] = useState(false);
+//   const jwt_token = localStorage.getItem("token");
+//   const defaultLayoutObj = classes.find(
+//     (item) => Object.values(item).pop(1) === "compact-wrapper"
+//   );
+//   const layout =
+//     localStorage.getItem("layout") || Object.keys(defaultLayoutObj).pop();
+
+//   useEffect(() => {
+//     let abortController = new AbortController();
+//     const requestOptions = { method: "GET", headers: authHeader() };
+//     fetch("/users", requestOptions).then(handleResponse);
+
+//     setAuthenticated(JSON.parse(localStorage.getItem("authenticated")));
+//     console.ignoredYellowBox = ["Warning: Each", "Warning: Failed"];
+//     console.disableYellowBox = true;
+//     return () => {
+//       abortController.abort();
+//     };
+//   }, []);
+
+//   return (
+//     <BrowserRouter basename={"/"}>
+//       <>
+//         <Suspense fallback={<Loader />}>
+//           <Routes>
+//             <Route path={"/"} element={<PrivateRoute />}>
+//               {login || authenticated || jwt_token ? (
+//                 <>
+//                   <Route exact path={`${process.env.PUBLIC_URL}`} element={<Navigate to={`${process.env.PUBLIC_URL}/login`} />} />
+//                   {/* <Route
+//                     exact
+//                     path={`${process.env.PUBLIC_URL}`}
+//                     element={
+//                       <Navigate
+//                         to={`${process.env.PUBLIC_URL}/all-customers}`}
+//                       />
+//                     }
+//                   /> */}
+//                   <Route exact path={`/`} element={<Navigate to={`${process.env.PUBLIC_URL}/login`} />} />
+//                   {/* <Route
+//                     exact
+//                     path={`/`}
+//                     element={
+//                       <Navigate
+//                         to={`${process.env.PUBLIC_URL}/all-customers}`}
+//                       />
+//                     }
+//                   /> */}
+//                 </>
+//               ) : (
+//                 ""
+//               )}
+//               <Route path={`/*`} element={<LayoutRoutes />} />
+//             </Route>
+//             <Route
+//               path={`${process.env.PUBLIC_URL}/callback`}
+//               render={() => <Callback />}
+//             />
+//             <Route
+//               exact
+//               path={`${process.env.PUBLIC_URL}/login`}
+//               element={<Signin />}
+//             />
+//             {authRoutes.map(({ path, Component }, i) => (
+//               <Route path={path} element={Component} key={i} />
+//             ))}
+//           </Routes>
+//         </Suspense>
+//       </>
+//     </BrowserRouter>
+//   );
+// };
+
+// export default Routers;
