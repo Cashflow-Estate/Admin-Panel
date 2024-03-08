@@ -10,3 +10,8 @@ export const AlreadyHaveAccount = 'Already have an account';
 
 export const EmailAddress = 'Email Address';
 export const PhoneNumber = 'Phone Number';
+
+export const Start = 'Start Date';
+export const End = 'End Date';
+export const Deal_Gallery = 'DEAL GALLERY';
+

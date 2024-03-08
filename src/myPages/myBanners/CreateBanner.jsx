@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react';
-import { Row, Col, Card, CardBody, Form, FormGroup, Label, Input, CardFooter } from 'reactstrap';
-import { Breadcrumbs, Btn } from '../../AbstractElements';
+import { Row, Col, Card, CardBody, Form, FormGroup, Input, CardFooter } from 'reactstrap';
+import { Breadcrumbs, Btn,H6 } from '../../AbstractElements';
 import HeaderCard from '../../myComponents/HeaderCard';
 
 const CreateBanner = () => {
@@ -37,13 +37,12 @@ const CreateBanner = () => {
       <Breadcrumbs parent='Banners' title='Create Banners' mainTitle='Create Banners' />
 
             <Card>
-                <HeaderCard title={"Create a new Banner"} />
                 <Form className="form theme-form" onSubmit={handleSubmit}>
                     <CardBody>
                         <Row>
                             <Col>
                                 <FormGroup>
-                                    <Label htmlFor="bannerName">{"Banner Name"}</Label>
+                                    <H6 htmlFor="bannerName">{"Banner Name"}</H6>
                                     <Input 
                                         type="text" 
                                         id="bannerName" 
@@ -59,7 +58,7 @@ const CreateBanner = () => {
                         <Row>
                             <Col>
                                 <FormGroup>
-                                    <Label htmlFor="bannerImage">{"Banner Image URL"}</Label>
+                                    <H6 htmlFor="bannerImage">{"Banner Image URL"}</H6>
                                     <Input 
                                         type="text" 
                                         id="bannerImage" 
@@ -75,7 +74,7 @@ const CreateBanner = () => {
                         <Row>
                             <Col>
                                 <FormGroup>
-                                    <Label>{"Select Banner Design"}</Label>
+                                    <H6>{"Select Banner Design"}</H6>
                                     <div>
                                         <Input 
                                             type="radio" 
@@ -99,7 +98,7 @@ const CreateBanner = () => {
                         <Row>
                             <Col>
                                 <FormGroup>
-                                    <Label htmlFor="bannerLink">{"Banner Link"}</Label>
+                                    <H6 htmlFor="bannerLink">{"Banner Link"}</H6>
                                     <Input 
                                         type="text" 
                                         id="bannerLink" 

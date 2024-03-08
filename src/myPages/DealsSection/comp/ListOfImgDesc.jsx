@@ -1,7 +1,8 @@
 import React, { Fragment } from "react";
 import { Card, CardBody, Col, Media } from "reactstrap";
-import { IMAGE_GALLERY, PortfolioTitle } from "../../../Constant";
+import {  PortfolioTitle } from "../../../Constant";
 import HeaderCard from "../../../myComponents/HeaderCard";
+import { Deal_Gallery } from "../../../myConstants";
 
 
 const ListOfImageDesc = ({ smallImages, setPhotoIndex, photoIndex }) => {
@@ -10,7 +11,7 @@ const ListOfImageDesc = ({ smallImages, setPhotoIndex, photoIndex }) => {
             {smallImages.length > 0 ?
                 <Col sm="12">
                     <Card>
-                        <HeaderCard title={IMAGE_GALLERY} />
+                        <HeaderCard title={Deal_Gallery} />
                         <CardBody>
                             <div className="my-gallery row gallery-with-description">
                             <figure className="col-xl-3 col-sm-6">

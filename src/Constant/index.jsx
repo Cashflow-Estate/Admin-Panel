@@ -250,10 +250,10 @@ export const AllCampaignsTitle = 'All Campaigns';
 
 export const ProjectTitle = 'Project Title';
 export const ClientName = 'Client name';
-export const ProjectRate = 'Project Rate';
+export const ProjectRate = 'Deal Rate';
 
 export const ProgressLevel = 'Progress Level';
-export const ProjectStatus = 'Project Status';
+export const ProjectStatus = 'Deal Status';
 export const ProjectSize = 'Project Size';
 export const Small = 'Small';
 export const Medium = 'Medium';

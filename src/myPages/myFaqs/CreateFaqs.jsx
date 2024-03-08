@@ -58,7 +58,7 @@ const CreateFaqs = () => {
                             </FormGroup>
                         ))}
                     </Form>
-                    <Button color="primary" onClick={addFAQ}>Add FAQ</Button>
+                    <Button color="success" onClick={addFAQ}>Add FAQ</Button>
                 </CardBody>
             </Card>
         </Fragment>

@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from 'react';
 import { Row, Col, Card, CardBody, Form, FormGroup, Label, Input, CardFooter } from 'reactstrap';
 import HeaderCard from './HeaderCard';
-import { Breadcrumbs, Btn } from '../AbstractElements';
+import { Breadcrumbs, Btn, H6 } from '../AbstractElements';
 
 const CreatePackage = () => {
     const [planType, setPlanType] = useState('basic'); // Default plan type is 'basic'
@@ -25,7 +25,7 @@ const CreatePackage = () => {
                         <Row>
                             <Col>
                                 <FormGroup>
-                                    <Label htmlFor="exampleFormControlInput1">Package Name</Label>
+                                    <H6 htmlFor="exampleFormControlInput1">Package Name</H6>
                                     <Input className="form-control" placeholder="Package Name" />
                                 </FormGroup>
                             </Col>
@@ -33,7 +33,7 @@ const CreatePackage = () => {
                         <Row>
                             <Col>
                                 <FormGroup>
-                                    <Label htmlFor="exampleFormControlInput1">Price</Label>
+                                    <H6 htmlFor="exampleFormControlInput1">Price</H6>
                                     <Input className="form-control" placeholder="Package Price" />
                                 </FormGroup>
                             </Col>
@@ -41,7 +41,7 @@ const CreatePackage = () => {
                         <Row>
                             <Col>
                                 <FormGroup>
-                                    <Label>Plan Type</Label>
+                                    <H6>Plan Type</H6>
                                     <Input type="select" value={planType} onChange={handlePlanTypeChange}>
                                         <option value="basic">Basic</option>
                                         <option value="pro">Pro</option>
@@ -52,7 +52,7 @@ const CreatePackage = () => {
                         <Row>
                             <Col>
                                 <FormGroup>
-                                    <Label>Billing Cycle</Label>
+                                    <H6>Billing Cycle</H6>
                                     <div>
                                         <Label check>
                                             <Input type="radio" name="billingCycle" value="monthly" checked={billingCycle === 'monthly'} onChange={handleBillingCycleChange} />{' '}
@@ -71,8 +71,8 @@ const CreatePackage = () => {
                         <Row>
                             <Col>
                                 <div>
-                                    <Label>Description</Label>
-                                    <Input type="textarea" className="form-control" rows="3" />
+                                    <H6>Description</H6>
+                                    <Input type="textarea" placeholder='Enter package deatils' className="form-control" rows="3" />
                                 </div>
                             </Col>
                         </Row>
