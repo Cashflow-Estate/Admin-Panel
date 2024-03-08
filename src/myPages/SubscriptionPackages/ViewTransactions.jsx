@@ -1,6 +1,5 @@
 import React, { Fragment, useState } from "react";
-
-import { Card, CardBody, CardHeader, Nav } from "reactstrap";
+import { Card, CardBody, CardHeader, Nav, Col } from "reactstrap";
 import { Image, H5, Breadcrumbs } from "../../AbstractElements";
 import { DailyDropdown, RecentOrdersTitle } from "../../Constant";
 import useShowClass from "../../Hooks/useShowClass";
@@ -17,6 +16,7 @@ const ViewTransactions = () => {
     setIsActive(`${i}`);
     setShow("");
   };
+
   return (
     <Fragment>
       <Breadcrumbs mainTitle="Transactions" parent="All" title="Transaction" />
@@ -48,8 +48,6 @@ const ViewTransactions = () => {
           </div>
         </CardBody>
       </Card>
-      <PaginationWithIconsClass />
-
     </Fragment>
   );
 };

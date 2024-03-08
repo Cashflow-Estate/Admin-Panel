@@ -33,20 +33,7 @@ const IssueClass = ({ register }) => {
                     </Col>
                     </FormGroup>
                 </Col>
-                <Col sm="4">
-                    <FormGroup>
-                        <H6>{End}</H6>
-                        <Col xl="5" sm="9">
-                        <DatePicker className="form-control digits" selected={endDate} onChange={handleEndDateChange} />
-                    </Col>
-                    </FormGroup>
-                </Col>
-                <Col sm="4">
-                    <FormGroup>
-                        <H6>{Comment}</H6>
-                        <input className="form-control" type="text" name="comment" placeholder="Add Comment" {...register('comment',{ required: true })} />
-                    </FormGroup>
-                </Col>
+               
             </Row>
         </Fragment>
     );

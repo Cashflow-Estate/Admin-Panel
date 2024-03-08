@@ -253,7 +253,7 @@ export const ClientName = 'Client name';
 export const ProjectRate = 'Deal Rate';
 
 export const ProgressLevel = 'Progress Level';
-export const ProjectStatus = 'Deal Status';
+export const ProjectStatus = 'Send to';
 export const ProjectSize = 'Project Size';
 export const Small = 'Small';
 export const Medium = 'Medium';

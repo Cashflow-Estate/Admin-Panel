@@ -23,7 +23,7 @@ const UploadProjectFileClass = () => {
               className='dropzone dz-clickable'
               getUploadParams={getUploadParams}
               onChangeStatus={handleChangeStatus}
-              maxFiles={1}
+              maxFiles={10}
               multiple={false}
               canCancel={false}
               inputContent='Drop A File'
