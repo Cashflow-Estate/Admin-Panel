@@ -16,7 +16,7 @@ const ListOfImageDesc = ({ smallImages }) => {
         infinite: true,
         speed: 500,
         slidesToShow: 4,
-        slidesToScroll: 3
+        slidesToScroll: 2
     };
 
     const handleImageClick = (index) => {
