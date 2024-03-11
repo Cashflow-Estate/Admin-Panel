@@ -25,7 +25,7 @@ const LocationDetail = ({ register }) => {
               className="form-control"
               type="number"
               name="rate"
-              placeholder="Are in Sqft"
+              placeholder="Area in Sqft"
               {...register("detail", { required: true })}
             />
           </FormGroup>

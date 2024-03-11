@@ -7,17 +7,13 @@ import { useNavigate, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { Container, Row, Col, Card, CardBody, Form } from "reactstrap";
 import CustomizerContext from "../../_helper/Customizer";
-import DealTitle from "./comp/DealTitle";
-import ClientNameClass from "./comp/ClientName";
 import ProjectRateClass from "./comp/ProjectRate";
-import EnterSomeDetailsClass from "./comp/EnterSomeDetails";
 import UploadProjectFileClass from "./comp/UploadProjectFile";
 import IssueClass from "./comp/IssueClass";
-import HeaderCard from "../../myComponents/HeaderCard";
 import SimpleMdeReact from "react-simplemde-editor";
-import DealPrice from "./comp/DealPrice";
 import DraggableMarker from "./comp/DraggableMarker";
 import LocationDetail from "./comp/LocationDetail";
+import DealForm from "./comp/DealForm";
 
 const CreateDeal = () => {
   const history = useNavigate();
@@ -63,14 +59,12 @@ const CreateDeal = () => {
                   className="theme-form"
                   onSubmit={handleSubmit(AddProject)}
                 >
-                  <DealTitle register={register} errors={errors} />
-                  <DealPrice register={register} errors={errors} />
+                  <DealForm register={register} errors={errors} />
 
-                  <ClientNameClass register={register} errors={errors} />
                   <ProjectRateClass register={register} errors={errors} />
                   <LocationDetail register={register} errors={errors} />
                   <IssueClass register={register} />
-                 
+
                   <SimpleMdeReact
                     id="editor_container"
                     onChange={handleChange}
