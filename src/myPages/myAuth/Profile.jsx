@@ -17,10 +17,7 @@ const Profile = () => {
       <Container fluid={true}>
         <div className="edit-profile">
           <Row>
-            <Col xl="4">
-              <MyProfileEdit />
-            </Col>
-            <Col xl="8">
+            <Col xl="12">
               <EditMyProfile />
             </Col>
           </Row>

@@ -35,9 +35,7 @@ const CreateDeal = () => {
       errors.showMessages();
     }
   };
-  const [text, setText] = useState(
-    `Enter text in the area on the left. For more info, click the ? (help) icon in the menu.`
-  );
+  const [text, setText] = useState(``);
   const handleChange = () => {
     setText(
       "Enter text in the area on the left. For more info, click the ? (help) icon in the menu."

@@ -6,38 +6,40 @@ import { H6 } from "../../../AbstractElements";
 const LocationDetail = ({ register }) => {
   return (
     <Fragment>
-      <H6>{"Property Details"}</H6>
       <Row>
         <Col sm="4">
+          <H6>{"Total Bed Rooms"}</H6>
           <FormGroup>
             <input
               className="form-control"
               type="number"
-              name="rate"
+              name="bedRooms"
               placeholder="Total Bed Rooms"
-              {...register("detail", { required: true })}
+              {...register("bedRooms", { required: true })}
             />
           </FormGroup>
         </Col>
         <Col sm="4">
+          <H6>{"Area in Sqft"}</H6>
           <FormGroup>
             <input
               className="form-control"
               type="number"
-              name="rate"
+              name="area"
               placeholder="Area in Sqft"
-              {...register("detail", { required: true })}
+              {...register("area", { required: true })}
             />
           </FormGroup>
         </Col>
         <Col sm="4">
+          <H6>{"Total Baths"}</H6>
           <FormGroup>
             <input
               className="form-control"
               type="number"
-              name="rate"
+              name="baths"
               placeholder="Total Baths"
-              {...register("detail", { required: true })}
+              {...register("baths", { required: true })}
             />
           </FormGroup>
         </Col>

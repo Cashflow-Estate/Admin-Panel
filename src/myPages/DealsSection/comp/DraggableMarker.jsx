@@ -54,32 +54,3 @@ const DraggableMarker = () => {
 };
 
 export default DraggableMarker;
-
-
-// import React, { Fragment, useState } from 'react';
-// import { Map, Draggable, Marker } from "pigeon-maps";
-// import { Col, Card, CardBody } from 'reactstrap';
-
-// const DraggableMarker = () => {
-//   const [anchor, setAnchor] = useState([50.879, 4.6997]);
-//   return (
-//     <Fragment>
-//       <Col xl="12" md="12">
-//         <Card>
-       
-//           <CardBody>
-//             <div className="map-js-height">
-//               <Map height={350} defaultCenter={[50.879, 4.6997]} defaultZoom={11}>
-//                 <Draggable offset={[60, 87]} anchor={anchor} onDragEnd={setAnchor}>
-//                   <Marker width={50} anchor={[50.879, 4.6997]} />
-//                 </Draggable>
-//               </Map>
-//             </div>
-//           </CardBody>
-//         </Card>
-//       </Col>
-//     </Fragment>
-//   );
-// };
-
-// export default DraggableMarker;

@@ -25,17 +25,7 @@ const ViewTransactions = () => {
         <CardHeader className="card-no-border">
           <div className="header-top">
             <H5 attrH5={{ className: "m-0" }}>{"Recent Transaction"}</H5>
-            <div className="card-header-right-icon">
-              <CommonDropDown
-                dropdownMain={{
-                  className: "icon-dropdown",
-                  direction: "start",
-                }}
-                options={DailyDropdown}
-                iconName="icon-more-alt"
-                btn={{ tag: "span" }}
-              />
-            </div>
+        
           </div>
         </CardHeader>
         <CardBody className="pt-0">

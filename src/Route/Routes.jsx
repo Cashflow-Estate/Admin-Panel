@@ -14,8 +14,16 @@ import ViewFaqs from "../myPages/myFaqs/ViewFaqs";
 import CreateFaqs from "../myPages/myFaqs/CreateFaqs";
 import ViewBanners from "../myPages/myBanners/ViewBanners";
 import CreateBanner from "../myPages/myBanners/CreateBanner";
+import Dashboard from "../myPages/Dashboard";
+import DealsQueries from "../myPages/DealsSection/comp/DealsQueries";
+import Call from "../myPages/Call";
+import WebsiteQueries from "../myPages/WebsiteQueries";
 
 export const routes = [
+  {
+    path: `/dashboard`,
+    Component: <Dashboard />,
+  },
   {
     path: `/users/all-customers`,
     Component: <AllCustomers />,
@@ -44,7 +52,11 @@ export const routes = [
   },
 
   {
-    path: `/subscription-packages/transactions`,
+    path: `/customers/transactions`,
+    Component: <ViewTransactions />
+  },
+  {
+    path: `/members/transactions`,
     Component: <ViewTransactions />
   },
 
@@ -56,11 +68,19 @@ export const routes = [
     path: `/deals/send-deals`,
     Component: <SendDeals />
   },
+  {
+    path: `/deals/queries`,
+    Component: <DealsQueries />
+  },
+  {
+    path: `/website/queries`,
+    Component: <WebsiteQueries />
+  },
 
-  // {
-  //   path: `/deals/edit`,
-  //   Component: <EditDeal />
-  // },
+  {
+    path: `/schedule-call`,
+    Component: <Call />
+  },
   {
     path: `/deals/view`,
     Component: <ViewDeals />

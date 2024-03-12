@@ -1,15 +1,26 @@
 export const MENUITEMS = [
   {
-    menutitle: "Dashboard",
-    menucontent: "Dashboards",
+    menutitle: "Generals",
+    menucontent: "Generals",
     Items: [
       {
-        path: `/users/all-customers`,
+        path: `/dashboard`,
         type: "link",
-        title: "Users",
+        title: "Dashboard",
         icon: "user",
       },
-
+      {
+        path: `/account/profile`,
+        type: "link",
+        title: "Profile",
+        icon: "user",
+      },
+    ],
+  },
+  {
+    menutitle: "Application",
+    menucontent: "Application",
+    Items: [
       {
         title: "Deals",
         icon: "task",
@@ -29,7 +40,19 @@ export const MENUITEMS = [
         ],
       },
       {
-        title: "Packages",
+        path: `/deals/queries`,
+        type: "link",
+        title: "Deals Queries",
+        icon: "user",
+      },
+      {
+        path: `/users/all-customers`,
+        type: "link",
+        title: "Users",
+        icon: "user",
+      },
+      {
+        title: "Memberships",
         icon: "ecommerce",
         type: "sub",
         badge: "badge badge-light-primary",
@@ -47,18 +70,10 @@ export const MENUITEMS = [
         ],
       },
       {
-        title: "Transactions",
-        icon: "icons",
-        type: "link",
-        path: `/subscription-packages/transactions`,
-      },
-
-      {
-        title: "Banners",
+        title: "Promotions",
         icon: "sample-page",
         badge2: true,
         active: false,
-
         type: "sub",
         children: [
           {
@@ -73,6 +88,37 @@ export const MENUITEMS = [
           },
         ],
       },
+      {
+        title: "Schedule A Call",
+        icon: "icons",
+        type: "link",
+        path: `/schedule-call`,
+      },
+      {
+        path: `/website/queries`,
+        type: "link",
+        title: "Website Queries",
+        icon: "user",
+      },
+      {
+        title: "Transactions",
+        icon: "icons",
+     
+        type: "sub",
+        children: [
+          {
+            title: "Customers",
+            type: "link",
+            path: `/customers/transactions`,
+          },
+          {
+            title: "Members",
+            type: "link",
+            path: `/members/transactions`,
+          },
+        ],
+      },
+     
       {
         icon: "faq",
         type: "sub",
@@ -89,6 +135,11 @@ export const MENUITEMS = [
             title: "View Faq's",
           },
         ],
+      },
+      {
+        path: `/`,
+        type: "link",
+        title: "Logout",
       },
     ],
   },
