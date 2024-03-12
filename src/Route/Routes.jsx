@@ -18,11 +18,16 @@ import Dashboard from "../myPages/Dashboard";
 import DealsQueries from "../myPages/DealsSection/comp/DealsQueries";
 import Call from "../myPages/Call";
 import WebsiteQueries from "../myPages/WebsiteQueries";
+import CRM from "../myPages/CRM";
 
 export const routes = [
   {
     path: `/dashboard`,
     Component: <Dashboard />,
+  },
+  {
+    path: `/crm`,
+    Component: <CRM />,
   },
   {
     path: `/users/all-customers`,

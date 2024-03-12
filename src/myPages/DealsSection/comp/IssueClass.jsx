@@ -25,14 +25,7 @@ const IssueClass = ({ register }) => {
     return (
         <Fragment>
             <Row>
-                <Col sm="4">
-                    <FormGroup>
-                        <H6>{Start}</H6>
-                        <Col xl="5" sm="9">
-                        <DatePicker className="form-control digits" selected={startDate} onChange={handleStartDateChange} />
-                    </Col>
-                    </FormGroup>
-                </Col>
+  
                 <Col sm="4">
                     <FormGroup>
                         <H6>{"Monthly Cash Flow Range"}</H6>
@@ -42,7 +35,7 @@ const IssueClass = ({ register }) => {
                 </Col>
                 <Col sm="4">
                     <FormGroup>
-                        <H6>{"Approx 20%-22%  Annual Return"}</H6>
+                        <H6>{"Approx Annual Return(%)"}</H6>
                         <input className="form-control" type="text" name="annually_cash" placeholder="Enter annually profit " {...register('annually_cash', { required: true })} />
                         {/* <span style={{ color: 'red' }}>{errors.client_name && 'Client Name is required'}</span> */}
                     </FormGroup>

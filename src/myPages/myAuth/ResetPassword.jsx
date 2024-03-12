@@ -7,6 +7,8 @@ import logoDark from '../../assets/images/logo/logo_dark.png';
 
 const ResetPassword = ({ logoClassMain }) => {
   const [togglePassword, setTogglePassword] = useState(false);
+  const [toggleRetypePassword, setToggleRetypePassword] = useState(false);
+
   return (
     <Fragment>
       <section>
@@ -33,34 +35,25 @@ const ResetPassword = ({ logoClassMain }) => {
                           </div>
                         </div>
                       </FormGroup>
-                      <FormGroup>
+                      <FormGroup className='position-relative'>
                         <Label className='m-0 col-form-label'>Retype Password</Label>
-                        <Input className='form-control' type='password' name='login[password]' required='' placeholder='*********' />
-                      </FormGroup>
-                      <FormGroup>
-                        <div className='checkbox'>
-                          <Input id='checkbox1' type='checkbox' />
-                          <Label className='text-muted' for='checkbox1'>
-                            Remember password
-                          </Label>
+                        <div className='position-relative'>
+                          <Input className='form-control' type={toggleRetypePassword ? 'text' : 'password'} name='login[retypePassword]' required='' placeholder='*********' />
+                          <div className='show-hide' onClick={() => setToggleRetypePassword(!toggleRetypePassword)}>
+                            <span className={toggleRetypePassword ? '' : 'show'}></span>
+                          </div>
                         </div>
                       </FormGroup>
                       <FormGroup>
                         <Btn attrBtn={{ className: 'd-block w-100', color: 'primary', type: 'submit' }}>Done</Btn>
                       </FormGroup>
-                      <P attrPara={{ className: 'mb-0' }}>
-                        Don't have account?
-                        <a className='ps-2' href='#javascript'>
-                          Create Account
-                        </a>
-                      </P>
                     </Form>
                   </div>
                 </div>
               </div>
             </Col>
           </Row>
-        </Container>
+        </Container>  
       </section>
     </Fragment>
   );

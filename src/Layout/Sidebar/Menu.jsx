@@ -94,10 +94,11 @@ export const MENUITEMS = [
         type: "link",
         path: `/schedule-call`,
       },
+   
       {
-        path: `/website/queries`,
+        path: `/crm`,
         type: "link",
-        title: "Website Queries",
+        title: "CRM",
         icon: "user",
       },
       {
@@ -118,7 +119,12 @@ export const MENUITEMS = [
           },
         ],
       },
-     
+      {
+        path: `/website/queries`,
+        type: "link",
+        title: "Website Queries",
+        icon: "user",
+      },
       {
         icon: "faq",
         type: "sub",

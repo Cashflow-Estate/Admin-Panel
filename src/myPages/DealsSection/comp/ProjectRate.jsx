@@ -32,19 +32,7 @@ const ProjectRateClass = ({ register }) => {
   return (
     <Fragment>
       <Row>
-        <Col sm="4">
-          <FormGroup>
-            <H6>{ProjectRate}</H6>
-            <input
-              className="form-control"
-              type="number"
-              name="rate"
-              defaultValue="0"
-              placeholder="Price"
-              {...register("rate", { required: true })}
-            />
-          </FormGroup>
-        </Col>
+  
         <Col sm="4">
           <FormGroup>
             <H6>{"Slow Flip Terms"}</H6>

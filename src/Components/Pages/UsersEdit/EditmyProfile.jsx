@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useRef } from "react";
 import { Btn, H4, H5, H6, Image, P } from "../../../AbstractElements";
 import { useForm } from "react-hook-form";
 import { FaPencilAlt } from 'react-icons/fa';
@@ -39,6 +39,13 @@ const EditMyProfile = () => {
     alert(JSON.stringify(data, null, 2));
   };
 
+  const fileInputRef = useRef(null);
+
+  const handleImageClick = () => {
+    // Trigger click on file input when image is clicked
+    fileInputRef.current.click();
+  };
+
   return (
     <Fragment>
       <Form className="card" onSubmit={handleSubmit(onEditSubmit)}>
@@ -56,23 +63,32 @@ const EditMyProfile = () => {
         <CardBody>
         <Row className="mb-2">
   <div className="profile-title">
-    <div className="media">
+    <div  style={{cursor:"pointer"}} className="media">
       <Image
         attrImage={{
           className: "img-70 m-0 rounded-circle",
           alt: "",
           src: `${require("../../../assets/images/user/1.jpg")}`,
+          onClick: handleImageClick, // Add onClick handler to image
         }}
       />
       <div className="media-body">
         <Link>
           <H5 attrH5={{ className: "mb-1" }}>MARK JECNO</H5>
         </Link>
-        <P>DESIGNER <FaPencilAlt style={{ marginLeft: '5px', cursor: 'pointer' }} /></P>
+        <P>DESIGNER</P>
       </div>
     </div>
   </div>
 </Row>
+
+          {/* File input for uploading new image */}
+          <input
+            type="file"
+            accept="image/*"
+            style={{ display: "none" }}
+            ref={fileInputRef}
+          />
           <Row>
             <Col sm="4">
               <FormGroup>
@@ -122,50 +138,67 @@ const EditMyProfile = () => {
             </Col>
           </Row>
           <Row>
+         
             <Col sm="4">
               <FormGroup>
-                <H6 className="form-label">{Password}</H6>
+                <H6 className="form-label">{City}</H6>
                 <Input
                   className="form-control"
-                  type="password"
-                  placeholder="Password"
-                  {...register("password", { required: true })}
+                  type="text"
+                  placeholder="City"
+                  {...register("city", { required: true })}
                 />
-                {errors.password && (
-                  <span className="text-danger">{errors.password.message}</span>
+                {errors.city && (
+                  <span className="text-danger">{errors.city.message}</span>
                 )}
               </FormGroup>
             </Col>
             <Col sm="4">
               <FormGroup>
-                <H6 className="form-label">{Address}</H6>
+                <H6 className="form-label">{"State"}</H6>
                 <Input
                   className="form-control"
                   type="text"
-                  placeholder="Address"
-                  {...register("address", { required: true })}
+                  placeholder="State"
+                  {...register("state", { required: true })}
                 />
-                {errors.address && (
-                  <span className="text-danger">{errors.address.message}</span>
+                {errors.state && (
+                  <span className="text-danger">{errors.state.message}</span>
                 )}
               </FormGroup>
             </Col>
             <Col sm="4">
               <FormGroup>
-                <H6 className="form-label">{"DOB"}</H6>
+                <H6 className="form-label">{Country}</H6>
                 <Input
                   className="form-control"
                   type="text"
-                  placeholder="Date of birth"
-                  {...register("dateofbirth", { required: true })}
+                  placeholder="Country"
+                  {...register("country", { required: true })}
                 />
-                {errors.dateofbirth && (
-                  <span className="text-danger">{errors.dateofbirth.message}</span>
+                {errors.country && (
+                  <span className="text-danger">{errors.country.message}</span>
                 )}
               </FormGroup>
             </Col>
           </Row>
- 
+          {/* <Row>
+
+            <Col sm="4">
+              <FormGroup>
+                <H6 className="form-label">{PostalCode}</H6>
+                <Input
+                  className="form-control"
+                  type="text"
+                  placeholder="Postal Code"
+                  {...register("postalCode", { required: true })}
+                />
+                {errors.postalCode && (
+                  <span className="text-danger">{errors.postalCode.message}</span>
+                )}
+              </FormGroup>
+            </Col>
+          </Row> */}
         </CardBody>
         <CardFooter className="text-end">
           <Btn attrBtn={{ color: "primary", type: "submit" }}>

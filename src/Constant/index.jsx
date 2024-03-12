@@ -1,4 +1,5 @@
 export const Dashboard = 'Dashboard';
+export const ChangePassword = 'Change Password';
 export const Widgets = 'Widgets';
 export const Summary = 'Summary';
 export const NewsUpdate = 'News & Update';

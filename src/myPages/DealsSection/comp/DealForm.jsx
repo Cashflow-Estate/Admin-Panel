@@ -20,13 +20,7 @@ const DealForm = ({ register, errors }) => {
                         <span style={{ color: 'red' }}>{errors.price && 'Price is required'}</span>
                     </FormGroup>
                 </Col>
-                <Col>
-                    <FormGroup>
-                        <H6>{"Send To"}</H6>
-                        <input className="form-control" type="text" name="client_name" placeholder="Client Name" {...register('client_name', { required: true })} />
-                        {/* <span style={{ color: 'red' }}>{errors.client_name && 'Client Name is required'}</span> */}
-                    </FormGroup>
-                </Col>
+             
             </Row>
         </Fragment>
     );
