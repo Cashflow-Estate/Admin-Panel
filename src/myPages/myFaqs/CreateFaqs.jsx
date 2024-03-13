@@ -44,25 +44,30 @@ const CreateFaqs = () => {
         <CardBody>
           <Form>
             {faqs.map((faq, index) => (
-              <FormGroup key={index}>
-                <H6 for={`question${index}`}>Question</H6>
-                <Input
-                  type="text"
-                  name={`question${index}`}
-                  id={`question${index}`}
-                  placeholder="Enter question"
-                  value={faq.question}
-                  onChange={(e) => handleQuestionChange(index, e)}
-                />
-                <H6 for={`answer${index}`} className="mt-3">
-                  Answer
-                </H6>
-                <ReactQuill
-                  value={description}
-                  onChange={handleDescriptionChange}
-                  theme="snow" // You can change the theme if needed
-                />
-              </FormGroup>
+              <FormGroup key={index} >
+              <H6 for={`question${index}`} className="mb-2">Question</H6>
+              <Input
+                type="text"
+                name={`question${index}`}
+                id={`question${index}`}
+                placeholder="Enter question"
+                value={faq.question}
+                onChange={(e) => handleQuestionChange(index, e)}
+              />
+              <div style={{marginTop:"12px"}}>
+
+              <H6  for={`answer${index}`} >
+                Answer
+              </H6>
+              <ReactQuill
+                value={description}
+                onChange={handleDescriptionChange}
+                theme="snow" // You can change the theme if needed
+              />
+              </div>
+
+            </FormGroup>
+            
             ))}
           </Form>
           <Button color="success" onClick={addFAQ}>

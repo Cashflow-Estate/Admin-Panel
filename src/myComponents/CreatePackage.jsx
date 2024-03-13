@@ -1,9 +1,10 @@
 import React, { Fragment, useState } from "react";
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 import { Card, CardBody, Form, Input, Row, Col } from "reactstrap";
 import HeaderCard from "./HeaderCard";
 import { H6, Btn } from "../AbstractElements";
+import SimpleMdeReact from "react-simplemde-editor";
 
 const CreatePackage = () => {
   const [planType, setPlanType] = useState("basic"); // Default plan type is 'basic'
@@ -31,7 +32,10 @@ const CreatePackage = () => {
   const handleDescriptionChange = (value) => {
     setDescription(value);
   };
-
+  const [value, setValue] = useState("");
+  const handelChange = (e) => {
+    setValue(e);
+  };
   return (
     <Fragment>
       <Card>
@@ -55,33 +59,34 @@ const CreatePackage = () => {
                   placeholder="Package Price"
                 />
               </Col>
+              <Col>
+                <H6>{"Billing Cycle"}</H6>
+                <Input
+                  type="select"
+                  value={billingCycle}
+                  onChange={handleBillingCycleChange}
+                >
+                  <option value="weekly">Weekly</option>
+                  <option value="daily">Daily</option>
+                  <option value="monthly">Monthly</option>
+                  <option value="bi-monthly">Bi-Monthly</option>
+                  <option value="quarterly">Quarterly</option>
+                  <option value="semi-annually">Semi-Annually</option>
+                  <option value="annually">Annually</option>
+                </Input>
+              </Col>
             </Row>
             <Row className="pt-4">
-              <Col md="4">
-                <H6>{"Billing Cycle"}</H6>
-                <div className="pt-2">
-                  <Input
-                    type="select"
-                    value={billingCycle}
-                    onChange={handleBillingCycleChange}
-                  >
-                    <option value="weekly">Weekly</option>
-                    <option value="daily">Daily</option>
-                    <option value="monthly">Monthly</option>
-                    <option value="bi-monthly">Bi-Monthly</option>
-                    <option value="quarterly">Quarterly</option>
-                    <option value="semi-annually">Semi-Annually</option>
-                    <option value="annually">Annually</option>
-                  </Input>
-                </div>
-        
-              </Col>
-              <Col md="8">
+              <Col>
                 <H6>{"Description"}</H6>
-                <ReactQuill 
-                  value={description} 
-                  onChange={handleDescriptionChange} 
-                  theme="snow" // You can change the theme if needed
+                <SimpleMdeReact
+             
+                  id="editor_container"
+                  options={{
+                    autofocus: true,
+                    spellChecker: false,
+                  }}
+                  onChange={handelChange}
                 />
               </Col>
             </Row>

@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useState } from "react";
+import React, { Fragment, useState } from "react";
 import {
   Row,
   Col,
@@ -13,11 +13,10 @@ import {
   Button,
 } from "reactstrap";
 import { Btn, H5, P } from "../../../AbstractElements";
-import { HelpCircle, Trash2 } from "react-feather";
-import FaqContext from "../../../_helper/Faq";
+import { HelpCircle, Trash2, Edit } from "react-feather";
+import { useNavigate } from "react-router";
 
 const Questionss = () => {
-  const { faq } = useContext(FaqContext);
   const [isActivity, setIsActivity] = useState([]);
   const [deleteItemId, setDeleteItemId] = useState(null); // To track the item to be deleted
   const [showDeleteModal, setShowDeleteModal] = useState(false); // State for showing the delete confirmation modal
@@ -34,7 +33,7 @@ const Questionss = () => {
   const handleDelete = (id) => {
     // Set the item ID to be deleted and show the details modal
     setDeleteItemId(id);
-    setSelectedFaqItem(faq[id]); // Set the selected FAQ item
+    setSelectedFaqItem(faqs[id]); // Set the selected FAQ item
     setShowDeleteModal(true);
   };
 
@@ -50,12 +49,29 @@ const Questionss = () => {
     // Close the delete modal
     setShowDeleteModal(false);
   };
+  const history = useNavigate();
+  const handleEdit = () => {
+    // Navigate to the edit route
+    history("/faqs/create");
+  };
 
   const cancelDelete = () => {
     // Reset deleteItemId and hide the delete modal
     setDeleteItemId(null);
     setShowDeleteModal(false);
   };
+
+  const faqs = [
+    { id: 1, title: "Integrating WordPress with Your Website?" },
+    { id: 2, title: "WordPress Site Maintenance ?" },
+    { id: 3, title: "Meta Tags in WordPress ?" },
+    { id: 4, title: "Integrating WordPress with Your Website?" },
+    { id: 5, title: "WordPress Site Maintenance ?" },
+    { id: 6, title: "Meta Tags in WordPress ?" },
+    { id: 7, title: "Integrating WordPress with Your Website?" },
+    { id: 8, title: "WordPress Site Maintenance ?" },
+    { id: 9, title: "Meta Tags in WordPress ?" },
+  ];
 
   return (
     <Fragment>
@@ -68,45 +84,46 @@ const Questionss = () => {
           id="accordionoc"
         >
           <Col xl="8" lg="6" md="7" className="box-col-8 xl-60">
-            {faq &&
-              faq.map((faqItem, i) => (
-                <Fragment key={i}>
-                  <div className={`${i !== 0 ? "faq-title" : ""}`}></div>
-                  {faqItem.titless.map((item, id) => (
-                    <Card key={id}>
-                      <CardHeader>
-                        <H5 attrH5={{ className: "mb-0" }}>
-                          <Btn
-                            attrBtn={{
-                              color: "link ps-0",
-                              onClick: () => handelChange(id),
-                            }}
-                          >
-                            <HelpCircle />
-                            {item.title}
-                          </Btn>
-                          <div
-                          onClick={ () => handleDelete(id)}
-                            style={{
-                              position: "absolute",
-                              right: 0,
-                              top: "10px",
-                            }}
-                          
-                          >
-                            <Trash2 />
-                          </div>
-                        </H5>
-                      </CardHeader>
-                      <Collapse isOpen={isActivity[id]}>
-                        <CardBody>
-                          <P>{para}</P>
-                        </CardBody>
-                      </Collapse>
-                    </Card>
-                  ))}
-                </Fragment>
-              ))}
+            {faqs.map((faqItem) => (
+              <Card key={faqItem.id}>
+                <CardHeader>
+                  <H5 attrH5={{ className: "mb-0" }}>
+                    <Btn
+                      attrBtn={{
+                        color: "link ps-0",
+                        onClick: () => handelChange(faqItem.id),
+                      }}
+                    >
+                      <HelpCircle />
+                      {faqItem.title}
+                    </Btn>
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        position: "absolute",
+                        right: 9,
+                        top: "10px",
+                      }}
+                    >
+                      <Edit
+                        style={{ marginRight: "5px", cursor: "pointer" }}
+                        onClick={handleEdit} // Call handleEdit on click
+                      />
+                      <Trash2
+                        style={{ cursor: "pointer" }}
+                        onClick={() => handleDelete(faqItem.id)}
+                      />
+                    </div>
+                  </H5>
+                </CardHeader>
+                <Collapse isOpen={isActivity[faqItem.id]}>
+                  <CardBody>
+                    <P>{para}</P>
+                  </CardBody>
+                </Collapse>
+              </Card>
+            ))}
           </Col>
         </Row>
       </Col>

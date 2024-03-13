@@ -3,7 +3,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Card, CardBody, Form, Input, Row, Col, FormGroup, Button } from "reactstrap";
 import HeaderCard from "../../myComponents/HeaderCard";
-import { H6 } from "../../AbstractElements";
+import { Breadcrumbs, H6 } from "../../AbstractElements";
 import ReactQuill from "react-quill";
 
 const Call = () => {
@@ -27,6 +27,8 @@ const Call = () => {
 
   return (
     <Fragment>
+      <Breadcrumbs mainTitle="Call" parent="Call" title="Schedule a Meet" />
+
       <Card>
         <HeaderCard
           span1="Schedule a Call"
@@ -111,7 +113,7 @@ const Call = () => {
             </Row>
             <Row>
               <Col>
-                <Button color="primary" type="submit">Schedule Call</Button>
+                <Button color="success" type="submit">Schedule Call</Button>
               </Col>
             </Row>
           </Form>

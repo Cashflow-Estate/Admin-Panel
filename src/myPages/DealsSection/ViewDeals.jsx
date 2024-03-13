@@ -5,6 +5,7 @@ import { Container, Row } from "reactstrap";
 import GalleryContext from "../../_helper/Gallery";
 import DealCategory from "./comp/DealCategory";
 import iii from "../../../src/assets/cashflowimg/apartments/a1.png"
+import AllDealsTable from "./comp/AllDealsTable";
 const ViewDeals = () => {
   const { images, smallImages } = useContext(GalleryContext);
   const initilindex = { index: 0, isOpen: false };
@@ -18,17 +19,18 @@ const ViewDeals = () => {
     <Fragment>
       <Breadcrumbs mainTitle="Deals" parent="Deals" title="All Deals" />
 
-      <Container fluid={true}>
-        <Row>
+      {/* <Container fluid={true}> */}
+        {/* <Row> */}
           {/* <DealCategory smallImages={featureProduct} /> */}
-          <ListOfImageDesc
+          {/* <ListOfImageDesc
             smallImages={featureProduct}
             setPhotoIndex={callback}
             photoIndex={photoIndex}
             withDesc={true}
-          />
-        </Row>
-      </Container>
+          /> */}
+          <AllDealsTable/>
+        {/* </Row>
+      </Container> */}
     </Fragment>
   );
 };

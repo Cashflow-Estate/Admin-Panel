@@ -1,62 +1,29 @@
 import React, { Fragment } from "react";
-import { Container, Row, Col, Card, CardImg, CardBody, CardTitle, CardText, Breadcrumb } from "reactstrap";
+import { Container, Row, Col, Card, CardBody, CardTitle, CardText } from "reactstrap";
+import { Breadcrumbs } from "../../AbstractElements";
+
+const queries = [
+  { id: 1, title: "Query Title 1", name: "Syed M.Abid", description: "This is a brief description of the query or question. You can provide more details here if needed." },
+
+];
 
 const WebsiteQueries = () => {
   return (
     <Fragment>
-      <Breadcrumb mainTitle="Queries" parent="Queries" title="Website Queries" />
-      <Container fluid={true}>
+      <Breadcrumbs mainTitle="Queries" parent="Queries" title="Website Queries" />
+      <Container fluid>
         <Row>
-          <Col sm="6">
-            <Card>
-              <CardBody>
-                <CardTitle tag="h4">Query Title 1</CardTitle>
-                <CardText tag="h6">Name : Syed M.Abid</CardText>
-
-                <CardText>
-                  This is a brief description of the query or question. You can provide more details here if needed.
-                </CardText>
-              </CardBody>
-            </Card>
-          </Col>
-          <Col sm="6">
-            <Card>
-              <CardBody>
-                <CardTitle tag="h4">Query Title 1</CardTitle>
-                <CardText tag="h6">Name : Syed M.Abid</CardText>
-
-                <CardText>
-                  This is a brief description of the query or question. You can provide more details here if needed.
-                </CardText>
-              </CardBody>
-            </Card>
-          </Col>
-          <Col sm="6">
-            <Card>
-              <CardBody>
-                <CardTitle tag="h4">Query Title 1</CardTitle>
-                <CardText tag="h6">Name : Syed M.Abid</CardText>
-
-                <CardText>
-                  This is a brief description of the query or question. You can provide more details here if needed.
-                </CardText>
-              </CardBody>
-            </Card>
-          </Col>
-          <Col sm="6">
-            <Card>
-              <CardBody>
-                <CardTitle tag="h4">Query Title 1</CardTitle>
-                <CardText tag="h6">Name : Syed M.Abid</CardText>
-
-                <CardText>
-                  This is a brief description of the query or question. You can provide more details here if needed.
-                </CardText>
-              </CardBody>
-            </Card>
-          </Col>
-         
-          {/* Repeat the above pattern for other queries */}
+          {queries.map(query => (
+            <Col key={query.id} sm="6">
+              <Card>
+                <CardBody>
+                  <CardTitle tag="h4">{query.title}</CardTitle>
+                  <CardText tag="h6">Name: {query.name}</CardText>
+                  <CardText>{query.description}</CardText>
+                </CardBody>
+              </Card>
+            </Col>
+          ))}
         </Row>
       </Container>
     </Fragment>

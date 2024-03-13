@@ -201,7 +201,7 @@ const EditMyProfile = () => {
           </Row> */}
         </CardBody>
         <CardFooter className="text-end">
-          <Btn attrBtn={{ color: "primary", type: "submit" }}>
+          <Btn attrBtn={{ color: "success", type: "submit" }}>
             {UpdateProfile}
           </Btn>
         </CardFooter>
