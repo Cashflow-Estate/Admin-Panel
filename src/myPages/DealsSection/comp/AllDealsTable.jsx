@@ -2,7 +2,7 @@ import React, { Fragment, useState } from "react";
 import DataTable from "react-data-table-component";
 import { Button } from "reactstrap";
 // import iii from "../../../src/assets/cashflowimg/apartments/a1.png"
-import iii from "../../../../src/assets/cashflowimg/apartments/a1.png"
+import iii from "../../../../src/assets/cashflowimg/apartments/a1.png";
 import { useNavigate } from "react-router";
 
 const AllDealsTable = () => {
@@ -12,15 +12,14 @@ const AllDealsTable = () => {
       title: "Deal 1",
       image: "deal1.jpg",
       status: "Active",
-      queries:<i className="fa fa-rss-square"></i>
+      queries: <i className="fa fa-rss-square"></i>,
     },
     {
       id: 2,
       title: "Deal 2",
       image: "deal2.jpg",
       status: "Inactive",
-      queries:<i className="fa fa-rss-square"></i>
-
+      queries: <i className="fa fa-rss-square"></i>,
     },
     // Add more deals as needed
   ]);
@@ -30,18 +29,17 @@ const AllDealsTable = () => {
     history(`/deals/1`);
   };
   // Define handleEdit function
-const handleEdit = (row) => {
-  history(`/deals/create`);
+  const handleEdit = (row) => {
+    history(`/deals/create`);
+  };
 
-};
+  // Define handleDelete function
+  const handleDelete = (row) => {
+    // Logic for handling delete action
+    console.log("Deleting row:", row);
+  };
 
-// Define handleDelete function
-const handleDelete = (row) => {
-  // Logic for handling delete action
-  console.log("Deleting row:", row);
-};
-
-// Your component code continues...
+  // Your component code continues...
 
   const customColumns = [
     {
@@ -60,7 +58,15 @@ const handleDelete = (row) => {
     },
     {
       name: "Status",
-      selector: (row) => row.status,
+      selector: (row) => (
+        <button
+          className={`btn badge-light-${
+            row.status === "Inactive" ? "light" : "primary"
+          } ${row.status === "Inactive" && "disabled"}`}
+        >
+          {row.status}
+        </button>
+      ),
       sortable: true,
       center: false,
     },
@@ -74,20 +80,17 @@ const handleDelete = (row) => {
             justifyContent: "flex-start", // Align buttons to the left
           }}
         >
-            <Button
+          <Button
             color=""
             onClick={() => handleViewQueries(row)}
             style={{ padding: "0.25rem", marginRight: "0.5rem" }}
           >
-    <i className="fa fa-wechat"></i>
-
+            <i className="fa fa-wechat"></i>
           </Button>
-      
         </div>
       ),
       sortable: true,
       center: false,
-
     },
     {
       name: "Actions",
@@ -126,11 +129,10 @@ const handleDelete = (row) => {
       width: "20%",
       center: true, // Keep the column centered
     },
-
   ];
 
   const handleViewQueries = (deal) => {
-history("/deals/queries")
+    history("/deals/queries");
   };
 
   return (

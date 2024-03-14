@@ -29054,7 +29054,7 @@ footer.blockquote-footer {
 }
 @media (min-width: 1500px) {
   .product-page-main .product-slider img {
-    height: 400px;
+    height: 900px;
     -o-object-fit: cover;
        object-fit: cover;
   }

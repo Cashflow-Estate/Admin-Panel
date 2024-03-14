@@ -32,7 +32,7 @@ const App = () => (
             {/* <WishListProvider> */}
               {/* <FilterProvider> */}
                 {/* <CartProvider> */}
-                  {/* <ProductProvider> */}
+                  <ProductProvider>
                     {/* <SearchResultProvider> */}
                       {/* <EmailProvider> */}
                         {/* <TodoProvider> */}
@@ -62,7 +62,7 @@ const App = () => (
                         {/* </TodoProvider> */}
                       {/* </EmailProvider> */}
                     {/* </SearchResultProvider> */}
-                  {/* </ProductProvider> */}
+                  </ProductProvider>
                 {/* </CartProvider> */}
               {/* </FilterProvider> */}
             {/* </WishListProvider> */}

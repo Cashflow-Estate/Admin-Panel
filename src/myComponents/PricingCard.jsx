@@ -26,8 +26,11 @@ const PricingCard = () => {
                 <LI attrLI={{ className: 'border-0' }}>{'15 Subdomains'}</LI>
               </UL>
               <div className='pricingtable-Edit'>
+              <div className='pricingtable-actions'>
                 <Btn attrBtn={{ color: 'success', size: 'lg' }}>{Edit}</Btn>
+                <Btn attrBtn={{ color: 'danger', size: 'lg' }}>{'Delete'}</Btn>
               </div>
+            </div>
             </div>
           </Col>
           <Col lg='3' md='6'>
@@ -47,8 +50,11 @@ const PricingCard = () => {
                 <LI attrLI={{ className: 'border-0' }}>{'15 Subdomains'}</LI>
               </UL>
               <div className='pricingtable-Edit'>
+              <div className='pricingtable-actions'>
                 <Btn attrBtn={{ color: 'success', size: 'lg' }}>{Edit}</Btn>
+                <Btn attrBtn={{ color: 'danger', size: 'lg' }}>{'Delete'}</Btn>
               </div>
+            </div>
             </div>
           </Col>
           <Col lg='3' md='6'>
@@ -68,9 +74,13 @@ const PricingCard = () => {
                 <LI attrLI={{ className: 'border-0' }}>{'15 Subdomains'}</LI>
               </UL>
               <div className='pricingtable-Edit'>
+              <div className='pricingtable-actions'>
                 <Btn attrBtn={{ color: 'success', size: 'lg' }}>{Edit}</Btn>
+                <Btn attrBtn={{ color: 'danger', size: 'lg' }}>{'Delete'}</Btn>
               </div>
             </div>
+                
+              </div>
           </Col>
           <Col lg='3' md='6'>
             <div className='pricingtable'>
@@ -89,8 +99,11 @@ const PricingCard = () => {
                 <LI attrLI={{ className: 'border-0' }}>{'15 Subdomains'}</LI>
               </UL>
               <div className='pricingtable-Edit'>
+              <div className='pricingtable-actions'>
                 <Btn attrBtn={{ color: 'success', size: 'lg' }}>{Edit}</Btn>
+                <Btn attrBtn={{ color: 'danger', size: 'lg' }}>{'Delete'}</Btn>
               </div>
+            </div>
             </div>
           </Col>
         </Row>

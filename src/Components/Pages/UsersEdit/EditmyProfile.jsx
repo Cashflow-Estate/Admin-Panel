@@ -1,7 +1,7 @@
-import React, { Fragment, useRef } from "react";
+import React, { Fragment, useRef, useState } from "react";
 import { Btn, H4, H5, H6, Image, P } from "../../../AbstractElements";
 import { useForm } from "react-hook-form";
-import { FaPencilAlt } from 'react-icons/fa';
+import { FaPencilAlt } from "react-icons/fa";
 import {
   Row,
   Col,
@@ -39,11 +39,24 @@ const EditMyProfile = () => {
     alert(JSON.stringify(data, null, 2));
   };
 
-  const fileInputRef = useRef(null);
+  const [url, setUrl] = useState("");
 
-  const handleImageClick = () => {
-    // Trigger click on file input when image is clicked
-    fileInputRef.current.click();
+  const readUrl = (event) => {
+    if (event.target.files.length === 0) return;
+    var mimeType = event.target.files[0].type;
+
+    if (mimeType.match(/image\/*/) == null) {
+      return;
+    }
+    var reader = new FileReader();
+    reader.readAsDataURL(event.target.files[0]);
+    reader.onload = (_event) => {
+      setUrl(reader.result);
+    };
+  };
+
+  const handleImageIconClick = () => {
+    document.getElementById("profile-image-input").click();
   };
 
   return (
@@ -61,34 +74,47 @@ const EditMyProfile = () => {
           </div>
         </CardHeader>
         <CardBody>
-        <Row className="mb-2">
-  <div className="profile-title">
-    <div  style={{cursor:"pointer"}} className="media">
-      <Image
-        attrImage={{
-          className: "img-70 m-0 rounded-circle",
-          alt: "",
-          src: `${require("../../../assets/images/user/1.jpg")}`,
-          onClick: handleImageClick, // Add onClick handler to image
-        }}
-      />
-      <div className="media-body">
-        <Link>
-          <H5 attrH5={{ className: "mb-1" }}>MARK JECNO</H5>
-        </Link>
-        <P>DESIGNER</P>
-      </div>
-    </div>
-  </div>
-</Row>
+          <Row className="mb-2">
+            <div className="profile-title">
+              <div style={{ cursor: "pointer" }} className="media">
+                <Image
+                  attrImage={{
+                    className: "img-70 m-0 rounded-circle",
+                    alt: "",
+                    src: `${
+                      url ? url : require("../../../assets/images/user/1.jpg")
+                    }`,
+                  }}
+                  onClick={handleImageIconClick}
+                />
+                <label
+                  htmlFor="profile-image-input"
+                  style={{
+                    display: "none",
+                  }}
+                >
+                  <FaPencilAlt className="edit-icon" />
+                </label>
+                <input
+                  id="profile-image-input"
+                  style={{
+                    display: "none",
+                  }}
+                  className="upload"
+                  type="file"
+                  onChange={(e) => readUrl(e)}
+                />
 
-          {/* File input for uploading new image */}
-          <input
-            type="file"
-            accept="image/*"
-            style={{ display: "none" }}
-            ref={fileInputRef}
-          />
+                <div className="media-body">
+                  <Link>
+                    <H5 attrH5={{ className: "mb-1" }}>MARK JECNO</H5>
+                  </Link>
+                  <P>DESIGNER</P>
+                </div>
+              </div>
+            </div>
+          </Row>
+
           <Row>
             <Col sm="4">
               <FormGroup>
@@ -138,7 +164,6 @@ const EditMyProfile = () => {
             </Col>
           </Row>
           <Row>
-         
             <Col sm="4">
               <FormGroup>
                 <H6 className="form-label">{City}</H6>
