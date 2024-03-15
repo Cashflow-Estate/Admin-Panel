@@ -22,10 +22,10 @@
                     55,
                     40
                 ],
-                "borderColor": "#7366ff",
+                "borderColor": "#31a911",
                 "backgroundColor": "rgba(145, 46, 252, 0.4)",
                 "highlightFill": "#912efc",
-                "highlightStroke": "#7366ff",
+                "highlightStroke": "#31a911",
                 "borderWidth": 2
             },
             {
@@ -88,7 +88,7 @@
                 ],
                 "label": "Data1",
                 "fill": true,
-                "borderColor": "#7366ff",
+                "borderColor": "#31a911",
                 "backgroundColor": "rgba(145, 46, 252, 0.3)",
                 "borderWidth": 2
             },
@@ -146,11 +146,11 @@
             {
                 "label": "My Second dataset",
                 "backgroundColor": "rgba(145, 46, 252, 0.4)",
-                "borderColor": "#7366ff",
+                "borderColor": "#31a911",
                 "fill": true,
                 "pointBackgroundColor": "#912efc",
                 "pointBorderColor": "#fff",
-                "pointHoverBackgroundColor": "#7366ff",
+                "pointHoverBackgroundColor": "#31a911",
                 "pointHoverBorderColor": "#912efc",
                 "data": [
                     12,
@@ -216,8 +216,8 @@
             {
                 "label": "Data3",
                 "backgroundColor": "rgba(145, 46, 252, 0.2)",
-                "borderColor": "#7366ff",
-                "pointColor": "#7366ff",
+                "borderColor": "#31a911",
+                "pointColor": "#31a911",
                 "fill": true,
                 "data": [
                     60,
@@ -259,7 +259,7 @@
                     100
                 ],
                 "backgroundColor": [
-                    "#7366ff",
+                    "#31a911",
                     "#4d8aff",
                     "#51bb25"
                 ]
@@ -296,7 +296,7 @@
                     120
                 ],
                 "backgroundColor": [
-                    "#7366ff",
+                    "#31a911",
                     "#4d8aff",
                     "#f8d62b",
                     "#51bb25",

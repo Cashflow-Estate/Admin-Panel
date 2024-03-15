@@ -912,7 +912,7 @@ export const RecentOrderChart = {
         colorStops: [
           {
             offset: 0,
-            color: '#7366ff',
+            color: '#31a911',
             opacity: 1,
           },
           {
@@ -1139,7 +1139,7 @@ export const GrowthChartData = {
         top: 5,
         left: 0,
         blur: 4,
-        color: '#7366ff',
+        color: '#31a911',
         opacity: 0.22,
       },
     },

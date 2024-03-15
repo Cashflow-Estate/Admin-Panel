@@ -9,7 +9,7 @@ export class ConfigDB {
       sidebar_setting: 'default-sidebar',
     },
     color: {
-      primary_color: localStorage.getItem('default_color') || '#7366ff',
+      primary_color: localStorage.getItem('default_color') || '#31a911',
       secondary_color: localStorage.getItem('secondary_color') || '#f73164',
       mix_background_layout: 'light-only',
     },
