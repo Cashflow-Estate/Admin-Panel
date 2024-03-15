@@ -1,7 +1,6 @@
 import React, { Fragment, useState } from "react";
 import DataTable from "react-data-table-component";
 import { Button } from "reactstrap";
-// import iii from "../../../src/assets/cashflowimg/apartments/a1.png"
 import iii from "../../../../src/assets/cashflowimg/apartments/a1.png";
 import { useNavigate } from "react-router";
 
@@ -13,6 +12,7 @@ const AllDealsTable = () => {
       image: "deal1.jpg",
       status: "Active",
       queries: <i className="fa fa-rss-square"></i>,
+      address: "123 Main St, City, Country",
     },
     {
       id: 2,
@@ -20,6 +20,7 @@ const AllDealsTable = () => {
       image: "deal2.jpg",
       status: "Inactive",
       queries: <i className="fa fa-rss-square"></i>,
+      address: "456 Elm St, City, Country",
     },
     // Add more deals as needed
   ]);
@@ -28,18 +29,18 @@ const AllDealsTable = () => {
   const handleViewDetails = (user) => {
     history(`/deals/1`);
   };
-  // Define handleEdit function
+
   const handleEdit = (row) => {
     history(`/deals/create`);
   };
 
-  // Define handleDelete function
   const handleDelete = (row) => {
-    // Logic for handling delete action
     console.log("Deleting row:", row);
   };
 
-  // Your component code continues...
+  const handleViewQueries = (deal) => {
+    history("/deals/queries");
+  };
 
   const customColumns = [
     {
@@ -71,13 +72,19 @@ const AllDealsTable = () => {
       center: false,
     },
     {
+      name: "Address",
+      selector: (row) => row.address,
+      sortable: true,
+      center: false,
+    },
+    {
       name: "Queries",
       cell: (row) => (
         <div
           style={{
             display: "flex",
             alignItems: "center",
-            justifyContent: "flex-start", // Align buttons to the left
+            justifyContent: "flex-start",
           }}
         >
           <Button
@@ -99,7 +106,7 @@ const AllDealsTable = () => {
           style={{
             display: "flex",
             alignItems: "center",
-            justifyContent: "flex-start", // Align buttons to the left
+            justifyContent: "flex-start",
           }}
         >
           <Button
@@ -127,13 +134,9 @@ const AllDealsTable = () => {
       ),
       button: true,
       width: "20%",
-      center: true, // Keep the column centered
+      center: true,
     },
   ];
-
-  const handleViewQueries = (deal) => {
-    history("/deals/queries");
-  };
 
   return (
     <Fragment>

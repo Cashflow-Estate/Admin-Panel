@@ -83,70 +83,86 @@ const DealsDetails = () => {
           <CardBody style={{ height: "650px" }}>
             <div className="product-page-details">
               <h3>{house.name}</h3>
-              <h5>{house.address}</h5>
+              <h6>{house.address}</h6>
+              <div className="product-price">
+                {symbol}
+                {house.price}
+              </div>
             </div>
-            <div className="product-price">
-              {symbol}
-              {house.price}
-            </div>
-            <p>{house.description}</p>
-            <hr />
             <div>
               <table className="product-page-width">
-                <tbody >
+                <tbody>
                   <tr>
                     <td>
-                      <BiBed
-                        style={{
-                          color: "blue",
-                          fontSize: "24px",
-                        }}
-                      />
-                      <b>{"Rooms"} &nbsp;&nbsp;&nbsp;:</b>
+                      <div className="d-flex ">
+                        <BiBed
+                          style={{
+                            color: "blue",
+                            fontSize: "24px",
+                          }}
+                        />
+                        <b style={{ paddingLeft: "5px", fontSize: "15px" }}>
+                          {"Rooms"} &nbsp;&nbsp;&nbsp;
+                        </b>
+                      </div>
                     </td>
-                    <td>{house.bedrooms}</td>
+                    <td>:{house.bedrooms}</td>
                   </tr>
                   <tr>
                     <td>
-                      <BiBath
-                        style={{
-                          color: "blue",
-                          fontSize: "24px",
-                        }}
-                      />
-                      <b>{"Bath"} &nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;&nbsp;</b>
+                      <div className="d-flex ">
+                        <BiBath
+                          style={{
+                            color: "blue",
+                            fontSize: "24px",
+                          }}
+                        />
+                        <b style={{ paddingLeft: "5px", fontSize: "15px" }}>
+                          {"Bath"} &nbsp;&nbsp;&nbsp;
+                        </b>
+                      </div>
                     </td>
-                    <td>{house.bathrooms}</td>
+                    <td>:  {house.bathrooms}</td>
                   </tr>
                   <tr>
                     <td>
-                      <BiArea
-                        style={{
-                          color: "blue",
-                          fontSize: "24px",
-                        }}
-                      />
-                      <b>{"Area"} &nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;&nbsp;</b>
+                      <div className="d-flex ">
+                        <BiArea
+                          style={{
+                            color: "blue",
+                            fontSize: "24px",
+                          }}
+                        />
+                        <b style={{ paddingLeft: "5px", fontSize: "15px" }}>
+                          {"Area in sqft"} &nbsp;&nbsp;&nbsp;
+                        </b>
+                      </div>
                     </td>
-                    <td>{house.surface} sqft</td>
+                    <td>:  {house.surface}</td>
                   </tr>
                   <tr>
                     <td>
-                      <CgUnavailable
-                        style={{
-                          color: "blue",
-                          fontSize: "24px",
-                        }}
-                      />
-                      <b>
-                        {"Availability"} &nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;&nbsp;
-                      </b>
+                      <div className="d-flex ">
+                        <CgUnavailable
+                          style={{
+                            color: "blue",
+                            fontSize: "24px",
+                          }}
+                        />
+                        <b style={{ paddingLeft: "5px", fontSize: "15px" }}>
+                          {"Availability"} &nbsp;&nbsp;&nbsp;
+                        </b>
+                      </div>
                     </td>
-                    <td className="txt-success">{house.availability}</td>
+                    <td>:  {house.availability}</td>
                   </tr>
+            
                 </tbody>
               </table>
             </div>
+            <hr />
+            <p>{house.description}</p>
+            <hr />
           </CardBody>
         </Card>
       )}
