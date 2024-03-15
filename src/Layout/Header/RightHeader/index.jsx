@@ -19,7 +19,7 @@ const RightHeader = () => {
           {/* <Language /> */}
           <Searchbar />
           {/* <BookmarkHeader /> */}
-          <MoonLight />
+          {/* <MoonLight /> */}
           {/* <CartHeader /> */}
           <Notificationbar />
           <UserHeader />

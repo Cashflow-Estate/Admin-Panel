@@ -14,9 +14,7 @@ const ViewBanners = () => {
       <CardHeader className='card-no-border'>
         <div className='header-top'>
           <H5 className='m-0'>{AllCampaignsTitle}</H5>
-          <div className='card-header-right-icon'>
-            <CommonDropDown dropdownMain={{ className: 'icon-dropdown', direction: 'start' }} options={DailyDropdown} iconName='icon-more-alt' btn={{ tag: 'span' }} />
-          </div>
+        
         </div>
       </CardHeader>
       <CardBody className='pt-0 campaign-table'>
