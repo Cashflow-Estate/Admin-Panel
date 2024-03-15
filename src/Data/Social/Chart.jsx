@@ -78,7 +78,7 @@ export const InstagramSubscriptionChart = {
         top: 8,
         left: 0,
         blur: 2,
-        color: ['#FFA941', '#7366FF'],
+        color: ['#FFA941', '#7366ff'],
         opacity: 0.1,
       },
     },
@@ -91,7 +91,7 @@ export const InstagramSubscriptionChart = {
         },
       },
     },
-    colors: ['#FFA941', '#7366FF'],
+    colors: ['#FFA941', '#7366ff'],
     stroke: {
       width: 2,
       curve: 'smooth',
@@ -672,7 +672,7 @@ export const ViewChartOption = {
           y: 44,
           marker: {
             size: 15,
-            fillColor: '#7366FF',
+            fillColor: '#7366ff',
             strokeColor: 'var(--view-border-marker)',
             strokeWidth: 20,
             radius: 2,
@@ -720,7 +720,7 @@ export const ViewChartOption = {
                 y: 44,
                 marker: {
                   size: 10,
-                  fillColor: '#7366FF',
+                  fillColor: '#7366ff',
                   strokeColor: '#cfcdfc',
                   strokeWidth: 7,
                   radius: 2,

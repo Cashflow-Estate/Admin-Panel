@@ -912,7 +912,7 @@ export const RecentOrderChart = {
         colorStops: [
           {
             offset: 0,
-            color: '#7366FF',
+            color: '#7366ff',
             opacity: 1,
           },
           {

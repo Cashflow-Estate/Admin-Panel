@@ -55,43 +55,44 @@ const SmallWidgetsData = [
   {
     title: "Total Deals",
     color: "primary",
-    total: 2_435,
-    gros: 50,
+    total: 3_435,
     icon: "new-order",
   },
   {
-    title: "Free Trial Members",
+    title: "Active Deals",
     color: "warning",
     total: 2_908,
     gros: 20,
     icon: "customers",
   },
+  
   {
-    title: "Deals Done",
+    title: "Deals Closed(monthly)",
+    color: "success",
+    total: 3_908,
+    gros: 80,
+    icon: "sale",
+
+  },
+  {
+    title: "Transactions(monthly)",
     color: "secondary",
     total: 389,
     gros: 10,
     prefix: "$",
-    icon: "sale",
+    icon: "profit",
+
     suffix: "k",
   },
   {
-    title: "Deals Active",
-    color: "success",
-    total: 3_908,
-    gros: 80,
-
-    icon: "profit",
-  },
-  {
-    title: "Deals Inactive",
+    title: "Website Queries",
     color: "success",
     total: 3_908,
     gros: 80,
     icon: "profit",
   },
   {
-    title: "Total Block Users",
+    title: "Deals Queries",
     color: "primary",
     total: 2_435,
     gros: 50,
@@ -139,13 +140,13 @@ const SmallWidgets = ({ data, mainClass }) => {
               end={data.total}
             />
           </H4>
-          <span className={`font-${data.color} f-12 f-w-500`}>
+          {/* <span className={`font-${data.color} f-12 f-w-500`}>
             <i className={`icon-arrow-${data.gros < 50 ? "down" : "up"}`} />
             <span>
               {data.gros < 50 ? "-" : "+"}
               {data.gros}%
             </span>
-          </span>
+          </span> */}
         </div>
         <div className="bg-gradient">
           <SvgIcon iconId={data.icon} className="stroke-icon svg-fill" />
@@ -175,6 +176,20 @@ const TotalUser = () => {
               <span className="font-primary d-flex align-items-center">
                 <i className="icon-arrow-up icon-rotate me-1"> </i>
                 <span className="f-w-500">Customers</span>
+              </span>
+            </div>
+          </LI>
+          <LI>
+            <div className="user-icon success">
+              <div className="user-box">
+                <UserMinus className="font-success" />
+              </div>
+            </div>
+            <div>
+              <H5 attrH5={{ className: "mb-1" }}>178,098</H5>
+              <span className="font-danger d-flex align-items-center">
+                <i className="icon-arrow-down icon-rotate me-1" />
+                <span className="f-w-500">Members</span>
               </span>
             </div>
           </LI>
