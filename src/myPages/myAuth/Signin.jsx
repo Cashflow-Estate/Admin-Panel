@@ -41,7 +41,7 @@ const Logins = ({ selected }) => {
       await new Promise((resolve) => setTimeout(resolve, 100));
       toast.success("Successfully logged in!..");
       setTimeout(() => {
-        navigate(`/users/all-customers`);
+        navigate(`/dashboard`);
       }, 2000);
     } else {
       toast.error("You entered the wrong password or username!..");
