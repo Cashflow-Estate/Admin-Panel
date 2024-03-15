@@ -12,6 +12,7 @@ import {
   LogOut,
   ChangePassword,
 } from "../../../Constant";
+import img from "../../../assets/images/user/1.jpg"
 
 const UserHeader = () => {
   const history = useNavigate();
@@ -44,8 +45,9 @@ const UserHeader = () => {
       <div className="media profile-media">
         <Image
           attrImage={{
-            className: "b-r-10 m-0",
-            src: `${authenticated ? auth0_profile.picture : profile}`,
+            className: "img-40 m-0 rounded-circle",
+
+            src: `${authenticated ?img : img}`,
             alt: "",
           }}
         />

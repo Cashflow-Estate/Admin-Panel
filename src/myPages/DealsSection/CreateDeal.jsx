@@ -86,9 +86,9 @@ const CreateDeal = () => {
                     onSubmit={handleSubmit(AddProject)}
                   >
                     <DealForm register={register} errors={errors} />
-                    <ProjectRateClass register={register} errors={errors} />
+                    {/* <ProjectRateClass register={register} errors={errors} /> */}
                     <IssueClass register={register} />
-                    <DealAddress register={register} errors={errors} />
+                    {/* <DealAddress register={register} errors={errors} /> */}
                     <LocationDetail register={register} errors={errors} />
                     <SimpleMdeReact
                       id="editor_container"

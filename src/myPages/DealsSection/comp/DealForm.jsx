@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Col, FormGroup, Row } from 'reactstrap';
+import { Col, FormGroup, Input, Row } from 'reactstrap';
 import { H6 } from '../../../AbstractElements';
 
 const DealForm = ({ register, errors }) => {
@@ -20,7 +20,18 @@ const DealForm = ({ register, errors }) => {
                         <span style={{ color: 'red' }}>{errors.price && 'Price is required'}</span>
                     </FormGroup>
                 </Col>
-             
+                <Col sm="4">
+          <FormGroup>
+            <H6>{"Slow Flip Terms"}</H6>
+            <Input
+              className="form-control"
+              type="number"
+              name="approxPrice"
+              placeholder="Approximate Price"
+              {...register("approxPrice", { required: true })}
+            />
+          </FormGroup>
+        </Col>
             </Row>
         </Fragment>
     );

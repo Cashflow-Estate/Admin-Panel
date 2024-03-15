@@ -19,11 +19,11 @@ const SidebarLogo = () => {
   return (
     <div className='logo-wrapper'>
       {layout1 !== 'compact-wrapper dark-sidebar' && layout1 !== 'compact-wrapper color-sidebar' && mixLayout ? (
-        <Link to={`${process.env.PUBLIC_URL}/pages/sample-page/${layoutURL}`}>
+        <Link>
           <Image attrImage={{ className: 'img-fluid d-inline', src: `${require('../../assets/CashflowLogos/White Background/Cash-Flow-Logo.jpg')}`, alt: '' }} />
         </Link>
       ) : (
-        <Link to={`${process.env.PUBLIC_URL}/pages/sample-page/${layoutURL}`}>
+        <Link>
           <Image attrImage={{ className: 'img-fluid d-inline', src: `${require('../../assets/CashflowLogos/Black background/Cash-Flow-Logo.png')}`, alt: '' }} />
         </Link>
       )}

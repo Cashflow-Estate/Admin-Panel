@@ -109,7 +109,7 @@ const EditMyProfile = () => {
                   <Link>
                     <H5 attrH5={{ className: "mb-1" }}>MARK JECNO</H5>
                   </Link>
-                  <P>DESIGNER</P>
+                  <P>Customer</P>
                 </div>
               </div>
             </div>
@@ -166,6 +166,20 @@ const EditMyProfile = () => {
           <Row>
             <Col sm="4">
               <FormGroup>
+                <H6 className="form-label">{"Street"}</H6>
+                <Input
+                  className="form-control"
+                  type="text"
+                  placeholder="Street"
+                  {...register("Street", { required: true })}
+                />
+                {errors.street && (
+                  <span className="text-danger">{errors.street.message}</span>
+                )}
+              </FormGroup>
+            </Col>
+            <Col sm="4">
+              <FormGroup>
                 <H6 className="form-label">{City}</H6>
                 <Input
                   className="form-control"
@@ -189,6 +203,20 @@ const EditMyProfile = () => {
                 />
                 {errors.state && (
                   <span className="text-danger">{errors.state.message}</span>
+                )}
+              </FormGroup>
+            </Col>
+            <Col sm="4">
+              <FormGroup>
+                <H6 className="form-label">{"Zip"}</H6>
+                <Input
+                  className="form-control"
+                  type="text"
+                  placeholder="Zip"
+                  {...register("zip", { required: true })}
+                />
+                {errors.zip && (
+                  <span className="text-danger">{errors.zip.message}</span>
                 )}
               </FormGroup>
             </Col>

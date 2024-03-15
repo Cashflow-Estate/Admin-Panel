@@ -106,14 +106,20 @@ const Questionss = () => {
                         top: "10px",
                       }}
                     >
-                      <Edit
-                        style={{ marginRight: "5px", cursor: "pointer" }}
-                        onClick={handleEdit} // Call handleEdit on click
-                      />
-                      <Trash2
-                        style={{ cursor: "pointer" }}
+                      <Button
+                        color=""
+                        onClick={handleEdit}
+                        style={{ padding: "0.01rem", marginRight: "0.1rem" }}
+                      >
+                        <i className="icon-pencil"></i>
+                      </Button>
+                      <Button
                         onClick={() => handleDelete(faqItem.id)}
-                      />
+                        color=""
+                        style={{ padding: "0.25rem", marginRight: "0.5rem" }}
+                      >
+                        <i className="icon-trash"></i>
+                      </Button>
                     </div>
                   </H5>
                 </CardHeader>

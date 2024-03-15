@@ -33,31 +33,8 @@ const ProjectRateClass = ({ register }) => {
     <Fragment>
       <Row>
   
-        <Col sm="4">
-          <FormGroup>
-            <H6>{"Slow Flip Terms"}</H6>
-            <Input
-              className="form-control"
-              type="number"
-              name="approxPrice"
-              placeholder="Approximate Price"
-              {...register("approxPrice", { required: true })}
-            />
-          </FormGroup>
-        </Col>
-        <Col sm="4">
-          <FormGroup>
-            <H6>{"Interest"}</H6>
-
-            <Input
-              className="form-control"
-              type="number"
-              name="upfrontDown"
-              placeholder="Upfront Down"
-              {...register("upfrontDown", { required: true })}
-            />
-          </FormGroup>
-        </Col>
+      
+      
       </Row>
     </Fragment>
   );
