@@ -1,4 +1,3 @@
-
 import React, { Fragment, useState } from "react";
 import { BrowserRouter as Router, Route, useNavigate } from "react-router-dom";
 import DataTable from "react-data-table-component";
@@ -21,9 +20,12 @@ const AllCustomers = () => {
   const [filter, setFilter] = useState("All");
   console.log("🚀 ~ AllCustomers ~ filter:", filter);
   const [searchTerm, setSearchTerm] = useState("");
-  const [filterOpen, setFilterOpen] = useState(false); // Initially closed
+  const [filterOpen, setFilterOpen] = useState(false); 
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
+  const [userDetailsModalOpen, setUserDetailsModalOpen] = useState(false); 
+  const [selectedUserDetails, setSelectedUserDetails] = useState(null); 
+  console.log("🚀 ~ AllCustomers ~ selectedUserDetails:", selectedUserDetails)
 
   const FilterIcon = () => (
     <span>
@@ -70,7 +72,7 @@ const AllCustomers = () => {
 
   const handleFilterChange = (filterValue) => {
     setFilter(filterValue);
-    setFilterOpen(false); // Close dropdown when a filter is selected
+    setFilterOpen(false); 
   };
 
   const handleSearch = (event) => {
@@ -106,7 +108,13 @@ const AllCustomers = () => {
     {
       name: "Client",
       selector: (row) => (
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
           {renderClientBadge(row.client)}
         </div>
       ),
@@ -116,11 +124,17 @@ const AllCustomers = () => {
     {
       name: "Status",
       cell: (row) => (
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
           <Button
             color={row.blocked ? "danger" : "success"}
             onClick={() => handleToggleModal(row)}
-            style={{ padding: "0.5rem", minWidth: "40px" }} // Adjust padding and width as needed
+            style={{ padding: "0.5rem", minWidth: "40px" }} 
           >
             {row.blocked ? (
               <i className="icon-unlock"></i>
@@ -135,11 +149,20 @@ const AllCustomers = () => {
     {
       name: "Action",
       cell: (row) => (
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-          <Button color={""} onClick={() => handleViewDetails(row)} style={{ margin: "0 5px" }}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Button
+            color={""}
+            onClick={() => handleViewDetails(row)}
+            style={{ margin: "0 5px" }}
+          >
             <i className="icon-more-alt"></i>
           </Button>
-       
         </div>
       ),
       button: true,
@@ -147,10 +170,11 @@ const AllCustomers = () => {
       center: true,
     },
   ];
-  
+
   const history = useNavigate();
   const handleViewDetails = (user) => {
-    history(`/user/${user.id}`);
+    setSelectedUserDetails(user); 
+    setUserDetailsModalOpen(true); 
   };
 
   return (
@@ -250,6 +274,30 @@ const AllCustomers = () => {
             {selectedUser?.blocked ? "Unblock" : "Block"}
           </Button>
         </ModalFooter>
+      </Modal>
+      {/* User Details Modal */}
+      <Modal
+        isOpen={userDetailsModalOpen}
+        toggle={() => setUserDetailsModalOpen(false)}
+      >
+        <Button color={"black"} onClick={() => setUserDetailsModalOpen(false)}>
+          <i
+            className="icofont icofont-close d-flex justify-content-end pt-3"
+            style={{ fontSize: "24px" }}
+          ></i>{" "}
+        </Button>
+        <ModalBody>
+          <p>User ID: {selectedUserDetails?.id}</p>
+          <p>Email: {selectedUserDetails?.email}</p>
+          <p>Block: {selectedUserDetails?.blockUser}</p>
+          <p>Client: {selectedUserDetails?.client}</p>
+          <p>Location: {selectedUserDetails?.location}</p>
+          <p>PackageName: {selectedUserDetails?.packageName}</p>
+          <p>Position: {selectedUserDetails?.position}</p>
+          <p>Investment: {selectedUserDetails?.investment}</p>
+         
+        </ModalBody>
+        <ModalFooter></ModalFooter>
       </Modal>
     </Fragment>
   );
