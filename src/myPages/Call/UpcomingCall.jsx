@@ -32,7 +32,7 @@ const UpcomingCall = () => {
 
   export default UpcomingCall;
 
-const ScheduleListData = [
+  const ScheduleListData = [
     {
       title: "Web Design",
       image: "4.jpg",
@@ -41,6 +41,15 @@ const ScheduleListData = [
       date: "January 3, 2022",
       date2: "09.00 - 12.00 AM",
       color: "primary",
+    },
+    {
+      title: "UI/UX Design",
+      image: "2.jpg",
+      icon: "bag",
+      icon2: "clock",
+      date: "Febuary 10, 2022",
+      date2: "11.00 - 1.00 PM",
+      color: "warning",
     },
   ];
   const ScheduleListBox = ({ data }) => {
