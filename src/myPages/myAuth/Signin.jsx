@@ -14,10 +14,9 @@ import { Link, useNavigate } from "react-router-dom";
 import man from "../../assets/images/dashboard/profile.png";
 
 import CustomizerContext from "../../_helper/Customizer";
-// import OtherWay from "./OtherWay";
 import { ToastContainer, toast } from "react-toastify";
 
-const Logins = ({ selected }) => {
+const Signin = ({ selected }) => {
   const [email, setEmail] = useState("test@gmail.com");
   const [password, setPassword] = useState("test123");
   const [togglePassword, setTogglePassword] = useState(false);
@@ -51,7 +50,7 @@ const Logins = ({ selected }) => {
   return (
     <Fragment>
       <ToastContainer position='top-right'/>
-      <Container fluid={true} className="p-4 login-page">
+      <Container fluid={true}>
 
         {" "}
         <Row>
@@ -64,7 +63,6 @@ const Logins = ({ selected }) => {
                   </h4>
                   <div className="position-relative form-group  link text-center">
                     {" "}
-                    {/* Adjusted margin */}
                     Or,<Link to={`/signup`}>{CreateNewAccount}</Link>
                   </div>
                   <FormGroup>
@@ -116,4 +114,4 @@ const Logins = ({ selected }) => {
   );
 };
 
-export default Logins;
+export default Signin;
