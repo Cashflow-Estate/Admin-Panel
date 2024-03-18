@@ -149,7 +149,7 @@ export const MENUITEMS = [
         ],
       },
       {
-        path: `/`,
+        path: ``,
         type: "link",
         title: "Logout",
       },

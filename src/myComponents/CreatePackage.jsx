@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from "react";
 import { Card, CardBody, Form, Input, Row, Col } from "reactstrap";
 import HeaderCard from "./HeaderCard";
-import { H6, Btn } from "../AbstractElements";
+import { H6, Btn, Breadcrumbs } from "../AbstractElements";
 import SimpleMdeReact from "react-simplemde-editor";
 
 const CreatePackage = () => {
@@ -36,6 +36,8 @@ const CreatePackage = () => {
   };
   return (
     <Fragment>
+      <Breadcrumbs mainTitle="Pricing" parent="Packages" title="Create a new plan" />
+
       <Card>
         <HeaderCard
           span1="Create a new plan"
