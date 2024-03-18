@@ -20,6 +20,7 @@ import Call from "../myPages/Call";
 import WebsiteQueries from "../myPages/WebsiteQueries";
 import CRM from "../myPages/CRM";
 import ViewMore from "../myPages/DealsSection/comp/ViewMore";
+import UpcomingCall from "../myPages/Call/UpcomingCall";
 
 export const routes = [
   {
@@ -90,6 +91,10 @@ export const routes = [
   {
     path: `/schedule-call`,
     Component: <Call />
+  },
+  {
+    path: `/upcoming-call`,
+    Component: <UpcomingCall />
   },
   {
     path: `/deals/view`,

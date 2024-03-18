@@ -86,19 +86,17 @@ const CreateDeal = () => {
                     onSubmit={handleSubmit(AddProject)}
                   >
                     <DealForm register={register} errors={errors} />
-                    {/* <ProjectRateClass register={register} errors={errors} /> */}
                     <IssueClass register={register} />
-                    {/* <DealAddress register={register} errors={errors} /> */}
                     <LocationDetail register={register} errors={errors} />
+                   
                     <SimpleMdeReact
-                      id="editor_container"
-                      onChange={handleChange}
-                      value={text}
-                      options={{
-                        autofocus: true,
-                        spellChecker: false,
-                      }}
-                    />
+                     id="editor_container_description"
+                     onChange={handleChange}
+                     value={text}
+                     options={{
+                       spellChecker: false,
+                     }}
+                   />
                     <UploadProjectFileClass
                       register={register}
                       errors={errors}
@@ -108,7 +106,7 @@ const CreateDeal = () => {
                         <div className="text-end">
                           <Btn
                             attrBtn={{ color: "success", className: "me-3" }}
-                            onClick={AddProject} // Call AddProject function when this button is clicked
+                            onClick={AddProject}
                           >
                             {Add}
                           </Btn>

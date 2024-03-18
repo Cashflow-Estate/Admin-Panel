@@ -3,8 +3,26 @@ import DataTable from "react-data-table-component";
 import { Button } from "reactstrap";
 import iii from "../../../../src/assets/cashflowimg/apartments/a1.png";
 import { useNavigate } from "react-router";
+import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 
 const AllDealsTable = () => {
+  const [modal, setModal] = useState(false);
+  const [selectedDeal, setSelectedDeal] = useState(null);
+
+  const toggleModal = () => {
+    setModal(!modal);
+  };
+
+  const handleDelete = (deal) => {
+    setSelectedDeal(deal);
+    toggleModal();
+  };
+
+  const confirmDelete = () => {
+    // Perform delete operation
+    console.log("Deleting deal:", selectedDeal);
+    toggleModal(); // Close the modal after deleting
+  };
   const [dealsData] = useState([
     {
       id: 1,
@@ -34,9 +52,7 @@ const AllDealsTable = () => {
     history(`/deals/create`);
   };
 
-  const handleDelete = (row) => {
-    console.log("Deleting row:", row);
-  };
+  
 
   const handleViewQueries = (deal) => {
     history("/deals/queries");
@@ -157,6 +173,16 @@ const AllDealsTable = () => {
           className="p-2"
         />
       </div>
+      <Modal isOpen={modal} toggle={toggleModal}>
+        <ModalHeader toggle={toggleModal}>Confirm Delete</ModalHeader>
+        <ModalBody>
+          Are you sure you want to delete the deal titled "{selectedDeal?.title}"?
+        </ModalBody>
+        <ModalFooter>
+          <Button color="danger" onClick={confirmDelete}>Delete</Button>{' '}
+          <Button color="secondary" onClick={toggleModal}>Cancel</Button>
+        </ModalFooter>
+      </Modal>
     </Fragment>
   );
 };

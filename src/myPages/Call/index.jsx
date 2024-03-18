@@ -4,7 +4,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { Card, CardBody, Form, Input, Row, Col, FormGroup, Button } from "reactstrap";
 import HeaderCard from "../../myComponents/HeaderCard";
 import { Breadcrumbs, H6 } from "../../AbstractElements";
-import ReactQuill from "react-quill";
+import SimpleMdeReact from "react-simplemde-editor";
 
 const Call = () => {
   const [description, setDescription] = useState(""); // State to hold rich text description
@@ -30,11 +30,7 @@ const Call = () => {
       <Breadcrumbs mainTitle="Call" parent="Call" title="Schedule a Meet" />
 
       <Card>
-        <HeaderCard
-          span1="Schedule a Call"
-          parent="Calls"
-          title="Advance"
-        />
+      
         <CardBody>
           <Form onSubmit={handleSubmit}>
             <Row>
@@ -102,11 +98,15 @@ const Call = () => {
             <FormGroup>
 
                 <H6>{"Description"}</H6>
-                <ReactQuill 
-                  value={description} 
-                  onChange={handleDescriptionChange} 
-                  theme="snow" // You can change the theme if needed
-                />
+                <SimpleMdeReact
+             
+             id="editor_container"
+             options={{
+               spellChecker: false,
+             }}
+             onChange={handleDescriptionChange}
+           />
+             
                 </FormGroup>
 
               </Col>

@@ -1,6 +1,4 @@
 import React, { Fragment, useState } from "react";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
 import { Card, CardBody, Form, Input, Row, Col } from "reactstrap";
 import HeaderCard from "./HeaderCard";
 import { H6, Btn } from "../AbstractElements";
@@ -83,7 +81,6 @@ const CreatePackage = () => {
              
                   id="editor_container"
                   options={{
-                    autofocus: true,
                     spellChecker: false,
                   }}
                   onChange={handelChange}

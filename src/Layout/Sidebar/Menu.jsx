@@ -94,6 +94,12 @@ export const MENUITEMS = [
         type: "link",
         path: `/schedule-call`,
       },
+      {
+        title: "Upcoming Call",
+        icon: "icons",
+        type: "link",
+        path: `/upcoming-call`,
+      },
    
       {
         path: `/crm`,

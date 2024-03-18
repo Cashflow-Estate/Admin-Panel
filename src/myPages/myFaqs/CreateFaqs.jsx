@@ -11,7 +11,7 @@ import {
   Collapse,
 } from "reactstrap";
 import { Breadcrumbs, H6 } from "../../AbstractElements";
-import ReactQuill from "react-quill";
+import SimpleMdeReact from "react-simplemde-editor";
 
 const CreateFaqs = () => {
   const [description, setDescription] = useState(""); // State to hold rich text description
@@ -59,11 +59,14 @@ const CreateFaqs = () => {
               <H6  for={`answer${index}`} >
                 Answer
               </H6>
-              <ReactQuill
-                value={description}
-                onChange={handleDescriptionChange}
-                theme="snow" // You can change the theme if needed
-              />
+              <SimpleMdeReact
+             
+             id="editor_container"
+             options={{
+               spellChecker: false,
+             }}
+            //  onChange={handelChange}
+           />
               </div>
 
             </FormGroup>
