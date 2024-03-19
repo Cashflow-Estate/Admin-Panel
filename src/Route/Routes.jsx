@@ -21,6 +21,7 @@ import WebsiteQueries from "../myPages/WebsiteQueries";
 import CRM from "../myPages/CRM";
 import ViewMore from "../myPages/DealsSection/comp/ViewMore";
 import UpcomingCall from "../myPages/Call/UpcomingCall";
+import Queries from "../myPages/DealsSection/comp/Queries";
 
 export const routes = [
   {
@@ -78,6 +79,10 @@ export const routes = [
   {
     path: `/deals/queries`,
     Component: <DealsQueries />
+  },
+  {
+    path: `/customer/queries`,
+    Component: <Queries />
   },
   {
     path: `/deals/1`,

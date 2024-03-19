@@ -50,47 +50,47 @@ const CreateDeal = () => {
   };
 
   const data = [
-    { id: 1, member: true, city: "New York", name: "John",client:"customer" },
-    { id: 2, member: false, city: "Los Angeles", name: "Alice" ,client:"customer" },
-    { id: 3, member: true, city: "Chicago", name: "Bob",client:"member"  },
-    { id: 4, member: false, city: "Houston", name: "Carol",client:"free"  },
-  
+    { id: 1, member: true, city: "New York", name: "John", client: "customer" },
+    {
+      id: 2,
+      member: false,
+      city: "Los Angeles",
+      name: "Alice",
+      client: "customer",
+    },
+    { id: 3, member: true, city: "Chicago", name: "Bob", client: "member" },
+    { id: 4, member: false, city: "Houston", name: "Carol", client: "free" },
   ];
-
-
 
   const [selectedCity, setSelectedCity] = useState(null);
 
   const filteredOptions = selectedCity
     ? data.filter((item) => item.city === selectedCity)
     : data;
-    const [sendTo, setSendTo] = useState(""); // State to keep track of selected option
-  
+  const [sendTo, setSendTo] = useState(""); // State to keep track of selected option
 
-    const handleAdd = () => {
-      // Implement your logic for handling the Add button click
-    };
-    
-    const handleCancel = () => {
-      // Implement your logic for handling the Cancel button click
-    };
-    
-  
-  
-    const handleCityChange = (event) => {
-      setSelectedCity(event.target.value);
-    };
-  
-    const handleSendDeal = (sendTo) => {
-      console.log("Sending deal to:", sendTo);
-    };
-  
-    // Options for the searchable dropdown
-    const userOptions = data.map((user) => ({
-      value: user.id,
-      label: user.name,
-    }));
-  
+  const handleAdd = () => {
+    // Implement your logic for handling the Add button click
+  };
+
+  const handleCancel = () => {
+    // Implement your logic for handling the Cancel button click
+  };
+
+  const handleCityChange = (event) => {
+    setSelectedCity(event.target.value);
+  };
+
+  const handleSendDeal = (sendTo) => {
+    console.log("Sending deal to:", sendTo);
+  };
+
+  // Options for the searchable dropdown
+  const userOptions = data.map((user) => ({
+    value: user.id,
+    label: user.name,
+  }));
+
   return (
     <Fragment>
       <Breadcrumbs
@@ -99,132 +99,130 @@ const CreateDeal = () => {
         mainTitle="Create Deals"
       />
 
-        <Container fluid={true}>
-          <Row>
-            <Col sm="12">
-              <Card>
-                <CardBody>
-                  <Form
-                    className="theme-form"
-                    onSubmit={handleSubmit(AddProject)}
-                  >
-                    <DealForm register={register} errors={errors} />
-                    <IssueClass register={register} />
-                    <LocationDetail register={register} errors={errors} />
-                   
-                    <SimpleMdeReact
-                     id="editor_container_description"
-                     onChange={handleChange}
-                     value={text}
-                     options={{
-                       spellChecker: false,
-                     }}
-                   />
-                    <UploadProjectFileClass
-                      register={register}
-                      errors={errors}
-                    />
-                    <Row>
-                      <Col>
-                        <div className="text-end">
-                          <Btn
-                            attrBtn={{ color: "success", className: "me-3" }}
-                            onClick={AddProject}
-                          >
-                            {Add}
-                          </Btn>
-
-                          <Btn attrBtn={{ color: "danger" }}>{Cancel}</Btn>
-                        </div>
-                      </Col>
-                    </Row>
-                  </Form>
-                </CardBody>
-              </Card>
-            </Col>
-          </Row>
-        </Container>
-   
-   {formSubmitted && client && ( // Render user selection part only if form is submitted and client state is true
-        <Container fluid={true}>
+      <Container fluid={true}>
         <Row>
-            <Col sm="12">
-              <Card>
-                <CardBody>
-                  <Form className="theme-form">
-                    {/* Your existing form elements */}
-                    <FormGroup>
-                      <Label for="selectCity">Select City:</Label>
-                      <Input
-                        type="select"
-                        name="selectCity"
-                        id="selectCity"
-                        value={selectedCity}
-                        onChange={handleCityChange}
-                      >
-                        <option value="">All Cities</option>
-                        {Array.from(new Set(data.map((item) => item.city))).map(
-                          (city) => (
+          <Col sm="12">
+            <Card>
+              <CardBody>
+                <Form
+                  className="theme-form"
+                  onSubmit={handleSubmit(AddProject)}
+                >
+                  <DealForm register={register} errors={errors} />
+                  <IssueClass register={register} />
+                  <LocationDetail register={register} errors={errors} />
+
+                  <SimpleMdeReact
+                    id="editor_container_description"
+                    onChange={handleChange}
+                    value={text}
+                    options={{
+                      spellChecker: false,
+                    }}
+                  />
+                  <UploadProjectFileClass register={register} errors={errors} />
+                  <Row>
+                    <Col>
+                      <div className="text-end">
+                        <Btn
+                          attrBtn={{ color: "success", className: "me-3" }}
+                          onClick={AddProject}
+                        >
+                          {Add}
+                        </Btn>
+
+                        <Btn attrBtn={{ color: "danger" }}>{Cancel}</Btn>
+                      </div>
+                    </Col>
+                  </Row>
+                </Form>
+              </CardBody>
+            </Card>
+          </Col>
+        </Row>
+      </Container>
+
+      {formSubmitted &&
+        client && ( // Render user selection part only if form is submitted and client state is true
+          <Container fluid={true}>
+            <Row>
+              <Col sm="12">
+                <Card>
+                  <CardBody>
+                    <Form className="theme-form">
+                      {/* Your existing form elements */}
+                      <FormGroup>
+                        <Label for="selectCity">Select City:</Label>
+                        <Input
+                          type="select"
+                          name="selectCity"
+                          id="selectCity"
+                          value={selectedCity}
+                          onChange={handleCityChange}
+                        >
+                          <option value="">All Cities</option>
+                          {Array.from(
+                            new Set(data.map((item) => item.city))
+                          ).map((city) => (
                             <option key={city} value={city}>
                               {city}
                             </option>
-                          )
-                        )}
-                      </Input>
-                    </FormGroup>
-                    <FormGroup>
-                      <Label for="sendTo">Send To:</Label>
-                      <Select
-                        options={[
-                          { value: "all", label: "All Users" },
-                          { value: "paid", label: "Only Paid Customers" },
-                          { value: "members", label: "Paid Members" },
-                          { value: "specific", label: "Specific Customer" },
-                        ]}
-                        onChange={(selectedOption) => {
-                          setSendTo(selectedOption.value); // Update sendTo state
-                          handleSendDeal(selectedOption.value);
-                        }}
-                      />
-                    </FormGroup>
-                    {sendTo === "specific" && (
+                          ))}
+                        </Input>
+                      </FormGroup>
                       <FormGroup>
-                        <Label for="specificCustomer">Select Customer:</Label>
+                        <Label for="sendTo">Send To:</Label>
                         <Select
-                          options={userOptions}
-                          isSearchable={true}
-                          placeholder="Search for a customer..."
-                          onChange={(selectedOption) =>
-                            console.log("Selected customer:", selectedOption)
-                          }
+                          options={[
+                            { value: "all", label: "All Users" },
+                            { value: "paid", label: "Only Paid Customers" },
+                            { value: "members", label: "Paid Members" },
+                            { value: "specific", label: "Specific Customer" },
+                          ]}
+                          onChange={(selectedOption) => {
+                            setSendTo(selectedOption.value); // Update sendTo state
+                            handleSendDeal(selectedOption.value);
+                          }}
                         />
                       </FormGroup>
-                    )}
-                  <Row>
-  <Col>
-    <div className="text-end">
-      <Btn
-        attrBtn={{ color: "success", className: "me-3" }}
-        onClick={handleAdd}
-      >
-        Send
-      </Btn>
-      <Btn
-        attrBtn={{ color: "danger" }}
-        onClick={handleCancel}
-      >
-        Cancel
-      </Btn>
-    </div>
-  </Col>
-</Row>
-                  </Form>
-                </CardBody>
-              </Card>
-            </Col>
-          </Row>
-        </Container>
-      )}
+                      {sendTo === "specific" && (
+                        <FormGroup>
+                          <Label for="specificCustomer">Select Customer:</Label>
+                          <Select
+                            options={userOptions}
+                            isSearchable={true}
+                            placeholder="Search for a customer..."
+                            onChange={(selectedOption) =>
+                              console.log("Selected customer:", selectedOption)
+                            }
+                          />
+                        </FormGroup>
+                      )}
+                      <Row>
+                        <Col>
+                          <div className="text-end">
+                            <Btn
+                              attrBtn={{ color: "success", className: "me-3" }}
+                              onClick={handleAdd}
+                            >
+                              Send
+                            </Btn>
+                            <Btn
+                              attrBtn={{ color: "danger" }}
+                              onClick={handleCancel}
+                            >
+                              Cancel
+                            </Btn>
+                          </div>
+                        </Col>
+                      </Row>
+                    </Form>
+                  </CardBody>
+                </Card>
+              </Col>
+            </Row>
+          </Container>
+        )}
     </Fragment>
   );
 };

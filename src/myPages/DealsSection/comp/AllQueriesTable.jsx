@@ -1,11 +1,12 @@
 import React, { Fragment, useState } from "react";
 import DataTable from "react-data-table-component";
-import { Button } from "reactstrap";
+import { Button, Col, Media, Row } from "reactstrap";
 import iii from "../../../../src/assets/cashflowimg/apartments/a1.png";
 import { useNavigate } from "react-router";
 import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import { H4, H6, Image, LI, P, UL } from "../../../AbstractElements";
 
-const AllDealsTable = () => {
+const AllQueriesTable = () => {
   const [modal, setModal] = useState(false);
   const [selectedDeal, setSelectedDeal] = useState(null);
 
@@ -26,20 +27,34 @@ const AllDealsTable = () => {
   const [dealsData] = useState([
     {
       id: 1,
-      title: "Deal 1",
+      name:"Abid",
       image: "deal1.jpg",
-      status: "Active",
-      queries: <i className="fa fa-rss-square"></i>,
-      address: "123 Main St, City, Country",
-    },
-    {
-      id: 2,
-      title: "Deal 2",
-      image: "deal2.jpg",
+      title: "Deal 1",
       status: "Inactive",
       queries: <i className="fa fa-rss-square"></i>,
-      address: "456 Elm St, City, Country",
+      time: "07:40 am",
     },
+    {
+      id: 1,
+      name:"Abid",
+      image: "deal1.jpg",
+      title: "Deal 1",
+      status: "Active",
+      queries: <i className="fa fa-rss-square"></i>,
+           time: "07:40 am",
+
+    },
+    {
+      id: 1,
+      name:"Abid",
+      image: "deal1.jpg",
+      title: "Deal 1",
+      status: "Active",
+      queries: <i className="fa fa-rss-square"></i>,
+           time: "07:40 am",
+
+    },
+  
     // Add more deals as needed
   ]);
   const history = useNavigate();
@@ -48,30 +63,35 @@ const AllDealsTable = () => {
     history(`/deals/1`);
   };
 
-  const handleEdit = (row) => {
-    history(`/deals/create`);
-  };
 
-  
 
   const handleViewQueries = (deal) => {
-    history("/deals/queries");
+    history("/customer/queries");
   };
 
   const customColumns = [
-    {
-      name: "Title",
-      selector: (row) => row.title,
-      sortable: true,
-      center: false,
-    },
     {
       name: "Image",
       cell: (row) => (
         <img src={iii} alt={row.title} style={{ width: "50px" }} />
       ),
-      sortable: false,
-      center: true,
+      selector: (row) => row["image"],
+    //   sortable: true,
+      center: false,
+      minWidth: "100px",
+      maxWidth: "300px",
+    },
+    {
+      name: "Name",
+      selector: (row) => row.name,
+    //   sortable: true,
+      center: false,
+    },
+    {
+      name: "Title",
+      selector: (row) => row.title,
+      sortable: true,
+      center: false,
     },
     {
       name: "Status",
@@ -84,15 +104,15 @@ const AllDealsTable = () => {
           {row.status}
         </button>
       ),
-      sortable: true,
-      center: false,
+    //   sortable: true,
+      center: true,
     },
     {
-      name: "Address",
-      selector: (row) => row.address,
-      sortable: true,
-      center: false,
-    },
+        name: "Time",
+        selector: (row) => row.time,
+        // sortable: true,
+        center: false,
+      },
     {
       name: "Queries",
       cell: (row) => (
@@ -107,7 +127,7 @@ const AllDealsTable = () => {
             color=""
             onClick={() => handleViewQueries(row)}
           >
-            <i style={{fontSize:"20px"}} className="icofont icofont-eye"></i>
+     <i style={{fontSize:"20px"}} className="icofont icofont-expand"></i>
           </Button>
         </div>
       ),
@@ -124,20 +144,7 @@ const AllDealsTable = () => {
             justifyContent: "flex-start",
           }}
         >
-          <Button
-            color=""
-            onClick={() => handleEdit(row)}
-            style={{ padding: "0.25rem", marginRight: "0.5rem" }}
-          >
-            <i className="icon-pencil"></i>
-          </Button>
-          <Button
-            color=""
-            onClick={() => handleDelete(row)}
-            style={{ padding: "0.25rem", marginRight: "0.5rem" }}
-          >
-            <i className="icon-trash"></i>
-          </Button>
+        
           <Button
             color=""
             onClick={() => handleViewDetails(row)}
@@ -175,15 +182,22 @@ const AllDealsTable = () => {
       <Modal isOpen={modal} toggle={toggleModal}>
         <ModalHeader toggle={toggleModal}>Confirm Delete</ModalHeader>
         <ModalBody>
-          Are you sure you want to delete the deal titled "{selectedDeal?.title}"?
+          Are you sure you want to delete the deal titled "{selectedDeal?.title}
+          "?
         </ModalBody>
         <ModalFooter>
-          <Button color="danger" onClick={confirmDelete}>Delete</Button>{' '}
-          <Button color="secondary" onClick={toggleModal}>Cancel</Button>
+          <Button color="danger" onClick={confirmDelete}>
+            Delete
+          </Button>{" "}
+          <Button color="secondary" onClick={toggleModal}>
+            Cancel
+          </Button>
         </ModalFooter>
       </Modal>
     </Fragment>
   );
 };
 
-export default AllDealsTable;
+export default AllQueriesTable;
+
+
