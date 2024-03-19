@@ -7,7 +7,7 @@ import CommonDropDown from "../myBanners/comp/CommonDropDown";
 import RecentOrderContentTab from "./comp/RecentOrderContentTab";
 import PaginationWithIconsClass from "./comp/PaginationWithIcons";
 
-const ViewTransactions = () => {
+const ViewTransactions = ({ showBreadcrumbs }) => { // Receive showBreadcrumbs prop
   const [isActive, setIsActive] = useState("0");
   const [show, setShow] = useShowClass("show");
   const RecentOrdersNav = ["1", "2", "3", "4", "5"];
@@ -19,13 +19,11 @@ const ViewTransactions = () => {
 
   return (
     <Fragment>
-      <Breadcrumbs mainTitle="Transactions" parent="All" title="Transaction" />
-
+      {showBreadcrumbs && <Breadcrumbs mainTitle="Transactions" parent="All" title="Transaction" />} {/* Conditionally render breadcrumbs */}
       <Card className="recent-order">
         <CardHeader className="card-no-border">
           <div className="header-top">
             <H5 attrH5={{ className: "m-0" }}>{"Recent Transaction"}</H5>
-        
           </div>
         </CardHeader>
         <CardBody className="pt-0">

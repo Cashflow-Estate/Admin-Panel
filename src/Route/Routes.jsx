@@ -5,10 +5,8 @@ import ViewTransactions from "../myPages/SubscriptionPackages/ViewTransactions";
 
 import ViewDeals from "../myPages/DealsSection/ViewDeals";
 import AllCustomers from "../myPages/myCutomers/AllCustomers";
-import SIngleCustomer from "../myPages/myCutomers/SingleCustomer";
 import Banners from "../myPages/myBanners/ViewBanners";
 import SendDeals from "../myPages/DealsSection/SendDeals";
-import SingleCustomer from "../myPages/myCutomers/SingleCustomer";
 import CreateDeal from "../myPages/DealsSection/CreateDeal";
 import ViewFaqs from "../myPages/myFaqs/ViewFaqs";
 import CreateFaqs from "../myPages/myFaqs/CreateFaqs";
@@ -22,6 +20,7 @@ import CRM from "../myPages/CRM";
 import ViewMore from "../myPages/DealsSection/comp/ViewMore";
 import UpcomingCall from "../myPages/Call/UpcomingCall";
 import Queries from "../myPages/DealsSection/comp/Queries";
+import UserDetails from "../myPages/myCutomers/UserDetails";
 
 export const routes = [
   {
@@ -36,92 +35,91 @@ export const routes = [
     path: `/users/all-customers`,
     Component: <AllCustomers />,
   },
-  {
-    path: `/user/:id`,
-    Component: <SingleCustomer />,
-  },
+  { path: "/user-details/:id", Component: <UserDetails /> },
+  // {
+  //   path: `/user/:id`,
+  //   Component: <SingleCustomer />,
+  // },
   {
     path: `/account/profile`,
-    Component: <Profile />
+    Component: <Profile />,
   },
 
   {
     path: `/advertisement-banner`,
-    Component: <Banners />
+    Component: <Banners />,
   },
   {
     path: `/subscription-packages/create`,
-    Component: <CreateSubscriptionPackage />
+    Component: <CreateSubscriptionPackage />,
   },
 
   {
     path: `/subscription-packages/view`,
-    Component: <ViewSubscriptionPackages />
+    Component: <ViewSubscriptionPackages />,
   },
 
   {
     path: `/customers/transactions`,
-    Component: <ViewTransactions />
+    Component: <ViewTransactions />,
   },
   {
     path: `/members/transactions`,
-    Component: <ViewTransactions />
+    Component: <ViewTransactions />,
   },
 
   {
     path: `/deals/create`,
-    Component: <CreateDeal />
+    Component: <CreateDeal />,
   },
   {
     path: `/deals/send-deals`,
-    Component: <SendDeals />
+    Component: <SendDeals />,
   },
   {
     path: `/deals/queries`,
-    Component: <DealsQueries />
+    Component: <DealsQueries />,
   },
   {
     path: `/customer/queries`,
-    Component: <Queries />
+    Component: <Queries />,
   },
   {
     path: `/deals/1`,
-    Component: <ViewMore />
+    Component: <ViewMore />,
   },
   {
     path: `/website/queries`,
-    Component: <WebsiteQueries />
+    Component: <WebsiteQueries />,
   },
 
   {
     path: `/schedule-call`,
-    Component: <Call />
+    Component: <Call />,
   },
   {
     path: `/upcoming-call`,
-    Component: <UpcomingCall />
+    Component: <UpcomingCall />,
   },
   {
     path: `/deals/view`,
-    Component: <ViewDeals />
+    Component: <ViewDeals />,
   },
   {
     path: `/faqs/view`,
-    Component: <ViewFaqs />
+    Component: <ViewFaqs />,
   },
   {
     path: `/faqs/create`,
-    Component: <CreateFaqs/>
+    Component: <CreateFaqs />,
   },
   {
     path: `/banners/view`,
-    Component: <ViewBanners/>
-
+    Component: <ViewBanners />,
   },
 
   {
     path: `/banners/create`,
-    Component: <CreateBanner/>
-
+    Component: <CreateBanner />,
   },
 ];

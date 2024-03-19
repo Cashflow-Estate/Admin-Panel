@@ -173,9 +173,10 @@ const AllCustomers = () => {
 
   const history = useNavigate();
   const handleViewDetails = (user) => {
-    setSelectedUserDetails(user); 
-    setUserDetailsModalOpen(true); 
+    console.log("🚀 ~ handleViewDetails ~ user:", user)
+    history(`/user-details/${user.id}`); // Navigate to user details page
   };
+
 
   return (
     <Fragment>
