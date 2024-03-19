@@ -8,9 +8,12 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
+  InputGroup,
+  Input,
 } from "reactstrap";
 import {
   Breadcrumbs,
+  Btn,
   H4,
   H6,
   Image,
@@ -37,83 +40,33 @@ const Queries = () => {
   };
 
   return (
-    <Fragment>
-      <Row>
-        <Col xl="8" className="box-col-8 xl-60 ">
-          <div className="comment-box">
-            <Comments />
-          </div>
-        </Col>
-        {/* <Col className="pt-3" xl="4">
-     
-          <Button color="primary" onClick={handleDrawerOpen}>
-            Give Feedback
-          </Button>
-          {isDrawerOpen && (
-            <FeedbackDrawer
-              isOpen={isDrawerOpen}
-              onClose={handleDrawerClose}
-              value={value}
-              onChange={handleChange}
-            />
-          )}
-        </Col> */}
-      </Row>
-    </Fragment>
+<Fragment>
+  <Breadcrumbs mainTitle="Inquiries" parent="Deals Queries" title="Master City" />
+
+  <Row>
+    <Col xl="12" className="box-col-8"> 
+      <div className="comment-box">
+        <Comments />
+      </div>
+    </Col>
+    {/* <Col xl="4"> */}
+      <Send/>
+    {/* </Col> */}
+  </Row>
+</Fragment>
+
   );
 };
 
 export default Queries;
-const FeedbackDrawer = ({ isOpen, onClose, value, onChange }) => {
-  const handleSubmit = () => {
-    console.log("Feedback submitted:", value);
-    onClose();
-  };
 
-  return (
-    <Modal isOpen={isOpen} toggle={onClose} className="feedback-drawer-modal">
-      <ModalHeader toggle={onClose}>Give Feedback</ModalHeader>
-      <ModalBody>
-        <div className="drawer-body">
-          <h4>Query</h4>
-          <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.</p>
-          <h4>Write Your Feedback</h4>
-          <SimpleMdeReact
-            options={{
-              spellChecker: false,
-            }}
-            onChange={onChange}
-            value={value}
-          />
-        </div>
-      </ModalBody>
-      <ModalFooter>
-        <Button color="primary" onClick={handleSubmit}>
-          Submit
-        </Button>
-        <Button color="secondary" onClick={onClose}>
-          Close
-        </Button>
-      </ModalFooter>
-    </Modal>
-  );
-};
 const Comments = () => {
-  const [modal, setModal] = useState(false);
-  const [feedbackValue, setFeedbackValue] = useState('');
 
-  const toggleModal = () => {
-    setModal(!modal);
-  };
-
-  const handleFeedbackChange = (value) => {
-    setFeedbackValue(value);
-  };
 
   return (
     <Fragment>
-      <H4>Queries</H4>
-      <UL attrUL={{ className: "simple-list" }}>
+     <div style={{ maxHeight: "450px", overflowY: "auto" }}> {/* Set max height and enable vertical scrolling */}
+        <UL attrUL={{ className: "simple-list" }}>
         <LI attrLI={{ className: "border-0  bg-transparent" }}>
           <Media className="align-self-center">
             <Image
@@ -137,9 +90,9 @@ const Comments = () => {
                   "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text."
                 }
               </P>
-              <Button color="primary" onClick={toggleModal}>
+              {/* <Button color="primary" onClick={toggleModal}>
                 Give Feedback
-              </Button>
+              </Button> */}
             </Media>
           </Media>
         </LI>
@@ -170,14 +123,153 @@ const Comments = () => {
             </LI>
           </UL>
         </LI>
+        <LI attrLI={{ className: "border-0  bg-transparent" }}>
+          <Media className="align-self-center">
+            <Image
+              attrImage={{
+                className: "align-self-center",
+                src: `${require("../../../assets/images/user/1.jpg")}`,
+                alt: "",
+              }}
+            />
+            <Media body>
+              <Row>
+                <Col md="4" className="xl-100">
+                  <H6 attrH6={{ className: "mt-0" }}>
+                    {"JolioMark"}
+                    <span> {"( Designer )"}</span>
+                  </H6>
+                </Col>
+              </Row>
+              <P>
+                {
+                  "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text."
+                }
+              </P>
+              {/* <Button color="primary" onClick={toggleModal}>
+                Give Feedback
+              </Button> */}
+            </Media>
+          </Media>
+        </LI>
+        <LI attrLI={{ className: "border-0  bg-transparent" }}>
+          <UL>
+            <LI attrLI={{ className: "border-0 " }}>
+              <Media>
+                <Image
+                  attrImage={{
+                    className: "align-self-center",
+                    src: `${require("../../../assets/images/blog/9.jpg")}`,
+                    alt: "",
+                  }}
+                />
+                <Media body>
+                  <Row>
+                    <Col xl="12">
+                      <H6 attrH6={{ className: "mt-0" }}>{"Admin"}</H6>
+                    </Col>
+                  </Row>
+                  <P>
+                    {
+                      "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text."
+                    }
+                  </P>
+                </Media>
+              </Media>
+            </LI>
+          </UL>
+        </LI>
+        <LI attrLI={{ className: "border-0  bg-transparent" }}>
+          <Media className="align-self-center">
+            <Image
+              attrImage={{
+                className: "align-self-center",
+                src: `${require("../../../assets/images/user/1.jpg")}`,
+                alt: "",
+              }}
+            />
+            <Media body>
+              <Row>
+                <Col md="4" className="xl-100">
+                  <H6 attrH6={{ className: "mt-0" }}>
+                    {"JolioMark"}
+                    <span> {"( Designer )"}</span>
+                  </H6>
+                </Col>
+              </Row>
+              <P>
+                {
+                  "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text."
+                }
+              </P>
+              {/* <Button color="primary" onClick={toggleModal}>
+                Give Feedback
+              </Button> */}
+            </Media>
+          </Media>
+        </LI>
+        <LI attrLI={{ className: "border-0  bg-transparent" }}>
+          <UL>
+            <LI attrLI={{ className: "border-0 " }}>
+              <Media>
+                <Image
+                  attrImage={{
+                    className: "align-self-center",
+                    src: `${require("../../../assets/images/blog/9.jpg")}`,
+                    alt: "",
+                  }}
+                />
+                <Media body>
+                  <Row>
+                    <Col xl="12">
+                      <H6 attrH6={{ className: "mt-0" }}>{"Admin"}</H6>
+                    </Col>
+                  </Row>
+                  <P>
+                    {
+                      "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text."
+                    }
+                  </P>
+                </Media>
+              </Media>
+            </LI>
+          </UL>
+        </LI>
+       
+   
     
       </UL>
-      <FeedbackDrawer
-        isOpen={modal}
-        onClose={toggleModal}
-        value={feedbackValue}
-        onChange={handleFeedbackChange}
-      />
+      </div>
+
     </Fragment>
+  );
+};
+const Send = () => {
+  return (
+   <div className="chat-message clearfix">
+      <Row>
+        <Col xl="12" className="d-flex">
+          <div style={{ position: "relative", width: "100%" }}>
+            <div style={{ position: "absolute", bottom: 0, width: "100%" }}>
+              <InputGroup className="text-box">
+                <textarea
+                  className="form-control input-txt-bx"
+                  placeholder="Type a message......"
+                  rows={4} // Adjust the number of rows as needed
+                />
+                <Btn
+                  attrBtn={{
+                    color: "primary"
+                    // , onClick: () => handleMessagePress('send')
+                  }}
+                >
+                  Send
+                </Btn>
+              </InputGroup>
+            </div>
+          </div>
+        </Col>
+      </Row>
+    </div>
   );
 };
