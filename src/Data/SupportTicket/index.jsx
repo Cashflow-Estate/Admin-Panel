@@ -101,6 +101,240 @@ export const supportData = [
       <Media className='justify-content-start'>
         <Image attrImage={{ className: 'rounded-circle img-30 me-3', src: `${user3}`, alt: 'Generic placeholder image' }} />
         <Media body className='align-self-center'>
+          <div>John Doe</div>
+        </Media>
+      </Media>
+    ),
+    position: 'Senior Developer',
+    client: "Customers",
+    investment: '$100,000',
+    location: 'New York',
+    skill: (
+      <div className='progress-showcase' style={{ width: '86px' }}>
+        <div className='progress sm-progress-bar'>
+          <div className='progress-bar custom-progress-width bg-secondary' role='progressbar' style={{ width: '70%' }}></div>
+        </div>
+      </div>
+    ),
+    extn: 1234,
+    email: 'john.doe@example.com',
+    packageName: 'premium',
+    blockUser: false,
+    id: "1"
+  },
+  {
+    image: (
+      <Media className='justify-content-start'>
+        <Image attrImage={{ className: 'rounded-circle img-30 me-3', src: `${user2}`, alt: 'Generic placeholder image' }} />
+        <Media body className='align-self-center'>
+          <div>Jane Smith</div>
+        </Media>
+      </Media>
+    ),
+    position: 'Marketing Manager',
+    client: "Customers",
+    investment: '$75,000',
+    location: 'Los Angeles',
+    skill: (
+      <div className='progress-showcase' style={{ width: '86px' }}>
+        <div className='progress sm-progress-bar'>
+          <div className='progress-bar custom-progress-width bg-secondary' role='progressbar' style={{ width: '60%' }}></div>
+        </div>
+      </div>
+    ),
+    extn: 5678,
+    email: 'jane.smith@example.com',
+    packageName: 'premium',
+    blockUser: false,
+    id: "2"
+  },
+  {
+    image: (
+      <Media className='justify-content-start'>
+        <Image attrImage={{ className: 'rounded-circle img-30 me-3', src: `${user3}`, alt: 'Generic placeholder image' }} />
+        <Media body className='align-self-center'>
+          <div>Tiger Nixon</div>
+        </Media>
+      </Media>
+    ),
+    position: 'Junior Technical Author',
+    client: "Customers",
+    investment: '$86,000',
+    location: 'San Francisco',
+    skill: (
+      <div className='progress-showcase' style={{ width: '86px' }}>
+        <div className='progress sm-progress-bar'>
+          <div className='progress-bar custom-progress-width bg-secondary' role='progressbar' style={{ width: '50%' }}></div>
+        </div>
+      </div>
+    ),
+    extn: 1562,
+    email: 'tiger.nixon@example.com',
+    packageName: 'basic',
+    blockUser: true,
+    id: "3"
+  },
+  {
+    image: (
+      <Media className='justify-content-start'>
+        <Image attrImage={{ className: 'rounded-circle img-30 me-3', src: `${user3}`, alt: 'Generic placeholder image' }} />
+        <Media body className='align-self-center'>
+          <div>John Doe</div>
+        </Media>
+      </Media>
+    ),
+    position: 'Senior Developer',
+    client: "Customers",
+    investment: '$100,000',
+    location: 'New York',
+    skill: (
+      <div className='progress-showcase' style={{ width: '86px' }}>
+        <div className='progress sm-progress-bar'>
+          <div className='progress-bar custom-progress-width bg-secondary' role='progressbar' style={{ width: '70%' }}></div>
+        </div>
+      </div>
+    ),
+    extn: 1234,
+    email: 'john.doe@example.com',
+    packageName: 'premium',
+    blockUser: false,
+    id: "1"
+  },
+  {
+    image: (
+      <Media className='justify-content-start'>
+        <Image attrImage={{ className: 'rounded-circle img-30 me-3', src: `${user2}`, alt: 'Generic placeholder image' }} />
+        <Media body className='align-self-center'>
+          <div>Jane Smith</div>
+        </Media>
+      </Media>
+    ),
+    position: 'Marketing Manager',
+    client: "Customers",
+    investment: '$75,000',
+    location: 'Los Angeles',
+    skill: (
+      <div className='progress-showcase' style={{ width: '86px' }}>
+        <div className='progress sm-progress-bar'>
+          <div className='progress-bar custom-progress-width bg-secondary' role='progressbar' style={{ width: '60%' }}></div>
+        </div>
+      </div>
+    ),
+    extn: 5678,
+    email: 'jane.smith@example.com',
+    packageName: 'premium',
+    blockUser: false,
+    id: "2"
+  },
+  {
+    image: (
+      <Media className='justify-content-start'>
+        <Image attrImage={{ className: 'rounded-circle img-30 me-3', src: `${user3}`, alt: 'Generic placeholder image' }} />
+        <Media body className='align-self-center'>
+          <div>Tiger Nixon</div>
+        </Media>
+      </Media>
+    ),
+    position: 'Junior Technical Author',
+    client: "Customers",
+    investment: '$86,000',
+    location: 'San Francisco',
+    skill: (
+      <div className='progress-showcase' style={{ width: '86px' }}>
+        <div className='progress sm-progress-bar'>
+          <div className='progress-bar custom-progress-width bg-secondary' role='progressbar' style={{ width: '50%' }}></div>
+        </div>
+      </div>
+    ),
+    extn: 1562,
+    email: 'tiger.nixon@example.com',
+    packageName: 'basic',
+    blockUser: true,
+    id: "3"
+  },
+  {
+    image: (
+      <Media className='justify-content-start'>
+        <Image attrImage={{ className: 'rounded-circle img-30 me-3', src: `${user3}`, alt: 'Generic placeholder image' }} />
+        <Media body className='align-self-center'>
+          <div>John Doe</div>
+        </Media>
+      </Media>
+    ),
+    position: 'Senior Developer',
+    client: "Customers",
+    investment: '$100,000',
+    location: 'New York',
+    skill: (
+      <div className='progress-showcase' style={{ width: '86px' }}>
+        <div className='progress sm-progress-bar'>
+          <div className='progress-bar custom-progress-width bg-secondary' role='progressbar' style={{ width: '70%' }}></div>
+        </div>
+      </div>
+    ),
+    extn: 1234,
+    email: 'john.doe@example.com',
+    packageName: 'premium',
+    blockUser: false,
+    id: "1"
+  },
+  {
+    image: (
+      <Media className='justify-content-start'>
+        <Image attrImage={{ className: 'rounded-circle img-30 me-3', src: `${user2}`, alt: 'Generic placeholder image' }} />
+        <Media body className='align-self-center'>
+          <div>Jane Smith</div>
+        </Media>
+      </Media>
+    ),
+    position: 'Marketing Manager',
+    client: "Customers",
+    investment: '$75,000',
+    location: 'Los Angeles',
+    skill: (
+      <div className='progress-showcase' style={{ width: '86px' }}>
+        <div className='progress sm-progress-bar'>
+          <div className='progress-bar custom-progress-width bg-secondary' role='progressbar' style={{ width: '60%' }}></div>
+        </div>
+      </div>
+    ),
+    extn: 5678,
+    email: 'jane.smith@example.com',
+    packageName: 'premium',
+    blockUser: false,
+    id: "2"
+  },
+  {
+    image: (
+      <Media className='justify-content-start'>
+        <Image attrImage={{ className: 'rounded-circle img-30 me-3', src: `${user3}`, alt: 'Generic placeholder image' }} />
+        <Media body className='align-self-center'>
+          <div>Tiger Nixon</div>
+        </Media>
+      </Media>
+    ),
+    position: 'Junior Technical Author',
+    client: "Customers",
+    investment: '$86,000',
+    location: 'San Francisco',
+    skill: (
+      <div className='progress-showcase' style={{ width: '86px' }}>
+        <div className='progress sm-progress-bar'>
+          <div className='progress-bar custom-progress-width bg-secondary' role='progressbar' style={{ width: '50%' }}></div>
+        </div>
+      </div>
+    ),
+    extn: 1562,
+    email: 'tiger.nixon@example.com',
+    packageName: 'basic',
+    blockUser: true,
+    id: "3"
+  },
+  {
+    image: (
+      <Media className='justify-content-start'>
+        <Image attrImage={{ className: 'rounded-circle img-30 me-3', src: `${user3}`, alt: 'Generic placeholder image' }} />
+        <Media body className='align-self-center'>
           <div>Tiger Nixon</div>
         </Media>
       </Media>
