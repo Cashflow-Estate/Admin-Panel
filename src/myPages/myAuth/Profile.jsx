@@ -11,7 +11,7 @@ const Profile = () => {
     <Fragment>
       <Breadcrumbs
         mainTitle="Edit Profile"
-        parent="Users"
+        parent="My"
         title="Edit Profile"
       />
       <Container fluid={true}>

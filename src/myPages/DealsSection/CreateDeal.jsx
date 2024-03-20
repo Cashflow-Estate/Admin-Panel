@@ -1,5 +1,5 @@
 import React, { Fragment, useContext, useState } from "react";
-import { Breadcrumbs, Btn } from "../../AbstractElements";
+import { Breadcrumbs, Btn, H4 } from "../../AbstractElements";
 import ProjectContext from "../../_helper/Project";
 import { Add, Cancel } from "../../Constant";
 import { useNavigate, Link } from "react-router-dom";
@@ -96,10 +96,11 @@ const CreateDeal = () => {
       <Breadcrumbs
         parent="Deals"
         title="Create Deals"
-        mainTitle="Create Deals"
+        mainTitle="Deals"
       />
 
       <Container fluid={true}>
+        <H4>Create Deals</H4>
         <Row>
           <Col sm="12">
             <Card>

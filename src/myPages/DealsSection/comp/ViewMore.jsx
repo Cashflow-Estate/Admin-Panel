@@ -29,7 +29,7 @@ const ViewMore = () => {
         <Breadcrumbs
           mainTitle="Details"
           parent="Deals"
-          title="Details of Deal"
+          title="1"
         />
 
         <Row className="product-page-main p-0">

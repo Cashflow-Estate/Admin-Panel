@@ -3,7 +3,7 @@
 ==========================**/
 %sidebar-after {
   position: absolute;
-  content: '';
+  content: "";
   top: 48%;
   width: 8px;
   border-top: 1px solid rgba($theme-body-sub-title-color, 0.4);
@@ -11,7 +11,7 @@
 
 %sidebar-active-dot {
   position: absolute;
-  content: '';
+  content: "";
   width: 5px;
   height: 5px;
   top: 50%;
@@ -21,7 +21,7 @@
   background: var(--theme-deafult);
   opacity: 0;
   visibility: hidden;
-  [dir='rtl'] & {
+  [dir="rtl"] & {
     left: unset;
     right: 25px;
   }
@@ -29,14 +29,14 @@
 
 %sidebar-before {
   position: absolute;
-  content: '';
+  content: "";
   width: 1px;
   height: 0;
   background: rgba($theme-body-sub-title-color, 0.4);
   top: -10px;
   left: 27px;
   transition: height 0.5s;
-  [dir='rtl'] & {
+  [dir="rtl"] & {
     left: unset;
     right: 27px;
   }
@@ -44,7 +44,7 @@
 
 %horizontal-after {
   position: absolute;
-  content: '';
+  content: "";
   top: 49%;
   width: 5px;
   height: 1px;
@@ -73,7 +73,7 @@
     border-left: 7px solid transparent;
     border-right: 7px solid transparent;
     border-bottom: 7px solid $white;
-    content: '';
+    content: "";
     top: -7px;
     position: absolute;
     left: 10px;
@@ -86,7 +86,7 @@
     border-left: 7px solid transparent;
     border-right: 7px solid transparent;
     border-bottom: 7px solid $light-background;
-    content: '';
+    content: "";
     top: -7px;
     position: absolute;
     left: 10px;
@@ -151,7 +151,7 @@
             position: absolute;
             left: 30px;
             top: 27px;
-            content: '\f002';
+            content: "\f002";
             font-size: 16px;
             color: $dark-gray;
             font-family: FontAwesome;
@@ -489,7 +489,7 @@
               align-items: center;
               .media-body {
                 margin-right: 20px;
-                [dir='rtl'] & {
+                [dir="rtl"] & {
                   margin-right: unset;
                   margin-left: 20px;
                 }
@@ -759,20 +759,62 @@
             a {
               svg {
                 &.stroke-icon {
-                  stroke: $dark-color;
+                  // stroke: $dark-color;
+                  stroke: white;
                 }
                 &.fill-icon {
-                  fill: $sidebar-fill-icon-color;
+                  // fill: $sidebar-fill-icon-color;
+                  fill: rgb(172, 165, 165);
                 }
               }
               &.active {
                 svg {
                   transition: all 0.3s ease;
                   &.stroke-icon {
-                    stroke: var(--theme-deafult);
+                    // stroke: var(--theme-deafult);
+                    stroke: white;
                   }
                   &.fill-icon {
-                    fill: var(--theme-deafult);
+                    // fill: var(--theme-deafult);
+                    fill: white;
+                  }
+                }
+              }
+            }
+          }
+          li {
+            a {
+              text-transform: capitalize;
+            }
+          }
+        }
+      }
+    }
+    div.sidebar-wrapper {
+      .sidebar-main {
+        .sidebar-links {
+          > li {
+            a {
+              svg {
+                &.stroke-icon {
+                  // stroke: $dark-color;
+                  stroke: white;
+                }
+                &.fill-icon {
+                  // fill: $sidebar-fill-icon-color;
+                  fill: rgb(172, 165, 165);
+                }
+              }
+              &.active:hover {
+                svg {
+                  transition: all 0.3s ease;
+                  &.stroke-icon {
+                    // stroke: var(--theme-deafult);
+                    stroke: green;
+                  }
+                  &.fill-icon {
+                    // fill: var(--theme-deafult);
+                    fill: green;
                   }
                 }
               }
@@ -881,7 +923,7 @@
                     .according-menu {
                       i {
                         &:before {
-                          content: '-';
+                          content: "-";
                         }
                       }
                     }
@@ -1108,7 +1150,7 @@
 
                           &:after {
                             position: absolute;
-                            content: '';
+                            content: "";
                             left: -12px;
                             top: 50%;
                             width: 5px;
@@ -1217,7 +1259,8 @@
     h6 {
       font-size: 14px;
       font-weight: 600;
-      color: $theme-body-sub-title-color;
+      // color: $theme-body-sub-title-color;
+      color: white;
       text-transform: uppercase;
       margin-bottom: 0;
       letter-spacing: 0.4px;
@@ -1331,7 +1374,7 @@
                     transition: all 0.3s ease;
                     a {
                       text-align: left;
-                      [dir='rtl'] & {
+                      [dir="rtl"] & {
                         text-align: right;
                       }
                     }
@@ -1345,9 +1388,9 @@
                     > a {
                       padding: 12px 15px;
                       transition: all 0.3s ease;
-svg{
-  margin-right: 15px;
-}
+                      svg {
+                        margin-right: 15px;
+                      }
                       span {
                         display: inline-block;
                       }
@@ -1398,7 +1441,7 @@ svg{
                   }
 
                   a {
-                    svg{
+                    svg {
                       margin: 0;
                     }
                     span {
@@ -1438,7 +1481,7 @@ svg{
               color: rgba(0, 0, 0, 0);
               margin-top: 20px;
               margin-bottom: 30px;
-
+              background-color: #1f1d1d;
               li {
                 a {
                   font-weight: 500;
@@ -1455,7 +1498,8 @@ svg{
                   span {
                     letter-spacing: 0.7px;
                     text-transform: capitalize;
-                    color: rgba($theme-body-sub-title-color, 0.8);
+                    // color: rgba($theme-body-sub-title-color, 0.8);
+                    color: white;
                   }
 
                   &.link-nav {
@@ -1500,12 +1544,12 @@ svg{
                 &.sidebar-main-title {
                   padding: 25px 0 6px 20px;
                   margin-top: 10px;
-                  [dir='rtl'] & {
+                  [dir="rtl"] & {
                     padding: 25px 20px 6px 0;
                   }
                   &::before {
                     position: absolute;
-                    content: '';
+                    content: "";
                     top: 0;
                     left: 50%;
                     background: var(--sidebar-border);
@@ -1538,7 +1582,8 @@ svg{
                   &:hover {
                     > a {
                       &:hover {
-                        background-color: rgba($primary-color, 0.07);
+                        // background-color: rgba($primary-color, 0.07);
+                        background-color: #dfefda;
                         transition: all 0.3s ease;
                       }
                     }
@@ -1572,7 +1617,14 @@ svg{
                     }
                   }
                 }
-
+                .sidebar-link.active {
+                  &:hover {
+                    span {
+                      color: green;
+                      transition: all 0.3s ease;
+                    }
+                  }
+                }
                 a {
                   padding: 12px 20px;
                   position: relative;
@@ -1656,7 +1708,8 @@ svg{
                     a {
                       padding: 7px 25px;
                       font-size: 14px;
-                      color: rgba($theme-body-font-color, 0.6);
+                      // color: rgba($theme-body-font-color, 0.6);
+                      color: white;
                       display: block;
                       position: relative;
                       letter-spacing: 0.06em;
@@ -1811,7 +1864,7 @@ svg{
                   display: block;
                   &::after {
                     position: absolute;
-                    content: '';
+                    content: "";
                     width: 4px;
                     height: 35px;
                     right: 0;
@@ -1821,7 +1874,7 @@ svg{
                     border-radius: 5px 0px 0px 5px;
                     opacity: 0;
                     visibility: hidden;
-                    [dir='rtl'] & {
+                    [dir="rtl"] & {
                       right: unset;
                       left: 0;
                     }
@@ -1830,7 +1883,8 @@ svg{
                     transition: all 0.5s ease;
                     position: relative;
                     margin-bottom: 10px;
-                    background-color: lighten($primary-color, 27%);
+                    // background-color: lighten($primary-color, 27%);
+                    background-color: #3c9f1e;
                     &::after {
                       opacity: 1;
                       visibility: visible;
@@ -1843,12 +1897,14 @@ svg{
                     }
                     .according-menu {
                       i {
-                        color: var(--theme-deafult);
+                        // color: var(--theme-deafult);
+                        color: white;
                       }
                     }
 
                     span {
-                      color: var(--theme-deafult);
+                      // color: var(--theme-deafult);
+                      color: white;
                       transition: all 0.3s ease;
                     }
                   }
@@ -1873,7 +1929,8 @@ svg{
 
         i {
           vertical-align: middle;
-          color: rgba($theme-body-sub-title-color, 0.8);
+          // color: rgba($theme-body-sub-title-color, 0.8);
+          color: white;
           font-weight: 500;
         }
       }
@@ -2083,7 +2140,6 @@ svg{
         position: fixed;
         top: 0;
       }
-  
     }
 
     .toggle-sidebar {
@@ -2270,11 +2326,12 @@ svg{
                   > a {
                     &::after {
                       position: absolute;
-                      content: '';
+                      content: "";
                       left: 20px;
                       top: 48%;
                       width: 8px;
-                      border-top: 2px solid rgba($theme-body-sub-title-color, 0.4);
+                      border-top: 2px solid
+                        rgba($theme-body-sub-title-color, 0.4);
                     }
                   }
                 }
@@ -2298,7 +2355,7 @@ svg{
 
                         &::after {
                           position: absolute;
-                          content: '';
+                          content: "";
                           left: 20px;
                           top: 48%;
                           width: 6px;
@@ -2309,10 +2366,10 @@ svg{
                   }
                 }
               }
-              &:hover{
-                   .sidebar-submenu{
-                    display: block !important;
-                   }
+              &:hover {
+                .sidebar-submenu {
+                  display: block !important;
+                }
               }
             }
 
@@ -2367,7 +2424,7 @@ svg{
           }
         }
 
-        &[sidebar-layout='stroke-svg'] {
+        &[sidebar-layout="stroke-svg"] {
           .sidebar-links {
             .mega-menu {
               svg {
@@ -2382,7 +2439,7 @@ svg{
             }
           }
         }
-        &[sidebar-layout='fill-svg'] {
+        &[sidebar-layout="fill-svg"] {
           .sidebar-links {
             .mega-menu {
               svg {
@@ -2563,7 +2620,7 @@ svg{
           top: 37px;
           width: calc(100% - 50px);
           left: 25px;
-          [dir='rtl'] & {
+          [dir="rtl"] & {
             left: unset;
             right: 25px;
           }
@@ -2631,7 +2688,7 @@ svg{
   &.modern-type {
     .progress-chart-wrap {
       margin-left: -22px;
-      [dir='rtl'] & {
+      [dir="rtl"] & {
         margin-left: unset;
         margin-right: -22px;
       }
@@ -2770,9 +2827,9 @@ svg{
 
     &::before {
       position: absolute;
-      content: '';
+      content: "";
       left: 0;
-      top:-50px;
+      top: -50px;
       width: 100%;
       height: 300px;
       background-image: $gradient-bg-primary;
@@ -3202,7 +3259,7 @@ svg{
 
       &::before {
         position: absolute;
-        content: '';
+        content: "";
         left: 0;
         width: 100%;
         height: 200px;
@@ -3380,24 +3437,27 @@ svg{
   }
 }
 
-.page-wrapper { 
-  &[sidebar-layout='stroke-svg'] {
-    .sidebar-wrapper,.page-header  {
-    .stroke-icon {
-      display: inline-block;
+.page-wrapper {
+  &[sidebar-layout="stroke-svg"] {
+    .sidebar-wrapper,
+    .page-header {
+      .stroke-icon {
+        display: inline-block;
+      }
+      .fill-icon {
+        display: none;
+      }
     }
-    .fill-icon {
-      display: none;
-    }
-  }}
-  &[sidebar-layout='fill-svg'] {
-       .sidebar-wrapper,.page-header  {
-    .stroke-icon {
-      display: none;
-    }
-    .fill-icon {
-      display: inline-block;
-    }
+  }
+  &[sidebar-layout="fill-svg"] {
+    .sidebar-wrapper,
+    .page-header {
+      .stroke-icon {
+        display: none;
+      }
+      .fill-icon {
+        display: inline-block;
+      }
     }
   }
 }

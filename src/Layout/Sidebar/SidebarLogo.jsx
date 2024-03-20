@@ -28,11 +28,11 @@ const SidebarLogo = () => {
         </Link>
       )}
       <div className='back-btn' onClick={() => openCloseSidebar()}>
-        <i className='fa fa-angle-left'></i>
+      <i className= "icon-close"></i>
       </div>
-      <div className='toggle-sidebar' onClick={openCloseSidebar}>
+      {/* <div className='toggle-sidebar' onClick={openCloseSidebar}>
         <Grid className='status_toggle middle sidebar-toggle' />
-      </div>
+      </div> */}
     </div>
   );
 };
