@@ -77,7 +77,7 @@ export const routes = [
     Component: <SendDeals />,
   },
   {
-    path: `/deals/queries`,
+    path: `/inquiry`,
     Component: <DealsQueries />,
   },
   {

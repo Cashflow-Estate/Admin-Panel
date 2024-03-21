@@ -55,7 +55,7 @@ const AllDealsTable = () => {
   
 
   const handleViewQueries = (deal) => {
-    history("/deals/queries");
+    history("/inquiry");
   };
 
   const customColumns = [

@@ -39,10 +39,11 @@ export const MENUITEMS = [
           },
         ],
       },
+  
       {
-        path: `/deals/queries`,
+        path: `/inquiry`,
         type: "link",
-        title: "Deals Queries",
+        title: "Inquiry",
         icon: "user",
       },
       {
@@ -89,13 +90,13 @@ export const MENUITEMS = [
         ],
       },
       {
-        title: "Schedule A Call",
+        title: "Schedule-Call",
         icon: "icons",
         type: "link",
         path: `/schedule-call`,
       },
       {
-        title: "Upcoming Call",
+        title: "Upcoming-Call",
         icon: "icons",
         type: "link",
         path: `/upcoming-call`,
@@ -106,6 +107,7 @@ export const MENUITEMS = [
         title: "CRM",
         icon: "user",
       },
+ 
       {
         title: "Transactions",
         icon: "icons",
@@ -127,7 +129,7 @@ export const MENUITEMS = [
       {
         path: `/website/queries`,
         type: "link",
-        title: "Website Queries",
+        title: "Website",
         icon: "user",
       },
       {
