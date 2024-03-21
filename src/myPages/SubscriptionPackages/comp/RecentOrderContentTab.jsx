@@ -1,8 +1,7 @@
 import React, { Fragment, useState } from "react";
-import { RecentOrderTable } from "../../../Data/Ecommerce";
 import { Link } from "react-router-dom";
-import { TabContent, Table, TabPane } from "reactstrap";
-import { Col, Card, CardBody, Pagination, PaginationItem, PaginationLink } from 'reactstrap';
+import { Table, Col, Card, CardBody, Pagination, PaginationItem, PaginationLink } from 'reactstrap';
+
 const RecentOrderContentTab = ({ RecentOrdersNav, isActive, show }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
@@ -169,13 +168,10 @@ const RecentOrderContentTab = ({ RecentOrdersNav, isActive, show }) => {
     },
   ];
 
-
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
-
-  
 
   return (
     <Fragment>
@@ -217,22 +213,22 @@ const RecentOrderContentTab = ({ RecentOrdersNav, isActive, show }) => {
         </Table>
       </div>
       {/* Pagination */}
-      <Col xl="6">
+      <Col xl="6" className="d-flex justify-content-end">
         <Card>
           <CardBody>
-            <Pagination aria-label="Page navigation example" className="pagination-primary" >
+            <Pagination aria-label="Page navigation example" className="pagination-primary">
               <PaginationItem>
-                <PaginationLink previous href="#javascript" />
+                <PaginationLink previous onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1} />
               </PaginationItem>
               {Array.from({ length: Math.ceil(data.length / itemsPerPage) }).map((_, index) => (
-                <PaginationItem key={index}>
-                  <PaginationLink onClick={() => paginate(index + 1)} href="#javascript">
+                <PaginationItem key={index} active={index + 1 === currentPage}>
+                  <PaginationLink onClick={() => paginate(index + 1)}>
                     {index + 1}
                   </PaginationLink>
                 </PaginationItem>
               ))}
               <PaginationItem>
-                <PaginationLink next href="#javascript" />
+                <PaginationLink next onClick={() => paginate(currentPage + 1)} disabled={currentPage === Math.ceil(data.length / itemsPerPage)} />
               </PaginationItem>
             </Pagination>
           </CardBody>
@@ -241,4 +237,5 @@ const RecentOrderContentTab = ({ RecentOrdersNav, isActive, show }) => {
     </Fragment>
   );
 };
-export default RecentOrderContentTab
+
+export default RecentOrderContentTab;

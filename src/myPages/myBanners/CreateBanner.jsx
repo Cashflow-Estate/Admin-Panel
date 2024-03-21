@@ -114,7 +114,7 @@ const CreateBanner = () => {
                     </CardBody>
                     <CardFooter className="text-end">
                         <Btn attrBtn={{ color: "success", className: "m-r-15", type: "submit" }} >{"Create"}</Btn>
-                        <Btn attrBtn={{ color: "secondary", type: "button" }} >{"Cancel"}</Btn>
+                        <Btn attrBtn={{ color: "warning", type: "button" }} >{"Cancel"}</Btn>
                     </CardFooter>
                 </Form>
             </Card>

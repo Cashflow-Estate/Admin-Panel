@@ -40,7 +40,7 @@ const Queries = () => {
           title="Master City"
         />
         <Row>
-          <Col xl="12" className="box-col-8 xl-60">
+          <Col  >
             <div className="comment-box" ref={commentContainerRef}>
               <Comments />
             </div>
@@ -100,8 +100,7 @@ const Comments = () => {
   return (
     <div
       ref={commentContainerRef}
-      style={{ maxHeight: '40vh', overflowY: 'auto', overflowX: 'hidden' }} // Set max height and add vertical scrollbar only
-    >
+      style={{ maxHeight: '40vh', overflowY: 'auto', overflowX: 'hidden' }} >
       <UL attrUL={{ className: "simple-list" }}>
         <LI attrLI={{ className: "border-0 bg-transparent" }}>
           <Media className="align-self-center">

@@ -1,77 +1,126 @@
+import React, { Fragment, useState } from "react";
+import {
+  Button,
+  Col,
+  Row,
+  Modal,
+  Table,
+} from "react-bootstrap";
 
-import React, { useState } from 'react';
-import { Card, Button } from 'react-bootstrap';
-import { Breadcrumbs } from '../../AbstractElements';
-import DealsQueriesPagination from '../DealsSection/comp/DealsQueriesPagination';
+import SimpleMDE from "react-simplemde-editor";
+import "easymde/dist/easymde.min.css";
+import { Breadcrumbs } from "../../AbstractElements";
 
 const WebsiteQueries = () => {
-    const [currentPage, setCurrentPage] = useState(1);
-    const [queriesPerPage] = useState(6); // Number of queries per page
-    const [expandedQueries, setExpandedQueries] = useState([]); // State to track expanded queries
+  return (
+    <Fragment>
+      <Breadcrumbs mainTitle="Website Inquiries" parent="Queries" title="Website" />
 
-    // Static data (replace with your actual data)
-    const queries = [
-      "Query 1: Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      "Query 2: Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      "Query 3: Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      "Query 4: Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-      "Query 5: Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Excepteur sint occaecat cupidatat non proidentExcepteur sint occaecat cupidatat non proidentExcepteur sint occaecat cupidatat non proidentExcepteur sint occaecat cupidatat non proidentExcepteur sint occaecat cupidatat non proident",
-      "Query 4: Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-      "Query 5: Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Excepteur sint occaecat cupidatat non proidentExcepteur sint occaecat cupidatat non proidentExcepteur sint occaecat cupidatat non proidentExcepteur sint occaecat cupidatat non proidentExcepteur sint occaecat cupidatat non proident",
-      "Query 3: Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      "Query 4: Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-  ];
-
-
-    // Pagination logic
-    const indexOfLastQuery = currentPage * queriesPerPage;
-    const indexOfFirstQuery = indexOfLastQuery - queriesPerPage;
-    const currentQueries = queries.slice(indexOfFirstQuery, indexOfLastQuery);
-
-    // Change page
-    const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
-    const handleExpand = (index) => {
-        const expanded = [...expandedQueries];
-        expanded[index] = true;
-        setExpandedQueries(expanded);
-    };
-
-    return (
-        <div>
-            <Breadcrumbs mainTitle="Queries" parent="Queries" title="View Queries" />
-            <h1>Website Queries</h1>
-            <div className="row">
-                {currentQueries.map((query, index) => (
-                    <div key={index} className="col-md-4 mb-3">
-                        <Card>
-                            <Card.Body style={{ maxHeight: expandedQueries[index] ? 'none' : '200px', overflowY: 'auto' }}>
-                                <Card.Title>Query {indexOfFirstQuery + index + 1}</Card.Title>
-                                <Card.Text>
-                                    {query}
-                                </Card.Text>
-                                {/* Add a button to expand the text */}
-                                {!expandedQueries[index] && (
-                                    <Button onClick={() => handleExpand(index)}>Read More</Button>
-                                )}
-                            </Card.Body>
-                        </Card>
-                    </div>
-                ))}
-            </div>
-            <div style={{ position: 'absolute', bottom: '-15px', right: '40px' }}>
-                <DealsQueriesPagination
-                    currentPage={currentPage}
-                    queriesPerPage={queriesPerPage}
-                    totalQueries={queries.length}
-                    paginate={paginate}
-                />
-            </div>
-        </div>
-    );
+      <Row>
+        <Col >
+            <Comments />
+        </Col>
+      </Row>
+    </Fragment>
+  );
 };
 
 export default WebsiteQueries;
+
+const FeedbackDrawer = ({ isOpen, onClose, value, onChange, onSubmit }) => {
+  const handleSubmit = () => {
+    onSubmit(value);
+    onClose();
+  };
+
+  return (
+    
+    <Modal show={isOpen} onHide={onClose} size="lg">
+      <Modal.Header closeButton>
+        <Modal.Title>Give Feedback</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        
+        <h4>Query</h4>
+        <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.</p>
+        <h4>Write Your Feedback</h4>
+          <SimpleMDE
+            onChange={onChange}
+            value={value}
+          />
+      </Modal.Body>
+      <Modal.Footer>
+        <Button variant="primary" onClick={handleSubmit}>
+          Submit
+        </Button>
+        <Button variant="secondary" onClick={onClose}>
+          Close
+        </Button>
+      </Modal.Footer>
+    </Modal>
+  );
+};
+
+const Comments = () => {
+  const [modal, setModal] = useState(false);
+  const [feedbackValue, setFeedbackValue] = useState('');
+  const [selectedQuery, setSelectedQuery] = useState(null);
+  const [queriesData] = useState([
+    { name: "JolioMark", email: "joliomark@example.com", time: "10:00 AM", query: "Lorem Ipsum Query 1" },
+    { name: "JohnDoe", email: "johndoe@example.com", time: "11:30 AM", query: "Lorem Ipsum Query 2" },
+    { name: "JaneDoe", email: "janedoe@example.com", time: "1:45 PM", query: "Lorem Ipsum Query 3" },
+  ]);
+
+  const toggleModal = (query) => {
+    setSelectedQuery(query);
+    setModal(!modal);
+  };
+
+  const handleFeedbackChange = (value) => {
+    setFeedbackValue(value);
+  };
+
+  const handleFeedbackSubmit = (value) => {
+    console.log("Feedback submitted:", value);
+    // Perform submission logic here
+  };
+
+  return (
+    <Fragment>
+      <Table striped bordered hover>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Time</th>
+            <th>View Query</th>
+          </tr>
+        </thead>
+        <tbody>
+          {queriesData.map((query, index) => (
+            <tr key={index}>
+              <td>{query.name}</td>
+              <td>{query.email}</td>
+              <td>{query.time}</td>
+              <td>
+                <Button variant="primary" onClick={() => toggleModal(query.query)}>
+                  View Query
+                </Button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+      <FeedbackDrawer
+        isOpen={modal}
+        onClose={() => setModal(false)}
+        value={feedbackValue}
+        onChange={handleFeedbackChange}
+        onSubmit={handleFeedbackSubmit}
+      />
+    </Fragment>
+  );
+};
 
 
 // import React, { useState } from 'react';
