@@ -35,12 +35,14 @@ const UserDetails = () => {
         <UserProfile user={user} />
       </Col>
       <Col>
-      
-      <UserDeals heading={"Deal Purchased"} />
+        <UserDeals heading={"Special Deals"} />
       </Col>
-      <Col style={{ paddingTop: '20px' }}>
-  <UserDeals heading={"Deals Not Yet Buy"} />
-</Col>
+      <Col style={{ paddingTop: "20px" }}>
+        <UserDeals heading={"Deal Purchased"} />
+      </Col>
+      <Col style={{ paddingTop: "20px" }}>
+        <UserDeals heading={"Deals Not Yet Buy"} />
+      </Col>
       <ViewTransactions showBreadcrumbs={false} />{" "}
     </Fragment>
   );
