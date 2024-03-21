@@ -35,15 +35,15 @@ const UserDetails = () => {
         <UserProfile user={user} />
       </Col>
       <Col>
-        <UserDeals heading={"Special Deals"} />
+        <UserDeals heading={"Featured Deals"} />
       </Col>
       <Col style={{ paddingTop: "20px" }}>
         <UserDeals heading={"Deal Purchased"} />
       </Col>
       <Col style={{ paddingTop: "20px" }}>
-        <UserDeals heading={"Deals Not Yet Buy"} />
+        <UserDeals heading={"Inquiry, no purchase."} />
       </Col>
-      <ViewTransactions showBreadcrumbs={false} />{" "}
+      {/* <ViewTransactions showBreadcrumbs={false} />{" "} */}
     </Fragment>
   );
 };
@@ -98,41 +98,41 @@ const SocialData = ({
     <>
       <UL attrUL={{ className: "social-follow" }}>
         <LI>
-          <H5 attrH5={{ className: "mb-0" }}>{totalPost}</H5>
-          <span className="f-light" style={{ color: "orange" }}>
-            Address
+          <H5 attrH5={{ className: "mb-0" }}>Address</H5>
+          <span className="f-light" style={{ color: "orange",fontSize:"15px" }}>
+            {totalPost}
           </span>
         </LI>
         <LI>
-          <H5 attrH5={{ className: "mb-0" }}>{follower}</H5>
-          <span className="f-light" style={{ color: "orange" }}>
-            Ph#
+          <H5 attrH5={{ className: "mb-0" }}>Ph#</H5>
+          <span className="f-light" style={{ color: "orange",fontSize:"15px" }}>
+            {follower}
           </span>
         </LI>
         <LI>
-          <H5 attrH5={{ className: "mb-0" }}>{following}</H5>
-          <span className="f-light" style={{ color: "orange" }}>
-            Invested
+          <H5 attrH5={{ className: "mb-0" }}>Invested Amount</H5>
+          <span className="f-light" style={{ color: "orange",fontSize:"15px" }}>
+            {following}
           </span>
         </LI>
       </UL>
       <UL attrUL={{ className: "social-follow" }}>
         <LI>
-          <H5 attrH5={{ className: "mb-0" }}>{email}</H5>
-          <span className="f-light" style={{ color: "orange" }}>
-            Email
+          <H5 attrH5={{ className: "mb-0" }}>Email</H5>
+          <span className="f-light" style={{ color: "orange",fontSize:"15px" }}>
+            {email}
           </span>
         </LI>
         <LI>
-          <H5 attrH5={{ className: "mb-0" }}>{PackageName}</H5>
-          <span className="f-light" style={{ color: "orange" }}>
-            Plan
+          <H5 attrH5={{ className: "mb-0" }}>Plan</H5>
+          <span className="f-light" style={{ color: "orange",fontSize:"15px" }}>
+            {PackageName}
           </span>
         </LI>
         <LI>
-          <H5 attrH5={{ className: "mb-0" }}>{MemberType}</H5>
-          <span className="f-light" style={{ color: "orange" }}>
-            Member Type
+          <H5 attrH5={{ className: "mb-0" }}>Member Type</H5>
+          <span className="f-light" style={{ color: "orange",fontSize:"15px" }}>
+            {MemberType}
           </span>
         </LI>
       </UL>
