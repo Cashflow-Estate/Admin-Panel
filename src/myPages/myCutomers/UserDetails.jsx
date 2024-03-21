@@ -5,6 +5,7 @@ import { Breadcrumbs, H5, H6, Image, LI, UL } from "../../AbstractElements";
 import { BOD, ContactUs, ContactUsNumber, DDMMYY, Designer, LocationDetails, MarkJecno } from "../../Constant";
 import CountUp from 'react-countup';
 import SvgIcon from "../../Components/Common/Component/SvgIcon";
+import UserDeals from "./UserDeals";
 
 const UserDetails = () => {
   const user = {
@@ -26,6 +27,7 @@ const UserDetails = () => {
       <Col>
       <UserProfile user={user} />
     </Col>
+    <UserDeals/>
       <ViewTransactions showBreadcrumbs={false} /> {/* Pass prop to hide breadcrumbs */}
 
     </Fragment>
@@ -60,38 +62,39 @@ const UserProfile = ({ user }) => {
   );
 };
 
-const SocialData = ({ totalPost, follower, following,MemberType,PackageName,email }) => {
+const SocialData = ({ totalPost, follower, following, MemberType, PackageName, email }) => {
   return (
     <>
       <UL attrUL={{ className: 'social-follow' }}>
-      <LI>
-        <H5 attrH5={{ className: 'mb-0' }}>{totalPost}</H5>
-        <span className='f-light'>Address</span>
-      </LI>
-      <LI>
-        <H5 attrH5={{ className: 'mb-0' }}>{follower}</H5>
-        <span className='f-light'>Ph#</span>
-      </LI>
-      <LI>
-        <H5 attrH5={{ className: 'mb-0' }}>{following}</H5>
-        <span className='f-light'>Invested</span>
-      </LI>
-    </UL>
-    <UL attrUL={{ className: 'social-follow' }}>
-      <LI>
-        <H5 attrH5={{ className: 'mb-0' }}>{email}</H5>
-        <span className='f-light'>Email</span>
-      </LI>
-      <LI>
-        <H5 attrH5={{ className: 'mb-0' }}>{PackageName}</H5>
-        <span className='f-light'>Plan</span>
-      </LI>
-      <LI>
-        <H5 attrH5={{ className: 'mb-0' }}>{MemberType}</H5>
-        <span className='f-light'>Member Type</span>
-      </LI>
-    </UL>
+        <LI>
+          <H5 attrH5={{ className: 'mb-0' }}>{totalPost}</H5>
+          <span className='f-light' style={{ color: 'orange' }}>Address</span>
+        </LI>
+        <LI>
+          <H5 attrH5={{ className: 'mb-0' }}>{follower}</H5>
+          <span className='f-light' style={{ color: 'orange' }}>Ph#</span>
+        </LI>
+        <LI>
+          <H5 attrH5={{ className: 'mb-0' }}>{following}</H5>
+          <span className='f-light' style={{ color: 'orange' }}>Invested</span>
+        </LI>
+      </UL>
+      <UL attrUL={{ className: 'social-follow' }}>
+        <LI>
+          <H5 attrH5={{ className: 'mb-0' }}>{email}</H5>
+          <span className='f-light' style={{ color: 'orange' }}>Email</span>
+        </LI>
+        <LI>
+          <H5 attrH5={{ className: 'mb-0' }}>{PackageName}</H5>
+          <span className='f-light' style={{ color: 'orange' }}>Plan</span>
+        </LI>
+        <LI>
+          <H5 attrH5={{ className: 'mb-0' }}>{MemberType}</H5>
+          <span className='f-light' style={{ color: 'orange' }}>Member Type</span>
+        </LI>
+      </UL>
     </>
   );
 };
+
 

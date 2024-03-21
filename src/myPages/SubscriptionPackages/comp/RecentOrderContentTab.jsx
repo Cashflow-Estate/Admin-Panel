@@ -4,7 +4,7 @@ import { Table, Col, Card, CardBody, Pagination, PaginationItem, PaginationLink 
 
 const RecentOrderContentTab = ({ RecentOrdersNav, isActive, show }) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
+  const itemsPerPage = 5;
   const data = [
     {
       id: "#CFDE-2163",
@@ -213,9 +213,8 @@ const RecentOrderContentTab = ({ RecentOrdersNav, isActive, show }) => {
         </Table>
       </div>
       {/* Pagination */}
-      <Col xl="6" className="d-flex justify-content-end">
-        <Card>
-          <CardBody>
+      <Col xl="12" className="d-flex justify-content-end">
+        
             <Pagination aria-label="Page navigation example" className="pagination-primary">
               <PaginationItem>
                 <PaginationLink previous onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1} />
@@ -231,8 +230,7 @@ const RecentOrderContentTab = ({ RecentOrdersNav, isActive, show }) => {
                 <PaginationLink next onClick={() => paginate(currentPage + 1)} disabled={currentPage === Math.ceil(data.length / itemsPerPage)} />
               </PaginationItem>
             </Pagination>
-          </CardBody>
-        </Card>
+        
       </Col>
     </Fragment>
   );
