@@ -5,7 +5,7 @@ import iii from "../../../src/assets/cashflowimg/apartments/a1.png";
 import { useNavigate } from "react-router";
 import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 
-const UserDeals = () => {
+const UserDeals = ({heading}) => {
   const [modal, setModal] = useState(false);
   const [selectedDeal, setSelectedDeal] = useState(null);
 
@@ -158,7 +158,7 @@ const UserDeals = () => {
       <div className="container-fluid">
         <div className="row">
           <div className="col-md-12">
-            <h3>Deal Purchased</h3>
+            <h3>{heading}</h3>
           </div>
         </div>
       </div>
