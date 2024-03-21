@@ -100,7 +100,6 @@ export const MENUITEMS = [
         type: "link",
         path: `/upcoming-call`,
       },
-   
       {
         path: `/crm`,
         type: "link",
@@ -110,7 +109,7 @@ export const MENUITEMS = [
       {
         title: "Transactions",
         icon: "icons",
-     
+
         type: "sub",
         children: [
           {

@@ -53,7 +53,7 @@ const FeedbackDrawer = ({ isOpen, onClose, value, onChange, onSubmit }) => {
         <Button variant="primary" onClick={handleSubmit}>
           Submit
         </Button>
-        <Button variant="secondary" onClick={onClose}>
+        <Button variant="warning" onClick={onClose}>
           Close
         </Button>
       </Modal.Footer>

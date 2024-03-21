@@ -132,7 +132,7 @@ const CreateDeal = () => {
                           {Add}
                         </Btn>
 
-                        <Btn attrBtn={{ color: "danger" }}>{Cancel}</Btn>
+                        <Btn attrBtn={{ color: "warning" }}>{Cancel}</Btn>
                       </div>
                     </Col>
                   </Row>
@@ -209,7 +209,7 @@ const CreateDeal = () => {
                               Send
                             </Btn>
                             <Btn
-                              attrBtn={{ color: "danger" }}
+                              attrBtn={{ color: "warning" }}
                               onClick={handleCancel}
                             >
                               Cancel
