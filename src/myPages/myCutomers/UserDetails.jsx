@@ -53,6 +53,10 @@ const UserDetails = () => {
         <Col style={{ paddingTop: "20px" }}>
           <UserDeals heading={"Inquiry, no purchase."} />
         </Col>
+        <Col style={{ paddingTop: "20px" }}>
+        <ViewTransactions showBreadcrumbs={false} />{" "}
+
+        </Col>
       </div>
       <div style={{ position: "fixed", right: "25px", bottom: "30px" }}>
         <a
@@ -64,7 +68,6 @@ const UserDetails = () => {
           <img height={50} width={50} src={whatsappIcon} alt="WhatsApp Icon" />
         </a>
       </div>
-      <ViewTransactions showBreadcrumbs={false} />{" "}
     </Fragment>
   );
 };
