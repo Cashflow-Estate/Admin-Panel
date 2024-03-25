@@ -1,7 +1,9 @@
 import React, { Fragment, useState } from "react";
+import { useGenerateWhatsappUrl } from '../../myHooks';
 import { Card, CardBody, CardHeader, Col, Row } from "reactstrap";
 import ViewTransactions from "../SubscriptionPackages/ViewTransactions";
 import { Breadcrumbs, H5, H6, Image, LI, UL } from "../../AbstractElements";
+import whatsappIcon from "../../assets/CashflowLogos/whatsappp.jpeg"
 import {
   BOD,
   ContactUs,
@@ -16,6 +18,12 @@ import SvgIcon from "../../Components/Common/Component/SvgIcon";
 import UserDeals from "./UserDeals";
 
 const UserDetails = () => {
+  const [whatsAppUrl, setWhatsAppUrl] = useGenerateWhatsappUrl();
+  
+  const handleClick = () => {
+    setWhatsAppUrl("+923079551467");
+  };
+
   const user = {
     id: 1,
     avatar: "dashboard-5/profile.png",
@@ -28,27 +36,41 @@ const UserDetails = () => {
     PackageName: "Pro",
     MemberType: "Customer",
   };
+  
   return (
     <Fragment>
-      <Breadcrumbs mainTitle="User Detail" parent="User" title="#1121" />
-      <Col>
-        <UserProfile user={user} />
-      </Col>
-      <Col>
-        <UserDeals heading={"Featured Deals"} />
-      </Col>
-      <Col style={{ paddingTop: "20px" }}>
-        <UserDeals heading={"Deal Purchased"} />
-      </Col>
-      <Col style={{ paddingTop: "20px" }}>
-        <UserDeals heading={"Inquiry, no purchase."} />
-      </Col>
+      <div style={{ paddingRight: "60px" }}>
+        <Breadcrumbs mainTitle="User Detail" parent="User" title="#1121" />
+        <Col>
+          <UserProfile user={user} />
+        </Col>
+        <Col>
+          <UserDeals heading={"Featured Deals"} />
+        </Col>
+        <Col style={{ paddingTop: "20px" }}>
+          <UserDeals heading={"Deal Purchased"} />
+        </Col>
+        <Col style={{ paddingTop: "20px" }}>
+          <UserDeals heading={"Inquiry, no purchase."} />
+        </Col>
+      </div>
+      <div style={{ position: "fixed", right: "20px", bottom: "20px" }}>
+        <a
+          // aria-disabled={!isPhoneValid}
+          href={whatsAppUrl}
+          rel='noopener noreferrer'
+          onClick={handleClick}
+        >
+          <img height={50} width={50} src={whatsappIcon} alt="WhatsApp Icon" />
+        </a>
+      </div>
       {/* <ViewTransactions showBreadcrumbs={false} />{" "} */}
     </Fragment>
   );
 };
 
 export default UserDetails;
+
 
 const UserProfile = ({ user }) => {
   return (
