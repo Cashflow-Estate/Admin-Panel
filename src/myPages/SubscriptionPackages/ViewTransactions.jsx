@@ -19,7 +19,7 @@ const ViewTransactions = ({ showBreadcrumbs }) => { // Receive showBreadcrumbs p
 
   return (
     <Fragment>
-      {showBreadcrumbs && <Breadcrumbs mainTitle="Transactions" parent="All" title="Transaction" />} {/* Conditionally render breadcrumbs */}
+      <Breadcrumbs mainTitle="Transactions" parent="All" title="Transaction" />
       <Card className="recent-order">
         <CardHeader className="card-no-border">
           <div className="header-top">

@@ -4,6 +4,7 @@ import { Button } from "reactstrap";
 import iii from "../../../src/assets/cashflowimg/apartments/a1.png";
 import { useNavigate } from "react-router";
 import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import { Breadcrumbs } from "../../AbstractElements";
 
 const UserDeals = ({heading}) => {
   const [modal, setModal] = useState(false);
@@ -155,13 +156,9 @@ const UserDeals = ({heading}) => {
 
   return (
     <Fragment>
-      <div className="container-fluid">
-        <div className="row">
-          <div className="col-md-12">
-            <h3>{heading}</h3>
-          </div>
-        </div>
-      </div>
+      <Breadcrumbs mainTitle={heading} parent="Deals" title={heading} />
+
+      
       <div className="table-responsive support-table mt-2">
         <DataTable
           columns={customColumns}

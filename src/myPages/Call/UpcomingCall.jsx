@@ -30,8 +30,9 @@ const UpcomingCall = () => {
     );
   };
 
-  export default UpcomingCall;
 
+  
+  export default UpcomingCall;
   const ScheduleListData = [
     {
       title: "Web Design",
