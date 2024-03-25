@@ -45,8 +45,10 @@ const UserDetails = () => {
     if (activeTab !== tab) setActiveTab(tab);
   };
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [dropdownOpenTrans, setDropdownOpenTrans] = useState(false);
 
   const toggleDropdown = () => setDropdownOpen(prevState => !prevState);
+  const toggleDropdownTrans = () => setDropdownOpenTrans(prevState => !prevState);
 
 
   const handleClick = () => {
@@ -181,22 +183,31 @@ const UserDetails = () => {
                   </Dropdown>
                 </NavItem>
                 <NavItem>
-                  <NavLink
-                    className={classnames({ "text-white": activeTab !== "5" })}
-                    style={{
-                      backgroundColor: activeTab === "5" ? "green" : "black",
-                      color: activeTab === "5" ? "white" : "white",
-                      borderRadius: "15px",
-                      padding: "10px",
-                      marginRight: "5px",
+                <Dropdown isOpen={dropdownOpenTrans} toggle={toggleDropdownTrans}>
+                    <DropdownToggle
+                      className="nav-link"
+                      style={{
+                        backgroundColor: activeTab === "5" ? "green" : "black",
+                        color: activeTab === "5" ? "white" : "white",
+                        borderRadius: "15px",
+                        padding: "10px",
+                      }}
+                      caret
+                    >
+                      Transactions
+                    </DropdownToggle>
+                    <DropdownMenu >
+                      <DropdownItem onClick={() => toggleTab("5")}>
+                        Deals Transactions
+                      </DropdownItem>
+                      <DropdownItem divider />
+                      <DropdownItem onClick={() => toggleTab("10")}>
+                      Subscription Transactions
 
-                    }}
-                    onClick={() => {
-                      toggleTab("5");
-                    }}
-                  >
-                    View Transactions
-                  </NavLink>
+                      </DropdownItem>
+                   
+                    </DropdownMenu>
+                  </Dropdown>
                 </NavItem>
                 <NavItem>
                   <NavLink
