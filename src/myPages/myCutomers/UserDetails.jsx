@@ -39,7 +39,7 @@ const UserDetails = () => {
   
   return (
     <Fragment>
-      <div style={{ paddingRight: "60px" }}>
+      <div >
         <Breadcrumbs mainTitle="User Detail" parent="User" title="#1121" />
         <Col>
           <UserProfile user={user} />
@@ -54,7 +54,7 @@ const UserDetails = () => {
           <UserDeals heading={"Inquiry, no purchase."} />
         </Col>
       </div>
-      <div style={{ position: "fixed", right: "20px", bottom: "20px" }}>
+      <div style={{ position: "fixed", right: "25px", bottom: "30px" }}>
         <a
           // aria-disabled={!isPhoneValid}
           href={whatsAppUrl}
