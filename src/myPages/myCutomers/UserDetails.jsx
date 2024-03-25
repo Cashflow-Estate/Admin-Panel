@@ -64,7 +64,7 @@ const UserDetails = () => {
           <img height={50} width={50} src={whatsappIcon} alt="WhatsApp Icon" />
         </a>
       </div>
-      {/* <ViewTransactions showBreadcrumbs={false} />{" "} */}
+      <ViewTransactions showBreadcrumbs={false} />{" "}
     </Fragment>
   );
 };
