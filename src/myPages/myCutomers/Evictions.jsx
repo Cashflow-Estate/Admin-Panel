@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, CardBody, CardTitle, CardText, Container } from 'reactstrap';
 import { Breadcrumbs } from '../../AbstractElements';
+import { Link } from 'react-router-dom';
 
 // Dummy complaint data
 const complaints = [
@@ -23,7 +24,9 @@ const complaints = [
 const ComplaintCard = ({ dealTitle, dealComplaint }) => (
   <Card className="mb-3">
     <CardBody>
-      <CardTitle tag="h5">{dealTitle}</CardTitle>
+      <CardTitle tag="h5">
+        <Link to="/deals/1">{dealTitle}</Link>
+        </CardTitle>
       <CardText>{dealComplaint}</CardText>
     </CardBody>
   </Card>

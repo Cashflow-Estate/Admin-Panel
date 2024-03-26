@@ -205,7 +205,8 @@
                   <td className="f-w-12">{item.type}</td>
                   <td className="f-w-12">{item.status}</td>
                   <td className="view-more">
-                    <i className="icon-more-alt"></i>
+                  <i class="icofont icofont-info-circle" style={{fontSize: "20px",height: "30px"}}></i>
+
                   </td>
                 </tr>
               ))}
@@ -213,7 +214,7 @@
           </Table>
         </div>
         {/* Pagination */}
-        <Col xl="12" className="d-flex justify-content-end">
+        <Col xl="12" className="d-flex justify-content-end mt-4">
           
               <Pagination aria-label="Page navigation example" className="pagination-primary">
                 <PaginationItem>

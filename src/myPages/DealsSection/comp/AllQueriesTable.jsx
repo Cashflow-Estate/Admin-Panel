@@ -35,23 +35,23 @@ const AllQueriesTable = () => {
       time: "07:40 am",
     },
     {
-      id: 1,
+      id: 2,
       name:"Abid",
       image: "deal1.jpg",
       title: "Deal 1",
       status: "Active",
       queries: <i className="fa fa-rss-square"></i>,
-           time: "07:40 am",
+           time: "07:49 am",
 
     },
     {
-      id: 1,
-      name:"Abid",
+      id: 3,
+      name:"Ali",
       image: "deal1.jpg",
       title: "Deal 1",
       status: "Active",
       queries: <i className="fa fa-rss-square"></i>,
-           time: "07:40 am",
+           time: "08:40 am",
 
     },
   
@@ -145,13 +145,11 @@ const AllQueriesTable = () => {
           }}
         >
         
-          <Button
-            color=""
-            onClick={() => handleViewDetails(row)}
-            style={{ padding: "0.25rem" }}
-          >
-            <i className="icon-more-alt"></i>
-          </Button>
+        <Button color={""} onClick={() => handleViewDetails(row)} style={{ padding: "0.6rem", minWidth: "40px" }}>
+
+<i class="icofont icofont-info-circle" style={{fontSize: "20px",height: "30px"}}></i>
+
+      </Button>
         </div>
       ),
       button: true,

@@ -31,16 +31,16 @@ const RecentDealsTransaction = ({ show, isActive, RecentOrdersNav }) => {
         <Table>
           <thead>
             <tr>
-              <th>Date</th>
               <th>Deal</th>
+              <th>Date</th>
               <th>Amount</th>
             </tr>
           </thead>
           <tbody>
             {currentItems.map((transaction) => (
               <tr key={transaction.id}>
-                <td>{transaction.date}</td>
                 <td>{transaction.deal}</td>
+                <td>{transaction.date}</td>
                 <td>{transaction.amount}</td>
               </tr>
             ))}

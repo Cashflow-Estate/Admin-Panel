@@ -6,7 +6,7 @@ import { useNavigate } from "react-router";
 import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { Breadcrumbs } from "../../AbstractElements";
 
-const UserDeals = ({heading}) => {
+const UserDeals = ({ heading }) => {
   const [modal, setModal] = useState(false);
   const [selectedDeal, setSelectedDeal] = useState(null);
 
@@ -29,7 +29,7 @@ const UserDeals = ({heading}) => {
       id: 1,
       title: "Deal 1",
       image: "deal1.jpg",
-    //   status: "Active",
+      //   status: "Active",
       queries: <i className="fa fa-rss-square"></i>,
       address: "123 Main St, City, Country",
     },
@@ -37,7 +37,7 @@ const UserDeals = ({heading}) => {
       id: 2,
       title: "Deal 2",
       image: "deal2.jpg",
-    //   status: "Inactive",
+      //   status: "Inactive",
       queries: <i className="fa fa-rss-square"></i>,
       address: "456 Elm St, City, Country",
     },
@@ -52,8 +52,6 @@ const UserDeals = ({heading}) => {
   const handleEdit = (row) => {
     history(`/deals/create`);
   };
-
-  
 
   const handleViewQueries = (deal) => {
     history("/customer/queries");
@@ -104,11 +102,8 @@ const UserDeals = ({heading}) => {
             justifyContent: "flex-start",
           }}
         >
-          <Button
-            color=""
-            onClick={() => handleViewQueries(row)}
-          >
-            <i style={{fontSize:"20px"}} className="icofont icofont-eye"></i>
+          <Button color="" onClick={() => handleViewQueries(row)}>
+            <i style={{ fontSize: "20px" }} className="icofont icofont-eye"></i>
           </Button>
         </div>
       ),
@@ -125,26 +120,15 @@ const UserDeals = ({heading}) => {
             justifyContent: "flex-start",
           }}
         >
-          {/* <Button
-            color=""
-            onClick={() => handleEdit(row)}
-            style={{ padding: "0.25rem", marginRight: "0.5rem" }}
-          >
-            <i className="icon-pencil"></i>
-          </Button>
           <Button
-            color=""
-            onClick={() => handleDelete(row)}
-            style={{ padding: "0.25rem", marginRight: "0.5rem" }}
-          >
-            <i className="icon-trash"></i>
-          </Button> */}
-          <Button
-            color=""
+            color={""}
             onClick={() => handleViewDetails(row)}
-            style={{ padding: "0.25rem" }}
+            style={{ padding: "0.6rem", minWidth: "40px" }}
           >
-            <i className="icon-more-alt"></i>
+            <i
+              class="icofont icofont-info-circle"
+              style={{ fontSize: "20px", height: "30px" }}
+            ></i>
           </Button>
         </div>
       ),
@@ -158,7 +142,6 @@ const UserDeals = ({heading}) => {
     <Fragment>
       <Breadcrumbs mainTitle={heading} parent="Deals" title={heading} />
 
-      
       <div className="table-responsive support-table mt-2">
         <DataTable
           columns={customColumns}

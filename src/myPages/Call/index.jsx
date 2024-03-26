@@ -70,13 +70,14 @@ const Call = () => {
             </Row>
             <Row>
               
-              <Col md="4">
+            <Col md="4">
                 <FormGroup>
-                  <H6 for="date">Date</H6>
-                  <DatePicker
-                    selected={date}
-                    onChange={date => setDate(date)}
-                    dateFormat="MM/dd/yyyy"
+                  <H6 for="time">Time</H6>
+                  <Input
+                    type="date"
+                    id="date"
+                    value={date}
+                    onChange={(e) => setDate(e.target.value)}
                   />
                 </FormGroup>
               </Col>
