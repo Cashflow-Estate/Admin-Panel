@@ -165,7 +165,8 @@ const AllQueriesTable = () => {
       <div className="container-fluid">
         <div className="row">
           <div className="col-md-12">
-            <h3>View Deals</h3>
+          <h3>View Inquiries</h3>
+
           </div>
         </div>
       </div>

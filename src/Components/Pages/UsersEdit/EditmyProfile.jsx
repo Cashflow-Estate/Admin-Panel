@@ -109,7 +109,7 @@ const EditMyProfile = () => {
                   <Link>
                     <H5 attrH5={{ className: "mb-1" }}>MARK JECNO</H5>
                   </Link>
-                  <P>Customer</P>
+                  <P>Admin</P>
                 </div>
               </div>
             </div>

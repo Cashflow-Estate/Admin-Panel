@@ -8,7 +8,6 @@ import ChevronRight from './ChevronRight ';
 import ChevronLeft from './ChevronLeft ';
 
 const DealCategory = ({ smallImages }) => {
-  console.log("🚀 ~ DealCategory ~ smallImages:", smallImages)
 
   return (
     <div>

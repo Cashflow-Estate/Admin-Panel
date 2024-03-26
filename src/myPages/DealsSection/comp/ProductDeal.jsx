@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 const ProductDeal = (Props) => {
     const { name, price, id,image } = Props;
-    console.log("🚀 ~ ProductDeal ~ Props:", Props)
   
     
   

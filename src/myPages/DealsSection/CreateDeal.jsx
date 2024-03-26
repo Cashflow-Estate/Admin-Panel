@@ -27,9 +27,7 @@ import Select from "react-select";
 
 const CreateDeal = () => {
   const [client, setClient] = useState(false);
-  console.log("🚀 ~ CreateDeal ~ client:", client);
   const [formSubmitted, setFormSubmitted] = useState(false); // State to track form submission
-  console.log("🚀 ~ CreateDeal ~ formSubmitted:", formSubmitted);
 
   const {
     register,

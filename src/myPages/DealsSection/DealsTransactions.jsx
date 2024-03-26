@@ -3,11 +3,10 @@ import { Card, CardBody, CardHeader, Nav, Col } from "reactstrap";
 import { Image, H5, Breadcrumbs } from "../../AbstractElements";
 import { DailyDropdown, RecentOrdersTitle } from "../../Constant";
 import useShowClass from "../../Hooks/useShowClass";
-import CommonDropDown from "../myBanners/comp/CommonDropDown";
-import RecentOrderContentTab from "./comp/RecentOrderContentTab";
-import PaginationWithIconsClass from "./comp/PaginationWithIcons";
 
-const ViewTransactions = ({ showBreadcrumbs }) => { // Receive showBreadcrumbs prop
+import RecentDealsTransaction from "./comp/RecentDealsTransaction";
+
+const  DealsTransactions= () => { // Receive showBreadcrumbs prop
   const [isActive, setIsActive] = useState("0");
   const [show, setShow] = useShowClass("show");
   const RecentOrdersNav = ["1", "2", "3", "4", "5"];
@@ -19,7 +18,9 @@ const ViewTransactions = ({ showBreadcrumbs }) => { // Receive showBreadcrumbs p
 
   return (
     <Fragment>
-      <Breadcrumbs mainTitle="Transactions" parent="Subscription" title="Transaction" />
+      <Breadcrumbs mainTitle="Transactions" parent="Deals   " title="Transaction" />
+
+     
       <Card className="recent-order">
         <CardHeader className="card-no-border">
           <div className="header-top">
@@ -28,7 +29,7 @@ const ViewTransactions = ({ showBreadcrumbs }) => { // Receive showBreadcrumbs p
         </CardHeader>
         <CardBody className="pt-0">
           <div className="recent-sliders">
-            <RecentOrderContentTab
+            <RecentDealsTransaction
               show={show}
               isActive={isActive}
               RecentOrdersNav={RecentOrdersNav}
@@ -40,4 +41,4 @@ const ViewTransactions = ({ showBreadcrumbs }) => { // Receive showBreadcrumbs p
   );
 };
 
-export default ViewTransactions;
+export default DealsTransactions ;

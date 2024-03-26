@@ -18,14 +18,12 @@ import { Breadcrumbs, H3 } from "../../AbstractElements";
 
 const AllCustomers = () => {
   const [filter, setFilter] = useState("All");
-  console.log("🚀 ~ AllCustomers ~ filter:", filter);
   const [searchTerm, setSearchTerm] = useState("");
-  const [filterOpen, setFilterOpen] = useState(false); 
+  const [filterOpen, setFilterOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
-  const [userDetailsModalOpen, setUserDetailsModalOpen] = useState(false); 
-  const [selectedUserDetails, setSelectedUserDetails] = useState(null); 
-  console.log("🚀 ~ AllCustomers ~ selectedUserDetails:", selectedUserDetails)
+  const [userDetailsModalOpen, setUserDetailsModalOpen] = useState(false);
+  const [selectedUserDetails, setSelectedUserDetails] = useState(null);
 
   const FilterIcon = () => (
     <span>
@@ -72,7 +70,7 @@ const AllCustomers = () => {
 
   const handleFilterChange = (filterValue) => {
     setFilter(filterValue);
-    setFilterOpen(false); 
+    setFilterOpen(false);
   };
 
   const handleSearch = (event) => {
@@ -134,7 +132,7 @@ const AllCustomers = () => {
           <Button
             color={row.blocked ? "danger" : "success"}
             onClick={() => handleToggleModal(row)}
-            style={{ padding: "0.5rem", minWidth: "40px" }} 
+            style={{ padding: "0.5rem", minWidth: "40px" }}
           >
             {row.blocked ? (
               <i className="icon-unlock"></i>
@@ -146,37 +144,23 @@ const AllCustomers = () => {
       ),
       center: true,
     },
+
     {
       name: "Action",
       cell: (row) => (
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Button
-            color={""}
-            onClick={() => handleViewDetails(row)}
-            style={{ margin: "0 5px" }}
-          >
-            <i className="icon-more-alt"></i>
-          </Button>
-        </div>
+        <Button color={""} onClick={() => handleViewDetails(row)}>
+          <i className="icon-more-alt"></i>
+        </Button>
       ),
       button: true,
-      width: "20%",
       center: true,
     },
   ];
 
   const history = useNavigate();
   const handleViewDetails = (user) => {
-    console.log("🚀 ~ handleViewDetails ~ user:", user)
-    history(`/user-details/${user.id}`); // Navigate to user details page
+    history(`/user-details/${user.id}`); 
   };
-
 
   return (
     <Fragment>
@@ -255,6 +239,7 @@ const AllCustomers = () => {
           center={true}
           pagination
           className="p-2"
+          responsive={true} 
         />
       </div>
       <Modal isOpen={modalOpen} toggle={handleToggleModal}>
@@ -296,7 +281,6 @@ const AllCustomers = () => {
           <p>PackageName: {selectedUserDetails?.packageName}</p>
           <p>Position: {selectedUserDetails?.position}</p>
           <p>Investment: {selectedUserDetails?.investment}</p>
-         
         </ModalBody>
         <ModalFooter></ModalFooter>
       </Modal>

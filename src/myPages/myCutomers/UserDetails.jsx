@@ -36,6 +36,8 @@ import UpcomingCall from "../Call/UpcomingCall";
 import Evictions from "./Evictions";
 import MeetRequests from "../Call/MeetRequest";
 import History from "../Call/History";
+import RecentDealsTransaction from "../DealsSection/comp/RecentDealsTransaction";
+import DealsTransactions from "../DealsSection/DealsTransactions";
 
 const UserDetails = () => {
   const [whatsAppUrl, setWhatsAppUrl] = useGenerateWhatsappUrl();
@@ -52,7 +54,7 @@ const UserDetails = () => {
 
 
   const handleClick = () => {
-    setWhatsAppUrl("+923079551467");
+    setWhatsAppUrl("+923026469153");
   };
 
   const user = {
@@ -197,11 +199,11 @@ const UserDetails = () => {
                       Transactions
                     </DropdownToggle>
                     <DropdownMenu >
-                      <DropdownItem onClick={() => toggleTab("5")}>
+                      <DropdownItem onClick={() => toggleTab("10")}>
                         Deals Transactions
                       </DropdownItem>
                       <DropdownItem divider />
-                      <DropdownItem onClick={() => toggleTab("10")}>
+                      <DropdownItem onClick={() => toggleTab("5")}>
                       Subscription Transactions
 
                       </DropdownItem>
@@ -251,6 +253,9 @@ const UserDetails = () => {
                 </TabPane>
                 <TabPane tabId="9">
                 <History/>
+                </TabPane>
+                <TabPane tabId="10">
+                <DealsTransactions />
                 </TabPane>
                 <TabPane tabId="7">
                <Evictions/>

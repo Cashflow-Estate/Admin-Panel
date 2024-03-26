@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 
 const CategoryDealRow = (Props) => {
-console.log("🚀 ~ CategoryDealRow ~ Props:", Props)
 
 
 

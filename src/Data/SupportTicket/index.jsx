@@ -37,7 +37,7 @@ export const supportData = [
       </div>
     ),
     extn: 5421,
-    email: 't.nixon@datatables.net',
+    email: 'twst@gmail.com',
     packageName: 'premium',
     blockUser: false,
     id:"1"
@@ -52,7 +52,7 @@ export const supportData = [
       </Media>
     ),
     position: 'System Architect',
-    client: "Members",
+    client: "Customers",
     investment: '$320,800',
     location: 'Edinburgh',
     skill: (
@@ -106,444 +106,444 @@ export const supportData = [
       </Media>
     ),
     position: 'Senior Developer',
-    client: "Customers",
-    investment: '$100,000',
-    location: 'New York',
-    skill: (
-      <div className='progress-showcase' style={{ width: '86px' }}>
-        <div className='progress sm-progress-bar'>
-          <div className='progress-bar custom-progress-width bg-secondary' role='progressbar' style={{ width: '70%' }}></div>
-        </div>
-      </div>
-    ),
-    extn: 1234,
-    email: 'john.doe@example.com',
-    packageName: 'premium',
-    blockUser: false,
-    id: "1"
-  },
-  {
-    image: (
-      <Media className='justify-content-start'>
-        <Image attrImage={{ className: 'rounded-circle img-30 me-3', src: `${user2}`, alt: 'Generic placeholder image' }} />
-        <Media body className='align-self-center'>
-          <div>Jane Smith</div>
-        </Media>
-      </Media>
-    ),
-    position: 'Marketing Manager',
-    client: "Customers",
-    investment: '$75,000',
-    location: 'Los Angeles',
-    skill: (
-      <div className='progress-showcase' style={{ width: '86px' }}>
-        <div className='progress sm-progress-bar'>
-          <div className='progress-bar custom-progress-width bg-secondary' role='progressbar' style={{ width: '60%' }}></div>
-        </div>
-      </div>
-    ),
-    extn: 5678,
-    email: 'jane.smith@example.com',
-    packageName: 'premium',
-    blockUser: false,
-    id: "2"
-  },
-  {
-    image: (
-      <Media className='justify-content-start'>
-        <Image attrImage={{ className: 'rounded-circle img-30 me-3', src: `${user3}`, alt: 'Generic placeholder image' }} />
-        <Media body className='align-self-center'>
-          <div>Tiger Nixon</div>
-        </Media>
-      </Media>
-    ),
-    position: 'Junior Technical Author',
-    client: "Customers",
-    investment: '$86,000',
-    location: 'San Francisco',
-    skill: (
-      <div className='progress-showcase' style={{ width: '86px' }}>
-        <div className='progress sm-progress-bar'>
-          <div className='progress-bar custom-progress-width bg-secondary' role='progressbar' style={{ width: '50%' }}></div>
-        </div>
-      </div>
-    ),
-    extn: 1562,
-    email: 'tiger.nixon@example.com',
-    packageName: 'basic',
-    blockUser: true,
-    id: "3"
-  },
-  {
-    image: (
-      <Media className='justify-content-start'>
-        <Image attrImage={{ className: 'rounded-circle img-30 me-3', src: `${user3}`, alt: 'Generic placeholder image' }} />
-        <Media body className='align-self-center'>
-          <div>John Doe</div>
-        </Media>
-      </Media>
-    ),
-    position: 'Senior Developer',
-    client: "Customers",
-    investment: '$100,000',
-    location: 'New York',
-    skill: (
-      <div className='progress-showcase' style={{ width: '86px' }}>
-        <div className='progress sm-progress-bar'>
-          <div className='progress-bar custom-progress-width bg-secondary' role='progressbar' style={{ width: '70%' }}></div>
-        </div>
-      </div>
-    ),
-    extn: 1234,
-    email: 'john.doe@example.com',
-    packageName: 'premium',
-    blockUser: false,
-    id: "1"
-  },
-  {
-    image: (
-      <Media className='justify-content-start'>
-        <Image attrImage={{ className: 'rounded-circle img-30 me-3', src: `${user2}`, alt: 'Generic placeholder image' }} />
-        <Media body className='align-self-center'>
-          <div>Jane Smith</div>
-        </Media>
-      </Media>
-    ),
-    position: 'Marketing Manager',
-    client: "Customers",
-    investment: '$75,000',
-    location: 'Los Angeles',
-    skill: (
-      <div className='progress-showcase' style={{ width: '86px' }}>
-        <div className='progress sm-progress-bar'>
-          <div className='progress-bar custom-progress-width bg-secondary' role='progressbar' style={{ width: '60%' }}></div>
-        </div>
-      </div>
-    ),
-    extn: 5678,
-    email: 'jane.smith@example.com',
-    packageName: 'premium',
-    blockUser: false,
-    id: "2"
-  },
-  {
-    image: (
-      <Media className='justify-content-start'>
-        <Image attrImage={{ className: 'rounded-circle img-30 me-3', src: `${user3}`, alt: 'Generic placeholder image' }} />
-        <Media body className='align-self-center'>
-          <div>Tiger Nixon</div>
-        </Media>
-      </Media>
-    ),
-    position: 'Junior Technical Author',
-    client: "Customers",
-    investment: '$86,000',
-    location: 'San Francisco',
-    skill: (
-      <div className='progress-showcase' style={{ width: '86px' }}>
-        <div className='progress sm-progress-bar'>
-          <div className='progress-bar custom-progress-width bg-secondary' role='progressbar' style={{ width: '50%' }}></div>
-        </div>
-      </div>
-    ),
-    extn: 1562,
-    email: 'tiger.nixon@example.com',
-    packageName: 'basic',
-    blockUser: true,
-    id: "3"
-  },
-  {
-    image: (
-      <Media className='justify-content-start'>
-        <Image attrImage={{ className: 'rounded-circle img-30 me-3', src: `${user3}`, alt: 'Generic placeholder image' }} />
-        <Media body className='align-self-center'>
-          <div>John Doe</div>
-        </Media>
-      </Media>
-    ),
-    position: 'Senior Developer',
-    client: "Customers",
-    investment: '$100,000',
-    location: 'New York',
-    skill: (
-      <div className='progress-showcase' style={{ width: '86px' }}>
-        <div className='progress sm-progress-bar'>
-          <div className='progress-bar custom-progress-width bg-secondary' role='progressbar' style={{ width: '70%' }}></div>
-        </div>
-      </div>
-    ),
-    extn: 1234,
-    email: 'john.doe@example.com',
-    packageName: 'premium',
-    blockUser: false,
-    id: "1"
-  },
-  {
-    image: (
-      <Media className='justify-content-start'>
-        <Image attrImage={{ className: 'rounded-circle img-30 me-3', src: `${user2}`, alt: 'Generic placeholder image' }} />
-        <Media body className='align-self-center'>
-          <div>Jane Smith</div>
-        </Media>
-      </Media>
-    ),
-    position: 'Marketing Manager',
-    client: "Customers",
-    investment: '$75,000',
-    location: 'Los Angeles',
-    skill: (
-      <div className='progress-showcase' style={{ width: '86px' }}>
-        <div className='progress sm-progress-bar'>
-          <div className='progress-bar custom-progress-width bg-secondary' role='progressbar' style={{ width: '60%' }}></div>
-        </div>
-      </div>
-    ),
-    extn: 5678,
-    email: 'jane.smith@example.com',
-    packageName: 'premium',
-    blockUser: false,
-    id: "2"
-  },
-  {
-    image: (
-      <Media className='justify-content-start'>
-        <Image attrImage={{ className: 'rounded-circle img-30 me-3', src: `${user3}`, alt: 'Generic placeholder image' }} />
-        <Media body className='align-self-center'>
-          <div>Tiger Nixon</div>
-        </Media>
-      </Media>
-    ),
-    position: 'Junior Technical Author',
-    client: "Customers",
-    investment: '$86,000',
-    location: 'San Francisco',
-    skill: (
-      <div className='progress-showcase' style={{ width: '86px' }}>
-        <div className='progress sm-progress-bar'>
-          <div className='progress-bar custom-progress-width bg-secondary' role='progressbar' style={{ width: '50%' }}></div>
-        </div>
-      </div>
-    ),
-    extn: 1562,
-    email: 'tiger.nixon@example.com',
-    packageName: 'basic',
-    blockUser: true,
-    id: "3"
-  },
-  {
-    image: (
-      <Media className='justify-content-start'>
-        <Image attrImage={{ className: 'rounded-circle img-30 me-3', src: `${user3}`, alt: 'Generic placeholder image' }} />
-        <Media body className='align-self-center'>
-          <div>Tiger Nixon</div>
-        </Media>
-      </Media>
-    ),
-    position: 'Junior Technical Author',
-    client: "Customers",
-    investment: '$86,000',
-    location: 'San Francisco',
-    skill: (
-      <div className='progress-showcase' style={{ width: '86px' }}>
-        <div className='progress sm-progress-bar'>
-          <div className='progress-bar custom-progress-width bg-secondary' role='progressbar' style={{ width: '50%' }}></div>
-        </div>
-      </div>
-    ),
-    extn: 1562,
-    email: 'a.cox@datatables.net',
-    packageName: 'basic',
-    blockUser: true,
-    id:"4"
-
-  },
-    {
-      image: (
-        <Media className='justify-content-start'>
-          <Image attrImage={{ className: 'rounded-circle img-30 me-3', src: `${user3}`, alt: 'Generic placeholder image' }} />
-          <Media body className='align-self-center'>
-            <div>Tiger Nixon</div>
-          </Media>
-        </Media>
-      ),
-      position: 'Junior Technical Author',
-      client: "Customers",
-      investment: '$86,000',
-      location: 'San Francisco',
-      skill: (
-        <div className='progress-showcase' style={{ width: '86px' }}>
-          <div className='progress sm-progress-bar'>
-            <div className='progress-bar custom-progress-width bg-secondary' role='progressbar' style={{ width: '50%' }}></div>
-          </div>
-        </div>
-      ),
-      extn: 1562,
-      email: 'a.cox@datatables.net',
-      packageName: 'basic',
-      blockUser: true,
-    },
-  {
-    image: (
-      <Media className='justify-content-start'>
-        <Image attrImage={{ className: 'rounded-circle img-30 me-3', src: `${user4}`, alt: 'Generic placeholder image' }} />
-        <Media body className='align-self-center'>
-          <div>Tiger Nixon</div>
-        </Media>
-      </Media>
-    ),
-    position: 'Software Engineer',
     client: "Free",
-    investment: '$132,000',
-    location: 'London',
-    skill: (
-      <div className='progress-showcase' style={{ width: '86px' }}>
-        <div className='progress sm-progress-bar'>
-          <div className='progress-bar custom-progress-width bg-success' style={{ width: '60%' }} role='progressbar'></div>
-        </div>
-      </div>
-    ),
-    extn: 2558,
-    email: 'b.greer@datatables.net',
-    packageName: 'premium',
-    blockUser: false,
-    id:"5"
-
-  },
-  {
-    image: (
-      <Media className='justify-content-start'>
-        <Image attrImage={{ className: 'rounded-circle img-30 me-3', src: `${user5}`, alt: 'Generic placeholder image' }} />
-        <Media body className='align-self-center'>
-          <div>Tiger Nixon</div>
-        </Media>
-      </Media>
-    ),
-    position: 'Integration Specialist',
-    client: "Members",
-    investment: '$372,000',
+    investment: '$100,000',
     location: 'New York',
     skill: (
       <div className='progress-showcase' style={{ width: '86px' }}>
         <div className='progress sm-progress-bar'>
-          <div className='progress-bar custom-progress-width bg-success' role='progressbar' style={{ width: '70%' }}></div>
+          <div className='progress-bar custom-progress-width bg-secondary' role='progressbar' style={{ width: '70%' }}></div>
         </div>
       </div>
     ),
-    extn: 4804,
-    email: 'b.williamson@datatables.net',
-    packageName: 'basic',
-    blockUser: true,
-    id:"6"
-
-  },
-  {
-    image: (
-      <Media className='justify-content-start'>
-        <Image attrImage={{ className: 'rounded-circle img-30 me-3', src: `${user6}`, alt: 'Generic placeholder image' }} />
-        <Media body className='align-self-center'>
-          <div>Tiger Nixon</div>
-        </Media>
-      </Media>
-    ),
-    position: 'Pre-Sales Support',
-    client: "Free",
-    investment: '$106,450',
-    location: 'New York',
-    skill: (
-      <div className='progress-showcase' style={{ width: '86px' }}>
-        <div className='progress sm-progress-bar'>
-          <div className='progress-bar custom-progress-width bg-success' role='progressbar' style={{ width: '20%' }}></div>
-        </div>
-      </div>
-    ),
-    extn: 8330,
-    email: 'c.vance@datatables.net',
-    packageName: 'basic',
+    extn: 1234,
+    email: 'john.doe@example.com',
+    packageName: 'premium',
     blockUser: false,
-    id:"7"
-
+    id: "1"
   },
-  {
-    image: (
-      <Media className='justify-content-start'>
-        <Image attrImage={{ className: 'rounded-circle img-30 me-3', src: `${user9}`, alt: 'Generic placeholder image' }} />
-        <Media body className='align-self-center'>
-          <div>Tiger Nixon</div>
-        </Media>
-      </Media>
-    ),
-    position: 'Senior Javascript Developer',
-    client: "Members",
-    investment: '$433,060',
-    location: 'San Francisco',
-    skill: (
-      <div className='progress-showcase' style={{ width: '86px' }}>
-        <div className='progress sm-progress-bar'>
-          <div className='progress-bar custom-progress-width bg-secondary' role='progressbar' style={{ width: '60%' }}></div>
-        </div>
-      </div>
-    ),
-    extn: 6224,
-    email: 'c.kelly@datatables.net',
-    packageName: 'premium',
-    blockUser: true,
-    id:"8"
+  // {
+  //   image: (
+  //     <Media className='justify-content-start'>
+  //       <Image attrImage={{ className: 'rounded-circle img-30 me-3', src: `${user2}`, alt: 'Generic placeholder image' }} />
+  //       <Media body className='align-self-center'>
+  //         <div>Jane Smith</div>
+  //       </Media>
+  //     </Media>
+  //   ),
+  //   position: 'Marketing Manager',
+  //   client: "Customers",
+  //   investment: '$75,000',
+  //   location: 'Los Angeles',
+  //   skill: (
+  //     <div className='progress-showcase' style={{ width: '86px' }}>
+  //       <div className='progress sm-progress-bar'>
+  //         <div className='progress-bar custom-progress-width bg-secondary' role='progressbar' style={{ width: '60%' }}></div>
+  //       </div>
+  //     </div>
+  //   ),
+  //   extn: 5678,
+  //   email: 'jane.smith@example.com',
+  //   packageName: 'premium',
+  //   blockUser: false,
+  //   id: "2"
+  // },
+  // {
+  //   image: (
+  //     <Media className='justify-content-start'>
+  //       <Image attrImage={{ className: 'rounded-circle img-30 me-3', src: `${user3}`, alt: 'Generic placeholder image' }} />
+  //       <Media body className='align-self-center'>
+  //         <div>Tiger Nixon</div>
+  //       </Media>
+  //     </Media>
+  //   ),
+  //   position: 'Junior Technical Author',
+  //   client: "Customers",
+  //   investment: '$86,000',
+  //   location: 'San Francisco',
+  //   skill: (
+  //     <div className='progress-showcase' style={{ width: '86px' }}>
+  //       <div className='progress sm-progress-bar'>
+  //         <div className='progress-bar custom-progress-width bg-secondary' role='progressbar' style={{ width: '50%' }}></div>
+  //       </div>
+  //     </div>
+  //   ),
+  //   extn: 1562,
+  //   email: 'tiger.nixon@example.com',
+  //   packageName: 'basic',
+  //   blockUser: true,
+  //   id: "3"
+  // },
+  // {
+  //   image: (
+  //     <Media className='justify-content-start'>
+  //       <Image attrImage={{ className: 'rounded-circle img-30 me-3', src: `${user3}`, alt: 'Generic placeholder image' }} />
+  //       <Media body className='align-self-center'>
+  //         <div>John Doe</div>
+  //       </Media>
+  //     </Media>
+  //   ),
+  //   position: 'Senior Developer',
+  //   client: "Customers",
+  //   investment: '$100,000',
+  //   location: 'New York',
+  //   skill: (
+  //     <div className='progress-showcase' style={{ width: '86px' }}>
+  //       <div className='progress sm-progress-bar'>
+  //         <div className='progress-bar custom-progress-width bg-secondary' role='progressbar' style={{ width: '70%' }}></div>
+  //       </div>
+  //     </div>
+  //   ),
+  //   extn: 1234,
+  //   email: 'john.doe@example.com',
+  //   packageName: 'premium',
+  //   blockUser: false,
+  //   id: "1"
+  // },
+  // {
+  //   image: (
+  //     <Media className='justify-content-start'>
+  //       <Image attrImage={{ className: 'rounded-circle img-30 me-3', src: `${user2}`, alt: 'Generic placeholder image' }} />
+  //       <Media body className='align-self-center'>
+  //         <div>Jane Smith</div>
+  //       </Media>
+  //     </Media>
+  //   ),
+  //   position: 'Marketing Manager',
+  //   client: "Customers",
+  //   investment: '$75,000',
+  //   location: 'Los Angeles',
+  //   skill: (
+  //     <div className='progress-showcase' style={{ width: '86px' }}>
+  //       <div className='progress sm-progress-bar'>
+  //         <div className='progress-bar custom-progress-width bg-secondary' role='progressbar' style={{ width: '60%' }}></div>
+  //       </div>
+  //     </div>
+  //   ),
+  //   extn: 5678,
+  //   email: 'jane.smith@example.com',
+  //   packageName: 'premium',
+  //   blockUser: false,
+  //   id: "2"
+  // },
+  // {
+  //   image: (
+  //     <Media className='justify-content-start'>
+  //       <Image attrImage={{ className: 'rounded-circle img-30 me-3', src: `${user3}`, alt: 'Generic placeholder image' }} />
+  //       <Media body className='align-self-center'>
+  //         <div>Tiger Nixon</div>
+  //       </Media>
+  //     </Media>
+  //   ),
+  //   position: 'Junior Technical Author',
+  //   client: "Customers",
+  //   investment: '$86,000',
+  //   location: 'San Francisco',
+  //   skill: (
+  //     <div className='progress-showcase' style={{ width: '86px' }}>
+  //       <div className='progress sm-progress-bar'>
+  //         <div className='progress-bar custom-progress-width bg-secondary' role='progressbar' style={{ width: '50%' }}></div>
+  //       </div>
+  //     </div>
+  //   ),
+  //   extn: 1562,
+  //   email: 'tiger.nixon@example.com',
+  //   packageName: 'basic',
+  //   blockUser: true,
+  //   id: "3"
+  // },
+  // {
+  //   image: (
+  //     <Media className='justify-content-start'>
+  //       <Image attrImage={{ className: 'rounded-circle img-30 me-3', src: `${user3}`, alt: 'Generic placeholder image' }} />
+  //       <Media body className='align-self-center'>
+  //         <div>John Doe</div>
+  //       </Media>
+  //     </Media>
+  //   ),
+  //   position: 'Senior Developer',
+  //   client: "Customers",
+  //   investment: '$100,000',
+  //   location: 'New York',
+  //   skill: (
+  //     <div className='progress-showcase' style={{ width: '86px' }}>
+  //       <div className='progress sm-progress-bar'>
+  //         <div className='progress-bar custom-progress-width bg-secondary' role='progressbar' style={{ width: '70%' }}></div>
+  //       </div>
+  //     </div>
+  //   ),
+  //   extn: 1234,
+  //   email: 'john.doe@example.com',
+  //   packageName: 'premium',
+  //   blockUser: false,
+  //   id: "1"
+  // },
+  // {
+  //   image: (
+  //     <Media className='justify-content-start'>
+  //       <Image attrImage={{ className: 'rounded-circle img-30 me-3', src: `${user2}`, alt: 'Generic placeholder image' }} />
+  //       <Media body className='align-self-center'>
+  //         <div>Jane Smith</div>
+  //       </Media>
+  //     </Media>
+  //   ),
+  //   position: 'Marketing Manager',
+  //   client: "Customers",
+  //   investment: '$75,000',
+  //   location: 'Los Angeles',
+  //   skill: (
+  //     <div className='progress-showcase' style={{ width: '86px' }}>
+  //       <div className='progress sm-progress-bar'>
+  //         <div className='progress-bar custom-progress-width bg-secondary' role='progressbar' style={{ width: '60%' }}></div>
+  //       </div>
+  //     </div>
+  //   ),
+  //   extn: 5678,
+  //   email: 'jane.smith@example.com',
+  //   packageName: 'premium',
+  //   blockUser: false,
+  //   id: "2"
+  // },
+  // {
+  //   image: (
+  //     <Media className='justify-content-start'>
+  //       <Image attrImage={{ className: 'rounded-circle img-30 me-3', src: `${user3}`, alt: 'Generic placeholder image' }} />
+  //       <Media body className='align-self-center'>
+  //         <div>Tiger Nixon</div>
+  //       </Media>
+  //     </Media>
+  //   ),
+  //   position: 'Junior Technical Author',
+  //   client: "Customers",
+  //   investment: '$86,000',
+  //   location: 'San Francisco',
+  //   skill: (
+  //     <div className='progress-showcase' style={{ width: '86px' }}>
+  //       <div className='progress sm-progress-bar'>
+  //         <div className='progress-bar custom-progress-width bg-secondary' role='progressbar' style={{ width: '50%' }}></div>
+  //       </div>
+  //     </div>
+  //   ),
+  //   extn: 1562,
+  //   email: 'tiger.nixon@example.com',
+  //   packageName: 'basic',
+  //   blockUser: true,
+  //   id: "3"
+  // },
+  // {
+  //   image: (
+  //     <Media className='justify-content-start'>
+  //       <Image attrImage={{ className: 'rounded-circle img-30 me-3', src: `${user3}`, alt: 'Generic placeholder image' }} />
+  //       <Media body className='align-self-center'>
+  //         <div>Tiger Nixon</div>
+  //       </Media>
+  //     </Media>
+  //   ),
+  //   position: 'Junior Technical Author',
+  //   client: "Customers",
+  //   investment: '$86,000',
+  //   location: 'San Francisco',
+  //   skill: (
+  //     <div className='progress-showcase' style={{ width: '86px' }}>
+  //       <div className='progress sm-progress-bar'>
+  //         <div className='progress-bar custom-progress-width bg-secondary' role='progressbar' style={{ width: '50%' }}></div>
+  //       </div>
+  //     </div>
+  //   ),
+  //   extn: 1562,
+  //   email: 'a.cox@datatables.net',
+  //   packageName: 'basic',
+  //   blockUser: true,
+  //   id:"4"
 
-  },
-  {
-    image: (
-      <Media className='justify-content-start'>
-        <Image attrImage={{ className: 'rounded-circle img-30 me-3', src: `${user9}`, alt: 'Generic placeholder image' }} />
-        <Media body className='align-self-center'>
-          <div>Tiger Nixon</div>
-        </Media>
-      </Media>
-    ),
-    position: 'Senior Javascript Developer',
-    client: "Members",
-    investment: '$433,060',
-    location: 'San Francisco',
-    skill: (
-      <div className='progress-showcase' style={{ width: '86px' }}>
-        <div className='progress sm-progress-bar'>
-          <div className='progress-bar custom-progress-width bg-secondary' role='progressbar' style={{ width: '60%' }}></div>
-        </div>
-      </div>
-    ),
-    extn: 6224,
-    email: 'u.kelly@datatables.net',
-    packageName: 'premium',
-    blockUser: true,
-    id:"9"
+  // },
+  //   {
+  //     image: (
+  //       <Media className='justify-content-start'>
+  //         <Image attrImage={{ className: 'rounded-circle img-30 me-3', src: `${user3}`, alt: 'Generic placeholder image' }} />
+  //         <Media body className='align-self-center'>
+  //           <div>Tiger Nixon</div>
+  //         </Media>
+  //       </Media>
+  //     ),
+  //     position: 'Junior Technical Author',
+  //     client: "Customers",
+  //     investment: '$86,000',
+  //     location: 'San Francisco',
+  //     skill: (
+  //       <div className='progress-showcase' style={{ width: '86px' }}>
+  //         <div className='progress sm-progress-bar'>
+  //           <div className='progress-bar custom-progress-width bg-secondary' role='progressbar' style={{ width: '50%' }}></div>
+  //         </div>
+  //       </div>
+  //     ),
+  //     extn: 1562,
+  //     email: 'a.cox@datatables.net',
+  //     packageName: 'basic',
+  //     blockUser: true,
+  //   },
+  // {
+  //   image: (
+  //     <Media className='justify-content-start'>
+  //       <Image attrImage={{ className: 'rounded-circle img-30 me-3', src: `${user4}`, alt: 'Generic placeholder image' }} />
+  //       <Media body className='align-self-center'>
+  //         <div>Tiger Nixon</div>
+  //       </Media>
+  //     </Media>
+  //   ),
+  //   position: 'Software Engineer',
+  //   client: "Free",
+  //   investment: '$132,000',
+  //   location: 'London',
+  //   skill: (
+  //     <div className='progress-showcase' style={{ width: '86px' }}>
+  //       <div className='progress sm-progress-bar'>
+  //         <div className='progress-bar custom-progress-width bg-success' style={{ width: '60%' }} role='progressbar'></div>
+  //       </div>
+  //     </div>
+  //   ),
+  //   extn: 2558,
+  //   email: 'b.greer@datatables.net',
+  //   packageName: 'premium',
+  //   blockUser: false,
+  //   id:"5"
 
-  },
-  {
-    image: (
-      <Media className='justify-content-start'>
-        <Image attrImage={{ className: 'rounded-circle img-30 me-3', src: `${user9}`, alt: 'Generic placeholder image' }} />
-        <Media body className='align-self-center'>
-          <div>Tiger Nixon</div>
-        </Media>
-      </Media>
-    ),
-    position: 'Senior Javascript Developer',
-    client: "Members",
-    investment: '$433,060',
-    location: 'San Francisco',
-    skill: (
-      <div className='progress-showcase' style={{ width: '86px' }}>
-        <div className='progress sm-progress-bar'>
-          <div className='progress-bar custom-progress-width bg-secondary' role='progressbar' style={{ width: '60%' }}></div>
-        </div>
-      </div>
-    ),
-    extn: 6224,
-    email: 'c.kelly@datatables.net',
-    packageName: 'premium',
-    blockUser: true,
-    id:"10"
+  // },
+  // {
+  //   image: (
+  //     <Media className='justify-content-start'>
+  //       <Image attrImage={{ className: 'rounded-circle img-30 me-3', src: `${user5}`, alt: 'Generic placeholder image' }} />
+  //       <Media body className='align-self-center'>
+  //         <div>Tiger Nixon</div>
+  //       </Media>
+  //     </Media>
+  //   ),
+  //   position: 'Integration Specialist',
+  //   client: "Members",
+  //   investment: '$372,000',
+  //   location: 'New York',
+  //   skill: (
+  //     <div className='progress-showcase' style={{ width: '86px' }}>
+  //       <div className='progress sm-progress-bar'>
+  //         <div className='progress-bar custom-progress-width bg-success' role='progressbar' style={{ width: '70%' }}></div>
+  //       </div>
+  //     </div>
+  //   ),
+  //   extn: 4804,
+  //   email: 'b.williamson@datatables.net',
+  //   packageName: 'basic',
+  //   blockUser: true,
+  //   id:"6"
 
-  },
+  // },
+  // {
+  //   image: (
+  //     <Media className='justify-content-start'>
+  //       <Image attrImage={{ className: 'rounded-circle img-30 me-3', src: `${user6}`, alt: 'Generic placeholder image' }} />
+  //       <Media body className='align-self-center'>
+  //         <div>Tiger Nixon</div>
+  //       </Media>
+  //     </Media>
+  //   ),
+  //   position: 'Pre-Sales Support',
+  //   client: "Free",
+  //   investment: '$106,450',
+  //   location: 'New York',
+  //   skill: (
+  //     <div className='progress-showcase' style={{ width: '86px' }}>
+  //       <div className='progress sm-progress-bar'>
+  //         <div className='progress-bar custom-progress-width bg-success' role='progressbar' style={{ width: '20%' }}></div>
+  //       </div>
+  //     </div>
+  //   ),
+  //   extn: 8330,
+  //   email: 'c.vance@datatables.net',
+  //   packageName: 'basic',
+  //   blockUser: false,
+  //   id:"7"
+
+  // },
+  // {
+  //   image: (
+  //     <Media className='justify-content-start'>
+  //       <Image attrImage={{ className: 'rounded-circle img-30 me-3', src: `${user9}`, alt: 'Generic placeholder image' }} />
+  //       <Media body className='align-self-center'>
+  //         <div>Tiger Nixon</div>
+  //       </Media>
+  //     </Media>
+  //   ),
+  //   position: 'Senior Javascript Developer',
+  //   client: "Members",
+  //   investment: '$433,060',
+  //   location: 'San Francisco',
+  //   skill: (
+  //     <div className='progress-showcase' style={{ width: '86px' }}>
+  //       <div className='progress sm-progress-bar'>
+  //         <div className='progress-bar custom-progress-width bg-secondary' role='progressbar' style={{ width: '60%' }}></div>
+  //       </div>
+  //     </div>
+  //   ),
+  //   extn: 6224,
+  //   email: 'c.kelly@datatables.net',
+  //   packageName: 'premium',
+  //   blockUser: true,
+  //   id:"8"
+
+  // },
+  // {
+  //   image: (
+  //     <Media className='justify-content-start'>
+  //       <Image attrImage={{ className: 'rounded-circle img-30 me-3', src: `${user9}`, alt: 'Generic placeholder image' }} />
+  //       <Media body className='align-self-center'>
+  //         <div>Tiger Nixon</div>
+  //       </Media>
+  //     </Media>
+  //   ),
+  //   position: 'Senior Javascript Developer',
+  //   client: "Members",
+  //   investment: '$433,060',
+  //   location: 'San Francisco',
+  //   skill: (
+  //     <div className='progress-showcase' style={{ width: '86px' }}>
+  //       <div className='progress sm-progress-bar'>
+  //         <div className='progress-bar custom-progress-width bg-secondary' role='progressbar' style={{ width: '60%' }}></div>
+  //       </div>
+  //     </div>
+  //   ),
+  //   extn: 6224,
+  //   email: 'u.kelly@datatables.net',
+  //   packageName: 'premium',
+  //   blockUser: true,
+  //   id:"9"
+
+  // },
+  // {
+  //   image: (
+  //     <Media className='justify-content-start'>
+  //       <Image attrImage={{ className: 'rounded-circle img-30 me-3', src: `${user9}`, alt: 'Generic placeholder image' }} />
+  //       <Media body className='align-self-center'>
+  //         <div>Tiger Nixon</div>
+  //       </Media>
+  //     </Media>
+  //   ),
+  //   position: 'Senior Javascript Developer',
+  //   client: "Members",
+  //   investment: '$433,060',
+  //   location: 'San Francisco',
+  //   skill: (
+  //     <div className='progress-showcase' style={{ width: '86px' }}>
+  //       <div className='progress sm-progress-bar'>
+  //         <div className='progress-bar custom-progress-width bg-secondary' role='progressbar' style={{ width: '60%' }}></div>
+  //       </div>
+  //     </div>
+  //   ),
+  //   extn: 6224,
+  //   email: 'c.kelly@datatables.net',
+  //   packageName: 'premium',
+  //   blockUser: true,
+  //   id:"10"
+
+  // },
 ];
 
 export const supportColumns = [
@@ -561,6 +561,7 @@ export const supportColumns = [
     selector: (row) => row['investment'],
     sortable: true,
     center: false,
+    
   },
   {
     name: 'Package',
@@ -574,6 +575,8 @@ export const supportColumns = [
     selector: (row) => row['email'],
     sortable: true,
     center: false,
+    minWidth: '200px',
+    maxWidth: '300px',
   },
  
   {
