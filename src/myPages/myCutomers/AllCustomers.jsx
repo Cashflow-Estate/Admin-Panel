@@ -74,6 +74,7 @@ const AllCustomers = () => {
   };
 
   const handleSearch = (event) => {
+
     setSearchTerm(event.target.value);
   };
 
