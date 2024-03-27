@@ -38,20 +38,23 @@ import MeetRequests from "../Call/MeetRequest";
 import History from "../Call/History";
 import RecentDealsTransaction from "../DealsSection/comp/RecentDealsTransaction";
 import DealsTransactions from "../DealsSection/DealsTransactions";
+import InsuranceTemplate from "./InsuranceTemplate";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const UserDetails = () => {
   const [whatsAppUrl, setWhatsAppUrl] = useGenerateWhatsappUrl();
   const [activeTab, setActiveTab] = useState("1");
-
+const navigate=useNavigate();
+const lcation=useLocation();
   const toggleTab = (tab) => {
     if (activeTab !== tab) setActiveTab(tab);
   };
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [dropdownOpenTrans, setDropdownOpenTrans] = useState(false);
 
-  const toggleDropdown = () => setDropdownOpen(prevState => !prevState);
-  const toggleDropdownTrans = () => setDropdownOpenTrans(prevState => !prevState);
-
+  const toggleDropdown = () => setDropdownOpen((prevState) => !prevState);
+  const toggleDropdownTrans = () =>
+    setDropdownOpenTrans((prevState) => !prevState);
 
   const handleClick = () => {
     setWhatsAppUrl("+923026469153");
@@ -154,7 +157,7 @@ const UserDetails = () => {
                     Deals Inquiry
                   </NavLink>
                 </NavItem>
-              
+
                 <NavItem>
                   <Dropdown isOpen={dropdownOpen} toggle={toggleDropdown}>
                     <DropdownToggle
@@ -169,23 +172,26 @@ const UserDetails = () => {
                     >
                       Zoom Calls
                     </DropdownToggle>
-                    <DropdownMenu >
+                    <DropdownMenu>
                       <DropdownItem onClick={() => toggleTab("6")}>
                         Upcoming Schedules
                       </DropdownItem>
                       <DropdownItem divider />
                       <DropdownItem onClick={() => toggleTab("8")}>
-                      Meet Requests
+                        Meet Requests
                       </DropdownItem>
                       <DropdownItem divider />
                       <DropdownItem onClick={() => toggleTab("9")}>
-                       Calls History
+                        Calls History
                       </DropdownItem>
                     </DropdownMenu>
                   </Dropdown>
                 </NavItem>
                 <NavItem>
-                <Dropdown isOpen={dropdownOpenTrans} toggle={toggleDropdownTrans}>
+                  <Dropdown
+                    isOpen={dropdownOpenTrans}
+                    toggle={toggleDropdownTrans}
+                  >
                     <DropdownToggle
                       className="nav-link"
                       style={{
@@ -198,33 +204,47 @@ const UserDetails = () => {
                     >
                       Transactions
                     </DropdownToggle>
-                    <DropdownMenu >
+                    <DropdownMenu>
                       <DropdownItem onClick={() => toggleTab("10")}>
                         Deals Transactions
                       </DropdownItem>
                       <DropdownItem divider />
                       <DropdownItem onClick={() => toggleTab("5")}>
-                      Subscription Transactions
-
+                        Subscription Transactions
                       </DropdownItem>
-                   
                     </DropdownMenu>
                   </Dropdown>
                 </NavItem>
                 <NavItem>
                   <NavLink
-                       className={classnames({ "text-white": activeTab !== "7" })}
-                       style={{
-                         backgroundColor: activeTab === "7" ? "green" : "black",
-                         color: activeTab === "7" ? "white" : "white",
-                         borderRadius: "15px",
-                         padding: "10px",
-                       }}
-                       onClick={() => {
-                         toggleTab("7");
-                       }}
+                    className={classnames({ "text-white": activeTab !== "7" })}
+                    style={{
+                      backgroundColor: activeTab === "7" ? "green" : "black",
+                      color: activeTab === "7" ? "white" : "white",
+                      borderRadius: "15px",
+                      padding: "10px",
+                    }}
+                    onClick={() => {
+                      toggleTab("7");
+                    }}
                   >
                     Evictions
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink
+                    className={classnames({ "text-white": activeTab !== "11" })}
+                    style={{
+                      backgroundColor: activeTab === "11" ? "green" : "black",
+                      color: activeTab === "7" ? "white" : "white",
+                      borderRadius: "15px",
+                      padding: "10px",
+                    }}
+                    onClick={() => {
+                      toggleTab("11");
+                    }}
+                  >
+                    Insurance
                   </NavLink>
                 </NavItem>
               </Nav>
@@ -246,22 +266,24 @@ const UserDetails = () => {
                   <ViewTransactions showBreadcrumbs={false} />
                 </TabPane>
                 <TabPane tabId="6">
-                <UpcomingCall/>
+                  <UpcomingCall />
                 </TabPane>
                 <TabPane tabId="8">
-                <MeetRequests/>
+                  <MeetRequests />
                 </TabPane>
                 <TabPane tabId="9">
-                <History/>
+                  <History />
                 </TabPane>
                 <TabPane tabId="10">
-                <DealsTransactions />
+                  <DealsTransactions />
                 </TabPane>
                 <TabPane tabId="7">
-               <Evictions/>
+                  <Evictions />
+                </TabPane>
+                <TabPane tabId="11">
+                  <InsuranceTemplate />
                 </TabPane>
               </TabContent>
-             
             </CardBody>
           </Card>
         </Col>

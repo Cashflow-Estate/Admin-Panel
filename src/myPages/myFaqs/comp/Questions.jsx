@@ -44,7 +44,6 @@ const Questionss = () => {
     setIsActivity(updatedActivity);
 
     // Implement delete functionality here
-    console.log("Delete FAQ item with id:", deleteItemId);
 
     // Close the delete modal
     setShowDeleteModal(false);
