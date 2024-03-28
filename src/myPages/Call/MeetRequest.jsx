@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Breadcrumbs, H5, H6, LI, UL, Btn } from '../../AbstractElements';
+import { Breadcrumbs, H5, H6, LI, UL, Btn, Image } from '../../AbstractElements';
 import SvgIcon from '../../Components/Common/Component/SvgIcon';
 import { Button, Card, CardBody, CardHeader } from 'reactstrap';
 import { useNavigate } from 'react-router';
@@ -56,8 +56,16 @@ const MeetRequestsListBox = ({ data }) => {
             {data.map((item, i) => (
                 <LI key={i} attrLI={{ className: `${item.color}` }}>
                     <div className="d-flex justify-content-between align-items-center">
+                    <div className="social-img">
+              <Image
+                attrImage={{
+                  src: require(`../../assets/images/user/3.png`),
+                  alt: "profile",
+                }}
+              />
+            </div>
                         <div>
-                            <H6 className="mb-1">{"Incoming Meet Request"}</H6>
+                            <H6 className="mb-1">{"For Master City Deals"}</H6>
                             <UL>
                                 <LI attrLI={{ className: "f-light" }}>
                                     <SvgIcon iconId={item.icon} className="fill-icon f-light" />

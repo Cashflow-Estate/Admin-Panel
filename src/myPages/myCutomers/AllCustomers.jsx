@@ -112,11 +112,17 @@ const AllCustomers = () => {
     {
       name: "Action",
       cell: (row) => (
-        <Button color={""} onClick={() => handleViewDetails(row)} style={{ padding: "0.6rem", minWidth: "40px" }}>
+       <> <Button color={""} onClick={() => handleViewDetails(row)} style={{ padding: "0.6rem", minWidth: "40px" }}>
 
   <i class="icofont icofont-info-circle" style={{fontSize: "20px",height: "30px"}}></i>
 
         </Button>
+        <Button color={""} onClick={() => handleZoom(row)} style={{ padding: "0.6rem", minWidth: "40px" }}>
+
+  <i class="icofont icofont-meeting-add" style={{fontSize: "20px",height: "30px"}}></i>
+
+        </Button>
+        </>
       ),
       button: true,
       center: true,
@@ -128,7 +134,7 @@ const AllCustomers = () => {
       name: "Alice Smith",
       image: user3, // Placeholder for image
       position: 'System Architect',
-      client: "Members",
+      client: "Customers",
       investment: '$320,800',
       location: 'Edinburgh',
       skill: null, // Placeholder for skill
@@ -291,6 +297,216 @@ const AllCustomers = () => {
       email: 's.brown@example.com',
       packageName: 'basic',
       blockUser: true,
+    },
+    {
+      id: "13",
+      name: "Grace Lee",
+      image: user3, // Placeholder for image
+      position: 'Frontend Developer',
+      client: "Customers",
+      investment: '$220,000',
+      location: 'San Francisco',
+      skill: null, // Placeholder for skill
+      extn: 2468,
+      email: 'grace.lee@example.com',
+      packageName: 'premium',
+      blockUser: false,
+    },
+    {
+      id: "14",
+      name: "William Johnson",
+      image: user3,// Placeholder for image
+      position: 'Software Engineer',
+      client: "Customers",
+      investment: '$320,000',
+      location: 'New York',
+      skill: null, // Placeholder for skill
+      extn: 3579,
+      email: 'w.johnson@example.com',
+      packageName: 'premium',
+      blockUser: false,
+    },
+    {
+      id: "15",
+      name: "Ethan Wilson",
+      image: user3, // Placeholder for image
+      position: 'Database Administrator',
+      client: "Customers",
+      investment: '$280,000',
+      location: 'Los Angeles',
+      skill: null, // Placeholder for skill
+      extn: 8642,
+      email: 'e.wilson@example.com',
+      packageName: 'premium',
+      blockUser: false,
+    },
+    {
+      id: "16",
+      name: "Nora Miller",
+      image: user3,// Placeholder for image
+      position: 'UI/UX Designer',
+      client: "Customers",
+      investment: '$180,000',
+      location: 'Chicago',
+      skill: null, // Placeholder for skill
+      extn: 1593,
+      email: 'n.miller@example.com',
+      packageName: 'basic',
+      blockUser: false,
+    },
+    {
+      id: "17",
+      name: "Liam Martinez",
+      image: user3, // Placeholder for image
+      position: 'Project Manager',
+      client: "Free",
+      investment: '$150,000',
+      location: 'Houston',
+      skill: null, // Placeholder for skill
+      extn: 7531,
+      email: 'liam.martinez@example.com',
+      packageName: 'basic',
+      blockUser: true,
+    },
+    {
+      id: "18",
+      name: "Chloe Garcia",
+      image: user3,// Placeholder for image
+      position: 'Marketing Specialist',
+      client: "Customers",
+      investment: '$300,000',
+      location: 'Miami',
+      skill: null, // Placeholder for skill
+      extn: 9512,
+      email: 'chloe.garcia@example.com',
+      packageName: 'premium',
+      blockUser: false,
+    },
+    {
+      id: "19",
+      name: "Alexander Taylor",
+      image: user3, // Placeholder for image
+      position: 'System Analyst',
+      client: "Customers",
+      investment: '$250,000',
+      location: 'Dallas',
+      skill: null, // Placeholder for skill
+      extn: 1478,
+      email: 'a.taylor@example.com',
+      packageName: 'premium',
+      blockUser: false,
+    },
+    {
+      id: "20",
+      name: "Madison Clark",
+      image: user3,// Placeholder for image
+      position: 'Quality Assurance Analyst',
+      client: "Customers",
+      investment: '$280,000',
+      location: 'Boston',
+      skill: null, // Placeholder for skill
+      extn: 3698,
+      email: 'madison.clark@example.com',
+      packageName: 'basic',
+      blockUser: false,
+    },
+    {
+      id: "21",
+      name: "Oliver White",
+      image: user3, // Placeholder for image
+      position: 'Network Administrator',
+      client: "Free",
+      investment: '$120,000',
+      location: 'Seattle',
+      skill: null, // Placeholder for skill
+      extn: 7854,
+      email: 'oliver.white@example.com',
+      packageName: 'basic',
+      blockUser: true,
+    },
+    {
+      id: "22",
+      name: "Ava Hall",
+      image: user3,// Placeholder for image
+      position: 'Technical Writer',
+      client: "Customers",
+      investment: '$220,000',
+      location: 'San Diego',
+      skill: null, // Placeholder for skill
+      extn: 2369,
+      email: 'ava.hall@example.com',
+      packageName: 'premium',
+      blockUser: false,
+    },
+    {
+      id: "23",
+      name: "Noah Martinez",
+      image: user3,// Placeholder for image
+      position: 'Software Developer',
+      client: "Customers",
+      investment: '$320,000',
+      location: 'Austin',
+      skill: null, // Placeholder for skill
+      extn: 4152,
+      email: 'noah.martinez@example.com',
+      packageName: 'premium',
+      blockUser: false,
+    },
+    {
+      id: "24",
+      name: "Isabella Rodriguez",
+      image: user3, // Placeholder for image
+      position: 'Business Analyst',
+      client: "Customers",
+      investment: '$180,000',
+      location: 'Denver',
+      skill: null, // Placeholder for skill
+      extn: 3698,
+      email: 'isabella.rodriguez@example.com',
+      packageName: 'basic',
+      blockUser: false,
+    },
+    {
+      id: "25",
+      name: "James Lopez",
+      image: user3,// Placeholder for image
+      position: 'Technical Support Engineer',
+      client: "Free",
+      investment: '$150,000',
+      location: 'Phoenix',
+      skill: null, // Placeholder for skill
+      extn: 7854,
+      email: 'james.lopez@example.com',
+      packageName: 'basic',
+      blockUser: true,
+    },
+    {
+      id: "26",
+      name: "Mia Perez",
+      image: user3,// Placeholder for image
+      position: 'Systems Administrator',
+      client: "Customers",
+      investment: '$300,000',
+      location: 'Philadelphia',
+      skill: null, // Placeholder for skill
+      extn: 2154,
+      email: 'mia.perez@example.com',
+      packageName: 'premium',
+      blockUser: false,
+    },
+    {
+      id: "27",
+      name: "Benjamin Sanchez",
+      image: user3, // Placeholder for image
+      position: 'UI Designer',
+      client: "Customers",
+      investment: '$280,000',
+      location: 'Portland',
+      skill: null, // Placeholder for skill
+      extn: 9632,
+      email: 'benjamin.sanchez@example.com',
+      packageName: 'basic',
+      blockUser: false,
     }
   ];
   
@@ -385,6 +601,9 @@ const AllCustomers = () => {
   const history = useNavigate();
   const handleViewDetails = (user) => {
     history(`/user-details/${user.id}`); 
+  };
+  const handleZoom = (user) => {
+    history(`/upcoming-call`); 
   };
 
   return (

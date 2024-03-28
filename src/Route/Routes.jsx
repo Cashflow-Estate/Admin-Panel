@@ -21,6 +21,7 @@ import ViewMore from "../myPages/DealsSection/comp/ViewMore";
 import UpcomingCall from "../myPages/Call/UpcomingCall";
 import Queries from "../myPages/DealsSection/comp/Queries";
 import UserDetails from "../myPages/myCutomers/UserDetails";
+import History from "../myPages/Call/History";
 
 export const routes = [
   {
@@ -100,6 +101,10 @@ export const routes = [
   {
     path: `/upcoming-call`,
     Component: <UpcomingCall />,
+  },
+  {
+    path: `/meet/history`,
+    Component: <History />,
   },
   {
     path: `/deals/view`,

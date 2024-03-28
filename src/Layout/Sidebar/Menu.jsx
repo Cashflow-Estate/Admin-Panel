@@ -90,16 +90,29 @@ export const MENUITEMS = [
         ],
       },
       {
-        title: "Schedule-Call",
+        title: "Meet",
         icon: "icons",
-        type: "link",
-        path: `/schedule-call`,
-      },
-      {
-        title: "Upcoming-Call",
-        icon: "icons",
-        type: "link",
-        path: `/upcoming-call`,
+        type: "sub",
+        children: [
+          {
+            title: "Schedule-Call",
+            icon: "icons",
+            type: "link",
+            path: `/schedule-call`,
+          },
+          {
+            title: "Upcoming-Call",
+            icon: "icons",
+            type: "link",
+            path: `/upcoming-call`,
+          },
+          {
+            title: "History",
+            icon: "icons",
+            type: "link",
+            path: `/meet/history`,
+          },
+        ],
       },
       {
         path: `/crm`,

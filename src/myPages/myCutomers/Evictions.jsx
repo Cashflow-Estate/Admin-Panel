@@ -1,21 +1,22 @@
-import React from 'react';
-import { Card, CardBody, CardTitle, CardText, Container } from 'reactstrap';
-import { Breadcrumbs } from '../../AbstractElements';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Card, CardBody, CardTitle, CardText, Container } from "reactstrap";
+import { Breadcrumbs, Image } from "../../AbstractElements";
+import { Link } from "react-router-dom";
+import SvgIcon from "../../Components/Common/Component/SvgIcon";
 
 // Dummy complaint data
 const complaints = [
   {
     id: 1,
-    dealTitle: 'Property at 123 Main Street',
+    dealTitle: "Property at 123 Main Street",
     dealComplaint:
-      'Tenant has failed to pay rent for the past three months despite multiple reminders and notices. The property is being damaged, and there have been reports of disturbances from neighbors.',
+      "Tenant has failed to pay rent for the past three months despite multiple reminders and notices. The property is being damaged, and there have been reports of disturbances from neighbors.",
   },
   {
     id: 2,
-    dealTitle: 'Apartment Complex at Oakwood Gardens',
+    dealTitle: "Apartment Complex at Oakwood Gardens",
     dealComplaint:
-      'Noise complaints from multiple tenants regarding Unit 205. The tenant is consistently violating noise ordinances, disturbing other residents, and causing a nuisance.',
+      "Noise complaints from multiple tenants regarding Unit 205. The tenant is consistently violating noise ordinances, disturbing other residents, and causing a nuisance.",
   },
   // Add more complaints as needed
 ];
@@ -24,9 +25,18 @@ const complaints = [
 const ComplaintCard = ({ dealTitle, dealComplaint }) => (
   <Card className="mb-3">
     <CardBody>
+        <div className="social-img">
+          <Image
+            attrImage={{
+              src: require(`../../assets/images/user/3.png`),
+              alt: "profile",
+            }}
+          />
+        </div>
+      
       <CardTitle tag="h5">
         <Link to="/deals/1">{dealTitle}</Link>
-        </CardTitle>
+      </CardTitle>
       <CardText>{dealComplaint}</CardText>
     </CardBody>
   </Card>
@@ -35,7 +45,7 @@ const ComplaintCard = ({ dealTitle, dealComplaint }) => (
 // Main component to display all complaint cards
 const Evictions = () => (
   <Container>
-        <Breadcrumbs mainTitle={"Evictions"} parent="Deals" title={"Evictions"} />
+    <Breadcrumbs mainTitle={"Evictions"} parent="Deals" title={"Evictions"} />
 
     {complaints.map((complaint) => (
       <ComplaintCard

@@ -94,7 +94,7 @@ const AllDealsTable = () => {
       center: false,
     },
     {
-      name: "Queries",
+      name: "Inquiry",
       cell: (row) => (
         <div
           style={{
@@ -103,12 +103,13 @@ const AllDealsTable = () => {
             justifyContent: "flex-start",
           }}
         >
-          <Button
-            color=""
-            onClick={() => handleViewQueries(row)}
-          >
-            <i style={{fontSize:"20px"}} className="icofont icofont-eye"></i>
+          {/* Button to view queries */}
+          <Button color="" onClick={() => handleViewQueries(row)}>
+            <i style={{ fontSize: "25px" }} className="icofont icofont-support-faq"></i>
           </Button>
+          
+          {/* Badge for notification count */}
+          <span className='badge rounded-pill badge-secondary' style={{ position: 'relative', top: '-10px', left: '-30px' }}>4</span>
         </div>
       ),
       sortable: true,

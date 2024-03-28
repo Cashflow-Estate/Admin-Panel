@@ -36,48 +36,4 @@ const ViewDeals = () => {
 };
 
 export default ViewDeals;
-const featureProduct = [
-  {
-    image: iii,
-    name: " Name",
-    price: "50$",
-    id:1
-  },
-  
-  {
-    image: iii,
-    name: " Name",
-    price: "50$",
-    id:1
-  },
-  
-  {
-    image: iii,
-    name: " Name",
-    price: "50$",
-    id:1
-  },
-  
-  {
-    image: iii,
-    name: " Name",
-    price: "50$",
-    id:1
-  },
-  
-  {
-    image: iii,
-    name: " Name",
-    price: "50$",
-    id:1
-  },
-  
-  {
-    image: iii,
-    name: " Name",
-    price: "50$",
-    id:1
-  },
-  
 
-];

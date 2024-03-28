@@ -79,7 +79,6 @@ const lcation=useLocation();
       <Row>
         <Col sm="12">
           <Card>
-            <CardBody>
               <Nav
                 tabs
                 style={{
@@ -248,6 +247,7 @@ const lcation=useLocation();
                   </NavLink>
                 </NavItem>
               </Nav>
+            <CardBody>
 
               <TabContent activeTab={activeTab}>
                 <TabPane tabId="1">

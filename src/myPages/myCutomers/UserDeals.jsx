@@ -5,6 +5,7 @@ import iii from "../../../src/assets/cashflowimg/apartments/a1.png";
 import { useNavigate } from "react-router";
 import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { Breadcrumbs } from "../../AbstractElements";
+import SvgIcon from "../../Components/Common/Component/SvgIcon";
 
 const UserDeals = ({ heading }) => {
   const [modal, setModal] = useState(false);
@@ -93,7 +94,7 @@ const UserDeals = ({ heading }) => {
       center: false,
     },
     {
-      name: "Queries",
+      name: "Inquiry",
       cell: (row) => (
         <div
           style={{
@@ -102,14 +103,19 @@ const UserDeals = ({ heading }) => {
             justifyContent: "flex-start",
           }}
         >
+          {/* Button to view queries */}
           <Button color="" onClick={() => handleViewQueries(row)}>
-            <i style={{ fontSize: "20px" }} className="icofont icofont-eye"></i>
+            <i style={{ fontSize: "25px" }} className="icofont icofont-support-faq"></i>
           </Button>
+          
+          {/* Badge for notification count */}
+          <span className='badge rounded-pill badge-secondary' style={{ position: 'relative', top: '-10px', left: '-30px' }}>4</span>
         </div>
       ),
       sortable: true,
       center: false,
     },
+    
     {
       name: "Details",
       cell: (row) => (
