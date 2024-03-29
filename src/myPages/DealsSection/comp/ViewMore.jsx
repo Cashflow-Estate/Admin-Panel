@@ -26,12 +26,14 @@ const ViewMore = () => {
     });
   }, []);
 
-  const { nav2 } = state;
+  const { nav1,nav2 } = state;
 
   const productItems = [
     { type: "image", source: iimmgg },
-    { type: "video", source: video },
     { type: "image", source: iimmgg },
+    { type: "image", source: iimmgg },
+    { type: "image", source: iimmgg },
+    { type: "video", source: video },
     { type: "video", source: video },
   ];
 
@@ -61,6 +63,33 @@ const ViewMore = () => {
                           src: item.source,
                           alt: "",
                           className: "img-fluid w-100",
+                        }}
+                        key={index}
+                      />
+                    ) : (
+                      <video controls key={index}>
+                        <source src={item.source} type="video/mp4" />
+                        Your browser does not support the video tag.
+                      </video>
+                    )
+                  )}
+                </Slider>
+                <Slider
+                  asNavFor={nav1}
+                  ref={slider2}
+                  slidesToShow={productItems.length}
+                  swipeToSlide={true}
+                  focusOnSelect={true}
+                  infinite={true}
+                  className="small-slick"
+                >
+                  {productItems.map((item, index) =>
+                    item.type === "image" ? (
+                      <Image
+                        attrImage={{
+                          src: item.source,
+                          alt: "",
+                          className: "img-fluid item",
                         }}
                         key={index}
                       />
