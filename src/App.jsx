@@ -41,7 +41,7 @@ const App = () => (
                               <GalleryProvider>
                                 {/* <TaskProvider> */}
                                   {/* <ContactProvider> */}
-                                    {/* <ChatProvider> */}
+                                    <ChatProvider>
                                       {/* <ProjectProvider> */}
                                         {/* <GoogleChartProvider> */}
                                           {/* <ChartjsProvider> */}
@@ -53,7 +53,7 @@ const App = () => (
                                           {/* </ChartjsProvider> */}
                                         {/* </GoogleChartProvider> */}
                                       {/* </ProjectProvider> */}
-                                    {/* </ChatProvider> */}
+                                    </ChatProvider>
                                   {/* </ContactProvider> */}
                                 {/* </TaskProvider> */}
                               </GalleryProvider>
