@@ -175,7 +175,7 @@ const TotalUser = () => {
               <H5 attrH5={{ className: "mb-1" }}>178,098</H5>
               <span className="font-primary d-flex align-items-center">
                 <i className="icon-arrow-up icon-rotate me-1"> </i>
-                <span className="f-w-500">Customers</span>
+                <span className="f-w-500">Paid Customers</span>
               </span>
             </div>
           </LI>
@@ -189,7 +189,7 @@ const TotalUser = () => {
               <H5 attrH5={{ className: "mb-1" }}>178,098</H5>
               <span className="font-danger d-flex align-items-center">
                 <i className="icon-arrow-down icon-rotate me-1" />
-                <span className="f-w-500">Members</span>
+                <span className="f-w-500">Paid Members</span>
               </span>
             </div>
           </LI>
@@ -203,7 +203,7 @@ const TotalUser = () => {
               <H5 attrH5={{ className: "mb-1" }}>178,098</H5>
               <span className="font-danger d-flex align-items-center">
                 <i className="icon-arrow-down icon-rotate me-1" />
-                <span className="f-w-500">Members</span>
+                <span className="f-w-500">Free Members</span>
               </span>
             </div>
           </LI>

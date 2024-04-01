@@ -7,13 +7,13 @@ import React, {
 } from "react";
 import { BiBed, BiBath, BiArea } from "react-icons/bi";
 import { CgUnavailable } from "react-icons/cg";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Button } from "react-bootstrap";
 import { Breadcrumbs, H3, Image, LI, P, UL } from "../../../AbstractElements";
 import { Card, CardBody, Media } from "reactstrap";
 import Slider from "react-slick";
 import iimmgg from "../../../assets/cashflowimg/apartments/a1lg.png";
 import video from "../../../assets/CashflowLogos/video.mp4";
-import { Chatting } from "./DealsLog";
+import Logs from "./Logs";
 const ViewMore = () => {
   const [state, setState] = useState({ nav1: null, nav2: null });
   const slider1 = useRef();
@@ -26,14 +26,14 @@ const ViewMore = () => {
     });
   }, []);
 
-  const { nav1,nav2 } = state;
+  const { nav1, nav2 } = state;
 
   const productItems = [
     { type: "image", source: iimmgg },
     { type: "image", source: iimmgg },
     { type: "image", source: iimmgg },
-    { type: "image", source: iimmgg },
-    { type: "video", source: video },
+    // { type: "image", source: iimmgg },
+    // { type: "video", source: video },
     { type: "video", source: video },
   ];
 
@@ -46,7 +46,18 @@ const ViewMore = () => {
       return <button className="slick-dot"></button>;
     },
   };
-
+  // const settings = {
+  //   asNavFor: nav2,
+  //   className: "product-slider",
+  //   arrows: false,
+  //   dots: true,
+  //   autoplay: true, // Enable autoplay
+  //   autoplaySpeed: 2000, // Set autoplay speed to 2 seconds
+  //   customPaging: function (i) {
+  //     return <button className="slick-dot"></button>;
+  //   },
+  // };
+  
   return (
     <Container fluid={true}>
       <div>
@@ -109,7 +120,7 @@ const ViewMore = () => {
           </Col>
         </Row>
         <Row>
-        <Chatting />
+         <Logs/>
         </Row>
       </div>
     </Container>
@@ -141,7 +152,7 @@ const DealsDetails = () => {
     <Fragment>
       {house && (
         <Card>
-          <CardBody style={{ height: "auto"}}>
+          <CardBody style={{ height: "auto" }}>
             <div className="product-page-details">
               <h3>{house.name}</h3>
               <h6>{house.address}</h6>
