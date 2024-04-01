@@ -3,10 +3,10 @@ import { Card, Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 import { Col } from 'reactstrap';
 import { Next, Previous } from '../../../Constant';
 
-const DealsQueriesPagination = ({ currentPage, queriesPerPage, totalQueries, paginate }) => {
+const DealsInquiryPagination = ({ currentPage, InquiryPerPage, totalInquiry, paginate }) => {
     const pageNumbers = [];
 
-    for (let i = 1; i <= Math.ceil(totalQueries / queriesPerPage); i++) {
+    for (let i = 1; i <= Math.ceil(totalInquiry / InquiryPerPage); i++) {
         pageNumbers.push(i);
     }
 
@@ -23,7 +23,7 @@ const DealsQueriesPagination = ({ currentPage, queriesPerPage, totalQueries, pag
                                 <PaginationLink onClick={() => paginate(number)}>{number}</PaginationLink>
                             </PaginationItem>
                         ))}
-                        <PaginationItem disabled={currentPage === Math.ceil(totalQueries / queriesPerPage)}>
+                        <PaginationItem disabled={currentPage === Math.ceil(totalInquiry / InquiryPerPage)}>
                             <PaginationLink onClick={() => paginate(currentPage + 1)}>{Next}</PaginationLink>
                         </PaginationItem>
                     </ul>
@@ -33,4 +33,4 @@ const DealsQueriesPagination = ({ currentPage, queriesPerPage, totalQueries, pag
     );
 };
 
-export default DealsQueriesPagination;
+export default DealsInquiryPagination;

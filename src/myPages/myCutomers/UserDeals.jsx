@@ -31,7 +31,7 @@ const UserDeals = ({ heading }) => {
       title: "Deal 1",
       image: "deal1.jpg",
       //   status: "Active",
-      queries: <i className="fa fa-rss-square"></i>,
+      Inquiry: <i className="fa fa-rss-square"></i>,
       address: "123 Main St, City, Country",
     },
     {
@@ -39,7 +39,7 @@ const UserDeals = ({ heading }) => {
       title: "Deal 2",
       image: "deal2.jpg",
       //   status: "Inactive",
-      queries: <i className="fa fa-rss-square"></i>,
+      Inquiry: <i className="fa fa-rss-square"></i>,
       address: "456 Elm St, City, Country",
     },
     // Add more deals as needed
@@ -54,8 +54,8 @@ const UserDeals = ({ heading }) => {
     history(`/deals/create`);
   };
 
-  const handleViewQueries = (deal) => {
-    history("/customer/queries");
+  const handleViewInquiry = (deal) => {
+    history("/customer/Inquiry");
   };
 
   const customColumns = [
@@ -103,8 +103,8 @@ const UserDeals = ({ heading }) => {
             justifyContent: "flex-start",
           }}
         >
-          {/* Button to view queries */}
-          <Button color="" onClick={() => handleViewQueries(row)}>
+          {/* Button to view Inquiry */}
+          <Button color="" onClick={() => handleViewInquiry(row)}>
             <i style={{ fontSize: "25px" }} className="icofont icofont-support-faq"></i>
           </Button>
           

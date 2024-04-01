@@ -13,13 +13,13 @@ import CreateFaqs from "../myPages/myFaqs/CreateFaqs";
 import ViewBanners from "../myPages/myBanners/ViewBanners";
 import CreateBanner from "../myPages/myBanners/CreateBanner";
 import Dashboard from "../myPages/Dashboard";
-import DealsQueries from "../myPages/DealsSection/comp/DealsQueries";
+import DealsInquiry from "../myPages/DealsSection/comp/DealsInquiry";
 import Call from "../myPages/Call";
-import WebsiteQueries from "../myPages/WebsiteQueries";
+import WebsiteInquiry from "../myPages/WebsiteInquiry";
 import CRM from "../myPages/CRM";
 import ViewMore from "../myPages/DealsSection/comp/ViewMore";
 import UpcomingCall from "../myPages/Call/UpcomingCall";
-import Queries from "../myPages/DealsSection/comp/Queries";
+import Inquiry from "../myPages/DealsSection/comp/Inquiry";
 import UserDetails from "../myPages/myCutomers/UserDetails";
 import History from "../myPages/Call/History";
 
@@ -79,19 +79,19 @@ export const routes = [
   },
   {
     path: `/inquiry`,
-    Component: <DealsQueries />,
+    Component: <DealsInquiry />,
   },
   {
-    path: `/customer/queries`,
-    Component: <Queries />,
+    path: `/customer/Inquiry`,
+    Component: <Inquiry />,
   },
   {
     path: `/deals/1`,
     Component: <ViewMore />,
   },
   {
-    path: `/website/queries`,
-    Component: <WebsiteQueries />,
+    path: `/website/Inquiry`,
+    Component: <WebsiteInquiry />,
   },
 
   {

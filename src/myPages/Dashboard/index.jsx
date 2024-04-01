@@ -85,14 +85,14 @@ const SmallWidgetsData = [
     suffix: "k",
   },
   {
-    title: "Website Queries",
+    title: "Website Inquiry",
     color: "success",
     total: 3_908,
     gros: 80,
     icon: "profit",
   },
   {
-    title: "Deals Queries",
+    title: "Deals Inquiry",
     color: "primary",
     total: 2_435,
     gros: 50,

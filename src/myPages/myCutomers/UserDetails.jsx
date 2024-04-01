@@ -119,7 +119,7 @@ const lcation=useLocation();
                       toggleTab("2");
                     }}
                   >
-                    Featured Deals
+                    Customized Deals
                   </NavLink>
                 </NavItem>
                 <NavItem>
@@ -176,9 +176,9 @@ const lcation=useLocation();
                         Upcoming Schedules
                       </DropdownItem>
                       <DropdownItem divider />
-                      <DropdownItem onClick={() => toggleTab("8")}>
+                      {/* <DropdownItem onClick={() => toggleTab("8")}>
                         Meet Requests
-                      </DropdownItem>
+                      </DropdownItem> */}
                       <DropdownItem divider />
                       <DropdownItem onClick={() => toggleTab("9")}>
                         Calls History
@@ -268,9 +268,9 @@ const lcation=useLocation();
                 <TabPane tabId="6">
                   <UpcomingCall />
                 </TabPane>
-                <TabPane tabId="8">
+                {/* <TabPane tabId="8">
                   <MeetRequests />
-                </TabPane>
+                </TabPane> */}
                 <TabPane tabId="9">
                   <History />
                 </TabPane>

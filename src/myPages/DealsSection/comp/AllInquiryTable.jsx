@@ -6,7 +6,7 @@ import { useNavigate } from "react-router";
 import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { H4, H6, Image, LI, P, UL } from "../../../AbstractElements";
 
-const AllQueriesTable = () => {
+const AllInquiryTable = () => {
   const [modal, setModal] = useState(false);
   const [selectedDeal, setSelectedDeal] = useState(null);
 
@@ -31,7 +31,7 @@ const AllQueriesTable = () => {
       image: "deal1.jpg",
       title: "Deal 1",
       status: "Inactive",
-      queries: <i className="fa fa-rss-square"></i>,
+      Inquiry: <i className="fa fa-rss-square"></i>,
       time: "07:40 am",
     },
     {
@@ -40,7 +40,7 @@ const AllQueriesTable = () => {
       image: "deal1.jpg",
       title: "Deal 1",
       status: "Active",
-      queries: <i className="fa fa-rss-square"></i>,
+      Inquiry: <i className="fa fa-rss-square"></i>,
            time: "07:49 am",
 
     },
@@ -50,7 +50,7 @@ const AllQueriesTable = () => {
       image: "deal1.jpg",
       title: "Deal 1",
       status: "Active",
-      queries: <i className="fa fa-rss-square"></i>,
+      Inquiry: <i className="fa fa-rss-square"></i>,
            time: "08:40 am",
 
     },
@@ -65,8 +65,8 @@ const AllQueriesTable = () => {
 
 
 
-  const handleViewQueries = (deal) => {
-    history("/customer/queries");
+  const handleViewInquiry = (deal) => {
+    history("/customer/Inquiry");
   };
 
   const customColumns = [
@@ -114,7 +114,7 @@ const AllQueriesTable = () => {
         center: false,
       },
     {
-      name: "Queries",
+      name: "Inquiry",
       cell: (row) => (
         <div
           style={{
@@ -125,7 +125,7 @@ const AllQueriesTable = () => {
         >
           <Button
             color=""
-            onClick={() => handleViewQueries(row)}
+            onClick={() => handleViewInquiry(row)}
           >
      <i style={{fontSize:"20px"}} className="icofont icofont-expand"></i>
           </Button>
@@ -197,6 +197,6 @@ const AllQueriesTable = () => {
   );
 };
 
-export default AllQueriesTable;
+export default AllInquiryTable;
 
 

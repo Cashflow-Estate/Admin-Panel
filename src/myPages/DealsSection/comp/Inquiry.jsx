@@ -5,7 +5,7 @@ import SimpleMdeReact from "react-simplemde-editor";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css'; // Import Quill styles
 import { EditorChange } from 'quill';
-const Queries = () => {
+const Inquiry = () => {
   const commentContainerRef = useRef(null);
 
   const handleSendComment = (comment) => {
@@ -36,7 +36,7 @@ const Queries = () => {
       <Fragment>
         <Breadcrumbs
           mainTitle="Inquiries"
-          parent="Deals Queries"
+          parent="Deals Inquiry"
           title="Master City"
         />
         <Row>
@@ -78,7 +78,7 @@ const Queries = () => {
   );
 };
 
-export default Queries;
+export default Inquiry;
 
 
 

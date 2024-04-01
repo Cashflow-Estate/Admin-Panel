@@ -140,7 +140,7 @@ export const MENUITEMS = [
         ],
       },
       {
-        path: `/website/queries`,
+        path: `/website/Inquiry`,
         type: "link",
         title: "Website",
         icon: "user",

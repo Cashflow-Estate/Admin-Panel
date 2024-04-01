@@ -1,31 +1,31 @@
 import React from "react";
 import { Fragment } from "react";
 import { Breadcrumbs } from '../../../AbstractElements';
-import AllQueriesTable from "./AllQueriesTable";
-const DealsQueries = () => {
+import AllInquiryTable from "./AllInquiryTable";
+const DealsInquiry = () => {
  return(
 
 <Fragment>
-     <Breadcrumbs mainTitle="Queries" parent="Queries" title="View Queries" />
-     <AllQueriesTable/>
+     <Breadcrumbs mainTitle="Inquiry" parent="Inquiry" title="View Inquiry" />
+     <AllInquiryTable/>
   </Fragment>
  ) 
 };
 
-export default DealsQueries;
+export default DealsInquiry;
 
 // import React, { useState } from 'react';
 // import { Card, Button } from 'react-bootstrap';
 // import { Breadcrumbs } from '../../../AbstractElements';
-// import DealsQueriesPagination from './DealsQueriesPagination';
+// import DealsInquiryPagination from './DealsInquiryPagination';
 
-// const DealsQueries = () => {
+// const DealsInquiry = () => {
 //     const [currentPage, setCurrentPage] = useState(1);
-//     const [queriesPerPage] = useState(6); // Number of queries per page
-//     const [expandedQueries, setExpandedQueries] = useState([]); // State to track expanded queries
+//     const [InquiryPerPage] = useState(6); // Number of Inquiry per page
+//     const [expandedInquiry, setExpandedInquiry] = useState([]); // State to track expanded Inquiry
 
 //     // Static data (replace with your actual data)
-//     const queries = [
+//     const Inquiry = [
 //       "Query 1: Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
 //       "Query 2: Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
 //       "Query 3: Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
@@ -38,34 +38,34 @@ export default DealsQueries;
 //   ];
 
 //     // Pagination logic
-//     const indexOfLastQuery = currentPage * queriesPerPage;
-//     const indexOfFirstQuery = indexOfLastQuery - queriesPerPage;
-//     const currentQueries = queries.slice(indexOfFirstQuery, indexOfLastQuery);
+//     const indexOfLastQuery = currentPage * InquiryPerPage;
+//     const indexOfFirstQuery = indexOfLastQuery - InquiryPerPage;
+//     const currentInquiry = Inquiry.slice(indexOfFirstQuery, indexOfLastQuery);
 
 //     // Change page
 //     const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
 //     const handleExpand = (index) => {
-//         const expanded = [...expandedQueries];
+//         const expanded = [...expandedInquiry];
 //         expanded[index] = true;
-//         setExpandedQueries(expanded);
+//         setExpandedInquiry(expanded);
 //     };
 
 //     return (
 //         <div>
-//             <Breadcrumbs mainTitle="Queries" parent="Queries" title="View Queries" />
-//             <h1>Deals Queries</h1>
+//             <Breadcrumbs mainTitle="Inquiry" parent="Inquiry" title="View Inquiry" />
+//             <h1>Deals Inquiry</h1>
 //             <div className="row">
-//                 {currentQueries.map((query, index) => (
+//                 {currentInquiry.map((query, index) => (
 //                     <div key={index} className="col-md-4 mb-3">
 //                         <Card>
-//                             <Card.Body style={{ maxHeight: expandedQueries[index] ? 'none' : '200px', overflowY: 'auto' }}>
+//                             <Card.Body style={{ maxHeight: expandedInquiry[index] ? 'none' : '200px', overflowY: 'auto' }}>
 //                                 <Card.Title>Query {indexOfFirstQuery + index + 1}</Card.Title>
 //                                 <Card.Text>
 //                                     {query}
 //                                 </Card.Text>
 //                                 {/* Add a button to expand the text */}
-//                                 {!expandedQueries[index] && (
+//                                 {!expandedInquiry[index] && (
 //                                     <Button onClick={() => handleExpand(index)}>Read More</Button>
 //                                 )}
 //                             </Card.Body>
@@ -74,10 +74,10 @@ export default DealsQueries;
 //                 ))}
 //             </div>
 //             <div style={{ position: 'absolute', bottom: '-15px', right: '40px' }}>
-//                 <DealsQueriesPagination
+//                 <DealsInquiryPagination
 //                     currentPage={currentPage}
-//                     queriesPerPage={queriesPerPage}
-//                     totalQueries={queries.length}
+//                     InquiryPerPage={InquiryPerPage}
+//                     totalInquiry={Inquiry.length}
 //                     paginate={paginate}
 //                 />
 //             </div>
@@ -85,4 +85,4 @@ export default DealsQueries;
 //     );
 // };
 
-// export default DealsQueries;
+// export default DealsInquiry;
