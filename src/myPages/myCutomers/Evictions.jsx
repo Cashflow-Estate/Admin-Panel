@@ -18,8 +18,7 @@ const complaints = [
     dealComplaint:
       "Noise complaints from multiple tenants regarding Unit 205. The tenant is consistently violating noise ordinances, disturbing other residents, and causing a nuisance.",
   },
-  // Add more complaints as needed
-];
+]
 
 // ComplaintCard component to display individual complaint
 const ComplaintCard = ({ dealTitle, dealComplaint }) => (
