@@ -8,6 +8,7 @@ import ForgetPassword from "../myPages/myAuth/ForgetPassword";
 import ResetPassword from "../myPages/myAuth/ResetPassword";
 import Signup from "../myPages/myAuth/Signup";
 import LayoutRoutes from "./LayoutRoutes";
+import OTP from "../myPages/myAuth/OTP";
 
 const Routers = () => {
   return (
@@ -16,6 +17,7 @@ const Routers = () => {
         <Routes>
           <Route exact path={"/"} element={<Signin />} />
           <Route path={"/signup"} element={<Signup />} />
+          <Route path={"/otp-verification"} element={<OTP />} />
           <Route path={"/forgot-password"} element={<ForgetPassword />} />
           <Route path={"/reset-password"} element={<ResetPassword />} />
           <Route path={`/*`} element={<LayoutRoutes />} />

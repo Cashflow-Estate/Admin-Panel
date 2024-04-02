@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Breadcrumbs, H4, H5, H6, Image, LI, UL } from "../../AbstractElements";
 import SvgIcon from "../../Components/Common/Component/SvgIcon";
 import { Card, CardBody, CardHeader, Col, Row } from "reactstrap";
@@ -19,24 +19,47 @@ import { UserMinus, UserPlus } from "react-feather";
 import Charts from "react-apexcharts";
 
 const Dashboard = () => {
+  const [role, setRole] = useState("");
+
+  useEffect(() => {
+    const storedRole = localStorage.getItem("role");
+    if (storedRole) {
+      setRole(JSON.parse(storedRole));
+    }
+  }, []);
+
   return (
     <Fragment>
       <Breadcrumbs mainTitle="Dashboard" parent="Dashboard" />
-      <TotalUser />
-      <Row>
-        <Col xl="6" md="10">
-          <WidgetsGrid />
-        </Col>
-        <Col xl="6" md="10">
-        <ChartWidgets />
-
-        </Col>
-      </Row>
+      {role === "Admin" && <AdminDashboard />}
+      {role === "Customer" && <CustomerDashboard />}
     </Fragment>
   );
 };
 
 export default Dashboard;
+
+
+const AdminDashboard = () => {
+  return (
+    <Row>
+      <Col xl="6" md="10">
+        <WidgetsGrid />
+      </Col>
+      <Col xl="6" md="10">
+        <ChartWidgets />
+      </Col>
+    </Row>
+  );
+};
+const CustomerDashboard = () => {
+  return (
+    <Row>
+    <H4>Customer Dashboard</H4>
+     
+    </Row>
+  );
+};
 
 const WidgetsGrid = () => {
   return (
