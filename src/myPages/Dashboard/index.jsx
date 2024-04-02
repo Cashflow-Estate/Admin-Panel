@@ -42,14 +42,17 @@ export default Dashboard;
 
 const AdminDashboard = () => {
   return (
+   <> <TotalUser />
     <Row>
       <Col xl="6" md="10">
         <WidgetsGrid />
       </Col>
       <Col xl="6" md="10">
-        <ChartWidgets />
+      <ChartWidgets />
+
       </Col>
     </Row>
+    </>
   );
 };
 const CustomerDashboard = () => {
