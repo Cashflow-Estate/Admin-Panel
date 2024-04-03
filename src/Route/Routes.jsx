@@ -23,7 +23,7 @@ import Inquiry from "../myPages/DealsSection/comp/Inquiry";
 import UserDetails from "../myPages/myCutomers/UserDetails";
 import History from "../myPages/Call/History";
 
-export const routes = [
+export const AdminRoutes = [
   {
     path: `/dashboard`,
     Component: <Dashboard />,
@@ -37,10 +37,7 @@ export const routes = [
     Component: <AllCustomers />,
   },
   { path: "/user-details/:id", Component: <UserDetails /> },
-  // {
-  //   path: `/user/:id`,
-  //   Component: <SingleCustomer />,
-  // },
+
   {
     path: `/account/profile`,
     Component: <Profile />,
@@ -127,4 +124,15 @@ export const routes = [
     path: `/banners/create`,
     Component: <CreateBanner />,
   },
+];
+export const UserRoutes = [
+  {
+    path: `/dashboard`,
+    Component: <Dashboard />,
+  },
+  {
+    path: `/account/profile`,
+    Component: <Profile />,
+  },
+ 
 ];

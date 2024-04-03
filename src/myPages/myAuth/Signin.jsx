@@ -16,6 +16,8 @@ import man from "../../assets/images/dashboard/profile.png";
 import CustomizerContext from "../../_helper/Customizer";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
+import { setUserInfo } from "../../features/auth/authSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const Signin = ({ selected }) => {
   const [email, setEmail] = useState("test@gmail.com");
@@ -23,10 +25,11 @@ const Signin = ({ selected }) => {
   const [togglePassword, setTogglePassword] = useState(false);
   const navigate = useNavigate();
   const { layoutURL } = useContext(CustomizerContext);
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
   const [value, setValue] = useState(localStorage.getItem("profileURL" || man));
   const [name, setName] = useState(localStorage.getItem("Name"));
-
+  const dispatch = useDispatch();
   useEffect(() => {
     localStorage.setItem("profileURL", man);
     localStorage.setItem("Name", "Emay Walter");
@@ -36,14 +39,17 @@ const Signin = ({ selected }) => {
     setValue(man);
     setName("Emay Walter");
     try {
-      const response = await axios.post('https://cashflow-pnra.onrender.com/api/v1/users/login', {
-        email: email,
-        password: password,
-      });
-  
+      const response = await axios.post(
+        "https://cashflow-pnra.onrender.com/api/v1/users/login",
+        {
+          email: email,
+          password: password,
+        }
+      );
+
       if (response.status === 200) {
-        localStorage.setItem("login", JSON.stringify(response.data.data));
-        localStorage.setItem("role", JSON.stringify(response.data.data.user.role));
+        dispatch(setUserInfo(response.data.data));
+
         await new Promise((resolve) => setTimeout(resolve, 100));
         toast.success("Successfully logged in!..");
         setTimeout(() => {
@@ -53,31 +59,14 @@ const Signin = ({ selected }) => {
         toast.error("You entered the wrong password or username!..");
       }
     } catch (error) {
-      console.error('Error:', error);
-      // Handle error
+      console.error("Error:", error);
     }
   };
-  // const loginAuth = async (e) => {
-  //   e.preventDefault();
-  //   setValue(man);
-  //   setName("Emay Walter");
-  //   if (email === "test@gmail.com" && password === "test123") {
-  //     localStorage.setItem("login", JSON.stringify(true));
-  //     await new Promise((resolve) => setTimeout(resolve, 100));
-  //     toast.success("Successfully logged in!..");
-  //     setTimeout(() => {
-  //       navigate(`/dashboard`);
-  //     }, 2000);
-  //   } else {
-  //     toast.error("You entered the wrong password or username!..");
-  //   }
-  // };
 
   return (
     <Fragment>
-      <ToastContainer position='top-right'/>
+      <ToastContainer position="top-right" />
       <Container fluid={true}>
-
         {" "}
         <Row>
           <Col xs="12">
@@ -135,7 +124,6 @@ const Signin = ({ selected }) => {
           </Col>
         </Row>
       </Container>
-
     </Fragment>
   );
 };

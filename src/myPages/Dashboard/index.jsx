@@ -17,49 +17,42 @@ import { Link } from "react-router-dom";
 import CountUp from "react-countup";
 import { UserMinus, UserPlus } from "react-feather";
 import Charts from "react-apexcharts";
+import { useSelector } from "react-redux";
 
 const Dashboard = () => {
-  const [role, setRole] = useState("");
-
-  useEffect(() => {
-    const storedRole = localStorage.getItem("role");
-    if (storedRole) {
-      setRole(JSON.parse(storedRole));
-    }
-  }, []);
+  const userAuthRole = useSelector((state) => state.auth.role);
 
   return (
     <Fragment>
       <Breadcrumbs mainTitle="Dashboard" parent="Dashboard" />
-      {role === "Admin" && <AdminDashboard />}
-      {role === "Customer" && <CustomerDashboard />}
+      {userAuthRole === "Admin" && <AdminDashboard />}
+      {userAuthRole === "Customer" && <CustomerDashboard />}
     </Fragment>
   );
 };
 
 export default Dashboard;
 
-
 const AdminDashboard = () => {
   return (
-   <> <TotalUser />
-    <Row>
-      <Col xl="6" md="10">
-        <WidgetsGrid />
-      </Col>
-      <Col xl="6" md="10">
-      <ChartWidgets />
-
-      </Col>
-    </Row>
+    <>
+      {" "}
+      <TotalUser />
+      <Row>
+        <Col xl="6" md="10">
+          <WidgetsGrid />
+        </Col>
+        <Col xl="6" md="10">
+          <ChartWidgets />
+        </Col>
+      </Row>
     </>
   );
 };
 const CustomerDashboard = () => {
   return (
     <Row>
-    <H4>Customer Dashboard</H4>
-     
+      <H4>Slow Flip Dashboard</H4>
     </Row>
   );
 };
@@ -91,14 +84,13 @@ const SmallWidgetsData = [
     gros: 20,
     icon: "customers",
   },
-  
+
   {
     title: "Deals Closed(monthly)",
     color: "success",
     total: 3_908,
     gros: 80,
     icon: "sale",
-
   },
   {
     title: "Transactions(monthly)",

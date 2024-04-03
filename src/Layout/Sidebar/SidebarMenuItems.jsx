@@ -3,7 +3,8 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import SvgIcon from "../../Components/Common/Component/SvgIcon";
 import CustomizerContext from "../../_helper/Customizer";
-import { MENUITEMS } from "./Menu";
+import { MENUITEMS_FOR_Admin, MENUITEMS_FOR_User } from "./Menu";
+import { useSelector } from "react-redux";
 
 const SidebarMenuItems = ({
   setMainMenu,
@@ -35,7 +36,7 @@ const SidebarMenuItems = ({
       }
     }
     if (!item.active) {
-      MENUITEMS.map((a) => {
+      MENUITEMS_FOR_Admin.map((a) => {
         a.Items.filter((Items) => {
           if (a.Items.includes(item)) Items.active = false;
           if (!Items.children) return false;
@@ -56,12 +57,14 @@ const SidebarMenuItems = ({
       });
     }
     item.active = !item.active;
-    setMainMenu({ mainmenu: MENUITEMS });
+    setMainMenu({ mainmenu: MENUITEMS_FOR_Admin });
   };
+  const Role=useSelector((state)=>state.auth.role)
 
   return (
     <>
-      {MENUITEMS.map((Item, i) => (
+    {Role==="Admin"?  
+    (MENUITEMS_FOR_Admin.map((Item, i) => (
         <Fragment key={i}>
           <li className="sidebar-main-title">
             <div>
@@ -259,7 +262,206 @@ const SidebarMenuItems = ({
             </li>
           ))}
         </Fragment>
-      ))}
+      ))):(MENUITEMS_FOR_User.map((Item, i) => (
+        <Fragment key={i}>
+          <li className="sidebar-main-title">
+            <div>
+              <h6 className="lan-1">{Item.menutitle}</h6>
+            </div>
+          </li>
+          {Item.Items.map((menuItem, i) => (
+            <li className="sidebar-list" key={i}>
+              {menuItem.type === "sub" ? (
+                <a
+                  href="javascript"
+                  className={`sidebar-link sidebar-title ${
+                    CurrentPath.includes(menuItem.title.toLowerCase())
+                      ? "active"
+                      : ""
+                  } ${menuItem.active && "active"}`}
+                  onClick={(event) => {
+                    event.preventDefault();
+                    setNavActive(menuItem);
+                    activeClass(menuItem.active);
+                  }}
+                >
+                  <SvgIcon
+                    className="stroke-icon"
+                    iconId={`stroke-${menuItem.icon}`}
+                  />
+                  <SvgIcon
+                    className="fill-icon"
+                    iconId={`fill-${menuItem.icon}`}
+                  />
+                  <span>{t(menuItem.title)}</span>
+                  {menuItem.badge ? (
+                    <label className={menuItem.badge}>
+                      {menuItem.badgetxt}
+                    </label>
+                  ) : (
+                    ""
+                  )}
+                  <div className="according-menu">
+                    {menuItem.active ? (
+                      <i className="fa fa-angle-down"></i>
+                    ) : (
+                      <i className="fa fa-angle-right"></i>
+                    )}
+                  </div>
+                </a>
+              ) : (
+                ""
+              )}
+
+              {menuItem.type === "link" ? (
+                <Link
+                  to={menuItem.path + "/"}
+                  className={`sidebar-link sidebar-title link-nav  ${
+                    CurrentPath.includes(menuItem.title.toLowerCase())
+                      ? "active"
+                      : ""
+                  }`}
+                  onClick={() => toggletNavActive(menuItem)}
+                >
+                  <SvgIcon
+                    className="stroke-icon"
+                    iconId={`stroke-${menuItem.icon}`}
+                  />
+                  <SvgIcon
+                    className="fill-icon"
+                    iconId={`fill-${menuItem.icon}`}
+                  />
+                  <span>{t(menuItem.title)}</span>
+                  {menuItem.badge ? (
+                    <label className={menuItem.badge}>
+                      {menuItem.badgetxt}
+                    </label>
+                  ) : (
+                    ""
+                  )}
+                </Link>
+              ) : (
+                ""
+              )}
+
+              {menuItem.children ? (
+                <ul
+                  className="sidebar-submenu"
+                  style={
+                    layout1 !== "compact-sidebar compact-small"
+                      ? menuItem?.active ||
+                        CurrentPath.includes(menuItem?.title?.toLowerCase())
+                        ? sidebartoogle
+                          ? { opacity: 1, transition: "opacity 500ms ease-in" }
+                          : { display: "block" }
+                        : { display: "none" }
+                      : { display: "none" }
+                  }
+                >
+                  {menuItem.children.map((childrenItem, index) => {
+                    return (
+                      <li key={index}>
+                        {childrenItem.type === "sub" ? (
+                          <a
+                            href="javascript"
+                            className={`${
+                              CurrentPath.includes(
+                                childrenItem?.title?.toLowerCase()
+                              )
+                                ? "active"
+                                : ""
+                            }`}
+                            onClick={(event) => {
+                              event.preventDefault();
+                              toggletNavActive(childrenItem);
+                            }}
+                          >
+                            {t(childrenItem.title)}
+                            <span className="sub-arrow">
+                              <i className="fa fa-chevron-right"></i>
+                            </span>
+                            <div className="according-menu">
+                              {childrenItem.active ? (
+                                <i className="fa fa-angle-down"></i>
+                              ) : (
+                                <i className="fa fa-angle-right"></i>
+                              )}
+                            </div>
+                          </a>
+                        ) : (
+                          ""
+                        )}
+
+                        {childrenItem.type === "link" ? (
+                          <Link
+                            to={childrenItem.path}
+                            className={`${
+                              CurrentPath.includes(
+                                childrenItem?.title?.toLowerCase()
+                              )
+                                ? "active"
+                                : ""
+                            }`}
+                            onClick={() => toggletNavActive(childrenItem)}
+                          >
+                            {t(childrenItem.title)}
+                          </Link>
+                        ) : (
+                          ""
+                        )}
+
+                        {childrenItem.children ? (
+                          <ul
+                            className="nav-sub-childmenu submenu-content"
+                            style={
+                              CurrentPath.includes(
+                                childrenItem?.title?.toLowerCase()
+                              ) || childrenItem.active
+                                ? { display: "block" }
+                                : { display: "none" }
+                            }
+                          >
+                            {childrenItem.children.map(
+                              (childrenSubItem, key) => (
+                                <li key={key}>
+                                  {childrenSubItem.type === "link" ? (
+                                    <Link
+                                      to={childrenSubItem.path + "/"}
+                                      className={`${
+                                        CurrentPath.includes(
+                                          childrenSubItem?.title?.toLowerCase()
+                                        )
+                                          ? "active"
+                                          : ""
+                                      }`}
+                                      onClick={() =>
+                                        toggletNavActive(childrenSubItem)
+                                      }
+                                    >
+                                      {t(childrenSubItem.title)}
+                                    </Link>
+                                  ) : (
+                                    ""
+                                  )}
+                                </li>
+                              )
+                            )}
+                          </ul>
+                        ) : (
+                          ""
+                        )}
+                      </li>
+                    );
+                  })}
+                </ul>
+              ) : (
+                ""
+              )}
+            </li>
+          ))}
+        </Fragment>
+      )))
+      }
     </>
   );
 };

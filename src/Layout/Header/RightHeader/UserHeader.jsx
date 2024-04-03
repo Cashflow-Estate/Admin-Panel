@@ -13,6 +13,8 @@ import {
   ChangePassword,
 } from "../../../Constant";
 import img from "../../../assets/images/user/1.jpg"
+import { useDispatch, useSelector } from "react-redux";
+import { removeUserInfo } from "../../../features/auth/authSlice";
 
 const UserHeader = () => {
   const history = useNavigate();
@@ -21,19 +23,25 @@ const UserHeader = () => {
   const { layoutURL } = useContext(CustomizerContext);
   const authenticated = JSON.parse(localStorage.getItem("authenticated"));
   const auth0_profile = JSON.parse(localStorage.getItem("auth0_profile"));
+  const userAuth=useSelector((state)=>state.auth.isAuthenticated)
+  console.log("🚀 ~ UserHeader ~ userAuth:", userAuth)
+  const userName=useSelector((state)=>state.auth.userInfo.userName)
+  const userRole=useSelector((state)=>state.auth.role)
+  console.log("🚀 ~ UserHeader ~ userName:", userName)
 
   useEffect(() => {
     setProfile(localStorage.getItem("profileURL") || man);
     setName(localStorage.getItem("Name") ? localStorage.getItem("Name") : name);
   }, []);
-
+const dispatch=useDispatch()
   const Logout = () => {
+    dispatch(removeUserInfo())
     localStorage.removeItem("profileURL");
     localStorage.removeItem("token");
     localStorage.removeItem("auth0_profile");
     localStorage.removeItem("Name");
     localStorage.setItem("authenticated", false);
-    history(`${process.env.PUBLIC_URL}/login`);
+    history(`${process.env.PUBLIC_URL}`);
   };
 
   const UserMenuRedirect = (redirect) => {
@@ -47,14 +55,14 @@ const UserHeader = () => {
           attrImage={{
             className: "img-40 m-0 rounded-circle",
 
-            src: `${authenticated ?img : img}`,
+            src: `${userAuth ?img : img}`,
             alt: "",
           }}
         />
         <div className="media-body">
-          <span>{authenticated ? auth0_profile.name : name}</span>
+          <span>{userAuth ? userName : name}</span>
           <P attrPara={{ className: "mb-0 font-roboto" }}>
-            {Admin} <i className="middle fa fa-angle-down"></i>
+            {userRole} <i className="middle fa fa-angle-down"></i>
           </P>
         </div>
       </div>
