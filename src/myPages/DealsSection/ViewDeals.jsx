@@ -4,8 +4,9 @@ import ListOfImageDesc from "./comp/ListOfImgDesc";
 import { Container, Row } from "reactstrap";
 import GalleryContext from "../../_helper/Gallery";
 import DealCategory from "./comp/DealCategory";
-import iii from "../../../src/assets/cashflowimg/apartments/a1.png"
+import iii from "../../../src/assets/cashflowimg/apartments/a1.png";
 import AllDealsTable from "./comp/AllDealsTable";
+import { useSelector } from "react-redux";
 const ViewDeals = () => {
   const { images, smallImages } = useContext(GalleryContext);
   const initilindex = { index: 0, isOpen: false };
@@ -14,26 +15,26 @@ const ViewDeals = () => {
   const callback = useCallback((photo) => {
     setPhotoIndex(photo);
   });
+  const userRole = useSelector((state) => state.auth.role);
 
   return (
     <Fragment>
       <Breadcrumbs mainTitle="Deals" parent="Deals" title="All Deals" />
 
       {/* <Container fluid={true}> */}
-        {/* <Row> */}
-          {/* <DealCategory smallImages={featureProduct} /> */}
-          {/* <ListOfImageDesc
+      {/* <Row> */}
+      {/* <DealCategory smallImages={featureProduct} /> */}
+      {/* <ListOfImageDesc
             smallImages={featureProduct}
             setPhotoIndex={callback}
             photoIndex={photoIndex}
             withDesc={true}
           /> */}
-          <AllDealsTable/>
-        {/* </Row>
+      {userRole === "Admin" ? <AllDealsTable /> : "User Deals"}
+      {/* </Row>
       </Container> */}
     </Fragment>
   );
 };
 
 export default ViewDeals;
-

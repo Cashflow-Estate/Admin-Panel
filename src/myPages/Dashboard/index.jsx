@@ -49,13 +49,7 @@ const AdminDashboard = () => {
     </>
   );
 };
-const CustomerDashboard = () => {
-  return (
-    <Row>
-      <H4>Slow Flip Dashboard</H4>
-    </Row>
-  );
-};
+
 
 const WidgetsGrid = () => {
   return (
@@ -451,4 +445,11 @@ const lineChart2 = {
       },
     ],
   },
+};
+const CustomerDashboard = () => {
+  return (
+    <Row>
+      <H4>Slow Flip Dashboard</H4>
+    </Row>
+  );
 };

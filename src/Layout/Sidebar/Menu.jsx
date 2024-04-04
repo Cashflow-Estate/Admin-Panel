@@ -65,6 +65,7 @@ export const MENUITEMS_FOR_Admin = [
           },
           {
             path: `/subscription-packages/view`,
+            
             type: "link",
             title: "View Packages",
           },
@@ -162,11 +163,7 @@ export const MENUITEMS_FOR_Admin = [
           },
         ],
       },
-      {
-        path: ``,
-        type: "link",
-        title: "Logout",
-      },
+    
     ],
   },
 ];
@@ -187,6 +184,39 @@ export const MENUITEMS_FOR_User = [
         title: "Profile",
         icon: "user",
       },
+    ],
+  },
+  {
+    menutitle: "Application",
+    menucontent: "Application",
+    Items: [
+      {
+        path: `/subscription-package`,
+        type: "link",
+        title: "Subscription-Package",
+        icon: "ecommerce",
+
+      },
+      {
+        path: `/deals/view`,
+        icon: "task",
+
+        type: "link",
+        title: "View Deals",
+      },
+      {
+        path: `/crm`,
+        type: "link",
+        title: "CRM",
+        icon: "user",
+      },
+      {
+        title: "Upcoming-Call",
+        icon: "icons",
+        type: "link",
+        path: `/upcoming-call`,
+      },
+    
     ],
   },
 
@@ -356,11 +386,7 @@ export const MENUITEMS = [
           },
         ],
       },
-      {
-        path: ``,
-        type: "link",
-        title: "Logout",
-      },
+    
     ],
   },
 ];

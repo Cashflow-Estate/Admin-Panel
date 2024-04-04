@@ -17,15 +17,10 @@ const ResetPassword = ({ logoClassMain }) => {
             <Col xl='12 p-0'>
               <div className='login-card'>
                 <div>
-                  <div>
-                    <Link className={`logo ${logoClassMain ? logoClassMain : ''}`} to={process.env.PUBLIC_URL}>
-                      <Image attrImage={{ className: 'img-fluid for-light', src: logoWhite, alt: 'looginpage' }} />
-                      <Image attrImage={{ className: 'img-fluid for-dark', src: logoDark, alt: 'looginpage' }} />
-                    </Link>
-                  </div>
+              
                   <div className='login-main'>
                     <Form className='theme-form login-form'>
-                      <H4>Create Your Password</H4>
+                      <H4>Create New Password</H4>
                       <FormGroup className='position-relative'>
                         <Label className='m-0 col-form-label'>New Password</Label>
                         <div className='position-relative'>

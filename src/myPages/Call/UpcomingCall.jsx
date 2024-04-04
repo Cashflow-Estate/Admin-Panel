@@ -11,8 +11,11 @@ import {
 import SvgIcon from "../../Components/Common/Component/SvgIcon";
 import { Card, CardBody, CardHeader } from "reactstrap";
 import { useNavigate } from "react-router";
+import { useSelector } from "react-redux";
 
 const UpcomingCall = () => {
+  const userRole = useSelector((state) => state.auth.role);
+
   const history = useNavigate();
   const call = () => {
     history("/schedule-call");
@@ -29,17 +32,19 @@ const UpcomingCall = () => {
         <CardHeader className="card-no-border">
           <div className="header-top">
             <H5 attrH5={{ className: "m-0" }}>{"Schedule"}</H5>
-            <div className="card-header-right-icon">
-              <Btn
-                onClick={call}
-                attrBtn={{
-                  color: "light-primary",
-                  className: "btn badge-light-primary",
-                }}
-              >
-                + {"Create"}
-              </Btn>
-            </div>
+            {userRole === "Admin" && (
+              <div className="card-header-right-icon">
+                <Btn
+                  onClick={call}
+                  attrBtn={{
+                    color: "light-primary",
+                    className: "btn badge-light-primary",
+                  }}
+                >
+                  + {"Create"}
+                </Btn>
+              </div>
+            )}
           </div>
         </CardHeader>
         <CardBody className="pt-0">

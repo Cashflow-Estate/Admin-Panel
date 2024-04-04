@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 import SvgIcon from "../../Components/Common/Component/SvgIcon";
 import CustomizerContext from "../../_helper/Customizer";
 import { MENUITEMS_FOR_Admin, MENUITEMS_FOR_User } from "./Menu";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { removeUserInfo } from "../../features/auth/authSlice";
 
 const SidebarMenuItems = ({
   setMainMenu,
@@ -59,8 +60,14 @@ const SidebarMenuItems = ({
     item.active = !item.active;
     setMainMenu({ mainmenu: MENUITEMS_FOR_Admin });
   };
-  const Role=useSelector((state)=>state.auth.role)
+  const dispatch = useDispatch();
+  const Role = useSelector((state) => state.auth.role);
 
+  const handleLogout = () => {
+    // Dispatch the removeUserInfo action upon logout
+    dispatch(removeUserInfo());
+    // Additional logout logic, such as redirecting the user to the login page
+  };
   return (
     <>
     {Role==="Admin"?  
@@ -462,6 +469,17 @@ const SidebarMenuItems = ({
         </Fragment>
       )))
       }
+      <li className="sidebar-list">
+        <Link
+          to="/logout"  // Set the path for logout
+          className="sidebar-link sidebar-title link-nav"
+          onClick={handleLogout} // Call handleLogout function on click
+        >
+          <SvgIcon className="stroke-icon" iconId="stroke-logout" />
+          <SvgIcon className="fill-icon" iconId="fill-logout" />
+          <span>Logout</span>
+        </Link>
+      </li>
     </>
   );
 };

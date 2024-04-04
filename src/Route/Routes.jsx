@@ -22,6 +22,7 @@ import UpcomingCall from "../myPages/Call/UpcomingCall";
 import Inquiry from "../myPages/DealsSection/comp/Inquiry";
 import UserDetails from "../myPages/myCutomers/UserDetails";
 import History from "../myPages/Call/History";
+import UserCurrentSubscription from "../myPages/SubscriptionPackages/UserCurrentSubscription";
 
 export const AdminRoutes = [
   {
@@ -133,6 +134,31 @@ export const UserRoutes = [
   {
     path: `/account/profile`,
     Component: <Profile />,
+  },
+  {
+    path: `/crm`,
+    Component: <UserDetails />,
+  },
+  {
+    path: `/deals/1`,
+    Component: <ViewMore />,
+  },
+  {
+    path: `/customer/Inquiry`,
+    Component: <Inquiry />,
+  },
+
+  {
+    path: `/upcoming-call`,
+    Component: <UpcomingCall />,
+  },
+  {
+    path: `/subscription-package`,
+    Component: <UserCurrentSubscription />,
+  },
+  {
+    path: `/deals/view`,
+    Component: <ViewDeals />,
   },
  
 ];
