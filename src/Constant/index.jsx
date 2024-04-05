@@ -151,7 +151,7 @@ export const BlogMessage = 'Amet minim mollit non deserunt ullamco est sit aliqu
 // Default Dashboard //
 // export const WelcomeToCuba = 'Welcome to cuba';
 export const WelcomeToCuba = 'Welcome to Cash-Flow Innovator';
-export const WelcomeMessage = 'Here whats happing in your account today';
+export const WelcomeMessage = 'Your future partner! ';
 export const WhatsNew = 'Whats New !';
 export const OverallBalanceTitle = 'Overall Balance';
 export const Earning = 'Earning';
@@ -179,7 +179,7 @@ export const TapUpBalance = 'Tap Up Balance';
 export const ValuableCustomerTitle = 'Valuable Customer';
 export const OrderThisMonthTitle = 'Order This Month';
 export const ToGoal = ' To Goal';
-export const MonthlyProfitsTitle = 'Monthly Profits';
+export const MonthlyProfitsTitle = 'Monthly Slow Flip Rate';
 export const MonthlyProfitsGrowth = 'Total profit growth of 30%';
 export const OrderOverviewTitle = 'Order Overview';
 export const Refunds = 'Refunds';

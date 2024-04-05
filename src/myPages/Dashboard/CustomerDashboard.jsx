@@ -144,7 +144,7 @@ const CustomerDashboard = () => {
    const MonthlyProfitsChartData = {
     series: [30, 55, 35],
     options: {
-      labels: ["Shoes", "Grocery", "other"],
+      labels: ["Plaza", "Store", "other"],
       chart: {
         type: "donut",
         height: 300,
@@ -303,7 +303,8 @@ const CustomerDashboard = () => {
     },
     {
       title: "Transactions(monthly)",
-      color: "secondary",
+      color: "warning",
+
       total: 389,
       gros: 10,
       prefix: "$",
@@ -426,19 +427,19 @@ const CustomerDashboard = () => {
   const OverallBalance = () => {
     const LightCardData = [
       {
-        title: "Income",
+        title: "Total",
         icon: "income",
         price: "$22,678",
       
       },
       {
-        title: "Expense",
+        title: "April",
         icon: "expense",
         price: "$12,057",
      
       },
       {
-        title: "Cashback",
+        title: "ROI",
         icon: "doller-return",
         price: "$8,475",
       },
