@@ -179,6 +179,13 @@ export const MENUITEMS_FOR_User = [
         icon: "user",
       },
       {
+        path: `/deals/view`,
+        icon: "task",
+
+        type: "link",
+        title: "View Deals",
+      },
+      {
         path: `/account/profile`,
         type: "link",
         title: "Profile",
@@ -191,19 +198,44 @@ export const MENUITEMS_FOR_User = [
     menucontent: "Application",
     Items: [
       {
-        path: `/subscription-package`,
+        title: "Transactions",
+        icon: "icons",
+
+        type: "sub",
+        children: [
+          {
+            title: "Deals",
+            type: "link",
+            path: `/deals/transactions`,
+          },
+          {
+            title: "Subscription",
+            type: "link",
+            path: `/subscription/transactions`,
+          },
+        ],
+      },
+      {
+        path: `/update-subscription`,
         type: "link",
-        title: "Subscription-Package",
+        title: "Update-Subscription",
         icon: "ecommerce",
 
       },
       {
-        path: `/deals/view`,
-        icon: "task",
-
+        path: `/debit-card`,
         type: "link",
-        title: "View Deals",
+        title: "Debit-Card",
+        icon: "ecommerce",
+
       },
+      {
+        path: `/inquiry`,
+        type: "link",
+        title: "Inquiry",
+        icon: "user",
+      },
+  
       {
         path: `/crm`,
         type: "link",

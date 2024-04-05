@@ -23,6 +23,8 @@ import Inquiry from "../myPages/DealsSection/comp/Inquiry";
 import UserDetails from "../myPages/myCutomers/UserDetails";
 import History from "../myPages/Call/History";
 import UserCurrentSubscription from "../myPages/SubscriptionPackages/UserCurrentSubscription";
+import UserCardDetails from "../myPages/SubscriptionPackages/comp/UserCardDetails";
+import DealsTransactions from "../myPages/DealsSection/DealsTransactions";
 
 export const AdminRoutes = [
   {
@@ -136,6 +138,14 @@ export const UserRoutes = [
     Component: <Profile />,
   },
   {
+    path: `/inquiry`,
+    Component: <DealsInquiry />,
+  },
+  {
+    path: `/customer/Inquiry`,
+    Component: <Inquiry />,
+  },
+  {
     path: `/crm`,
     Component: <UserDetails />,
   },
@@ -153,12 +163,23 @@ export const UserRoutes = [
     Component: <UpcomingCall />,
   },
   {
-    path: `/subscription-package`,
+    path: `/update-subscription`,
     Component: <UserCurrentSubscription />,
+  },
+  {
+    path: `/debit-card`,
+    Component: <UserCardDetails />,
   },
   {
     path: `/deals/view`,
     Component: <ViewDeals />,
   },
- 
+  {
+    path: `/deals/transactions`,
+    Component: <DealsTransactions />,
+  },
+  {
+    path: `/subscription/transactions`,
+    Component: <ViewTransactions showBreadcrumbs={false} />,
+  },
 ];
