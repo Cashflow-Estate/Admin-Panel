@@ -299,7 +299,7 @@ const lcation=useLocation();
 
 export default UserDetails;
 
-const UserProfile = ({ user }) => {
+export const UserProfile = ({ user }) => {
   return (
     <Col xl="12" sm="12" xxl="12" className="col-ed-12 box-col-4">
       <Card className="social-profile">
