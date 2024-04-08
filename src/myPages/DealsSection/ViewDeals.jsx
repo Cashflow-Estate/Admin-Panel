@@ -4,7 +4,7 @@ import ListOfImageDesc from "./comp/ListOfImgDesc";
 import { Container, Row,Col,Input } from "reactstrap";
 import GalleryContext from "../../_helper/Gallery";
 import DealCategory from "./comp/DealCategory";
-import iii from "../../../src/assets/cashflowimg/apartments/a1.png";
+import iii from "../../../src/assets/cashflowimg/immmmggg.jpg";
 import AllDealsTable from "./comp/AllDealsTable";
 import { useSelector } from "react-redux";
 import FilterContext from "../../_helper/Ecommerce/Filter";
