@@ -35,7 +35,7 @@ const App = () => (
             {/* <LearningProvider> */}
             {/* <JobSearchProvider> */}
             {/* <WishListProvider> */}
-            {/* <FilterProvider> */}
+            <FilterProvider>
             {/* <CartProvider> */}
             <ProductProvider>
               {/* <SearchResultProvider> */}
@@ -69,7 +69,7 @@ const App = () => (
               {/* </SearchResultProvider> */}
             </ProductProvider>
             {/* </CartProvider> */}
-            {/* </FilterProvider> */}
+            </FilterProvider>
             {/* </WishListProvider> */}
             {/* </JobSearchProvider> */}
             {/* </LearningProvider> */}
