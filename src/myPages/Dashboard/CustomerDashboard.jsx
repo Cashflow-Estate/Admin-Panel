@@ -10,6 +10,8 @@ import {
   P,
   UL,
 } from "../../AbstractElements";
+import { BsArrowLeftCircleFill, BsArrowRightCircleFill } from "react-icons/bs";
+
 import SvgIcon from "../../Components/Common/Component/SvgIcon";
 import {
   Card,
@@ -52,7 +54,11 @@ import Charts from "react-apexcharts";
 import { useSelector } from "react-redux";
 import img from "../../assets/images/dashboard/cartoon.svg";
 import greetingImage from "../../assets/images/dashboard-3/better.png";
+import "./Carousel.css";
+import iimmgg from "../../assets/cashflowimg/ban.jpg";
+import hous from "../../assets/cashflowimg/house-banner.png";
 
+import Slider from 'react-slick';
 import ReactApexChart from "react-apexcharts";
 import { UserProfile } from "../myCutomers/UserDetails";
 const CustomerDashboard = () => {
@@ -68,13 +74,19 @@ const CustomerDashboard = () => {
     PackageName: "Pro",
     MemberType: "Customer",
   };
+  const productItems = [
+    { type: 'horizontal', src: iimmgg },
+    { type: 'horizontal', src: hous },
+    { type: 'vertical', src: iimmgg },
+  ];
   return (
     <Container fluid={true}>
       <Row>
+        <Carousel adItems={productItems}/>
         <GreetingCard />
         <WidgetsGrids />
-        <OverallBalance />
-        <UserProfile user={user} />
+        {/* <OverallBalance /> */}
+        {/* <UserProfile user={user} /> */}
         <MonthlyProfits />
         <GreetingCard2 />
       </Row>
@@ -82,6 +94,57 @@ const CustomerDashboard = () => {
   );
 };
 export default CustomerDashboard;
+
+
+
+
+const Carousel = ({ adItems }) => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    autoplay: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplaySpeed: 3000,
+    nextArrow: <CustomArrow direction="right" />,
+    prevArrow: <CustomArrow direction="left" />,
+    customPaging: function (i) {
+      return (
+        <button className={`indicator ${currentSlide === i ? 'active' : ''}`}>
+          <span className="sr-only">Slide {i + 1}</span>
+        </button>
+      );
+    },
+    beforeChange: (oldIndex, newIndex) => {
+      setCurrentSlide(newIndex);
+    }
+  };
+
+  return (
+    <Slider {...settings}>
+      {adItems?.map((item, idx) => (
+        <div key={idx} className="slide-container">
+          <img src={item.src} alt={item.type === 'horizontal' ? 'Horizontal Ad' : 'Vertical Ad'} className="slide" />
+        </div>
+      ))}
+    </Slider>
+  );
+};
+
+const CustomArrow = ({ onClick, direction }) => (
+  <div className={`arrow arrow-${direction}`} onClick={onClick}>
+    {direction === 'left' ? (
+      <BsArrowLeftCircleFill className="arrow-icon" />
+    ) : (
+      <BsArrowRightCircleFill className="arrow-icon" />
+    )}
+  </div>
+);
+
+
 const GreetingCard2 = () => {
   return (
     <Col md="4" className="box-col-4">
@@ -277,7 +340,7 @@ const MonthlyProfitsChartData = {
 };
 const WidgetsGrids = () => {
   return (
-    <Col md="6" className="box-col-6">
+    <Col md="8" className="box-col-8">
       <Row>
         {SmallWidgetsDatas.map((data, i) => (
           <Col xs="6" key={i}>
@@ -311,7 +374,7 @@ const SmallWidgetsDatas = [
     icon: "sale",
   },
   {
-    title: "Transactions(monthly)",
+    title: "Transactions(Deals)",
     color: "warning",
 
     total: 389,
