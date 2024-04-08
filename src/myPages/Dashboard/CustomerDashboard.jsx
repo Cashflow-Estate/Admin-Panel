@@ -76,7 +76,7 @@ const CustomerDashboard = () => {
   };
   const productItems = [
     { type: 'horizontal', src: iimmgg },
-    { type: 'horizontal', src: hous },
+    // { type: 'horizontal', src: hous },
     { type: 'vertical', src: iimmgg },
   ];
   return (
