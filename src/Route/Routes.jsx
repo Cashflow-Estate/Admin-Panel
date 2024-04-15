@@ -25,6 +25,7 @@ import History from "../myPages/Call/History";
 import UserCurrentSubscription from "../myPages/SubscriptionPackages/UserCurrentSubscription";
 import UserCardDetails from "../myPages/SubscriptionPackages/comp/UserCardDetails";
 import DealsTransactions from "../myPages/DealsSection/DealsTransactions";
+import AddProperty from "../myPages/DealsSection/AddProperty";
 
 export const AdminRoutes = [
   {
@@ -173,6 +174,10 @@ export const UserRoutes = [
   {
     path: `/deals/view`,
     Component: <ViewDeals />,
+  },
+  {
+    path: `/new-property`,
+    Component: <AddProperty />,
   },
   {
     path: `/deals/transactions`,

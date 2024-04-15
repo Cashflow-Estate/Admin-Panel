@@ -15,7 +15,7 @@ import { Card, Button } from "reactstrap";
 import CartContext from "../../_helper/Ecommerce/Cart";
 import ProductContext from "../../_helper/Ecommerce/Product";
 
-const ViewDeals = () => {
+const ViewDeals = ({AddProperty}) => {
   const { images, smallImages } = useContext(GalleryContext);
   const initilindex = { index: 0, isOpen: false };
   const [photoIndex, setPhotoIndex] = useState(initilindex);
@@ -29,36 +29,27 @@ const ViewDeals = () => {
     <Fragment>
       <Breadcrumbs mainTitle="Deals" parent="Deals" title="All Deals" />
 
-      {/* <Container fluid={true}> */}
-      {/* <Row> */}
-      {/* <DealCategory smallImages={featureProduct} /> */}
-      {/* <ListOfImageDesc
-            smallImages={featureProduct}
-            setPhotoIndex={callback}
-            photoIndex={photoIndex}
-            withDesc={true}
-          /> */}
-      {userRole === "Admin" ? <AllDealsTable /> : <ProductContain/>}
-      {/* </Row>
-      </Container> */}
+
+      {userRole === "Admin" ? <AllDealsTable /> : <ProductContain AddProperty={AddProperty}/>}
+    
     </Fragment>
   );
 };
 
 export default ViewDeals;
-const ProductContain = () => {
+const ProductContain = ({AddProperty}) => {
   return (
       <Fragment>
           <Container fluid={true} className="product-wrapper" id="product-wrapper">
               <div className="product-grid">
-                  <ProductTotal />
+                  <ProductTotal AddProperty={AddProperty}/>
                   <ProductGrid />
               </div>
           </Container>
       </Fragment>
   );
 };
-const ProductTotal = () => {
+const ProductTotal = ({AddProperty}) => {
   const { setFilterContext } = useContext(FilterContext);
   const [filterSidebar, setFilterSidebar] = useState(true);
   const onFilterClick = () => {
@@ -114,57 +105,30 @@ const ProductTotal = () => {
               <ChevronDown className=' toggle-data' />
             </span>
           </span>
-          {/* <div className='grid-options d-inline-block'>
-            <UL attrUL={{ className: 'list-group', as: 'ul' }}>
-              <LI attrLI={{ className: 'border-0' }}>
-                <a className='product-2-layout-view' onClick={() => LayoutView(6)} href='#javascript'>
-                  <span className='line-grid line-grid-1 bg-primary'></span>
-                  <span className='line-grid line-grid-2 bg-primary'></span>
-                </a>
-              </LI>
-              <LI attrLI={{ className: 'border-0' }}>
-                <a className='product-3-layout-view' onClick={() => LayoutView(4)} href='#javascript'>
-                  <span className='line-grid line-grid-3 bg-primary'></span>
-                  <span className='line-grid line-grid-4 bg-primary'></span>
-                  <span className='line-grid line-grid-5 bg-primary'></span>
-                </a>
-              </LI>
-              <LI attrLI={{ className: 'border-0' }}>
-                <a className='product-4-layout-view' onClick={() => LayoutView(3)} href='#javascript'>
-                  <span className='line-grid line-grid-6 bg-primary'></span>
-                  <span className='line-grid line-grid-7 bg-primary'></span>
-                  <span className='line-grid line-grid-8 bg-primary'></span>
-                  <span className='line-grid line-grid-9 bg-primary'></span>
-                </a>{' '}
-              </LI>
-              <LI attrLI={{ className: 'border-0' }}>
-                <a className='product-6-layout-view' onClick={() => LayoutView(2)} href='#javascript'>
-                  <span className='line-grid line-grid-10 bg-primary'></span>
-                  <span className='line-grid line-grid-11 bg-primary'></span>
-                  <span className='line-grid line-grid-12 bg-primary'></span>
-                  <span className='line-grid line-grid-13 bg-primary'></span>
-                  <span className='line-grid line-grid-14 bg-primary'></span>
-                  <span className='line-grid line-grid-15 bg-primary'></span>
-                </a>
-              </LI>
-            </UL>
-          </div> */}
+     
         </Col>
-        <Sorting />
+        <Sorting AddProperty={AddProperty} />
       </Row>
     </Fragment>
   );
 };
 
 
-const Sorting = () => {
+const Sorting = ({AddProperty}) => {
   const { filterSortBy } = useContext(FilterContext);
   const filterSortFunc = (event) => {
     filterSortBy(event);
   };
+  const history = useNavigate();
+
+  const handleAddProperty=()=>{
+history("/new-property")
+  }
   return (
     <Fragment>
       <Col md='6' className='text-sm-end'>
+    {AddProperty &&  <Button color='success' onClick={handleAddProperty}>Create new property</Button>
+  }
         <div className='select2-drpdwn-product select-options d-inline-block' onChange={(e) => filterSortFunc(e.target.value)}>
           <Input className='form-control btn-square' type='select' name='select'>
             <option value='Featured'>{Featured}</option>

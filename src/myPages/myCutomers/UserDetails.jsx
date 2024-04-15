@@ -40,6 +40,7 @@ import RecentDealsTransaction from "../DealsSection/comp/RecentDealsTransaction"
 import DealsTransactions from "../DealsSection/DealsTransactions";
 import InsuranceTemplate from "./InsuranceTemplate";
 import { useLocation, useNavigate } from "react-router-dom";
+import ViewDeals from "../DealsSection/ViewDeals";
 
 const UserDetails = () => {
   const [whatsAppUrl, setWhatsAppUrl] = useGenerateWhatsappUrl();
@@ -103,6 +104,23 @@ const lcation=useLocation();
                     }}
                   >
                     Profile
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink
+                    className={classnames({ "text-white": activeTab !== "1" })}
+                    style={{
+                      backgroundColor: activeTab === "15" ? "green" : "black",
+                      color: activeTab === "15" ? "white" : "white",
+                      borderRadius: "15px",
+                      padding: "10px",
+                      marginRight: "5px",
+                    }}
+                    onClick={() => {
+                      toggleTab("15");
+                    }}
+                  >
+                    Properties
                   </NavLink>
                 </NavItem>
                 <NavItem>
@@ -252,6 +270,9 @@ const lcation=useLocation();
               <TabContent activeTab={activeTab}>
                 <TabPane tabId="1">
                   <UserProfile user={user} />
+                </TabPane>
+                <TabPane tabId="15">
+                  <ViewDeals AddProperty={true} />
                 </TabPane>
                 <TabPane tabId="2">
                   <UserDeals heading={"Featured Deals"} />

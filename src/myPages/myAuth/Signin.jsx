@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect, useContext } from "react";
 import { Col, Container, Form, FormGroup, Input, Label, Row } from "reactstrap";
-import { Btn, H4, H5, P } from "../../AbstractElements";
+import { Btn, H4, H5, P, Spinner } from "../../AbstractElements";
 import {
   CreateNewAccount,
   EmailAddress,
@@ -23,6 +23,7 @@ const Signin = ({ selected }) => {
   const [email, setEmail] = useState("test@gmail.com");
   const [password, setPassword] = useState("test123");
   const [togglePassword, setTogglePassword] = useState(false);
+  const [loader, setLoader] = useState(false);
   const navigate = useNavigate();
   const { layoutURL } = useContext(CustomizerContext);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -30,6 +31,15 @@ const Signin = ({ selected }) => {
   const [value, setValue] = useState(localStorage.getItem("profileURL" || man));
   const [name, setName] = useState(localStorage.getItem("Name"));
   const dispatch = useDispatch();
+   const Data = [
+
+    {
+        id: 2,
+        heading: 'Loader 3',
+        spinnerClass: 'loader-3'
+    },
+  
+];
   useEffect(() => {
     localStorage.setItem("profileURL", man);
     localStorage.setItem("Name", "Emay Walter");
@@ -38,9 +48,10 @@ const Signin = ({ selected }) => {
     e.preventDefault();
     setValue(man);
     setName("Emay Walter");
+    setLoader(true)
     try {
       const response = await axios.post(
-        "https://cashflow-pnra.onrender.com/api/v1/users/login",
+        "http://localhost:5000/api/v1/users/login",
         {
           email: email,
           password: password,
@@ -52,6 +63,7 @@ const Signin = ({ selected }) => {
 
         await new Promise((resolve) => setTimeout(resolve, 100));
         toast.success("Successfully logged in!..");
+        setLoader(false)
         setTimeout(() => {
           navigate(`/dashboard`);
         }, 2000);
@@ -115,6 +127,9 @@ const Signin = ({ selected }) => {
                         onClick: (e) => loginAuth(e),
                       }}
                     >
+                      {loader&& <div className="loader-box">
+                      <Spinner attrSpinner={{ className: Data[0].spinnerClass }} />
+                    </div>}
                       {SignIn}
                     </Btn>
                   </div>
