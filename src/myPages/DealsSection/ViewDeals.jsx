@@ -26,7 +26,7 @@ import {
   ModalBody,
   ModalFooter,
 } from "reactstrap";
-import { Pagination, PaginationItem, PaginationLink } from "reactstrap";
+import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 
 import GalleryContext from "../../_helper/Gallery";
 import DealCategory from "./comp/DealCategory";
@@ -420,7 +420,9 @@ const ProductGrid = ({ photoIndexSlider, setPhotoIndexSlider }) => {
                         <P>{"10737 Evanston Avenue N, Seattle, WA 98133"}</P>
                       </div>
                     </div>
+                    
                   </Card>
+                  
                 </div>
               );
             })}
@@ -431,38 +433,23 @@ const ProductGrid = ({ photoIndexSlider, setPhotoIndexSlider }) => {
               images={images}
             />
           )}
-          <Col xl="12" className="d-flex justify-content-end mb-4">
-            <Pagination
-              aria-label="Page navigation example"
-              className="pagination-primary"
-            >
-              <PaginationItem>
-                <PaginationLink
-                  previous
-                  onClick={() => paginate(currentPage - 1)}
-                  disabled={currentPage === 1}
-                />
+          
+          <Pagination aria-label="Page navigation example" className="pagination-primary">
+            <PaginationItem>
+              <PaginationLink previous onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1} />
+            </PaginationItem>
+            {Array.from({ length: Math.ceil(products.length / itemsPerPage) }).map((_, index) => (
+              <PaginationItem key={index} active={index + 1 === currentPage}>
+                <PaginationLink onClick={() => paginate(index + 1)}>
+                  {index + 1}
+                </PaginationLink>
               </PaginationItem>
-              {Array.from({
-                length: Math.ceil(products.length / itemsPerPage),
-              }).map((_, index) => (
-                <PaginationItem key={index} active={index + 1 === currentPage}>
-                  <PaginationLink onClick={() => paginate(index + 1)}>
-                    {index + 1}
-                  </PaginationLink>
-                </PaginationItem>
-              ))}
-              <PaginationItem>
-                <PaginationLink
-                  next
-                  onClick={() => paginate(currentPage + 1)}
-                  disabled={
-                    currentPage === Math.ceil(products.length / itemsPerPage)
-                  }
-                />
-              </PaginationItem>
-            </Pagination>
-          </Col>
+            ))}
+            <PaginationItem>
+              <PaginationLink next onClick={() => paginate(currentPage + 1)} disabled={currentPage === Math.ceil(products.length / itemsPerPage)} />
+            </PaginationItem>
+          </Pagination>
+      
         </Row>
       </div>
     </Fragment>
@@ -470,7 +457,6 @@ const ProductGrid = ({ photoIndexSlider, setPhotoIndexSlider }) => {
 };
 
 const SingleImage = ({ photoIndex, setPhotoIndex, images }) => {
-  console.log("🚀 ~ SingleImage ~ imagessssssssss:", images);
   const onMovePrev = () => {
     const prev = (photoIndex.index + images.length - 1) % images.length;
     setPhotoIndex({ ...photoIndex, index: prev });
