@@ -16,7 +16,10 @@ import UploadProjectFileClass from "./comp/UploadProjectFile";
 
 const AddProperty = () => {
   const [propertyType, setPropertyType] = useState("single_family_home");
-  const [address, setAddress] = useState("");
+  const [city, setCity] = useState("");
+  const [state, setState] = useState("");
+  const [country, setCountry] = useState("");
+  const [zip, setZip] = useState("");
   const [totalUnits, setTotalUnits] = useState("");
   const [amountPerMonth, setAmountPerMonth] = useState("");
   const [formErrors, setFormErrors] = useState({});
@@ -34,8 +37,17 @@ const AddProperty = () => {
     event.preventDefault();
     const errors = {};
 
-    if (!address.trim()) {
-      errors.address = "Address is required";
+    if (!city.trim()) {
+      errors.city = "City is required";
+    }
+    if (!state.trim()) {
+      errors.state = "State is required";
+    }
+    if (!country.trim()) {
+      errors.country = "Country is required";
+    }
+    if (!zip.trim()) {
+      errors.zip = "ZIP code is required";
     }
 
     if (propertyType === "apartment" && !totalUnits.trim()) {
@@ -48,7 +60,7 @@ const AddProperty = () => {
     }
 
     setFormErrors({});
-    console.log({ propertyType, address, totalUnits, description, amountPerMonth });
+    console.log({ propertyType, city, state, country, zip, totalUnits, description, amountPerMonth });
   };
 
   const handleAddProperty = () => {
@@ -81,17 +93,56 @@ const AddProperty = () => {
                 <Card className="mt-4">
                   <Card.Body>
                     <Form onSubmit={handleSubmit}>
-                      <Form.Group controlId="formPropertyAddress">
-                        <Form.Label>Address</Form.Label>
+                      <Form.Group controlId="formPropertyCity">
+                        <Form.Label>City</Form.Label>
                         <Form.Control
                           type="text"
-                          placeholder="Enter address"
-                          value={address}
-                          onChange={(e) => setAddress(e.target.value)}
-                          isInvalid={!!formErrors.address}
+                          placeholder="Enter city"
+                          value={city}
+                          onChange={(e) => setCity(e.target.value)}
+                          isInvalid={!!formErrors.city}
                         />
                         <Form.Control.Feedback type="invalid">
-                          {formErrors.address}
+                          {formErrors.city}
+                        </Form.Control.Feedback>
+                      </Form.Group>
+                      <Form.Group controlId="formPropertyState">
+                        <Form.Label>State</Form.Label>
+                        <Form.Control
+                          type="text"
+                          placeholder="Enter state"
+                          value={state}
+                          onChange={(e) => setState(e.target.value)}
+                          isInvalid={!!formErrors.state}
+                        />
+                        <Form.Control.Feedback type="invalid">
+                          {formErrors.state}
+                        </Form.Control.Feedback>
+                      </Form.Group>
+                      <Form.Group controlId="formPropertyCountry">
+                        <Form.Label>Country</Form.Label>
+                        <Form.Control
+                          type="text"
+                          placeholder="Enter country"
+                          value={country}
+                          onChange={(e) => setCountry(e.target.value)}
+                          isInvalid={!!formErrors.country}
+                        />
+                        <Form.Control.Feedback type="invalid">
+                          {formErrors.country}
+                        </Form.Control.Feedback>
+                      </Form.Group>
+                      <Form.Group controlId="formPropertyZip">
+                        <Form.Label>ZIP Code</Form.Label>
+                        <Form.Control
+                          type="text"
+                          placeholder="Enter ZIP code"
+                          value={zip}
+                          onChange={(e) => setZip(e.target.value)}
+                          isInvalid={!!formErrors.zip}
+                        />
+                        <Form.Control.Feedback type="invalid">
+                          {formErrors.zip}
                         </Form.Control.Feedback>
                       </Form.Group>
                       <Form.Group controlId="formAmountPerMonth">
@@ -118,17 +169,56 @@ const AddProperty = () => {
                 <Card className="mt-4">
                   <Card.Body>
                     <Form onSubmit={handleSubmit}>
-                      <Form.Group controlId="formPropertyAddressCondo">
-                        <Form.Label>Address</Form.Label>
+                      <Form.Group controlId="formPropertyCityCondo">
+                        <Form.Label>City</Form.Label>
                         <Form.Control
                           type="text"
-                          placeholder="Enter address"
-                          value={address}
-                          onChange={(e) => setAddress(e.target.value)}
-                          isInvalid={!!formErrors.address}
+                          placeholder="Enter city"
+                          value={city}
+                          onChange={(e) => setCity(e.target.value)}
+                          isInvalid={!!formErrors.city}
                         />
                         <Form.Control.Feedback type="invalid">
-                          {formErrors.address}
+                          {formErrors.city}
+                        </Form.Control.Feedback>
+                      </Form.Group>
+                      <Form.Group controlId="formPropertyStateCondo">
+                        <Form.Label>State</Form.Label>
+                        <Form.Control
+                          type="text"
+                          placeholder="Enter state"
+                          value={state}
+                          onChange={(e) => setState(e.target.value)}
+                          isInvalid={!!formErrors.state}
+                        />
+                        <Form.Control.Feedback type="invalid">
+                          {formErrors.state}
+                        </Form.Control.Feedback>
+                      </Form.Group>
+                      <Form.Group controlId="formPropertyCountryCondo">
+                        <Form.Label>Country</Form.Label>
+                        <Form.Control
+                          type="text"
+                          placeholder="Enter country"
+                          value={country}
+                          onChange={(e) => setCountry(e.target.value)}
+                          isInvalid={!!formErrors.country}
+                        />
+                        <Form.Control.Feedback type="invalid">
+                          {formErrors.country}
+                        </Form.Control.Feedback>
+                      </Form.Group>
+                      <Form.Group controlId="formPropertyZipCondo">
+                        <Form.Label>ZIP Code</Form.Label>
+                        <Form.Control
+                          type="text"
+                          placeholder="Enter ZIP code"
+                          value={zip}
+                          onChange={(e) => setZip(e.target.value)}
+                          isInvalid={!!formErrors.zip}
+                        />
+                        <Form.Control.Feedback type="invalid">
+                          {formErrors.zip}
                         </Form.Control.Feedback>
                       </Form.Group>
                       <Form.Group controlId="formAmountPerMonthCondo">
@@ -155,17 +245,56 @@ const AddProperty = () => {
                 <Card className="mt-4">
                   <Card.Body>
                     <Form onSubmit={handleSubmit}>
-                      <Form.Group controlId="formPropertyAddressApartment">
-                        <Form.Label>Address</Form.Label>
+                      <Form.Group controlId="formPropertyCityApartment">
+                        <Form.Label>City</Form.Label>
                         <Form.Control
                           type="text"
-                          placeholder="Enter address"
-                          value={address}
-                          onChange={(e) => setAddress(e.target.value)}
-                          isInvalid={!!formErrors.address}
+                          placeholder="Enter city"
+                          value={city}
+                          onChange={(e) => setCity(e.target.value)}
+                          isInvalid={!!formErrors.city}
                         />
                         <Form.Control.Feedback type="invalid">
-                          {formErrors.address}
+                          {formErrors.city}
+                        </Form.Control.Feedback>
+                      </Form.Group>
+                      <Form.Group controlId="formPropertyStateApartment">
+                        <Form.Label>State</Form.Label>
+                        <Form.Control
+                          type="text"
+                          placeholder="Enter state"
+                          value={state}
+                          onChange={(e) => setState(e.target.value)}
+                          isInvalid={!!formErrors.state}
+                        />
+                        <Form.Control.Feedback type="invalid">
+                          {formErrors.state}
+                        </Form.Control.Feedback>
+                      </Form.Group>
+                      <Form.Group controlId="formPropertyCountryApartment">
+                        <Form.Label>Country</Form.Label>
+                        <Form.Control
+                          type="text"
+                          placeholder="Enter country"
+                          value={country}
+                          onChange={(e) => setCountry(e.target.value)}
+                          isInvalid={!!formErrors.country}
+                        />
+                        <Form.Control.Feedback type="invalid">
+                          {formErrors.country}
+                        </Form.Control.Feedback>
+                      </Form.Group>
+                      <Form.Group controlId="formPropertyZipApartment">
+                        <Form.Label>ZIP Code</Form.Label>
+                        <Form.Control
+                          type="text"
+                          placeholder="Enter ZIP code"
+                          value={zip}
+                          onChange={(e) => setZip(e.target.value)}
+                          isInvalid={!!formErrors.zip}
+                        />
+                        <Form.Control.Feedback type="invalid">
+                          {formErrors.zip}
                         </Form.Control.Feedback>
                       </Form.Group>
                       <Form.Group controlId="formTotalUnitsApartment">

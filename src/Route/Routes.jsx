@@ -26,6 +26,7 @@ import UserCurrentSubscription from "../myPages/SubscriptionPackages/UserCurrent
 import UserCardDetails from "../myPages/SubscriptionPackages/comp/UserCardDetails";
 import DealsTransactions from "../myPages/DealsSection/DealsTransactions";
 import AddProperty from "../myPages/DealsSection/AddProperty";
+import AddNewOccupent from "../myPages/DealsSection/comp/AddNewOccupent";
 
 export const AdminRoutes = [
   {
@@ -178,6 +179,10 @@ export const UserRoutes = [
   {
     path: `/new-property`,
     Component: <AddProperty />,
+  },
+  {
+    path: `/new-occupent`,
+    Component: <AddNewOccupent />,
   },
   {
     path: `/deals/transactions`,

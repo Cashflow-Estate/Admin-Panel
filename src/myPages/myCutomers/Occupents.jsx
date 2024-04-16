@@ -3,6 +3,7 @@ import { Input, Modal, ModalBody, ModalFooter, Button } from "reactstrap";
 import DataTable from "react-data-table-component";
 import { Breadcrumbs } from "../../AbstractElements";
 import user3 from '../../assets/images/user/1.jpg';
+import { Link, useNavigate } from "react-router-dom";
 
 const Occupants = () => {
   const [filter, setFilter] = useState("All");
@@ -223,6 +224,8 @@ const Occupants = () => {
   ];
   
 
+
+
   const filteredData = supportData.filter((user) => {
     const nameMatches = user.name.toLowerCase().includes(searchTerm.toLowerCase());
     if (filter === "All") {
@@ -250,13 +253,20 @@ const Occupants = () => {
     console.log("View details for:", user);
     // Add your logic for viewing details here
   };
-
+  const history = useNavigate();
+  const handleAddOccupent = () => {
+    history("/new-occupent");
+  };
   return (
     <Fragment>
       <Breadcrumbs mainTitle="All Occupents" parent="Occupents" title="View Occupents" />
+  
       <div className="container-fluid">
         <div className="row">
-          <div className="col-md-6">
+        <div className="col-md-3">   <Button color="success" onClick={handleAddOccupent}>
+            Create new occupent
+          </Button></div>
+          <div className="col-md-5">
             <Input
               type="text"
               placeholder="Search by name"
@@ -265,7 +275,7 @@ const Occupants = () => {
               className="p-2"
             />
           </div>
-          <div className="col-md-6 text-right">
+          <div className="col-md-4 text-right">
             <Input
               type="select"
               value={filter}
@@ -275,7 +285,11 @@ const Occupants = () => {
               <option value="commercial">Commercial</option>
               <option value="residential">Residential</option>
             </Input>
+          
+    
+ 
           </div>
+     
         </div>
       </div>
       <div className="table-responsive support-table mt-3">
