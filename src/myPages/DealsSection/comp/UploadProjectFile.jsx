@@ -2,8 +2,9 @@ import React, { Fragment } from "react";
 import { Col, FormGroup, Label, Row } from "reactstrap";
 import { UploadProjectFile } from "../../../Constant";
 import Dropzone from "react-dropzone-uploader";
+import { H6 } from "../../../AbstractElements";
 
-const UploadProjectFileClass = () => {
+const UploadProjectFileClass = ({property}) => {
   const getUploadParams = ({ meta }) => {
     return {
       url: "https://httpbin.org/post",
@@ -17,7 +18,7 @@ const UploadProjectFileClass = () => {
       <Row>
         <Col>
           <FormGroup>
-            <Label>{UploadProjectFile}</Label>
+          { property? <H6>{"Add Prperty Closing Docs"}</H6>: <H6>{"Add Deals Files"}</H6>}
             <Dropzone
               className="dropzone dz-clickable"
               getUploadParams={getUploadParams}

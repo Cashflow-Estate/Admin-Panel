@@ -417,7 +417,7 @@ const SmallWidgetss = ({ data, mainClass }) => {
   );
 };
 
-const GreetingCard = () => {
+export const GreetingCard = () => {
   return (
     <Col className="col-xxl-4 col-sm-6 box-col-6">
       <Card className=" profile-box">

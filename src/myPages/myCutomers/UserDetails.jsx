@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useCallback, useMemo, useState } from "react";
 import { useGenerateWhatsappUrl } from "../../myHooks";
 import {
   Card,
@@ -25,6 +25,7 @@ import {
   ContactUs,
   ContactUsNumber,
   DDMMYY,
+  Dashboard,
   Designer,
   LocationDetails,
   MarkJecno,
@@ -41,18 +42,18 @@ import DealsTransactions from "../DealsSection/DealsTransactions";
 import InsuranceTemplate from "./InsuranceTemplate";
 import { useLocation, useNavigate } from "react-router-dom";
 import ViewDeals from "../DealsSection/ViewDeals";
-import Occupents from "./Occupents";
+import Occupants from "./Occupants";
+import { useSelector } from "react-redux";
+import InvestorDashboard from "../Dashboard/InvestorDashboard";
 
 const UserDetails = () => {
+  const role = useSelector((state) => state.auth.role);
   const [whatsAppUrl, setWhatsAppUrl] = useGenerateWhatsappUrl();
-  const [activeTab, setActiveTab] = useState("1");
-const navigate=useNavigate();
-const lcation=useLocation();
-  const toggleTab = (tab) => {
-    if (activeTab !== tab) setActiveTab(tab);
-  };
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [dropdownOpenTrans, setDropdownOpenTrans] = useState(false);
+
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const toggleDropdown = () => setDropdownOpen((prevState) => !prevState);
   const toggleDropdownTrans = () =>
@@ -75,21 +76,33 @@ const lcation=useLocation();
     MemberType: "Customer",
   };
 
+  const initialActiveTab = useMemo(() => {
+    return role === "Admin" ? "1" : "15";
+  }, [role]);
+
+  const toggleTab = useCallback((tab) => {
+    if (activeTab !== tab) setActiveTab(tab);
+  }, []);
+
+  const [activeTab, setActiveTab] = useState(initialActiveTab);
+
+
   return (
     <Fragment>
       <Breadcrumbs mainTitle="Abid Zaidi" parent="User" title="#1121" />
       <Row>
         <Col sm="12">
           <Card>
-              <Nav
-                tabs
-                style={{
-                  backgroundColor: "black",
-                  borderRadius: "15px",
-                  padding: "5px",
-                  marginBottom: "25px",
-                }}
-              >
+            <Nav
+              tabs
+              style={{
+                backgroundColor: "black",
+                borderRadius: "15px",
+                padding: "5px",
+                marginBottom: "25px",
+              }}
+            >
+              {role === "Admin" && (
                 <NavItem>
                   <NavLink
                     className={classnames({ "text-white": activeTab !== "1" })}
@@ -107,193 +120,235 @@ const lcation=useLocation();
                     Profile
                   </NavLink>
                 </NavItem>
-                <NavItem>
-                  <NavLink
-                    className={classnames({ "text-white": activeTab !== "1" })}
-                    style={{
-                      backgroundColor: activeTab === "15" ? "green" : "black",
-                      color: activeTab === "15" ? "white" : "white",
-                      borderRadius: "15px",
-                      padding: "10px",
-                      marginRight: "5px",
-                    }}
-                    onClick={() => {
-                      toggleTab("15");
-                    }}
-                  >
-                    Properties
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink
-                    className={classnames({ "text-white": activeTab !== "16" })}
-                    style={{
-                      backgroundColor: activeTab === "16" ? "green" : "black",
-                      color: activeTab === "15" ? "white" : "white",
-                      borderRadius: "15px",
-                      padding: "10px",
-                      marginRight: "5px",
-                    }}
-                    onClick={() => {
-                      toggleTab("16");
-                    }}
-                  >
-                    Occupents
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink
-                    className={classnames({ "text-white": activeTab !== "2" })}
-                    style={{
-                      backgroundColor: activeTab === "2" ? "green" : "black",
-                      color: activeTab === "2" ? "white" : "white",
-                      borderRadius: "15px",
-                      padding: "10px",
-                      marginRight: "5px",
-                    }}
-                    onClick={() => {
-                      toggleTab("2");
-                    }}
-                  >
-                    Customized Deals
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink
-                    className={classnames({ "text-white": activeTab !== "3" })}
-                    style={{
-                      backgroundColor: activeTab === "3" ? "green" : "black",
-                      color: activeTab === "3" ? "white" : "white",
-                      borderRadius: "15px",
-                      padding: "10px",
-                      marginRight: "5px",
-                    }}
-                    onClick={() => {
-                      toggleTab("3");
-                    }}
-                  >
-                    Deal Purchased
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink
-                    className={classnames({ "text-white": activeTab !== "4" })}
-                    style={{
-                      backgroundColor: activeTab === "4" ? "green" : "black",
-                      color: activeTab === "4" ? "white" : "white",
-                      borderRadius: "15px",
-                      padding: "10px",
-                      marginRight: "5px",
-                    }}
-                    onClick={() => {
-                      toggleTab("4");
-                    }}
-                  >
-                    Deals Inquiry
-                  </NavLink>
-                </NavItem>
-
-                <NavItem>
-                  <Dropdown isOpen={dropdownOpen} toggle={toggleDropdown}>
-                    <DropdownToggle
-                      className="nav-link"
+              )}
+              {role === "Customer" && (
+                <>
+                  {" "}
+                  <NavItem>
+                    <NavLink
+                      className={classnames({
+                        "text-white": activeTab !== "1",
+                      })}
                       style={{
-                        backgroundColor: activeTab === "6" ? "green" : "black",
-                        color: activeTab === "6" ? "white" : "white",
+                        backgroundColor: activeTab === "15" ? "green" : "black",
+                        color: activeTab === "15" ? "white" : "white",
                         borderRadius: "15px",
                         padding: "10px",
+                        marginRight: "5px",
                       }}
-                      caret
+                      onClick={() => {
+                        toggleTab("15");
+                      }}
                     >
-                      Zoom Calls
-                    </DropdownToggle>
-                    <DropdownMenu>
-                      <DropdownItem onClick={() => toggleTab("6")}>
-                        Upcoming Schedules
-                      </DropdownItem>
-                      <DropdownItem divider />
-                      {/* <DropdownItem onClick={() => toggleTab("8")}>
+                      Dashboard
+                    </NavLink>
+                  </NavItem>
+                  <NavItem>
+                    <NavLink
+                      className={classnames({
+                        "text-white": activeTab !== "17",
+                      })}
+                      style={{
+                        backgroundColor: activeTab === "17" ? "green" : "black",
+                        color: activeTab === "17" ? "white" : "white",
+                        borderRadius: "15px",
+                        padding: "10px",
+                        marginRight: "5px",
+                      }}
+                      onClick={() => {
+                        toggleTab("17");
+                      }}
+                    >
+                      Slow Flip Properties
+                    </NavLink>
+                  </NavItem>
+                  <NavItem>
+                    <NavLink
+                      className={classnames({
+                        "text-white": activeTab !== "16",
+                      })}
+                      style={{
+                        backgroundColor: activeTab === "16" ? "green" : "black",
+                        color: activeTab === "15" ? "white" : "white",
+                        borderRadius: "15px",
+                        padding: "10px",
+                        marginRight: "5px",
+                      }}
+                      onClick={() => {
+                        toggleTab("16");
+                      }}
+                    >
+                      Occupants
+                    </NavLink>
+                  </NavItem>{" "}
+                </>
+              )}
+              {role === "Admin" && (
+                <>
+                  {" "}
+                  <NavItem>
+                    <NavLink
+                      className={classnames({
+                        "text-white": activeTab !== "2",
+                      })}
+                      style={{
+                        backgroundColor: activeTab === "2" ? "green" : "black",
+                        color: activeTab === "2" ? "white" : "white",
+                        borderRadius: "15px",
+                        padding: "10px",
+                        marginRight: "5px",
+                      }}
+                      onClick={() => {
+                        toggleTab("2");
+                      }}
+                    >
+                      Customized Deals
+                    </NavLink>
+                  </NavItem>
+                  <NavItem>
+                    <NavLink
+                      className={classnames({
+                        "text-white": activeTab !== "3",
+                      })}
+                      style={{
+                        backgroundColor: activeTab === "3" ? "green" : "black",
+                        color: activeTab === "3" ? "white" : "white",
+                        borderRadius: "15px",
+                        padding: "10px",
+                        marginRight: "5px",
+                      }}
+                      onClick={() => {
+                        toggleTab("3");
+                      }}
+                    >
+                      Deal Purchased
+                    </NavLink>
+                  </NavItem>
+                  <NavItem>
+                    <NavLink
+                      className={classnames({
+                        "text-white": activeTab !== "4",
+                      })}
+                      style={{
+                        backgroundColor: activeTab === "4" ? "green" : "black",
+                        color: activeTab === "4" ? "white" : "white",
+                        borderRadius: "15px",
+                        padding: "10px",
+                        marginRight: "5px",
+                      }}
+                      onClick={() => {
+                        toggleTab("4");
+                      }}
+                    >
+                      Deals Inquiry
+                    </NavLink>
+                  </NavItem>
+                </>
+              )}
+
+              <NavItem>
+                <Dropdown isOpen={dropdownOpen} toggle={toggleDropdown}>
+                  <DropdownToggle
+                    className="nav-link"
+                    style={{
+                      backgroundColor: activeTab === "6" ? "green" : "black",
+                      color: activeTab === "6" ? "white" : "white",
+                      borderRadius: "15px",
+                      padding: "10px",
+                    }}
+                    caret
+                  >
+                    Zoom Calls
+                  </DropdownToggle>
+                  <DropdownMenu>
+                    <DropdownItem onClick={() => toggleTab("6")}>
+                      Upcoming Schedules
+                    </DropdownItem>
+                    <DropdownItem divider />
+                    {/* <DropdownItem onClick={() => toggleTab("8")}>
                         Meet Requests
                       </DropdownItem> */}
-                      <DropdownItem divider />
-                      <DropdownItem onClick={() => toggleTab("9")}>
-                        Calls History
-                      </DropdownItem>
-                    </DropdownMenu>
-                  </Dropdown>
-                </NavItem>
-                <NavItem>
-                  <Dropdown
-                    isOpen={dropdownOpenTrans}
-                    toggle={toggleDropdownTrans}
-                  >
-                    <DropdownToggle
-                      className="nav-link"
-                      style={{
-                        backgroundColor: activeTab === "5" ? "green" : "black",
-                        color: activeTab === "5" ? "white" : "white",
-                        borderRadius: "15px",
-                        padding: "10px",
-                      }}
-                      caret
-                    >
-                      Transactions
-                    </DropdownToggle>
-                    <DropdownMenu>
-                      <DropdownItem onClick={() => toggleTab("10")}>
-                        Deals Transactions
-                      </DropdownItem>
-                      <DropdownItem divider />
-                      <DropdownItem onClick={() => toggleTab("5")}>
-                        Subscription Transactions
-                      </DropdownItem>
-                    </DropdownMenu>
-                  </Dropdown>
-                </NavItem>
-                <NavItem>
-                  <NavLink
-                    className={classnames({ "text-white": activeTab !== "7" })}
+                    <DropdownItem divider />
+                    <DropdownItem onClick={() => toggleTab("9")}>
+                      Calls History
+                    </DropdownItem>
+                  </DropdownMenu>
+                </Dropdown>
+              </NavItem>
+              <NavItem>
+                <Dropdown
+                  isOpen={dropdownOpenTrans}
+                  toggle={toggleDropdownTrans}
+                >
+                  <DropdownToggle
+                    className="nav-link"
                     style={{
-                      backgroundColor: activeTab === "7" ? "green" : "black",
-                      color: activeTab === "7" ? "white" : "white",
+                      backgroundColor: activeTab === "5" ? "green" : "black",
+                      color: activeTab === "5" ? "white" : "white",
                       borderRadius: "15px",
                       padding: "10px",
                     }}
-                    onClick={() => {
-                      toggleTab("7");
-                    }}
+                    caret
                   >
-                    Evictions
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink
-                    className={classnames({ "text-white": activeTab !== "11" })}
-                    style={{
-                      backgroundColor: activeTab === "11" ? "green" : "black",
-                      color: activeTab === "7" ? "white" : "white",
-                      borderRadius: "15px",
-                      padding: "10px",
-                    }}
-                    onClick={() => {
-                      toggleTab("11");
-                    }}
-                  >
-                    Insurance
-                  </NavLink>
-                </NavItem>
-              </Nav>
+                    Transactions
+                  </DropdownToggle>
+                  <DropdownMenu>
+                    <DropdownItem onClick={() => toggleTab("10")}>
+                      Deals Transactions
+                    </DropdownItem>
+                    <DropdownItem divider />
+                    <DropdownItem onClick={() => toggleTab("5")}>
+                      Subscription Transactions
+                    </DropdownItem>
+                  </DropdownMenu>
+                </Dropdown>
+              </NavItem>
+              <NavItem>
+                <NavLink
+                  className={classnames({ "text-white": activeTab !== "7" })}
+                  style={{
+                    backgroundColor: activeTab === "7" ? "green" : "black",
+                    color: activeTab === "7" ? "white" : "white",
+                    borderRadius: "15px",
+                    padding: "10px",
+                  }}
+                  onClick={() => {
+                    toggleTab("7");
+                  }}
+                >
+                  Evictions
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink
+                  className={classnames({ "text-white": activeTab !== "11" })}
+                  style={{
+                    backgroundColor: activeTab === "11" ? "green" : "black",
+                    color: activeTab === "7" ? "white" : "white",
+                    borderRadius: "15px",
+                    padding: "10px",
+                  }}
+                  onClick={() => {
+                    toggleTab("11");
+                  }}
+                >
+                  Insurance
+                </NavLink>
+              </NavItem>
+            </Nav>
             <CardBody>
-
               <TabContent activeTab={activeTab}>
                 <TabPane tabId="1">
                   <UserProfile user={user} />
                 </TabPane>
                 <TabPane tabId="15">
+                  <InvestorDashboard />
+                </TabPane>
+                <TabPane tabId="17">
                   <ViewDeals AddProperty={true} />
                 </TabPane>
                 <TabPane tabId="16">
-                  <Occupents />
+                  <Occupants />
                 </TabPane>
                 <TabPane tabId="2">
                   <UserDeals heading={"Featured Deals"} />
@@ -330,11 +385,18 @@ const lcation=useLocation();
           </Card>
         </Col>
       </Row>
-      <div style={{ position: "fixed", right: "25px", bottom: "30px" }}>
-        <a href={whatsAppUrl} rel="noopener noreferrer" onClick={handleClick}>
-          <img height={50} width={50} src={whatsappIcon} alt="WhatsApp Icon" />
-        </a>
-      </div>
+      {role === "Admin" && (
+        <div style={{ position: "fixed", right: "25px", bottom: "30px" }}>
+          <a href={whatsAppUrl} rel="noopener noreferrer" onClick={handleClick}>
+            <img
+              height={50}
+              width={50}
+              src={whatsappIcon}
+              alt="WhatsApp Icon"
+            />
+          </a>
+        </div>
+      )}
     </Fragment>
   );
 };

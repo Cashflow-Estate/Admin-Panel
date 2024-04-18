@@ -35,7 +35,7 @@ export const MENUITEMS_FOR_Admin = [
           {
             path: `/deals/view`,
             type: "link",
-            title: "View Deals",
+            title: "Slow Flip Deals",
           },
         ],
       },
@@ -141,6 +141,24 @@ export const MENUITEMS_FOR_Admin = [
         ],
       },
       {
+        title: "Attorneys",
+        icon: "icons",
+
+        type: "sub",
+        children: [
+          {
+            title: "Attorneys",
+            type: "link",
+            path: `/attorneys`,
+          },
+          {
+            title: "Add-Attorneys",
+            type: "link",
+            path: `/add-attorneys`,
+          },
+        ],
+      },
+      {
         path: `/website/Inquiry`,
         type: "link",
         title: "Website",
@@ -178,12 +196,37 @@ export const MENUITEMS_FOR_User = [
         title: "Dashboard",
         icon: "user",
       },
+    
       {
-        path: `/deals/view`,
+        title: "Deals",
         icon: "task",
-
-        type: "link",
-        title: "View Deals",
+        type: "sub",
+        badge: "badge badge-light-primary",
+        children: [
+          {
+            path: `/deals/view`,
+            icon: "task",
+    
+            type: "link",
+            title: "Slow Flip Deals",
+          },
+     
+          {
+            path: `/deals/purchased`,
+            type: "link",
+            title: "Purchased Deals",
+          },
+          {
+            path: `/deals/inquiry`,
+            type: "link",
+            title: "Inquiry Deals",
+          },
+          {
+            path: `/deals/customize`,
+            type: "link",
+            title: "Customize Deals",
+          },
+        ],
       },
       {
         path: `/account/profile`,
@@ -243,6 +286,24 @@ export const MENUITEMS_FOR_User = [
         icon: "user",
       },
       {
+        title: "Attorneys",
+        icon: "icons",
+
+        type: "sub",
+        children: [
+          {
+            title: "Attorneys",
+            type: "link",
+            path: `/attorneys`,
+          },
+          {
+            title: "Add-Attorneys",
+            type: "link",
+            path: `/add-attorneys`,
+          },
+        ],
+      },
+      {
         title: "Upcoming-Call",
         icon: "icons",
         type: "link",
@@ -291,7 +352,7 @@ export const MENUITEMS = [
           {
             path: `/deals/view`,
             type: "link",
-            title: "View Deals",
+            title: "Slow Flip Deals",
           },
         ],
       },

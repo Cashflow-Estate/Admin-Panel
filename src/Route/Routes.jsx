@@ -26,7 +26,11 @@ import UserCurrentSubscription from "../myPages/SubscriptionPackages/UserCurrent
 import UserCardDetails from "../myPages/SubscriptionPackages/comp/UserCardDetails";
 import DealsTransactions from "../myPages/DealsSection/DealsTransactions";
 import AddProperty from "../myPages/DealsSection/AddProperty";
-import AddNewOccupent from "../myPages/DealsSection/comp/AddNewOccupent";
+import AddNewOccupant from "../myPages/DealsSection/comp/AddNewOccupant";
+import UserDeals from "../myPages/myCutomers/UserDeals";
+import PurchaseNew from "../myPages/DealsSection/comp/PurchaseNew";
+import Attornies from "../myPages/Attornies/Attornies";
+import AddAttornies from "../myPages/Attornies/AddAttornies";
 
 export const AdminRoutes = [
   {
@@ -36,6 +40,14 @@ export const AdminRoutes = [
   {
     path: `/crm`,
     Component: <CRM />,
+  },
+  {
+    path: `/attorneys`,
+    Component: <Attornies />,
+  },
+  {
+    path: `/add-attorneys`,
+    Component: <AddAttornies />,
   },
   {
     path: `/users/all-customers`,
@@ -132,6 +144,14 @@ export const AdminRoutes = [
 ];
 export const UserRoutes = [
   {
+    path: `/attorneys`,
+    Component: <Attornies />,
+  },
+  {
+    path: `/add-attorneys`,
+    Component: <AddAttornies />,
+  },
+  {
     path: `/dashboard`,
     Component: <Dashboard />,
   },
@@ -177,12 +197,28 @@ export const UserRoutes = [
     Component: <ViewDeals />,
   },
   {
+    path: `/deals/purchased`,
+    Component: <UserDeals heading={"Deal Purchased"} />,
+  },
+  {
+    path: `/deals/inquiry`,
+    Component: <UserDeals heading={"Deals Inquiry"} />,
+  },
+  {
+    path: `/deals/customize`,
+    Component: <UserDeals heading={"Featured Deals"} />,
+  },
+  {
     path: `/new-property`,
     Component: <AddProperty />,
   },
   {
-    path: `/new-occupent`,
-    Component: <AddNewOccupent />,
+    path: `/new-Occupant`,
+    Component: <AddNewOccupant />,
+  },
+  {
+    path: `/purchase-new/:id`,
+    Component: <PurchaseNew />,
   },
   {
     path: `/deals/transactions`,

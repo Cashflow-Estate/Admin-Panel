@@ -8,7 +8,7 @@
     "address": "10737 Evanston Avenue N, Seattle, WA 98133",
     "discription": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
     "discountPrice": "350.00",
-    "status": "none",
+    "status": "Condo",
     "price": 100.0,
     "stock": "In stock",
     "review": "(250 review)",
@@ -43,7 +43,7 @@
     "note": "Tops for Women Stylish",
     "discription": "Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo.",
     "discountPrice": "350.00",
-    "status": "sale",
+    "status": "Townhome",
     "price": 260.0,
     "stock": "In stock",
     "review": "(250 review)",
@@ -79,7 +79,7 @@
     "discription": "Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo.",
     "discountPrice": "350.00",
     "price": "360.00",
-    "status": "none",
+    "status": "Appartment",
     "stock": "In stock",
     "review": "(250 review)",
     "category": "Woman",
@@ -114,7 +114,7 @@
     "discription": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
     "discountPrice": "350.00",
     "price": "526.00",
-    "status": "50%",
+    "status": "Appartment",
     "stock": "In stock",
     "review": "(250 review)",
     "category": "Man",
@@ -150,7 +150,7 @@
     "discountPrice": "350.00",
     "price": 206.0,
     "stock": "In stock",
-    "status": "none",
+    "status": "Single Family Home",
     "review": "(250 review)",
     "category": "Man",
     "colors": ["green", "gray", "blue"],
@@ -184,7 +184,7 @@
     "discription": "Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo.",
     "discountPrice": "350.00",
     "price": 926.0,
-    "status": "none",
+    "status": "Single Family Home",
     "stock": "In stock",
     "review": "(250 review)",
     "category": "Woman",
@@ -254,7 +254,7 @@
     "discription": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
     "discountPrice": "350.00",
     "price": 500.0,
-    "status": "none",
+    "status": "Single Family Home",
     "stock": "In stock",
     "review": "(250 review)",
     "category": "Man",
@@ -289,7 +289,7 @@
     "discription": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
     "discountPrice": "350.00",
     "price": 826.0,
-    "status": "none",
+    "status": "Single Family Home",
     "stock": "In stock",
     "review": "(250 review)",
     "category": "Man",
@@ -324,13 +324,83 @@
     "discription": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
     "discountPrice": "350.00",
     "price": 500.0,
-    "status": "none",
+    "status": "Single Family Home",
     "stock": "In stock",
     "review": "(250 review)",
     "category": "Man",
     "colors": ["purple", "pink", "blue"],
     "size": ["M", "L", "XL"],
     "tags": ["Hudson", "Lee"],
+    "variants": [
+      {
+        "color": "White",
+        "images": "ecommerce/01.jpg"
+      },
+      {
+        "color": "gray",
+        "images": "ecommerce/04.jpg"
+      },
+      {
+        "color": "gray",
+        "images": "ecommerce/02.jpg"
+      },
+      {
+        "color": "gray",
+        "images": "ecommerce/03.jpg"
+      }
+    ]
+  }, {
+    "id": 11,
+    "img": "ecommerce/01.jpg",
+    "imgPng": "ecommerce/product-table-7.png",
+    "name": "Master City Deals",
+    "note": "3 bds1 | 1 bath, |200 sqft - Active",
+    "address": "10737 Evanston Avenue N, Seattle, WA 98133",
+    "discription": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
+    "discountPrice": "350.00",
+    "status": "Condo",
+    "price": 100.0,
+    "stock": "In stock",
+    "review": "(250 review)",
+    "category": "Man",
+    "colors": ["White", "gray"],
+    "size": ["M", "L", "XL"],
+    "tags": ["Diesel", "Hudson", "Lee"],
+    "variants": [
+      {
+        "color": "White",
+        "images": "ecommerce/01.jpg"
+      },
+      {
+        "color": "gray",
+        "images": "ecommerce/04.jpg"
+      },
+      {
+        "color": "black",
+        "images": "ecommerce/02.jpg"
+      },
+      {
+        "color": "pink",
+        "images": "ecommerce/03.jpg"
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "img": "ecommerce/02.jpg",
+    "imgPng": "ecommerce/product-table-6.png",
+    "name": "Dream Beauty Fashion",
+    "note": "Tops for Women Stylish",
+    "discription": "Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo.",
+    "discountPrice": "350.00",
+    "status": "Townhome",
+    "price": 260.0,
+    "stock": "In stock",
+    "review": "(250 review)",
+    "category": "Woman",
+    "colors": ["green", "gray"],
+    "size": ["M", "L", "XL"],
+    "tags": ["Levis", "Hudson", "Lee"],
     "variants": [
       {
         "color": "White",
