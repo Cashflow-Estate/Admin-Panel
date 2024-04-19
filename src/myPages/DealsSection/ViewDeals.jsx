@@ -295,7 +295,7 @@ const ProductGrid = ({ photoIndexSlider, setPhotoIndexSlider }) => {
         "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
       discountPrice: "350.00",
       status: "Condo",
-      availability:"Occupied",
+      availability: "Occupied",
       price: 100.0,
       stock: "In stock",
       review: "(250 review)",
@@ -332,7 +332,7 @@ const ProductGrid = ({ photoIndexSlider, setPhotoIndexSlider }) => {
         "Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo.",
       discountPrice: "350.00",
       status: "Townhome",
-      availability:"Available",
+      availability: "Available",
 
       price: 260.0,
       stock: "In stock",
@@ -371,7 +371,7 @@ const ProductGrid = ({ photoIndexSlider, setPhotoIndexSlider }) => {
       discountPrice: "350.00",
       price: "360.00",
       status: "Appartment",
-      availability:"Available",
+      availability: "Available",
 
       stock: "In stock",
       review: "(250 review)",
@@ -409,6 +409,8 @@ const ProductGrid = ({ photoIndexSlider, setPhotoIndexSlider }) => {
       discountPrice: "350.00",
       price: "526.00",
       status: "Appartment",
+      availability: "Available",
+
       stock: "In stock",
       review: "(250 review)",
       category: "Man",
@@ -446,7 +448,7 @@ const ProductGrid = ({ photoIndexSlider, setPhotoIndexSlider }) => {
       price: 206.0,
       stock: "In stock",
       status: "Single Family Home",
-      availability:"Available",
+      availability: "Available",
 
       review: "(250 review)",
       category: "Man",
@@ -483,7 +485,7 @@ const ProductGrid = ({ photoIndexSlider, setPhotoIndexSlider }) => {
       discountPrice: "350.00",
       price: 926.0,
       status: "Single Family Home",
-      availability:"Occupied",
+      availability: "Occupied",
 
       stock: "In stock",
       review: "(250 review)",
@@ -521,7 +523,7 @@ const ProductGrid = ({ photoIndexSlider, setPhotoIndexSlider }) => {
       discountPrice: "350.00",
       price: 1000.0,
       status: "Condo",
-      availability:"Available",
+      availability: "Available",
 
       stock: "In stock",
       review: "(250 review)",
@@ -559,7 +561,7 @@ const ProductGrid = ({ photoIndexSlider, setPhotoIndexSlider }) => {
       discountPrice: "350.00",
       price: 500.0,
       status: "Single Family Home",
-      availability:"Occupied",
+      availability: "Occupied",
 
       stock: "In stock",
       review: "(250 review)",
@@ -597,7 +599,7 @@ const ProductGrid = ({ photoIndexSlider, setPhotoIndexSlider }) => {
       discountPrice: "350.00",
       price: 826.0,
       status: "Single Family Home",
-      availability:"Occupied",
+      availability: "Occupied",
 
       stock: "In stock",
       review: "(250 review)",
@@ -635,7 +637,7 @@ const ProductGrid = ({ photoIndexSlider, setPhotoIndexSlider }) => {
       discountPrice: "350.00",
       price: 500.0,
       status: "Single Family Home",
-      availability:"Occupied",
+      availability: "Occupied",
 
       stock: "In stock",
       review: "(250 review)",
@@ -673,7 +675,7 @@ const ProductGrid = ({ photoIndexSlider, setPhotoIndexSlider }) => {
         "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
       discountPrice: "350.00",
       status: "Condo",
-      availability:"Available",
+      availability: "Available",
 
       price: 100.0,
       stock: "In stock",
@@ -701,7 +703,6 @@ const ProductGrid = ({ photoIndexSlider, setPhotoIndexSlider }) => {
         },
       ],
     },
-
   ];
 
   const initilindex = { index: 0, isOpen: false };
@@ -756,24 +757,6 @@ const ProductGrid = ({ photoIndexSlider, setPhotoIndexSlider }) => {
                         ) : item.status === "Appartment" ? (
                           <span className="ribbon ribbon-danger">
                             {item.status}
-                          </span>
-                        ) : (
-                          ""
-                        )}
-                        {item.availability === "Available" ? (
-                          <span className="ribbon ribbon-dark ribbon-right">
-                            {item.availability}
-                          </span>
-                        ) :item.availability === "Occupied" ? (
-                          <span className="ribbon ribbon-success ribbon-right">
-                            {item.availability}
-                          </span>
-                        ): (
-                          ""
-                        )}
-                        {item.status === "gift" ? (
-                          <span className="ribbon ribbon-secondary ribbon-vertical-left">
-                            <i className="icon-gift">{item.status}</i>
                           </span>
                         ) : (
                           ""
@@ -861,7 +844,31 @@ const ProductGrid = ({ photoIndexSlider, setPhotoIndexSlider }) => {
                           </span>
                         </div>
                       </div>
-                      
+                      <P>
+                        {item.availability === "Available" ? (
+                          <span
+                            style={{
+                              backgroundColor: "green",
+                              color: "white",
+                              padding: "3px 8px",
+                              borderRadius: "4px",
+                            }}
+                          >
+                            {item.availability}
+                          </span>
+                        ) : item.availability === "Occupied" ? (
+                          <span
+                            style={{
+                              backgroundColor: "red",
+                              color: "white",
+                              padding: "3px 8px",
+                              borderRadius: "4px",
+                            }}
+                          >
+                            {item.availability}
+                          </span>
+                        ) : null}
+                      </P>
                     </div>
                   </Card>
                 </div>

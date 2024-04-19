@@ -1,8 +1,14 @@
 import React from "react";
-import { Card, CardBody, CardTitle, CardText, Container } from "reactstrap";
+import {
+  Card,
+  CardBody,
+  CardTitle,
+  CardText,
+  Container,
+  Button,
+} from "reactstrap";
 import { Breadcrumbs, Image } from "../../AbstractElements";
-import { Link } from "react-router-dom";
-import SvgIcon from "../../Components/Common/Component/SvgIcon";
+import { Link, useNavigate } from "react-router-dom";
 
 // Dummy complaint data
 const complaints = [
@@ -20,41 +26,52 @@ const complaints = [
   },
   // Add more complaints as needed
 ];
-
 // ComplaintCard component to display individual complaint
-const ComplaintCard = ({ dealTitle, dealComplaint }) => (
-  <Card className="mb-3">
-    <CardBody>
-        <div className="social-img">
-          <Image
-            attrImage={{
-              src: require(`../../assets/images/user/3.png`),
-              alt: "profile",
-            }}
-          />
-        </div>
-      
-      <CardTitle tag="h5">
-        <Link to="/deals/1">{dealTitle}</Link>
-      </CardTitle>
-      <CardText>{dealComplaint}</CardText>
-    </CardBody>
-  </Card>
-);
+const ComplaintCard = ({ dealTitle, dealComplaint }) => {
+  return (
+    <div>
+      <Card className="mb-3">
+        <CardBody>
+          <div className="social-img">
+            <Image
+              attrImage={{
+                src: require(`../../assets/images/user/3.png`),
+                alt: "profile",
+              }}
+            />
+          </div>
+          <CardTitle tag="h5">
+            <Link to="/deals/1">{dealTitle}</Link>
+          </CardTitle>
+          <CardText>{dealComplaint}</CardText>
+        </CardBody>
+      </Card>
+    </div>
+  );
+};
 
 // Main component to display all complaint cards
-const Evictions = () => (
-  <Container>
-    <Breadcrumbs mainTitle={"Evictions"} parent="Deals" title={"Evictions"} />
+const Evictions = () => {
+  const navigation = useNavigate(); // Changed from 'history' to 'navigation'
 
-    {complaints.map((complaint) => (
-      <ComplaintCard
-        key={complaint.id}
-        dealTitle={complaint.dealTitle}
-        dealComplaint={complaint.dealComplaint}
-      />
-    ))}
-  </Container>
-);
-
+  const handleCreateEviction = () => {
+    navigation("/add-eviction");
+  };
+  return (
+    <Container>
+      <Breadcrumbs mainTitle={"Evictions"} parent="Deals" title={"Evictions"} />
+      <Button color="success" onClick={handleCreateEviction}>
+        Create Eviction
+      </Button>{" "}
+      {/* Corrected Button onClick */}
+      {complaints.map((complaint) => (
+        <ComplaintCard
+          key={complaint.id}
+          dealTitle={complaint.dealTitle}
+          dealComplaint={complaint.dealComplaint}
+        />
+      ))}
+    </Container>
+  );
+};
 export default Evictions;

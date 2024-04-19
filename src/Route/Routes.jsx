@@ -31,6 +31,7 @@ import UserDeals from "../myPages/myCutomers/UserDeals";
 import PurchaseNew from "../myPages/DealsSection/comp/PurchaseNew";
 import Attornies from "../myPages/Attornies/Attornies";
 import AddAttornies from "../myPages/Attornies/AddAttornies";
+import AddEviction from "../myPages/myCutomers/AddEviction";
 
 export const AdminRoutes = [
   {
@@ -42,12 +43,16 @@ export const AdminRoutes = [
     Component: <CRM />,
   },
   {
-    path: `/attorneys`,
+    path: `/slowflip-attorneys`,
     Component: <Attornies />,
   },
   {
     path: `/add-attorneys`,
     Component: <AddAttornies />,
+  },
+  {
+    path: `/add-eviction`,
+    Component: <AddEviction />,
   },
   {
     path: `/users/all-customers`,
@@ -144,12 +149,20 @@ export const AdminRoutes = [
 ];
 export const UserRoutes = [
   {
-    path: `/attorneys`,
+    path: `/slowflip-attorneys`,
+    Component: <Attornies />,
+  },
+  {
+    path: `/my-attorneys`,
     Component: <Attornies />,
   },
   {
     path: `/add-attorneys`,
-    Component: <AddAttornies />,
+    Component: <AddAttornies   />,
+  },
+  {
+    path: `/add-eviction`,
+    Component: <AddEviction />,
   },
   {
     path: `/dashboard`,

@@ -147,15 +147,17 @@ export const MENUITEMS_FOR_Admin = [
         type: "sub",
         children: [
           {
-            title: "Attorneys",
-            type: "link",
-            path: `/attorneys`,
-          },
-          {
             title: "Add-Attorneys",
             type: "link",
             path: `/add-attorneys`,
           },
+          {
+            title: "Slowflip Attorneys",
+            type: "link",
+            path: `/slowflip-attorneys`,
+          },
+       
+         
         ],
       },
       {
@@ -292,15 +294,21 @@ export const MENUITEMS_FOR_User = [
         type: "sub",
         children: [
           {
-            title: "Attorneys",
-            type: "link",
-            path: `/attorneys`,
-          },
-          {
             title: "Add-Attorneys",
             type: "link",
             path: `/add-attorneys`,
           },
+          {
+            title: "Slowflip Attorneys",
+            type: "link",
+            path: `/slowflip-attorneys`,
+          },
+          {
+            title: "My Attorneys",
+            type: "link",
+            path: `/my-attorneys`,
+          },
+       
         ],
       },
       {
