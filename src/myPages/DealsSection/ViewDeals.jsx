@@ -65,7 +65,7 @@ const ViewDeals = ({ AddProperty }) => {
 
   return (
     <Fragment>
-      <Breadcrumbs mainTitle="Deals" parent="Deals" title="All Deals" />
+      <Breadcrumbs mainTitle="Slow Flip Deals" parent="Deals" title="All Deals" />
 
       {userRole === "Admin" ? (
         <AllDealsTable />
@@ -78,15 +78,17 @@ const ViewDeals = ({ AddProperty }) => {
 
 export default ViewDeals;
 const ProductContain = ({ AddProperty }) => {
-  const { images, smallImages } = useContext(GalleryContext);
-  console.log("🚀 ~ ProductContain ~ images:", images);
+  const { images } = useContext(GalleryContext);
+  const [photoIndex, setPhotoIndex] = useState({ index: 0, isOpen: false });
 
-  const initilindex = { index: 0, isOpen: false };
-  const [photoIndex, setPhotoIndex] = useState(initilindex);
+  useEffect(() => {
+    // Scroll to the top of the page whenever the component updates
+    window.scrollTo(0, 0);
+  }, []);
 
-  const callback = useCallback((photo) => {
+  const callback = (photo) => {
     setPhotoIndex(photo);
-  });
+  };
   return (
     <Fragment>
       <Container fluid={true} className="product-wrapper" id="product-wrapper">

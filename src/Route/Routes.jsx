@@ -32,6 +32,7 @@ import PurchaseNew from "../myPages/DealsSection/comp/PurchaseNew";
 import Attornies from "../myPages/Attornies/Attornies";
 import AddAttornies from "../myPages/Attornies/AddAttornies";
 import AddEviction from "../myPages/myCutomers/AddEviction";
+import AddAgent from "../myPages/myInsurance/AddAgent";
 
 export const AdminRoutes = [
   {
@@ -49,6 +50,10 @@ export const AdminRoutes = [
   {
     path: `/add-attorneys`,
     Component: <AddAttornies />,
+  },
+  {
+    path: `/add-agent`,
+    Component: <AddAgent />,
   },
   {
     path: `/add-eviction`,
@@ -161,6 +166,10 @@ export const UserRoutes = [
     Component: <AddAttornies   />,
   },
   {
+    path: `/add-agent`,
+    Component: <AddAgent />,
+  },  
+  {
     path: `/add-eviction`,
     Component: <AddEviction />,
   },
@@ -211,7 +220,7 @@ export const UserRoutes = [
   },
   {
     path: `/deals/purchased`,
-    Component: <UserDeals heading={"Deal Purchased"} />,
+    Component: <UserDeals heading={"Slow Flip Deals Purchased"} />,
   },
   {
     path: `/deals/inquiry`,
@@ -219,7 +228,7 @@ export const UserRoutes = [
   },
   {
     path: `/deals/customize`,
-    Component: <UserDeals heading={"Featured Deals"} />,
+    Component: <UserDeals heading={"Your Custom Slow Flip Deals"} />,
   },
   {
     path: `/new-property`,

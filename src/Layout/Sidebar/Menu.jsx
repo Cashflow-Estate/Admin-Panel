@@ -22,7 +22,7 @@ export const MENUITEMS_FOR_Admin = [
     menucontent: "Application",
     Items: [
       {
-        title: "Deals",
+        title: "Slow Flip Deals",
         icon: "task",
         type: "sub",
         badge: "badge badge-light-primary",
@@ -200,7 +200,7 @@ export const MENUITEMS_FOR_User = [
       },
     
       {
-        title: "Deals",
+        title: "Slow Flip Deals",
         icon: "task",
         type: "sub",
         badge: "badge badge-light-primary",
@@ -221,7 +221,7 @@ export const MENUITEMS_FOR_User = [
           {
             path: `/deals/inquiry`,
             type: "link",
-            title: "Inquiry Deals",
+            title: "Deals Inquiry",
           },
           {
             path: `/deals/customize`,

@@ -145,7 +145,7 @@ const AddEviction = () => {
                 <Card>
                   <CardBody>
                     <RadioQuestions
-                      question="Is there a written lease with the Occupant?"
+                      question="Is there a written aggreement with the Occupant?"
                       options={[
                         {
                           value: "yes",
@@ -245,7 +245,7 @@ const AddEviction = () => {
                     <RadioQuestions
                       question="For cases where a suit is filed, do you want:"
                       options={[
-                        { value: "possessionOnly", label: "Possession Only" },
+                        { value: "possessionOnly", label: "Possession Only (Best Choice)" },
                         {
                           value: "possessionAndMonetary",
                           label:
@@ -274,8 +274,27 @@ const AddEviction = () => {
                 </Card>
                 <Card>
                   <CardBody>
-            <Attorney/>
-                
+                  <Attorney
+  attorneyTypes={[
+    {
+      value: "slowFlipAtt",
+      label: "Choose Slow Flip Attorney",
+      attorneys: [
+        { value: "slowFlipAttorney1", label: "Slow Flip Attorney 1" },
+        { value: "slowFlipAttorney2", label: "Slow Flip Attorney 2" },
+      ],
+    },
+    {
+      value: "myAttorneyAtt",
+      label: "I have my own eviction attorney",
+      attorneys: [
+        { value: "myAttorney1", label: "My Attorney 1" },
+        { value: "myAttorney2", label: "My Attorney 2" },
+      ],
+    },
+  ]}
+/>
+
                   </CardBody>
                 </Card>
                 {/* <UploadProjectFileClass register={register} errors={errors} /> */}
@@ -705,35 +724,74 @@ const DealForm = ({ register, errors }) => {
   );
 };
 
-const Attorney = () => {
-    const [selectedAttorney, setSelectedAttorney] = useState("");
+const Attorney = ({ attorneyTypes }) => {
+  const [selectedType, setSelectedType] = useState(""); // State for selected attorney type
+  const [selectedAttorney, setSelectedAttorney] = useState(""); // State for selected attorney
 
-    const handleAttorneyChange = (e) => {
-        setSelectedAttorney(e.target.value);
-    };
+  const handleTypeChange = (e) => {
+    const typeValue = e.target.value;
+    setSelectedType(typeValue);
+    // Reset selected attorney when type changes
+    setSelectedAttorney(""); 
+  };
 
-    return (
-        <Fragment>
-            <Row>
-                <Col sm={12}>
-                    <FormGroup>
-                        <Label for="attorney">Select Attorney</Label>
-                        <Input
-                            type="select"
-                            name="attorney"
-                            id="attorney"
-                            value={selectedAttorney}
-                            onChange={handleAttorneyChange}
-                        >
-                            <option value="">Select Attorney</option>
-                            {/* Add options for Slow Flip Attorneys */}
-                            <option value="slowFlipAttorney1">Slow Flip Attorney </option>
-                            <option value="slowFlipAttorney2">My Attorney</option>
-                           
-                        </Input>
-                    </FormGroup>
-                </Col>
-            </Row>
-        </Fragment>
-    );
+  const handleAttorneyChange = (e) => {
+    setSelectedAttorney(e.target.value);
+  };
+
+  return (
+    <Fragment>
+      <Row>
+        <Col sm={12}>
+          <FormGroup className="m-t-15 custom-radio-ml">
+            <Label>Select Attorney Type</Label>
+            <div>
+            {/* className="radio radio-primary" */}
+              {attorneyTypes.map((attorneyType) => (
+                <div  key={attorneyType.value} >
+                  <Input
+                    type="radio"
+                    name="attorneyType"
+                    value={attorneyType.value}
+                    checked={selectedType === attorneyType.value}
+                    onChange={handleTypeChange}
+                  />
+                  <Label>{attorneyType.label}</Label>
+                </div>
+              ))}
+            </div>
+          </FormGroup>
+        </Col>
+      </Row>
+      {selectedType && (
+        <Row>
+          <Col sm={12}>
+            <FormGroup>
+              <Label for="attorney">Select Attorney</Label>
+              <Input
+                type="select"
+                name="attorney"
+                id="attorney"
+                value={selectedAttorney}
+                onChange={handleAttorneyChange}
+              >
+                <option value="">Select Attorney</option>
+                {attorneyTypes
+                  .find((type) => type.value === selectedType)
+                  ?.attorneys.map((attorney) => (
+                    <option key={attorney.value} value={attorney.value}>
+                      {attorney.label}
+                    </option>
+                  ))}
+              </Input>
+            </FormGroup>
+          </Col>
+        </Row>
+      )}
+    </Fragment>
+  );
 };
+
+
+
+

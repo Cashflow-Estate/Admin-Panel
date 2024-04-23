@@ -32,7 +32,7 @@ const AddNewAttorney = () => {
 
   return (
     <Fragment>
-      <Breadcrumbs mainTitle="Create a new attorney" parent="Attorneys" title="Create Attorney" />
+      <Breadcrumbs  mainTitle="Create a new attorney" parent="Attorneys" title="Create Attorney" />
 
       <form onSubmit={handleSubmit}>
         <Row>

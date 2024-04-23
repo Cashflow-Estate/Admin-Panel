@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import {
   Tab,
   Tabs,
@@ -30,7 +30,10 @@ const AddProperty = () => {
   const [sqFt, setSqFt] = useState("");
   const [hasGarage, setHasGarage] = useState(false);
   const [hasLawn, setHasLawn] = useState(false);
-
+  useEffect(() => {
+    // Scroll to the top of the page whenever the component updates
+    window.scrollTo(0, 0);
+  }, []);
   const handleChange = (value) => {
     setDescription(value);
   };

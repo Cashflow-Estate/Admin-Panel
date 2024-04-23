@@ -74,7 +74,10 @@ const UserDetails = () => {
   useEffect(() => {
     localStorage.setItem("visitedTabs", JSON.stringify(visitedTabs));
   }, [visitedTabs]);
-
+  useEffect(() => {
+    // Scroll to the top of the page whenever the component updates
+    window.scrollTo(0, 0);
+  }, []);
   useEffect(() => {
     // Get the last visited tab from the array
     const lastVisitedTab = visitedTabs[visitedTabs.length - 1];
