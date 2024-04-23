@@ -56,11 +56,21 @@ const AllCustomers = () => {
     },
     {
       name: 'Email',
-      selector: (row) => row['email'],
+      selector: (row) => (
+        <div
+          style={{
+          overflow:"visible"
+          }}
+        >
+          { row['email']}
+        </div>
+      ),
+      // selector: (row) => row['email'],
       sortable: true,
       center: false,
+    
       minWidth: '200px',
-      maxWidth: '300px',
+      maxWidth: 'auto',
     },
     {
       name: 'Location',
@@ -252,7 +262,7 @@ const AllCustomers = () => {
       location: 'Toronto',
       skill: null, // Placeholder for skill
       extn: 3579,
-      email: 'emma.johnson@example.com',
+      email: 'emma.johson@example.com',
       packageName: 'premium',
       blockUser: false,
     },
