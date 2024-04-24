@@ -41,9 +41,9 @@ const CreateDeal = () => {
   };
 
   const [text, setText] = useState(``);
-  const handleChange = () => {
+  const handleChange = (e) => {
     setText(
-      "Enter text in the area on the left. For more info, click the ? (help) icon in the menu."
+    e?.target?.value
     );
   };
 
@@ -115,11 +115,9 @@ const CreateDeal = () => {
                     id="editor_container_description"
                     onChange={handleChange}
                     value={text}
-                    options={{
-                      spellChecker: false,
-                    }}
+                 
                   />
-                  <UploadProjectFileClass register={register} errors={errors} />
+                  <UploadProjectFileClass description={"Add Deals Files"} register={register} errors={errors} />
                   <Row>
                     <Col>
                       <div className="text-end">

@@ -211,7 +211,7 @@ const AddNewOccupant = () => {
             </FormGroup>
           </Col>
         </Row>
-        <UploadProjectFileClass property={"true"} />
+        <UploadProjectFileClass description={"Add Property Closing Docs"} />
 
         <button type="submit" className="btn btn-primary mr-2">
           Save

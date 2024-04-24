@@ -34,8 +34,8 @@ const AddProperty = () => {
     // Scroll to the top of the page whenever the component updates
     window.scrollTo(0, 0);
   }, []);
-  const handleChange = (value) => {
-    setDescription(value);
+  const handleChange = (e) => {
+    setDescription(e?.target?.value);
   };
 
   const handlePropertyTypeChange = (type) => {
@@ -553,10 +553,10 @@ const AddProperty = () => {
               id="editor_container_description"
               onChange={handleChange}
               value={description}
-              options={{
-                spellChecker: false,
-              }}
+             
             />
+        <UploadProjectFileClass description={"Add Property Images and Docs*"}/>
+
             <div className="d-flex justify-content-center mt-4">
               <Button variant="primary" onClick={handleAddProperty}>
                 Add Property
