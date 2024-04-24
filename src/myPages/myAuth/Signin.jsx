@@ -21,9 +21,9 @@ import { useDispatch, useSelector } from "react-redux";
 
 const Signin = ({ selected }) => {
   const [email, setEmail] = useState("test@gmail.com");
-  console.log("🚀 ~ Signin ~ email:", email)
+  console.log("🚀 ~ Signin ~ email:", email);
   const [password, setPassword] = useState("test123");
-  console.log("🚀 ~ Signin ~ password:", password)
+  console.log("🚀 ~ Signin ~ password:", password);
   const [togglePassword, setTogglePassword] = useState(false);
   const [loader, setLoader] = useState(false);
   const navigate = useNavigate();
@@ -33,15 +33,13 @@ const Signin = ({ selected }) => {
   const [value, setValue] = useState(localStorage.getItem("profileURL" || man));
   const [name, setName] = useState(localStorage.getItem("Name"));
   const dispatch = useDispatch();
-   const Data = [
-
+  const Data = [
     {
-        id: 2,
-        heading: 'Loader 3',
-        spinnerClass: 'loader-3'
+      id: 2,
+      heading: "Loader 3",
+      spinnerClass: "loader-3",
     },
-  
-];
+  ];
   useEffect(() => {
     localStorage.setItem("profileURL", man);
     localStorage.setItem("Name", "Emay Walter");
@@ -50,7 +48,7 @@ const Signin = ({ selected }) => {
     e.preventDefault();
     setValue(man);
     setName("Emay Walter");
-    setLoader(true)
+    setLoader(true);
     try {
       const response = await axios.post(
         "https://cashflow-backend-w0pi.onrender.com/api/v1/users/login",
@@ -65,7 +63,7 @@ const Signin = ({ selected }) => {
 
         await new Promise((resolve) => setTimeout(resolve, 100));
         toast.success("Successfully logged in!..");
-        setLoader(false)
+        setLoader(false);
         setTimeout(() => {
           navigate(`/dashboard`);
         }, 2000);
@@ -73,7 +71,10 @@ const Signin = ({ selected }) => {
         toast.error("You entered the wrong password or username!..");
       }
     } catch (error) {
+      toast.error("You entered the wrong password or username!..");
+
       console.error("Error:", error);
+      setLoader(false);
     }
   };
 
@@ -129,9 +130,13 @@ const Signin = ({ selected }) => {
                         onClick: (e) => loginAuth(e),
                       }}
                     >
-                      {loader&& <div className="loader-box">
-                      <Spinner attrSpinner={{ className: Data[0].spinnerClass }} />
-                    </div>}
+                      {loader && (
+                        <div className="loader-box">
+                          <Spinner
+                            attrSpinner={{ className: Data[0].spinnerClass }}
+                          />
+                        </div>
+                      )}
                       {SignIn}
                     </Btn>
                   </div>

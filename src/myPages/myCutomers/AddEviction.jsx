@@ -123,6 +123,14 @@ const AddEviction = () => {
                     <OccupantDetail register={register} errors={errors} />
                   </CardBody>
                 </Card>
+                <CardHeader>
+                  <H4>Select Property</H4>
+                </CardHeader>
+                <Card>
+                  <CardBody>
+                    <PropertyDetail register={register} errors={errors} />
+                  </CardBody>
+                </Card>
                 <Card>
                   <CardBody>
                     <RadioQuestions
@@ -360,8 +368,8 @@ const RadioQuestions = ({ question, options, onChange }) => {
             ))}
           </FormGroup>
         </Col>
-        {(question === "Is there a written lease with the Occupant?" ||
-          question === "Do you maintain a ledger for the Occupant?") && (
+        {(question === "Do you have any additional documents with relevance to this case that you need to attach?" ||
+          question === "Do you maintain a ledger for the Occupant?" ||     question === "Is there a written aggreement with the Occupant?") && (
           <Col sm="12">
             <FormGroup>
          
@@ -395,6 +403,171 @@ const RadioQuestions = ({ question, options, onChange }) => {
 
 
 
+const PropertyDetail = ({ register, errors }) => {
+  const dummyProperties = [
+    {
+      propertyName: "Property A",
+      streetAddress: "123 Main St",
+      city: "New York",
+      state: "NY",
+      country: "USA",
+      zipcode: "10001",
+      rentCharge: "1200",
+    },
+    {
+      propertyName: "Property B",
+      streetAddress: "456 Elm St",
+      city: "Los Angeles",
+      state: "CA",
+      country: "USA",
+      zipcode: "90001",
+      rentCharge: "1500",
+    },
+  ];
+
+  const [selectedProperty, setSelectedProperty] = useState(null);
+
+  const handlePropertySelect = (e) => {
+    const selectedPropertyName = e.target.value;
+    const property = dummyProperties.find(
+      (prop) => prop.propertyName === selectedPropertyName
+    );
+    setSelectedProperty(property);
+  };
+
+  return (
+    <Fragment>
+      <Row>
+        <Col sm={4}>
+          <FormGroup>
+            <h6 style={{ color: "black" }}>{"Property Name"}</h6>
+            <select
+              className="form-control"
+              onChange={handlePropertySelect}
+              defaultValue=""
+            >
+              <option value="" disabled hidden>
+                Select Property
+              </option>
+              {dummyProperties.map((property) => (
+                <option key={property.propertyName} value={property.propertyName}>
+                  {property.propertyName}
+                </option>
+              ))}
+            </select>
+          </FormGroup>
+        </Col>
+      </Row>
+      {selectedProperty && (
+        <Fragment>
+          <Row>
+            <Col sm={4}>
+              <FormGroup>
+                <h6 style={{ color: "black" }}>{"Street Address"}</h6>
+                <input
+                  className="form-control"
+                  type="text"
+                  name="propertyStreetAddress"
+                  placeholder="Enter property street address"
+                  value={selectedProperty.streetAddress}
+                  {...register("propertyStreetAddress", { required: true })}
+                />
+                <span style={{ color: "red" }}>
+                  {errors.propertyStreetAddress && "Street address is required"}
+                </span>
+              </FormGroup>
+            </Col>
+            <Col sm={4}>
+              <FormGroup>
+                <h6 style={{ color: "black" }}>{"City"}</h6>
+                <input
+                  className="form-control"
+                  type="text"
+                  name="propertyCity"
+                  placeholder="Enter property city"
+                  value={selectedProperty.city}
+                  {...register("propertyCity", { required: true })}
+                />
+                <span style={{ color: "red" }}>
+                  {errors.propertyCity && "City is required"}
+                </span>
+              </FormGroup>
+            </Col>
+            <Col sm={4}>
+              <FormGroup>
+                <h6 style={{ color: "black" }}>{"State"}</h6>
+                <input
+                  className="form-control"
+                  type="text"
+                  name="propertyState"
+                  placeholder="Enter property state"
+                  value={selectedProperty.state}
+                  {...register("propertyState", { required: true })}
+                />
+                <span style={{ color: "red" }}>
+                  {errors.propertyState && "State is required"}
+                </span>
+              </FormGroup>
+            </Col>
+          </Row>
+          <Row>
+            <Col sm={4}>
+              <FormGroup>
+                <h6 style={{ color: "black" }}>{"Country"}</h6>
+                <input
+                  className="form-control"
+                  type="text"
+                  name="propertyCountry"
+                  placeholder="Enter property country"
+                  value={selectedProperty.country}
+                  {...register("propertyCountry", { required: true })}
+                />
+                <span style={{ color: "red" }}>
+                  {errors.propertyCountry && "Country is required"}
+                </span>
+              </FormGroup>
+            </Col>
+            <Col sm={4}>
+              <FormGroup>
+                <h6 style={{ color: "black" }}>{"Zipcode"}</h6>
+                <input
+                  className="form-control"
+                  type="text"
+                  name="propertyZipcode"
+                  placeholder="Enter property zipcode"
+                  value={selectedProperty.zipcode}
+                  {...register("propertyZipcode", { required: true })}
+                />
+                <span style={{ color: "red" }}>
+                  {errors.propertyZipcode && "Zipcode is required"}
+                </span>
+              </FormGroup>
+            </Col>
+            <Col sm={4}>
+              <FormGroup>
+                <h6 style={{ color: "black" }}>{"Monthly Rent Charge"}</h6>
+                <input
+                  className="form-control"
+                  type="text"
+                  name="monthlyRentCharge"
+                  placeholder="Enter monthly rent charge"
+                  value={selectedProperty.rentCharge}
+                  {...register("monthlyRentCharge", { required: true })}
+                />
+                <span style={{ color: "red" }}>
+                  {errors.monthlyRentCharge && "Monthly rent charge is required"}
+                </span>
+              </FormGroup>
+            </Col>
+          </Row>
+        </Fragment>
+      )}
+    </Fragment>
+  );
+};
+
+
+  
 
 
 const OccupantDetail = ({ register, errors }) => {
