@@ -24,7 +24,7 @@ const Signup = ({ selected }) => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "https://cashflow-pnra.onrender.com/api/v1/users/register",
+        "https://cashflow-backend-w0pi.onrender.com/api/v1/users/register",
         {
           email,
           userName,
