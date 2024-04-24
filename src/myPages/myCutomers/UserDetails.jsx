@@ -1,4 +1,10 @@
-import React, { Fragment, useCallback, useEffect, useMemo, useState } from "react";
+import React, {
+  Fragment,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { useGenerateWhatsappUrl } from "../../myHooks";
 import {
   Card,
@@ -82,7 +88,8 @@ const UserDetails = () => {
     // Get the last visited tab from the array
     const lastVisitedTab = visitedTabs[visitedTabs.length - 1];
     // Update the active tab
-    setActiveTab(lastVisitedTab);
+    let tabb=role==="Admin"?"1":"15"
+ setActiveTab(lastVisitedTab || tabb);
   }, [location.pathname, visitedTabs]);
 
   const toggleDropdown = () => setDropdownOpen((prevState) => !prevState);
@@ -98,12 +105,15 @@ const UserDetails = () => {
   }, [role]);
   const [activeTab, setActiveTab] = useState(initialActiveTab);
 
-  const toggleTab = useCallback((tab) => {
-    if (activeTab !== tab) {
-      setActiveTab(tab);
-      setVisitedTabs((prevTabs) => [...prevTabs, tab]);
-    }
-  }, [activeTab]);
+  const toggleTab = useCallback(
+    (tab) => {
+      if (activeTab !== tab) {
+        setActiveTab(tab);
+        setVisitedTabs((prevTabs) => [...prevTabs, tab]);
+      }
+    },
+    [activeTab]
+  );
 
   const handleBack = () => {
     if (visitedTabs.length > 1) {
@@ -288,64 +298,69 @@ const UserDetails = () => {
                   </NavItem>
                 </>
               )}
-
-              <NavItem>
-                <Dropdown isOpen={dropdownOpen} toggle={toggleDropdown}>
-                  <DropdownToggle
-                    className="nav-link"
-                    style={{
-                      backgroundColor: activeTab === "6" ? "green" : "black",
-                      color: activeTab === "6" ? "white" : "white",
-                      borderRadius: "15px",
-                      padding: "10px",
-                    }}
-                    caret
-                  >
-                    Zoom Calls
-                  </DropdownToggle>
-                  <DropdownMenu>
-                    <DropdownItem onClick={() => toggleTab("6")}>
-                      Upcoming Schedules
-                    </DropdownItem>
-                    <DropdownItem divider />
-                    {/* <DropdownItem onClick={() => toggleTab("8")}>
+              {role === "Admin" && (
+                <>
+                  <NavItem>
+                    <Dropdown isOpen={dropdownOpen} toggle={toggleDropdown}>
+                      <DropdownToggle
+                        className="nav-link"
+                        style={{
+                          backgroundColor:
+                            activeTab === "6" ? "green" : "black",
+                          color: activeTab === "6" ? "white" : "white",
+                          borderRadius: "15px",
+                          padding: "10px",
+                        }}
+                        caret
+                      >
+                        Zoom Calls
+                      </DropdownToggle>
+                      <DropdownMenu>
+                        <DropdownItem onClick={() => toggleTab("6")}>
+                          Upcoming Schedules
+                        </DropdownItem>
+                        <DropdownItem divider />
+                        {/* <DropdownItem onClick={() => toggleTab("8")}>
                         Meet Requests
                       </DropdownItem> */}
-                    <DropdownItem divider />
-                    <DropdownItem onClick={() => toggleTab("9")}>
-                      Calls History
-                    </DropdownItem>
-                  </DropdownMenu>
-                </Dropdown>
-              </NavItem>
-              <NavItem>
-                <Dropdown
-                  isOpen={dropdownOpenTrans}
-                  toggle={toggleDropdownTrans}
-                >
-                  <DropdownToggle
-                    className="nav-link"
-                    style={{
-                      backgroundColor: activeTab === "5" ? "green" : "black",
-                      color: activeTab === "5" ? "white" : "white",
-                      borderRadius: "15px",
-                      padding: "10px",
-                    }}
-                    caret
-                  >
-                    Transactions
-                  </DropdownToggle>
-                  <DropdownMenu>
-                    <DropdownItem onClick={() => toggleTab("10")}>
-                      Deals Transactions
-                    </DropdownItem>
-                    <DropdownItem divider />
-                    <DropdownItem onClick={() => toggleTab("5")}>
-                      Subscription Transactions
-                    </DropdownItem>
-                  </DropdownMenu>
-                </Dropdown>
-              </NavItem>
+                        <DropdownItem divider />
+                        <DropdownItem onClick={() => toggleTab("9")}>
+                          Calls History
+                        </DropdownItem>
+                      </DropdownMenu>
+                    </Dropdown>
+                  </NavItem>
+                  <NavItem>
+                    <Dropdown
+                      isOpen={dropdownOpenTrans}
+                      toggle={toggleDropdownTrans}
+                    >
+                      <DropdownToggle
+                        className="nav-link"
+                        style={{
+                          backgroundColor:
+                            activeTab === "5" ? "green" : "black",
+                          color: activeTab === "5" ? "white" : "white",
+                          borderRadius: "15px",
+                          padding: "10px",
+                        }}
+                        caret
+                      >
+                        Transactions
+                      </DropdownToggle>
+                      <DropdownMenu>
+                        <DropdownItem onClick={() => toggleTab("10")}>
+                          Deals Transactions
+                        </DropdownItem>
+                        <DropdownItem divider />
+                        <DropdownItem onClick={() => toggleTab("5")}>
+                          Subscription Transactions
+                        </DropdownItem>
+                      </DropdownMenu>
+                    </Dropdown>
+                  </NavItem>
+                </>
+              )}
               <NavItem>
                 <NavLink
                   className={classnames({ "text-white": activeTab !== "7" })}
@@ -554,12 +569,6 @@ const SocialData = ({
   );
 };
 
-
-
-
-
-
-
 // import React, { Fragment, useCallback, useMemo, useState } from "react";
 // import { useGenerateWhatsappUrl } from "../../myHooks";
 // import {
@@ -647,7 +656,6 @@ const SocialData = ({
 //   }, []);
 
 //   const [activeTab, setActiveTab] = useState(initialActiveTab);
-
 
 //   return (
 //     <Fragment>
