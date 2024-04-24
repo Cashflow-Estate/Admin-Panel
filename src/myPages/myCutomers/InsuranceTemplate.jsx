@@ -48,7 +48,6 @@ const InsuranceForm = () => {
       <Form className="theme-form" onSubmit={handleSubmit(onSubmit)}>
         <Card>
           <CardHeader>
-            <H4>Add Insurance</H4>
           </CardHeader>
           <CardBody>
             <Row>
