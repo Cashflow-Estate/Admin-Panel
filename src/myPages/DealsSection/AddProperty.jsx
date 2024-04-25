@@ -196,7 +196,7 @@ const AddProperty = () => {
                         <Col sm={12}>
                           <FormGroup>
                             <h6 style={{ color: "black" }}>
-                              {"Prperty Details"}
+                              {"Property Details"}
                             </h6>
                             <input
                               className="form-control"
@@ -303,7 +303,7 @@ const AddProperty = () => {
                         <Col sm={12}>
                           <FormGroup>
                             <h6 style={{ color: "black" }}>
-                              {"Prperty Details"}
+                              {"Property Details"}
                             </h6>
                             <input
                               className="form-control"
@@ -409,7 +409,7 @@ const AddProperty = () => {
                         <Col sm={12}>
                           <FormGroup>
                             <h6 style={{ color: "black" }}>
-                              {"Prperty Details"}
+                              {"Property Details"}
                             </h6>
                             <input
                               className="form-control"
@@ -515,7 +515,7 @@ const AddProperty = () => {
                         <Col sm={12}>
                           <FormGroup>
                             <h6 style={{ color: "black" }}>
-                              {"Prperty Details"}
+                              {"Property Details"}
                             </h6>
                             <input
                               className="form-control"
@@ -555,7 +555,8 @@ const AddProperty = () => {
               value={description}
              
             />
-        <UploadProjectFileClass description={"Add Property Images and Docs*"}/>
+        <UploadProjectFileClass description={"Add Property Images*"}/>
+        <UploadProjectFileClass description={"Add Property Docs*"}/>
 
             <div className="d-flex justify-content-center mt-4">
               <Button variant="primary" onClick={handleAddProperty}>

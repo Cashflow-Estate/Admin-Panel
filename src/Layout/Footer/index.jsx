@@ -4,9 +4,10 @@ import { Col, Container, Row } from 'reactstrap';
 import { P } from '../../AbstractElements';
 
 const Footer = () => {
+  //  footer-fix
   return (
     <Fragment>
-      <footer className="footer footer-fix">
+      <footer className="footer">
         <Container fluid={true}>
           <Row>
             <Col md="12" className="footer-copyright text-center">
