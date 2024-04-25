@@ -6,7 +6,7 @@ import { P } from '../../AbstractElements';
 const Footer = () => {
   return (
     <Fragment>
-      <footer className="footer">
+      <footer className="footer footer-fix">
         <Container fluid={true}>
           <Row>
             <Col md="12" className="footer-copyright text-center">
