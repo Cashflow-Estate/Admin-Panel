@@ -65,7 +65,7 @@ const OTP = ({ logoClassMain }) => {
       };
 
       try {
-        const response = await axios.post('https://cashflow-backend-w0pi.onrender.com/api/v1/users/otp', requestBody);
+        const response = await axios.post('https://cashflow-be.vercel.app/api/v1/users/otp', requestBody);
 
         // Assuming the response contains necessary information about success/error
         if (response.status === 200) {
