@@ -37,6 +37,7 @@ const AddNewAttorney = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    console.log("🚀 ~ handleChange ~ value:", value)
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
@@ -89,9 +90,9 @@ const AttorneyForm = ({ formData, handleChange, register, errors }) => {
               type="text"
               name="name"
               placeholder="Name *"
-              onChange={handleChange}
+              onChange={(e)=>handleChange(e)}
               {...register("name", { required: true })}
-              value={formData.name}
+              // value={formData.name}
             />
             <span style={{ color: "red" }}>
               {errors.name && "Name is required"}
@@ -107,9 +108,9 @@ const AttorneyForm = ({ formData, handleChange, register, errors }) => {
               type="email"
               name="email"
               placeholder="Email Address"
-              onChange={handleChange}
+              onChange={(e)=>handleChange(e)}
               {...register("email", { required: true })}
-              value={formData.email}
+              // value={formData.email}
             />
             {errors.email && (
               <span className="text-danger">{errors.email.message}</span>
@@ -125,9 +126,9 @@ const AttorneyForm = ({ formData, handleChange, register, errors }) => {
               type="tel"
               name="phone"
               placeholder="Phone"
-              onChange={handleChange}
+              onChange={(e)=>handleChange(e)}
               {...register("phone", { required: true })}
-              value={formData.phone}
+              // value={formData.phone}
             />
             {errors.phone && (
               <span className="text-danger">{errors.phone.message}</span>
@@ -143,9 +144,9 @@ const AttorneyForm = ({ formData, handleChange, register, errors }) => {
               type="text"
               name="street"
               placeholder="Street"
-              onChange={handleChange}
+              onChange={(e)=>handleChange(e)}
               {...register("street", { required: true })}
-              value={formData.street}
+              // value={formData.street}
             />
             {errors.street && (
               <span className="text-danger">{errors.street.message}</span>
@@ -161,9 +162,9 @@ const AttorneyForm = ({ formData, handleChange, register, errors }) => {
               type="text"
               name="city"
               placeholder="City"
-              onChange={handleChange}
+              onChange={(e)=>handleChange(e)}
               {...register("city", { required: true })}
-              value={formData.city}
+              // value={formData.city}
             />
             {errors.city && (
               <span className="text-danger">{errors.city.message}</span>
@@ -179,9 +180,9 @@ const AttorneyForm = ({ formData, handleChange, register, errors }) => {
               type="text"
               name="state"
               placeholder="State"
-              onChange={handleChange}
+              onChange={(e)=>handleChange(e)}
               {...register("state", { required: true })}
-              value={formData.state}
+              // value={formData.state}
             />
             {errors.state && (
               <span className="text-danger">{errors.state.message}</span>
@@ -197,9 +198,9 @@ const AttorneyForm = ({ formData, handleChange, register, errors }) => {
               type="text"
               name="zip"
               placeholder="Zip"
-              onChange={handleChange}
+              onChange={(e)=>handleChange(e)}
               {...register("zip", { required: true })}
-              value={formData.zip}
+              // value={formData.zip}
             />
             {errors.zip && (
               <span className="text-danger">{errors.zip.message}</span>
@@ -215,9 +216,9 @@ const AttorneyForm = ({ formData, handleChange, register, errors }) => {
               type="text"
               name="country"
               placeholder="Country"
-              onChange={handleChange}
+              onChange={(e)=>handleChange(e)}
               {...register("country", { required: true })}
-              value={formData.country}
+              // value={formData.country}
             />
             {errors.country && (
               <span className="text-danger">{errors.country.message}</span>

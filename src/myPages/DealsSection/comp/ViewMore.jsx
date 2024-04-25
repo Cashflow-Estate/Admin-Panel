@@ -23,7 +23,6 @@ import Logs from "./Logs";
 
 const ViewMore = () => {
   useEffect(() => {
-    // Scroll to the top of the page whenever the component updates
     window.scrollTo(0, 0);
   }, []);
   const [state, setState] = useState({ nav1: null, nav2: null });
