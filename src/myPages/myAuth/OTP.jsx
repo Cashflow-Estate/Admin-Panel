@@ -58,7 +58,7 @@ const OTP = ({ logoClassMain }) => {
       const { email, userName, password, phoneNumber } = JSON.parse(storedData);
       const requestBody = {
         email,
-        userName,
+        userName, 
         password,
         phoneNumber,
         otp,

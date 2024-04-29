@@ -1,11 +1,7 @@
 import Dropzone from "react-dropzone";
-
-import React, { Fragment, useContext, useEffect, useState } from "react";
-import { Breadcrumbs, Btn, H4, H6 } from "../../AbstractElements";
-import ProjectContext from "../../_helper/Project";
-import { Add, Cancel } from "../../Constant";
-import { useNavigate, Link } from "react-router-dom";
-import { useForm } from "react-hook-form";
+import React, { Fragment, useEffect, useState } from "react";
+import { Breadcrumbs, Btn, H6 } from "../../AbstractElements";
+import { useForm, Controller } from "react-hook-form";
 import {
   Container,
   Row,
@@ -17,84 +13,109 @@ import {
   Label,
   Input,
 } from "reactstrap";
-import CustomizerContext from "../../_helper/Customizer";
-import ProjectRateClass from "./comp/ProjectRate";
-import UploadProjectFileClass from "./comp/UploadProjectFile";
-import IssueClass from "./comp/IssueClass";
-import SimpleMdeReact from "react-simplemde-editor";
-import LocationDetail from "./comp/LocationDetail";
-import DealForm from "./comp/DealForm";
-import DealAddress from "./comp/DealAddress";
+
 import Select from "react-select";
 import { FaTrash } from "react-icons/fa";
 import "./comp/multi.css";
 import axios from "axios";
+import { toast } from "react-toastify";
+
 const CreateDeal = () => {
-  const [client, setClient] = useState(false);
-  const [formSubmitted, setFormSubmitted] = useState(false);
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
-
-  const AddProject = (data) => {
-    setClient(true);
-    setFormSubmitted(true); 
-  };
-
-  const [text, setText] = useState(``);
-  const handleChange = (e) => {
-    setText(e?.target?.value);
-  };
-
-  const data = [
-    { id: 1, member: true, city: "New York", name: "John", client: "customer" },
-    {
-      id: 2,
-      member: false,
-      city: "Los Angeles",
-      name: "Alice",
-      client: "customer",
-    },
-    { id: 3, member: true, city: "Chicago", name: "Bob", client: "member" },
-    { id: 4, member: false, city: "Houston", name: "Carol", client: "free" },
-  ];
-
-  const [selectedCity, setSelectedCity] = useState(null);
-
-  const filteredOptions = selectedCity
-    ? data.filter((item) => item.city === selectedCity)
-    : data;
-  const [sendTo, setSendTo] = useState(""); // State to keep track of selected option
-
-  const handleAdd = () => {
-    // Implement your logic for handling the Add button click
-  };
-
-  const handleCancel = () => {
-    // Implement your logic for handling the Cancel button click
-  };
-
-  const handleCityChange = (event) => {
-    setSelectedCity(event.target.value);
-  };
-
-  const handleSendDeal = (sendTo) => {
-    console.log("Sending deal to:", sendTo);
-  };
-
-  // Options for the searchable dropdown
-  const userOptions = data.map((user) => ({
-    value: user.id,
-    label: user.name,
-  }));
-
+    trigger,
+    watch,
+    control,
+  } = useForm(); // Initialize form
+  const formData = watch();
+  const [images, setImages] = useState([]);
+  const [client, setClient] = useState(false);
+  const [formSubmitted, setFormSubmitted] = useState(false); // State to track form submission
   const [selectedOptions, setSelectedOptions] = useState([]); // State to store selected options
-  const [images, setImages] = useState([]); // State to store uploaded images
-  const [selectedSendTo, setSelectedSendTo] = useState(""); // State to store the selected send to option
+  const [useEmail, setUseEmail] = useState(false);
+  const [addressOptions, setAddressOptions] = useState([]);
+  console.log("🚀 ~ CreateDeal ~ addressOptions:", addressOptions);
+  const [address, setAddress] = useState("");
+  const [monthlyCashMin, setMonthlyCashMin] = useState(""); // State for Monthly Cash Flow Minimum
+  const [monthlyCashMax, setMonthlyCashMax] = useState(""); // State for Monthly Cash Flow Maximum
+  const [approxAnnualMinReturn, setApproxAnnualMinReturn] = useState(""); // State for Approx Annual Minimum Return(%)
+  const [approxAnnualMaxReturn, setApproxAnnualMaxReturn] = useState(""); // State for Approx Annual Maximum Return(%)
 
-  // Fixed options for the searchable dropdown
+  // Function to calculate Approx Annual Minimum and Maximum Returns
+  const calculateAnnualReturns = () => {
+    if (monthlyCashMin && monthlyCashMax) {
+      const minReturn =
+        ((monthlyCashMin * 12) / parseFloat(formData.price)) * 100;
+      const maxReturn =
+        ((monthlyCashMax * 12) / parseFloat(formData.price)) * 100;
+      setApproxAnnualMinReturn(Math.ceil(minReturn.toFixed(2))); // Round to 2 decimal places
+      setApproxAnnualMaxReturn(Math.ceil(maxReturn.toFixed(2))); // Round to 2 decimal places
+    }
+  };
+
+  useEffect(() => {
+    calculateAnnualReturns();
+  }, [monthlyCashMin, monthlyCashMax, formData.price]); // Add formData.price to dependency array
+
+  const AddProject = async (data) => {
+    console.log("🚀 ~ AddProject ~ data:", data);
+    setClient(true);
+    setFormSubmitted(true);
+    await trigger();
+
+    if (images.length === 0) {
+      alert("Please upload at least one image.");
+      return;
+    }
+    // // Ensure that the address field is properly set
+    // if (!data.address) {
+    //   alert("Please provide an address.");
+    //   return;
+    // }
+    const dealData = new FormData(); // Create a FormData object to send mixed content (text and files)
+    dealData.append("title", data.title);
+    dealData.append("price", data.price);
+    dealData.append("approxPrice", data.approxPrice);
+    dealData.append("upfrontDown", data.upfrontDown);
+    dealData.append("monthly_cash_min", data.monthly_cash_min);
+    dealData.append("monthly_cash_max", data.monthly_cash_max);
+    dealData.append("annually_return_min", approxAnnualMinReturn); // Fix typo here
+    dealData.append("annually_return_max", approxAnnualMaxReturn); // Fix typo here
+    dealData.append("closing_date", data.closing_date);
+    dealData.append("bedRooms", data.bedRooms);
+    dealData.append("area", data.area);
+    dealData.append("baths", data.baths);
+    dealData.append("address", address); // Assuming address is a string
+    data.sendTo && dealData.append("sendTo", data.sendTo[0]?.label); // Add sendTo if it exists
+    images.forEach((image, index) => {
+      dealData.append(`images`, image); // Append each image to FormData with the same key "images"
+    });
+    
+    try {
+      setFormSubmitted(true);
+
+      const response = await axios.post(
+        "https://cashflow-be.vercel.app/api/v1/deals",
+        dealData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      console.log("🚀 ~ AddProject ~ response:", response)
+      if(response.status==="201"){
+        setFormSubmitted(false);
+        toast.success("Successfully !..");
+      }
+      // Handle response
+    } catch (error) {
+      // Handle error
+    }
+  };
+
   const options = [
     { value: "all", label: "All Users" },
     { value: "paid", label: "Paid Customers" },
@@ -102,52 +123,27 @@ const CreateDeal = () => {
     { value: "free", label: "Free Customer" },
   ];
 
-  // Handler for selected options change
   const handleSelectChange = (selectedOptions) => {
     setSelectedOptions(selectedOptions);
   };
 
-  // Handler for send to dropdown change
-  const handleSendToChange = (selectedOption) => {
-    setSelectedSendTo(selectedOption.value);
-  };
-
-  // Handler for uploading images
-  const handleDrop = (acceptedFiles) => {
-    setImages([...images, ...acceptedFiles]);
-  };
-
-  // Handler for deleting an uploaded image
-  const handleDelete = (index) => {
-    const newImages = [...images];
-    newImages.splice(index, 1);
-    setImages(newImages);
-  };
-
-  //
-  const [monthlyCashMin, setMonthlyCashMin] = useState("");
-  const [monthlyCashMax, setMonthlyCashMax] = useState("");
-  const [annualCashMin, setAnnualCashMin] = useState("");
-
-  const [useEmail, setUseEmail] = useState(false); // State to track whether email is used
-
+  // Function to handle changes in "Send By Email" input
   const handleEmailChange = (e) => {
     const email = e.target.value;
-    // If email is entered, disable the React Select
     if (email.trim() !== "") {
       setUseEmail(true);
+      setSelectedOptions([]); // Clear selected options when using email
     } else {
       setUseEmail(false);
     }
   };
-  const [addressOptions, setAddressOptions] = useState([]);
-  console.log("🚀 ~ CreateDeal ~ addressOptions:", addressOptions)
   const handleAddressChange = async (inputAddress) => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/places?input=${inputAddress}`
+        `https://cashflow-be.vercel.app/places?input=${inputAddress}`
       );
       const candidates = response.data.candidates;
+      console.log("🚀 ~ handleAddressChange ~ candidates:", candidates);
       const formattedOptions = candidates.map((candidate) => ({
         value: candidate.formatted_address,
         label: `${candidate.name}: ${candidate.formatted_address}`,
@@ -157,12 +153,7 @@ const CreateDeal = () => {
       console.error("Error fetching location data:", error);
     }
   };
-  
 
-  const handleChangee = (selectedOption) => {
-    // Handle selected option here
-    console.log("Selected option:", selectedOption);
-  };
   return (
     <Fragment>
       <Breadcrumbs
@@ -171,7 +162,7 @@ const CreateDeal = () => {
         mainTitle="Slow Flip Deals"
       />
       <Container fluid={true}>
-        <Row>
+       {!formSubmitted? <Row>
           <Col sm="12">
             <Card>
               <CardBody>
@@ -213,7 +204,7 @@ const CreateDeal = () => {
                     <Col sm="4">
                       <FormGroup>
                         <H6>{"Slow Flip Total Price"}</H6>
-                        <Input
+                        <input
                           className="form-control"
                           type="number"
                           name="approxPrice"
@@ -230,7 +221,7 @@ const CreateDeal = () => {
                     <Col sm="4">
                       <FormGroup>
                         <H6>{"Interest"}</H6>
-                        <Input
+                        <input
                           className="form-control"
                           type="number"
                           name="upfrontDown"
@@ -245,15 +236,16 @@ const CreateDeal = () => {
                     <Col sm="4">
                       <FormGroup>
                         <H6>{"Monthly Cash Flow Minimum"}</H6>
-                        <Input
+                        <input
                           className="form-control"
                           type="number"
-                          name="monthly_cash"
+                          name="monthly_cash_min"
                           placeholder="Approximate monthly cashflow minimum"
-                          {...register("monthly_cash", { required: true })}
+                          {...register("monthly_cash_min", { required: true })}
+                          onChange={(e) => setMonthlyCashMin(e.target.value)}
                         />
                         <span style={{ color: "red" }}>
-                          {errors.monthly_cash &&
+                          {errors.monthly_cash_min &&
                             "Monthly Cash Flow Minimum is required"}
                         </span>
                       </FormGroup>
@@ -261,12 +253,13 @@ const CreateDeal = () => {
                     <Col sm="4">
                       <FormGroup>
                         <H6>{"Monthly Cash Flow Maximum"}</H6>
-                        <Input
+                        <input
                           className="form-control"
                           type="number"
                           name="monthly_cash_max"
                           placeholder="Approximate monthly cashflow maximum"
                           {...register("monthly_cash_max", { required: true })}
+                          onChange={(e) => setMonthlyCashMax(e.target.value)}
                         />
                         <span style={{ color: "red" }}>
                           {errors.monthly_cash_max &&
@@ -279,7 +272,8 @@ const CreateDeal = () => {
                     <Col sm="4">
                       <FormGroup>
                         <H6>{"Approx Annual Minimum Return(%)"}</H6>
-                        <Input
+                        <input
+                          value={approxAnnualMinReturn}
                           className="form-control"
                           type="text"
                           name="annually_cash"
@@ -290,10 +284,11 @@ const CreateDeal = () => {
                     <Col sm="4">
                       <FormGroup>
                         <H6>{"Approx Annual Maximum Return(%)"}</H6>
-                        <Input
+                        <input
                           className="form-control"
                           type="text"
                           name="annually_cash_max"
+                          value={approxAnnualMaxReturn}
                           readOnly
                         />
                       </FormGroup>
@@ -359,8 +354,6 @@ const CreateDeal = () => {
                         </span>
                       </FormGroup>
                     </Col>
-                  </Row>
-                  <Row>
                     <Col sm="12">
                       <FormGroup>
                         <H6 className="form-label">{"Address"}</H6>
@@ -369,50 +362,82 @@ const CreateDeal = () => {
                           name="address"
                           placeholder="Type to search for an address"
                           onChange={(e) => handleAddressChange(e.target.value)}
+                          value={address} // Bind the address value to state
                         />
-                            <span className="text-danger">
+                        <span className="text-danger">
                           {errors.address && errors.address.message}
                         </span>
                         <div>
                           {addressOptions.map((option, index) => (
-                            <div key={index}>
+                            <div
+                              key={index}
+                              onClick={() => setAddress(option.value)} // Set the selected address on click
+                              style={{ cursor: "pointer" }} // Change cursor to pointer for clickable effect
+                            >
                               {option.label}
                             </div>
                           ))}
                         </div>
-
-                    
                       </FormGroup>
                     </Col>
- 
-                  </Row>
-                  <Row>
                     <Col sm="12">
                       <FormGroup>
                         <Label for="sendTo">Send To:</Label>
-                        <Select
-                          options={options}
-                          isMulti
-                          onChange={handleSelectChange}
-                          isDisabled={useEmail}
+                        <Controller
+                          name="sendTo"
+                          control={control}
+                          rules={{
+                            required: !useEmail ? "Send To is required" : false,
+                          }}
+                          render={({ field }) => (
+                            <Select
+                              // isDisabled={useEmail}
+                              {...field}
+                              options={options}
+                              isMulti
+                              onChange={(value) => field.onChange(value)}
+                            />
+                          )}
                         />
-                      </FormGroup>
-                    </Col>
-                    <Col sm="6">
-                      <FormGroup>
-                        <Label for="email">OR Send By Email:</Label>
-                        <Input
-                          type="email"
-                          name="email"
-                          id="email"
-                          placeholder="Enter email"
-                          onChange={handleEmailChange}
-                          disabled={selectedOptions.length}
-                        />
+
+                        {errors.sendTo && (
+                          <span className="text-danger">
+                            {errors.sendTo.message}
+                          </span>
+                        )}
                       </FormGroup>
                     </Col>
                   </Row>
-                  <MultiDropzone />
+
+                  <Row>
+                    {/* <Col sm="6">
+                      <FormGroup>
+                        <h6 style={{ color: "black" }}>OR Send By Email:</h6>
+                        <input
+                          className="form-control"
+                          type="email"
+                          name="sendByEmail"
+                          id="email"
+                          placeholder="Enter email"
+                          onChange={handleEmailChange}
+                          disabled={selectedOptions?.length}
+                          {...register("sendByEmail", {
+                            required:
+                              !selectedOptions?.length && "Email is required",
+                          })}
+                        />
+                        {errors.sendByEmail && (
+                          <span className="text-danger">
+                            {errors.sendByEmail.message}
+                          </span>
+                        )}
+                      </FormGroup>
+                    </Col> */}
+
+                    <Col sm="12">
+                      <MultiDropzone setImages={setImages} />
+                    </Col>
+                  </Row>
                   <Row>
                     <Col>
                       <div className="text-end">
@@ -425,7 +450,7 @@ const CreateDeal = () => {
               </CardBody>
             </Card>
           </Col>
-        </Row>
+        </Row>:"Loading..........."}
       </Container>
     </Fragment>
   );
@@ -433,20 +458,21 @@ const CreateDeal = () => {
 
 export default CreateDeal;
 
-const MultiDropzone = (prop) => {
-  const [images, setImages] = useState([]);
+const MultiDropzone = ({ setImages }) => {
+  const [images, setImagesState] = useState([]);
   const handleDrop = (acceptedFiles) => {
-    setImages([...images, ...acceptedFiles]);
-    prop.setImageData([...images, ...acceptedFiles]);
+    setImagesState([...images, ...acceptedFiles]);
+    setImages([...images, ...acceptedFiles]); // Update parent state
   };
   const handleDelete = (index) => {
     const newImages = [...images];
     newImages.splice(index, 1);
-    setImages(newImages);
+    setImagesState(newImages);
+    setImages(newImages); // Update parent state
   };
+
   return (
     <div className="App2">
-      {/* <h1>Multi Image Upload</h1> */}
       <Dropzone onDrop={handleDrop} accept="image/*" multiple>
         {({ getRootProps, getInputProps }) => (
           <div
