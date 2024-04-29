@@ -1,0 +1,44 @@
+.App2 {
+    text-align: center;
+    margin-top: 50px;
+  }
+  .dropzone {
+    border: 2px dashed #ccc;
+    padding: 20px;
+    cursor: pointer;
+    position: relative;
+  }
+  .dropzone p {
+    margin: 0;
+  }
+  .dropzone-text {
+    text-align: center;
+    font-size: 16px;
+  }
+  .image-preview {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  .image-container {
+    margin: 10px;
+    position: relative;
+  }
+  .image-container img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+  .image-delete {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 5px;
+    cursor: pointer;
+  }
+  .image-delete:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+  }

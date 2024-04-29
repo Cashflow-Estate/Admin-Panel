@@ -8,26 +8,26 @@ const DealForm = ({ register, errors }) => {
             <Row>
                 <Col sm={4}>
                     <FormGroup>
-                        <h6 style={{color: "black"}}>{"Deal Title"}</h6>
+                        <h6 style={{color: "black"}}>{"Title"}</h6>
                         <input className="form-control" type="text" name="title" placeholder="Deal name *" {...register('title',{ required: true })} />
                         <span style={{ color: 'red' }}>{errors.title && 'Title is required'}</span>
                     </FormGroup>
                 </Col>
                 <Col sm={4}>
                     <FormGroup>
-                        <h6 style={{color: "black"}}>{"Deal Price"}</h6>
+                        <h6 style={{color: "black"}}>{"Price"}</h6>
                         <input className="form-control" type="number" name="price" placeholder="Deal price *" {...register('price',{ required: true })} />
                         <span style={{ color: 'red' }}>{errors.price && 'Price is required'}</span>
                     </FormGroup>
                 </Col>
                 <Col sm="4">
           <FormGroup>
-            <H6>{"Slow Flip Terms"}</H6>
+            <H6>{"Slow Flip Total Price"}</H6>
             <Input
               className="form-control"
               type="number"
               name="approxPrice"
-              placeholder="Approximate Price"
+              placeholder="Total Price"
               {...register("approxPrice", { required: true })}
             />
           </FormGroup>
