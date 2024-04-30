@@ -28,18 +28,35 @@ const CreateDeal = () => {
     trigger,
     watch,
     control,
+    reset,
   } = useForm(); // Initialize form
   const formData = watch();
   const [images, setImages] = useState([]);
   const [client, setClient] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false); // State to track form submission
-  console.log("🚀 ~ CreateDeal ~ formSubmitted:", formSubmitted)
   const [selectedOptions, setSelectedOptions] = useState([]); // State to store selected options
   const [useEmail, setUseEmail] = useState(false);
+  const [email, setEmail] = useState("");
+  console.log("🚀 ~ CreateDeal ~ useEmail:", useEmail);
+
+  const handleEmailChange = (event) => {
+    // Check if the email input field is not empty
+    console.log(
+      "🚀 ~ handleEmailChange ~ event.target.value:",
+      event.target.value
+    );
+    if (event.target.value.trim() !== "") {
+      setUseEmail(true);
+      setEmail(event.target.value);
+    } else {
+      setUseEmail(false);
+    }
+  };
+
   const [addressOptions, setAddressOptions] = useState([]);
-  console.log("🚀 ~ CreateDeal ~ addressOptions:", addressOptions);
   const [address, setAddress] = useState("");
   const [addressSearch, setAddressSearch] = useState("");
+  console.log("🚀 ~ CreateDeal ~ addressSearch:", addressSearch);
   const [monthlyCashMin, setMonthlyCashMin] = useState(""); // State for Monthly Cash Flow Minimum
   const [monthlyCashMax, setMonthlyCashMax] = useState(""); // State for Monthly Cash Flow Maximum
   const [approxAnnualMinReturn, setApproxAnnualMinReturn] = useState(""); // State for Approx Annual Minimum Return(%)
@@ -71,11 +88,7 @@ const CreateDeal = () => {
       alert("Please upload at least one image.");
       return;
     }
-    // // Ensure that the address field is properly set
-    // if (!data.address) {
-    //   alert("Please provide an address.");
-    //   return;
-    // }
+
     const dealData = new FormData(); // Create a FormData object to send mixed content (text and files)
     dealData.append("title", data.title);
     dealData.append("price", data.price);
@@ -89,8 +102,17 @@ const CreateDeal = () => {
     dealData.append("bedRooms", data.bedRooms);
     dealData.append("area", data.area);
     dealData.append("baths", data.baths);
-    dealData.append("address", addressSearch); // Assuming address is a string
-    data.sendTo && dealData.append("sendTo", data.sendTo.map((val)=>val.label)); // Add sendTo if it exists
+    dealData.append(
+      "address",
+      addressSearch.map((val) => `${val.label}:${val.value}`)
+    ); // Assuming address is a string
+    data.sendTo &&
+      dealData.append(
+        "sendTo",
+        data.sendTo.map((val) => val.label)
+      ); // Add sendTo if it exists
+
+    dealData.append("sendByEmail", email);
     images.forEach((image, index) => {
       dealData.append(`images`, image); // Append each image to FormData with the same key "images"
     });
@@ -111,7 +133,18 @@ const CreateDeal = () => {
       if (response.data.statusCode === 200) {
         setFormSubmitted(false);
         toast.success("Successfully !..");
+        reset(); // Reset the form
+        setImages([]); // Clear the images state
+        setMonthlyCashMin(""); // Clear monthlyCashMin state
+        setMonthlyCashMax(""); // Clear monthlyCashMax state
+        setApproxAnnualMinReturn(""); // Clear approxAnnualMinReturn state
+        setApproxAnnualMaxReturn(""); // Clear approxAnnualMaxReturn state
+        setAddressSearch(""); // Clear addressSearch state
+        setEmail(""); // Clear email state
+        setSelectedOptions([]); // Clear selectedOptions state
+        setUseEmail(false); // Reset useEmail state
       }
+      //
       // Handle response
     } catch (error) {
       // Handle error
@@ -125,20 +158,16 @@ const CreateDeal = () => {
     { value: "free", label: "Free Customer" },
   ];
 
-  const handleSelectChange = (selectedOptions) => {
-    setSelectedOptions(selectedOptions);
-  };
-
   // Function to handle changes in "Send By Email" input
-  const handleEmailChange = (e) => {
-    const email = e.target.value;
-    if (email.trim() !== "") {
-      setUseEmail(true);
-      setSelectedOptions([]); // Clear selected options when using email
-    } else {
-      setUseEmail(false);
-    }
-  };
+  // const handleEmailChange = (e) => {
+  //   const email = e.target.value;
+  //   if (email.trim() !== "") {
+  //     setUseEmail(true);
+  //     setSelectedOptions([]); // Clear selected options when using email
+  //   } else {
+  //     setUseEmail(false);
+  //   }
+  // };
   const handleAddressChange = async (inputAddress) => {
     try {
       const response = await axios.get(
@@ -156,6 +185,10 @@ const CreateDeal = () => {
     }
   };
   const [debouncedAddressSearch, setDebouncedAddressSearch] = useState("");
+  console.log(
+    "🚀 ~ CreateDeal ~ debouncedAddressSearch:",
+    debouncedAddressSearch
+  );
 
   // Debounce address search
   useEffect(() => {
@@ -168,7 +201,11 @@ const CreateDeal = () => {
   }, [addressSearch]); // Run the effect whenever addressSearch changes
 
   useEffect(() => {
-    if (debouncedAddressSearch.trim() !== "") {
+    if (
+      Array.isArray(debouncedAddressSearch)
+        ? ""
+        : debouncedAddressSearch.trim() !== ""
+    ) {
       // Check if the search query is not empty
       handleAddressChange(debouncedAddressSearch);
     }
@@ -387,17 +424,23 @@ const CreateDeal = () => {
                             name="address"
                             placeholder="Type to search for an address"
                             onChange={(e) => setAddressSearch(e.target.value)}
-                            value={addressSearch} // Bind the address search value to state
+                            value={
+                              Array.isArray(addressSearch)
+                                ? addressSearch.map(
+                                    (val) => `${val.label}:${val.value}`
+                                  )
+                                : addressSearch
+                            } // Bind the address search value to state
                           />
 
                           <span className="text-danger">
                             {errors.address && errors.address.message}
                           </span>
                           <div>
-                            {addressOptions.map((option, index) => (
+                            {addressOptions.map((option, index, arr) => (
                               <div
                                 key={index}
-                                onClick={() => setAddressSearch(option.value)} // Set the selected address on click
+                                onClick={() => setAddressSearch(arr)} // Set the selected address on click
                                 style={{ cursor: "pointer" }} // Change cursor to pointer for clickable effect
                               >
                                 {option.label}
@@ -413,17 +456,24 @@ const CreateDeal = () => {
                             name="sendTo"
                             control={control}
                             rules={{
-                              required: !useEmail
-                                ? "Send To is required"
-                                : false,
+                              validate: () => {
+                                if (!useEmail && !selectedOptions.length) {
+                                  return "Please select either 'Send To' or provide an email";
+                                }
+                                return true;
+                              },
                             }}
                             render={({ field }) => (
                               <Select
-                                // isDisabled={useEmail}
                                 {...field}
                                 options={options}
                                 isMulti
-                                onChange={(value) => field.onChange(value)}
+                                onChange={(value) => {
+                                  field.onChange(value);
+                                  setSelectedOptions(value);
+                                  setUseEmail(false); // Reset useEmail when 'Send To' is selected
+                                }}
+                                isDisabled={useEmail}
                               />
                             )}
                           />
@@ -439,28 +489,24 @@ const CreateDeal = () => {
 
                     <Row>
                       <Col sm="6">
-                      <FormGroup>
-                        <h6 style={{ color: "black" }}>OR Send By Email:</h6>
-                        <input
-                          className="form-control"
-                          type="email"
-                          name="sendByEmail"
-                          id="email"
-                          placeholder="Enter email"
-                          onChange={handleEmailChange}
-                          disabled={selectedOptions?.length}
-                          {...register("sendByEmail", {
-                            required:
-                              !selectedOptions?.length && "Email is required",
-                          })}
-                        />
-                        {errors.sendByEmail && (
-                          <span className="text-danger">
-                            {errors.sendByEmail.message}
-                          </span>
-                        )}
-                      </FormGroup>
-                    </Col>
+                        <FormGroup>
+                          <h6 style={{ color: "black" }}>OR Send By Email:</h6>
+                          <input
+                            className="form-control"
+                            type="email"
+                            name="sendByEmail"
+                            id="email"
+                            placeholder="Enter email"
+                            disabled={selectedOptions?.length}
+                            onChange={handleEmailChange}
+                          />
+                          {errors.sendByEmail && (
+                            <span className="text-danger">
+                              {errors.sendByEmail.message}
+                            </span>
+                          )}
+                        </FormGroup>
+                      </Col>
 
                       <Col sm="12">
                         <MultiDropzone setImages={setImages} />
