@@ -24,7 +24,7 @@ const Signup = ({ selected }) => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "https://cashflow-be.vercel.app/api/v1/users/register",
+        "http://localhost:5000/api/v1/users/register",
         {
           email,
           userName,

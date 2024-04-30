@@ -33,11 +33,13 @@ const CreateDeal = () => {
   const [images, setImages] = useState([]);
   const [client, setClient] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false); // State to track form submission
+  console.log("🚀 ~ CreateDeal ~ formSubmitted:", formSubmitted)
   const [selectedOptions, setSelectedOptions] = useState([]); // State to store selected options
   const [useEmail, setUseEmail] = useState(false);
   const [addressOptions, setAddressOptions] = useState([]);
   console.log("🚀 ~ CreateDeal ~ addressOptions:", addressOptions);
   const [address, setAddress] = useState("");
+  const [addressSearch, setAddressSearch] = useState("");
   const [monthlyCashMin, setMonthlyCashMin] = useState(""); // State for Monthly Cash Flow Minimum
   const [monthlyCashMax, setMonthlyCashMax] = useState(""); // State for Monthly Cash Flow Maximum
   const [approxAnnualMinReturn, setApproxAnnualMinReturn] = useState(""); // State for Approx Annual Minimum Return(%)
@@ -87,17 +89,17 @@ const CreateDeal = () => {
     dealData.append("bedRooms", data.bedRooms);
     dealData.append("area", data.area);
     dealData.append("baths", data.baths);
-    dealData.append("address", address); // Assuming address is a string
-    data.sendTo && dealData.append("sendTo", data.sendTo[0]?.label); // Add sendTo if it exists
+    dealData.append("address", addressSearch); // Assuming address is a string
+    data.sendTo && dealData.append("sendTo", data.sendTo.map((val)=>val.label)); // Add sendTo if it exists
     images.forEach((image, index) => {
       dealData.append(`images`, image); // Append each image to FormData with the same key "images"
     });
-    
+
     try {
       setFormSubmitted(true);
 
       const response = await axios.post(
-        "https://cashflow-be.vercel.app/api/v1/deals",
+        "http://localhost:5000/api/v1/deals",
         dealData,
         {
           headers: {
@@ -105,8 +107,8 @@ const CreateDeal = () => {
           },
         }
       );
-      console.log("🚀 ~ AddProject ~ response:", response)
-      if(response.status==="201"){
+      console.log("🚀 ~ AddProject ~ response:", response);
+      if (response.data.statusCode === 200) {
         setFormSubmitted(false);
         toast.success("Successfully !..");
       }
@@ -140,7 +142,7 @@ const CreateDeal = () => {
   const handleAddressChange = async (inputAddress) => {
     try {
       const response = await axios.get(
-        `https://cashflow-be.vercel.app/places?input=${inputAddress}`
+        `http://localhost:5000/places?input=${inputAddress}`
       );
       const candidates = response.data.candidates;
       console.log("🚀 ~ handleAddressChange ~ candidates:", candidates);
@@ -153,7 +155,24 @@ const CreateDeal = () => {
       console.error("Error fetching location data:", error);
     }
   };
+  const [debouncedAddressSearch, setDebouncedAddressSearch] = useState("");
 
+  // Debounce address search
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedAddressSearch(addressSearch);
+    }, 800); // Adjust the debounce delay as needed
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [addressSearch]); // Run the effect whenever addressSearch changes
+
+  useEffect(() => {
+    if (debouncedAddressSearch.trim() !== "") {
+      // Check if the search query is not empty
+      handleAddressChange(debouncedAddressSearch);
+    }
+  }, [debouncedAddressSearch]);
   return (
     <Fragment>
       <Breadcrumbs
@@ -162,255 +181,264 @@ const CreateDeal = () => {
         mainTitle="Slow Flip Deals"
       />
       <Container fluid={true}>
-       {!formSubmitted? <Row>
-          <Col sm="12">
-            <Card>
-              <CardBody>
-                <Form
-                  className="theme-form"
-                  onSubmit={handleSubmit(AddProject)}
-                >
-                  <Row>
-                    <Col sm={4}>
-                      <FormGroup>
-                        <h6 style={{ color: "black" }}>{"Title"}</h6>
-                        <input
-                          className="form-control"
-                          type="text"
-                          name="title"
-                          placeholder="Deal name *"
-                          {...register("title", { required: true })}
-                        />
-                        <span style={{ color: "red" }}>
-                          {errors.title && "Title is required"}
-                        </span>
-                      </FormGroup>
-                    </Col>
-                    <Col sm={4}>
-                      <FormGroup>
-                        <h6 style={{ color: "black" }}>{"Price"}</h6>
-                        <input
-                          className="form-control"
-                          type="number"
-                          name="price"
-                          placeholder="Deal price *"
-                          {...register("price", { required: true })}
-                        />
-                        <span style={{ color: "red" }}>
-                          {errors.price && "Price is required"}
-                        </span>
-                      </FormGroup>
-                    </Col>
-                    <Col sm="4">
-                      <FormGroup>
-                        <H6>{"Slow Flip Total Price"}</H6>
-                        <input
-                          className="form-control"
-                          type="number"
-                          name="approxPrice"
-                          placeholder="Total Price"
-                          {...register("approxPrice", { required: true })}
-                        />
-                        <span style={{ color: "red" }}>
-                          {errors.approxPrice && "Total Price is required"}
-                        </span>
-                      </FormGroup>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col sm="4">
-                      <FormGroup>
-                        <H6>{"Interest"}</H6>
-                        <input
-                          className="form-control"
-                          type="number"
-                          name="upfrontDown"
-                          placeholder="Upfront Down"
-                          {...register("upfrontDown", { required: true })}
-                        />
-                        <span style={{ color: "red" }}>
-                          {errors.upfrontDown && "Interest is required"}
-                        </span>
-                      </FormGroup>
-                    </Col>
-                    <Col sm="4">
-                      <FormGroup>
-                        <H6>{"Monthly Cash Flow Minimum"}</H6>
-                        <input
-                          className="form-control"
-                          type="number"
-                          name="monthly_cash_min"
-                          placeholder="Approximate monthly cashflow minimum"
-                          {...register("monthly_cash_min", { required: true })}
-                          onChange={(e) => setMonthlyCashMin(e.target.value)}
-                        />
-                        <span style={{ color: "red" }}>
-                          {errors.monthly_cash_min &&
-                            "Monthly Cash Flow Minimum is required"}
-                        </span>
-                      </FormGroup>
-                    </Col>
-                    <Col sm="4">
-                      <FormGroup>
-                        <H6>{"Monthly Cash Flow Maximum"}</H6>
-                        <input
-                          className="form-control"
-                          type="number"
-                          name="monthly_cash_max"
-                          placeholder="Approximate monthly cashflow maximum"
-                          {...register("monthly_cash_max", { required: true })}
-                          onChange={(e) => setMonthlyCashMax(e.target.value)}
-                        />
-                        <span style={{ color: "red" }}>
-                          {errors.monthly_cash_max &&
-                            "Monthly Cash Flow Maximum is required"}
-                        </span>
-                      </FormGroup>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col sm="4">
-                      <FormGroup>
-                        <H6>{"Approx Annual Minimum Return(%)"}</H6>
-                        <input
-                          value={approxAnnualMinReturn}
-                          className="form-control"
-                          type="text"
-                          name="annually_cash"
-                          readOnly
-                        />
-                      </FormGroup>
-                    </Col>
-                    <Col sm="4">
-                      <FormGroup>
-                        <H6>{"Approx Annual Maximum Return(%)"}</H6>
-                        <input
-                          className="form-control"
-                          type="text"
-                          name="annually_cash_max"
-                          value={approxAnnualMaxReturn}
-                          readOnly
-                        />
-                      </FormGroup>
-                    </Col>
-                    <Col sm="4">
-                      <FormGroup>
-                        <H6>{"Closing Date"}</H6>
-                        <input
-                          className="form-control"
-                          type="date"
-                          name="closing_date"
-                          {...register("closing_date", { required: true })}
-                        />
-                        <span style={{ color: "red" }}>
-                          {errors.closing_date && "Closing Date is required"}
-                        </span>
-                      </FormGroup>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col sm="4">
-                      <H6>{"Total Bed Rooms"}</H6>
-                      <FormGroup>
-                        <input
-                          className="form-control"
-                          type="number"
-                          name="bedRooms"
-                          placeholder="Total Bed Rooms"
-                          {...register("bedRooms", { required: true })}
-                        />
-                        <span style={{ color: "red" }}>
-                          {errors.bedRooms && "Total Bed Rooms is required"}
-                        </span>
-                      </FormGroup>
-                    </Col>
-                    <Col sm="4">
-                      <H6>{"Area in Sqft"}</H6>
-                      <FormGroup>
-                        <input
-                          className="form-control"
-                          type="number"
-                          name="area"
-                          placeholder="Area in Sqft"
-                          {...register("area", { required: true })}
-                        />
-                        <span style={{ color: "red" }}>
-                          {errors.area && "Area in Sqft is required"}
-                        </span>
-                      </FormGroup>
-                    </Col>
-                    <Col sm="4">
-                      <H6>{"Total Baths"}</H6>
-                      <FormGroup>
-                        <input
-                          className="form-control"
-                          type="number"
-                          name="baths"
-                          placeholder="Total Baths"
-                          {...register("baths", { required: true })}
-                        />
-                        <span style={{ color: "red" }}>
-                          {errors.baths && "Total Baths is required"}
-                        </span>
-                      </FormGroup>
-                    </Col>
-                    <Col sm="12">
-                      <FormGroup>
-                        <H6 className="form-label">{"Address"}</H6>
-                        <Input
-                          type="text"
-                          name="address"
-                          placeholder="Type to search for an address"
-                          onChange={(e) => handleAddressChange(e.target.value)}
-                          value={address} // Bind the address value to state
-                        />
-                        <span className="text-danger">
-                          {errors.address && errors.address.message}
-                        </span>
-                        <div>
-                          {addressOptions.map((option, index) => (
-                            <div
-                              key={index}
-                              onClick={() => setAddress(option.value)} // Set the selected address on click
-                              style={{ cursor: "pointer" }} // Change cursor to pointer for clickable effect
-                            >
-                              {option.label}
-                            </div>
-                          ))}
-                        </div>
-                      </FormGroup>
-                    </Col>
-                    <Col sm="12">
-                      <FormGroup>
-                        <Label for="sendTo">Send To:</Label>
-                        <Controller
-                          name="sendTo"
-                          control={control}
-                          rules={{
-                            required: !useEmail ? "Send To is required" : false,
-                          }}
-                          render={({ field }) => (
-                            <Select
-                              // isDisabled={useEmail}
-                              {...field}
-                              options={options}
-                              isMulti
-                              onChange={(value) => field.onChange(value)}
-                            />
-                          )}
-                        />
-
-                        {errors.sendTo && (
-                          <span className="text-danger">
-                            {errors.sendTo.message}
+        {!formSubmitted ? (
+          <Row>
+            <Col sm="12">
+              <Card>
+                <CardBody>
+                  <Form
+                    className="theme-form"
+                    onSubmit={handleSubmit(AddProject)}
+                  >
+                    <Row>
+                      <Col sm={4}>
+                        <FormGroup>
+                          <h6 style={{ color: "black" }}>{"Title"}</h6>
+                          <input
+                            className="form-control"
+                            type="text"
+                            name="title"
+                            placeholder="Deal name *"
+                            {...register("title", { required: true })}
+                          />
+                          <span style={{ color: "red" }}>
+                            {errors.title && "Title is required"}
                           </span>
-                        )}
-                      </FormGroup>
-                    </Col>
-                  </Row>
+                        </FormGroup>
+                      </Col>
+                      <Col sm={4}>
+                        <FormGroup>
+                          <h6 style={{ color: "black" }}>{"Price"}</h6>
+                          <input
+                            className="form-control"
+                            type="number"
+                            name="price"
+                            placeholder="Deal price *"
+                            {...register("price", { required: true })}
+                          />
+                          <span style={{ color: "red" }}>
+                            {errors.price && "Price is required"}
+                          </span>
+                        </FormGroup>
+                      </Col>
+                      <Col sm="4">
+                        <FormGroup>
+                          <H6>{"Slow Flip Total Price"}</H6>
+                          <input
+                            className="form-control"
+                            type="number"
+                            name="approxPrice"
+                            placeholder="Total Price"
+                            {...register("approxPrice", { required: true })}
+                          />
+                          <span style={{ color: "red" }}>
+                            {errors.approxPrice && "Total Price is required"}
+                          </span>
+                        </FormGroup>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col sm="4">
+                        <FormGroup>
+                          <H6>{"Interest"}</H6>
+                          <input
+                            className="form-control"
+                            type="number"
+                            name="upfrontDown"
+                            placeholder="Upfront Down"
+                            {...register("upfrontDown", { required: true })}
+                          />
+                          <span style={{ color: "red" }}>
+                            {errors.upfrontDown && "Interest is required"}
+                          </span>
+                        </FormGroup>
+                      </Col>
+                      <Col sm="4">
+                        <FormGroup>
+                          <H6>{"Monthly Cash Flow Minimum"}</H6>
+                          <input
+                            className="form-control"
+                            type="number"
+                            name="monthly_cash_min"
+                            placeholder="Approximate monthly cashflow minimum"
+                            {...register("monthly_cash_min", {
+                              required: true,
+                            })}
+                            onChange={(e) => setMonthlyCashMin(e.target.value)}
+                          />
+                          <span style={{ color: "red" }}>
+                            {errors.monthly_cash_min &&
+                              "Monthly Cash Flow Minimum is required"}
+                          </span>
+                        </FormGroup>
+                      </Col>
+                      <Col sm="4">
+                        <FormGroup>
+                          <H6>{"Monthly Cash Flow Maximum"}</H6>
+                          <input
+                            className="form-control"
+                            type="number"
+                            name="monthly_cash_max"
+                            placeholder="Approximate monthly cashflow maximum"
+                            {...register("monthly_cash_max", {
+                              required: true,
+                            })}
+                            onChange={(e) => setMonthlyCashMax(e.target.value)}
+                          />
+                          <span style={{ color: "red" }}>
+                            {errors.monthly_cash_max &&
+                              "Monthly Cash Flow Maximum is required"}
+                          </span>
+                        </FormGroup>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col sm="4">
+                        <FormGroup>
+                          <H6>{"Approx Annual Minimum Return(%)"}</H6>
+                          <input
+                            value={approxAnnualMinReturn}
+                            className="form-control"
+                            type="text"
+                            name="annually_cash"
+                            readOnly
+                          />
+                        </FormGroup>
+                      </Col>
+                      <Col sm="4">
+                        <FormGroup>
+                          <H6>{"Approx Annual Maximum Return(%)"}</H6>
+                          <input
+                            className="form-control"
+                            type="text"
+                            name="annually_cash_max"
+                            value={approxAnnualMaxReturn}
+                            readOnly
+                          />
+                        </FormGroup>
+                      </Col>
+                      <Col sm="4">
+                        <FormGroup>
+                          <H6>{"Closing Date"}</H6>
+                          <input
+                            className="form-control"
+                            type="date"
+                            name="closing_date"
+                            {...register("closing_date", { required: true })}
+                          />
+                          <span style={{ color: "red" }}>
+                            {errors.closing_date && "Closing Date is required"}
+                          </span>
+                        </FormGroup>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col sm="4">
+                        <H6>{"Total Bed Rooms"}</H6>
+                        <FormGroup>
+                          <input
+                            className="form-control"
+                            type="number"
+                            name="bedRooms"
+                            placeholder="Total Bed Rooms"
+                            {...register("bedRooms", { required: true })}
+                          />
+                          <span style={{ color: "red" }}>
+                            {errors.bedRooms && "Total Bed Rooms is required"}
+                          </span>
+                        </FormGroup>
+                      </Col>
+                      <Col sm="4">
+                        <H6>{"Area in Sqft"}</H6>
+                        <FormGroup>
+                          <input
+                            className="form-control"
+                            type="number"
+                            name="area"
+                            placeholder="Area in Sqft"
+                            {...register("area", { required: true })}
+                          />
+                          <span style={{ color: "red" }}>
+                            {errors.area && "Area in Sqft is required"}
+                          </span>
+                        </FormGroup>
+                      </Col>
+                      <Col sm="4">
+                        <H6>{"Total Baths"}</H6>
+                        <FormGroup>
+                          <input
+                            className="form-control"
+                            type="number"
+                            name="baths"
+                            placeholder="Total Baths"
+                            {...register("baths", { required: true })}
+                          />
+                          <span style={{ color: "red" }}>
+                            {errors.baths && "Total Baths is required"}
+                          </span>
+                        </FormGroup>
+                      </Col>
+                      <Col sm="12">
+                        <FormGroup>
+                          <H6 className="form-label">{"Address"}</H6>
+                          <input
+                            type="text"
+                            className="form-control"
+                            name="address"
+                            placeholder="Type to search for an address"
+                            onChange={(e) => setAddressSearch(e.target.value)}
+                            value={addressSearch} // Bind the address search value to state
+                          />
 
-                  <Row>
-                    {/* <Col sm="6">
+                          <span className="text-danger">
+                            {errors.address && errors.address.message}
+                          </span>
+                          <div>
+                            {addressOptions.map((option, index) => (
+                              <div
+                                key={index}
+                                onClick={() => setAddressSearch(option.value)} // Set the selected address on click
+                                style={{ cursor: "pointer" }} // Change cursor to pointer for clickable effect
+                              >
+                                {option.label}
+                              </div>
+                            ))}
+                          </div>
+                        </FormGroup>
+                      </Col>
+                      <Col sm="12">
+                        <FormGroup>
+                          <Label for="sendTo">Send To:</Label>
+                          <Controller
+                            name="sendTo"
+                            control={control}
+                            rules={{
+                              required: !useEmail
+                                ? "Send To is required"
+                                : false,
+                            }}
+                            render={({ field }) => (
+                              <Select
+                                // isDisabled={useEmail}
+                                {...field}
+                                options={options}
+                                isMulti
+                                onChange={(value) => field.onChange(value)}
+                              />
+                            )}
+                          />
+
+                          {errors.sendTo && (
+                            <span className="text-danger">
+                              {errors.sendTo.message}
+                            </span>
+                          )}
+                        </FormGroup>
+                      </Col>
+                    </Row>
+
+                    <Row>
+                      <Col sm="6">
                       <FormGroup>
                         <h6 style={{ color: "black" }}>OR Send By Email:</h6>
                         <input
@@ -432,25 +460,28 @@ const CreateDeal = () => {
                           </span>
                         )}
                       </FormGroup>
-                    </Col> */}
+                    </Col>
 
-                    <Col sm="12">
-                      <MultiDropzone setImages={setImages} />
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col>
-                      <div className="text-end">
-                        {/* <Btn attrBtn={{ color: "success", className: "me-3" }} onClick={AddProject}>Add</Btn> */}
-                        <Btn attrBtn={{ color: "success" }}>Add</Btn>
-                      </div>
-                    </Col>
-                  </Row>
-                </Form>
-              </CardBody>
-            </Card>
-          </Col>
-        </Row>:"Loading..........."}
+                      <Col sm="12">
+                        <MultiDropzone setImages={setImages} />
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col>
+                        <div className="text-end">
+                          {/* <Btn attrBtn={{ color: "success", className: "me-3" }} onClick={AddProject}>Add</Btn> */}
+                          <Btn attrBtn={{ color: "success" }}>Add</Btn>
+                        </div>
+                      </Col>
+                    </Row>
+                  </Form>
+                </CardBody>
+              </Card>
+            </Col>
+          </Row>
+        ) : (
+          "Loading..........."
+        )}
       </Container>
     </Fragment>
   );
