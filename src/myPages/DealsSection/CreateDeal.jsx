@@ -19,7 +19,7 @@ import { FaTrash } from "react-icons/fa";
 import "./comp/multi.css";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 
 const CreateDeal = () => {
   const {
@@ -84,6 +84,7 @@ const CreateDeal = () => {
   
   const [client, setClient] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false); // State to track form submission
+  console.log("🚀 ~ CreateDeal ~ formSubmitted:", formSubmitted)
   const [selectedOptions, setSelectedOptions] = useState([]); // State to store selected options
   const [useEmail, setUseEmail] = useState(false);
   const [email, setEmail] = useState("");
@@ -96,11 +97,10 @@ const CreateDeal = () => {
       setUseEmail(false);
     }
   };
-
+const history=useNavigate()
   const [addressOptions, setAddressOptions] = useState([]);
   const [address, setAddress] = useState("");
   const [addressSearch, setAddressSearch] = useState("");
-  console.log("🚀 ~ CreateDeal ~ addressSearch:", addressSearch)
   const [monthlyCashMin, setMonthlyCashMin] = useState(""); // State for Monthly Cash Flow Minimum
   const [monthlyCashMax, setMonthlyCashMax] = useState(""); // State for Monthly Cash Flow Maximum
   const [approxAnnualMinReturn, setApproxAnnualMinReturn] = useState(""); // State for Approx Annual Minimum Return(%)
@@ -172,7 +172,9 @@ setSelectedOptions(dealData.data.sendTo.map((value) => ({ value, label: value })
     }
 
     // Ensure addressSearch is an array
-    const selectedAddress = Array.isArray(addressSearch) ? addressSearch : [addressSearch];
+    const selectedAddress = Array.isArray(addressSearch) ? addressSearch?.map(
+      (val) => `${val.label}`
+    ) : [addressSearch];
 
     const dealData = new FormData(); // Create a FormData object to send mixed content (text and files)
     dealData.append("title", data.title);
@@ -199,6 +201,8 @@ setSelectedOptions(dealData.data.sendTo.map((value) => ({ value, label: value })
       if (response.data.statusCode === 200) {
         // Handle success
         toast.success(response.data.message);
+        setFormSubmitted(false)
+        history("/deals/view")
       }
     } catch (error) {
       // Handle error
