@@ -56,14 +56,37 @@ const CreateDeal = () => {
 
   const formData = watch();
   const [images, setImages] = useState([]);
-  console.log("🚀 ~ :::: ~ images:", images)
+  const [files, setFiles] = useState([]);
+  console.log("🚀 ~ :::: ~ images:", files)
+  
+  useEffect(() => {
+    const fetchFiles = async () => {
+      const fileObjects = await Promise.all(images.map(async file => {
+        if (file instanceof File) {
+          return file; // If already a File object, return as is
+        } else if (typeof file === 'object' && 'url' in file && 'filename' in file) {
+          // If it's a Cloudinary object, create a new File object from it
+          const response = await fetch(file.url);
+          const blob = await response.blob();
+          return new File([blob], file.filename, { type: file.format });
+        } else {
+          // For other cases (e.g., already a Blob), return as is
+          return file;
+        }
+      }));
+      console.log("🚀 ~ fileObjects ~ fileObjects:", fileObjects);
+      setFiles(fileObjects)
+    };
+  
+    fetchFiles();
+  }, [images]);
+  
+  
   const [client, setClient] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false); // State to track form submission
   const [selectedOptions, setSelectedOptions] = useState([]); // State to store selected options
-  console.log("🚀 ~ CreateDeal ~ selectedOptions:", selectedOptions);
   const [useEmail, setUseEmail] = useState(false);
   const [email, setEmail] = useState("");
-  console.log("🚀 ~ CreateDeal ~ email:", email);
 
   const handleEmailChange = (event) => {
     if (event.target.value?.trim() !== "") {
@@ -120,7 +143,7 @@ const CreateDeal = () => {
           dealData.data.sendTo.map((value) => ({ value, label: value })) || [],
         sendByEmail: dealData.data.sendByEmail || "", // Fill sendByEmail field
       });
-
+setSelectedOptions(dealData.data.sendTo.map((value) => ({ value, label: value })))
       setEmail(dealData.data.sendByEmail);
 
       // Update other relevant states if needed
@@ -136,79 +159,7 @@ const CreateDeal = () => {
       setAddressSearch(dealData.data.address); // Set addressSearch state
     }
   }, [dealData, reset]);
-  // const AddProject = async (data) => {
-  //   setClient(true);
-  //   setFormSubmitted(true);
-  //   await trigger();
-  
-  //   if (images.length === 0) {
-  //     alert("Please upload at least one image.");
-  //     return;
-  //   }
-  
-  //   // Ensure addressSearch is an array
-  //   const selectedAddress = Array.isArray(addressSearch) ? addressSearch : [addressSearch];
-  
-  //   const dealData = new FormData(); // Create a FormData object to send mixed content (text and files)
-  //   dealData.append("title", data.title);
-  //   dealData.append("price", data.price);
-  //   dealData.append("approxPrice", data.approxPrice);
-  //   dealData.append("upfrontDown", data.upfrontDown);
-  //   dealData.append("monthly_cash_min", data.monthly_cash_min);
-  //   dealData.append("monthly_cash_max", data.monthly_cash_max);
-  //   dealData.append("annually_return_min", approxAnnualMinReturn); // Fix typo here
-  //   dealData.append("annually_return_max", approxAnnualMaxReturn); // Fix typo here
-  //   dealData.append("closing_date", data.closing_date);
-  //   dealData.append("bedRooms", data.bedRooms);
-  //   dealData.append("area", data.area);
-  //   dealData.append("baths", data.baths);
-  //   dealData.append(
-  //     "address",
-  //     selectedAddress.map((val) => `${val.label}:${val.value}`)
-  //   ); // Append selected addresses to FormData
-  //   data.sendTo &&
-  //     dealData.append(
-  //       "sendTo",
-  //       data.sendTo.map((val) => val.label)
-  //     ); // Add sendTo if it exists
-  
-  //   dealData.append("sendByEmail", email);
-  //   images.forEach((image, index) => {
-  //     dealData.append(`images`, image); // Append each image to FormData with the same key "images"
-  //   });
-  
-  //   try {
-  //     setFormSubmitted(true);
-  
-  //     const response = await axios.post(
-  //       "http://localhost:5000/api/v1/deals",
-  //       dealData,
-  //       {
-  //         headers: {
-  //           "Content-Type": "multipart/form-data",
-  //         },
-  //       }
-  //     );
-  //     if (response.data.statusCode === 200) {
-  //       setFormSubmitted(false);
-  //       toast.success("Successfully !..");
-  //       reset(); // Reset the form
-  //       setImages([]); // Clear the images state
-  //       setMonthlyCashMin(""); // Clear monthlyCashMin state
-  //       setMonthlyCashMax(""); // Clear monthlyCashMax state
-  //       setApproxAnnualMinReturn(""); // Clear approxAnnualMinReturn state
-  //       setApproxAnnualMaxReturn(""); // Clear approxAnnualMaxReturn state
-  //       setAddressSearch(""); // Clear addressSearch state
-  //       setEmail(""); // Clear email state
-  //       setSelectedOptions([]); // Clear selectedOptions state
-  //       setUseEmail(false); // Reset useEmail state
-  //     }
-  //     //
-  //     // Handle response
-  //   } catch (error) {
-  //     // Handle error
-  //   }
-  // };
+
   
   const AddProject = async (data) => {
     setClient(true);
@@ -237,7 +188,7 @@ const CreateDeal = () => {
     dealData.append("address", selectedAddress.join(", ")); // Convert selectedAddress to a comma-separated string
     dealData.append("sendTo", JSON.stringify(selectedOptions.map((option) => option.value))); // Convert selectedOptions to JSON string
     dealData.append("sendByEmail", useEmail ? email : ""); // Send email only if useEmail is true
-    images.forEach((image) => {
+    files.forEach((image) => {
       dealData.append("images", image); // Append each image to FormData
     });
 
