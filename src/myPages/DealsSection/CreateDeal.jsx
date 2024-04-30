@@ -57,34 +57,39 @@ const CreateDeal = () => {
   const formData = watch();
   const [images, setImages] = useState([]);
   const [files, setFiles] = useState([]);
-  console.log("🚀 ~ :::: ~ images:", files)
-  
+  console.log("🚀 ~ :::: ~ images:", files);
+
   useEffect(() => {
     const fetchFiles = async () => {
-      const fileObjects = await Promise.all(images.map(async file => {
-        if (file instanceof File) {
-          return file; // If already a File object, return as is
-        } else if (typeof file === 'object' && 'url' in file && 'filename' in file) {
-          // If it's a Cloudinary object, create a new File object from it
-          const response = await fetch(file.url);
-          const blob = await response.blob();
-          return new File([blob], file.filename, { type: file.format });
-        } else {
-          // For other cases (e.g., already a Blob), return as is
-          return file;
-        }
-      }));
+      const fileObjects = await Promise.all(
+        images.map(async (file) => {
+          if (file instanceof File) {
+            return file; // If already a File object, return as is
+          } else if (
+            typeof file === "object" &&
+            "url" in file &&
+            "filename" in file
+          ) {
+            // If it's a Cloudinary object, create a new File object from it
+            const response = await fetch(file.url);
+            const blob = await response.blob();
+            return new File([blob], file.filename, { type: file.format });
+          } else {
+            // For other cases (e.g., already a Blob), return as is
+            return file;
+          }
+        })
+      );
       console.log("🚀 ~ fileObjects ~ fileObjects:", fileObjects);
-      setFiles(fileObjects)
+      setFiles(fileObjects);
     };
-  
+
     fetchFiles();
   }, [images]);
-  
-  
+
   const [client, setClient] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false); // State to track form submission
-  console.log("🚀 ~ CreateDeal ~ formSubmitted:", formSubmitted)
+  console.log("🚀 ~ CreateDeal ~ formSubmitted:", formSubmitted);
   const [selectedOptions, setSelectedOptions] = useState([]); // State to store selected options
   const [useEmail, setUseEmail] = useState(false);
   const [email, setEmail] = useState("");
@@ -97,7 +102,13 @@ const CreateDeal = () => {
       setUseEmail(false);
     }
   };
-const history=useNavigate()
+  const history = useNavigate();
+  const [addressOptionSelected, setAddressOptionSelected] = useState(false);
+
+  // Function to handle address option selection
+  const handleAddressOptionSelect = () => {
+    setAddressOptionSelected(true);
+  };
   const [addressOptions, setAddressOptions] = useState([]);
   const [address, setAddress] = useState("");
   const [addressSearch, setAddressSearch] = useState("");
@@ -143,7 +154,9 @@ const history=useNavigate()
           dealData.data.sendTo.map((value) => ({ value, label: value })) || [],
         sendByEmail: dealData.data.sendByEmail || "", // Fill sendByEmail field
       });
-setSelectedOptions(dealData.data.sendTo.map((value) => ({ value, label: value })))
+      setSelectedOptions(
+        dealData.data.sendTo.map((value) => ({ value, label: value }))
+      );
       setEmail(dealData.data.sendByEmail);
 
       // Update other relevant states if needed
@@ -160,10 +173,9 @@ setSelectedOptions(dealData.data.sendTo.map((value) => ({ value, label: value })
     }
   }, [dealData, reset]);
 
-  
   const AddProject = async (data) => {
     setClient(true);
-    setFormSubmitted(true);
+    // setFormSubmitted(true);
     await trigger();
 
     if (images.length === 0) {
@@ -172,9 +184,9 @@ setSelectedOptions(dealData.data.sendTo.map((value) => ({ value, label: value })
     }
 
     // Ensure addressSearch is an array
-    const selectedAddress = Array.isArray(addressSearch) ? addressSearch?.map(
-      (val) => `${val.label}`
-    ) : [addressSearch];
+    const selectedAddress = Array.isArray(addressSearch)
+      ? addressSearch?.map((val) => `${val.label}`)
+      : [addressSearch];
 
     const dealData = new FormData(); // Create a FormData object to send mixed content (text and files)
     dealData.append("title", data.title);
@@ -183,26 +195,35 @@ setSelectedOptions(dealData.data.sendTo.map((value) => ({ value, label: value })
     dealData.append("upfrontDown", data.upfrontDown);
     dealData.append("monthly_cash_min", data.monthly_cash_min);
     dealData.append("monthly_cash_max", data.monthly_cash_max);
+    dealData.append("annually_return_min", approxAnnualMinReturn);
+    dealData.append("annually_return_max", approxAnnualMaxReturn);
     dealData.append("closing_date", data.closing_date);
     dealData.append("bedRooms", data.bedRooms);
     dealData.append("area", data.area);
     dealData.append("baths", data.baths);
     dealData.append("address", selectedAddress.join(", ")); // Convert selectedAddress to a comma-separated string
-    dealData.append("sendTo", JSON.stringify(selectedOptions.map((option) => option.value))); // Convert selectedOptions to JSON string
+    dealData.append(
+      "sendTo",
+      JSON.stringify(selectedOptions.map((option) => option.value))
+    ); // Convert selectedOptions to JSON string
     dealData.append("sendByEmail", useEmail ? email : ""); // Send email only if useEmail is true
     files.forEach((image) => {
       dealData.append("images", image); // Append each image to FormData
     });
 
-    const apiUrl = id ? `http://localhost:5000/api/v1/deals/${id}` : 'http://localhost:5000/api/v1/deals';
+    const apiUrl = id
+      ? `http://localhost:5000/api/v1/deals/${id}`
+      : "http://localhost:5000/api/v1/deals";
 
     try {
-      const response = id ? await axios.patch(apiUrl, dealData) : await axios.post(apiUrl, dealData);
+      const response = id
+        ? await axios.patch(apiUrl, dealData)
+        : await axios.post(apiUrl, dealData);
       if (response.data.statusCode === 200) {
         // Handle success
         toast.success(response.data.message);
-        setFormSubmitted(false)
-        history("/deals/view")
+        // setFormSubmitted(false);
+        history("/deals/view");
       }
     } catch (error) {
       // Handle error
@@ -490,12 +511,27 @@ setSelectedOptions(dealData.data.sendTo.map((value) => ({ value, label: value })
                           <span className="text-danger">
                             {errors.address && errors.address.message}
                           </span>
-                          <div>
+                          <div
+                            style={{
+                              border: "1px solid #ccc",
+                              borderRadius: "5px",
+                              backgroundColor: "#f0f0f0",
+                            }}
+                          >
                             {addressOptions.map((option, index, arr) => (
                               <div
                                 key={index}
-                                onClick={() => setAddressSearch(arr)} // Set the selected address on click
-                                style={{ cursor: "pointer" }} // Change cursor to pointer for clickable effect
+                                style={{
+                                  padding: "10px",
+                                  borderBottom:
+                                    index !== arr.length - 1
+                                      ? "1px solid #ccc"
+                                      : "none",
+                                  cursor: "pointer",
+                                  transition: "background-color 0.3s ease",
+                                  backgroundColor: "inherit",
+                                }}
+                                onClick={() => setAddressSearch(arr)}
                               >
                                 {option.label}
                               </div>
@@ -565,7 +601,7 @@ setSelectedOptions(dealData.data.sendTo.map((value) => ({ value, label: value })
 
                       <Col sm="12">
                         <MultiDropzone
-                        images={images}
+                          images={images}
                           setImages={setImages}
                           dealData={dealData}
                         />
@@ -575,7 +611,9 @@ setSelectedOptions(dealData.data.sendTo.map((value) => ({ value, label: value })
                       <Col>
                         <div className="text-end">
                           {/* <Btn attrBtn={{ color: "success", className: "me-3" }} onClick={AddProject}>Add</Btn> */}
-                          <Btn attrBtn={{ color: "success" }}>{id?"Edit":"Add"}</Btn>
+                          <Btn attrBtn={{ color: "success" }}>
+                            {id ? "Edit" : "Add"}
+                          </Btn>
                         </div>
                       </Col>
                     </Row>
@@ -601,8 +639,8 @@ const MultiDropzone = ({ setImages, dealData, images }) => {
   const handleDelete = (index) => {
     if (dealData) {
       // Update dealData if available
-      const updatedDealData = [ ...images ];
-      console.log("🚀 ~ handleDelete ~ updatedDealData:", updatedDealData)
+      const updatedDealData = [...images];
+      console.log("🚀 ~ handleDelete ~ updatedDealData:", updatedDealData);
       updatedDealData.splice(index, 1);
       setImages(updatedDealData); // Assuming you have a setDealData function
     } else {
@@ -653,8 +691,14 @@ const MultiDropzone = ({ setImages, dealData, images }) => {
         {dealData
           ? images.map((image, index) => (
               <div key={index} className="image-container">
-                <img src={image.url || URL.createObjectURL(image)} alt={`Image-${index}`} />
-                <div className="image-delete" onClick={() => handleDelete(index)}>
+                <img
+                  src={image.url || URL.createObjectURL(image)}
+                  alt={`Image-${index}`}
+                />
+                <div
+                  className="image-delete"
+                  onClick={() => handleDelete(index)}
+                >
                   <FaTrash />
                 </div>
               </div>
@@ -662,7 +706,10 @@ const MultiDropzone = ({ setImages, dealData, images }) => {
           : images.map((image, index) => (
               <div key={index} className="image-container">
                 <img src={URL.createObjectURL(image)} alt={`Image-${index}`} />
-                <div className="image-delete" onClick={() => handleDelete(index)}>
+                <div
+                  className="image-delete"
+                  onClick={() => handleDelete(index)}
+                >
                   <FaTrash />
                 </div>
               </div>
@@ -671,5 +718,3 @@ const MultiDropzone = ({ setImages, dealData, images }) => {
     </div>
   );
 };
-
-
