@@ -15,7 +15,7 @@ const AllDealsTable = () => {
   useEffect(() => {
     // Fetch data from the API
     axios
-      .get("http://localhost:5000/api/v1/deals")
+      .get("https://fyp-be.onrender.com/api/v1/deals")
       .then((response) => {
         setDealsData(response.data.data);
       })
@@ -36,7 +36,7 @@ const AllDealsTable = () => {
   const confirmDelete = () => {
     // Perform delete operation
     axios
-      .delete(`http://localhost:5000/api/v1/deals/${selectedDeal._id}`)
+      .delete(`https://fyp-be.onrender.com/api/v1/deals/${selectedDeal._id}`)
       .then((response) => {
         toast.success("Deal deleted successfully");
         setDealsData(dealsData.filter((deal) => deal._id !== selectedDeal._id));

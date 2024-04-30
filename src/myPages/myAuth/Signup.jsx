@@ -24,7 +24,7 @@ const Signup = ({ selected }) => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/v1/users/register",
+        "https://fyp-be.onrender.com/api/v1/users/register",
         {
           email,
           userName,

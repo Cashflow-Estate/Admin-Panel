@@ -31,7 +31,7 @@ const ViewMore = () => {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5000/api/v1/deals/66310b346c5b33c3910ad310"
+        "https://fyp-be.onrender.com/api/v1/deals/66310b346c5b33c3910ad310"
       );
       setDeal(response.data.data);
     } catch (error) {
