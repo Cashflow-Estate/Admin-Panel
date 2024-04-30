@@ -10,7 +10,6 @@ import { toast } from "react-toastify";
 const AllDealsTable = () => {
   const [modal, setModal] = useState(false);
   const [selectedDeal, setSelectedDeal] = useState(null);
-  console.log("🚀 ~ AllDealsTable ~ selectedDeal:", selectedDeal)
   const [dealsData, setDealsData] = useState([]);
 
   useEffect(() => {
@@ -74,8 +73,9 @@ const AllDealsTable = () => {
   };
 
   const handleEdit = (row) => {
-    history(`/deals/create`);
+    history(`/deals/edit/${row._id}`); // Assuming _id is the unique identifier for each deal
   };
+  
 
   const handleViewInquiry = (deal) => {
     history("/inquiry");
@@ -147,13 +147,13 @@ const AllDealsTable = () => {
             justifyContent: "flex-start",
           }}
         >
-          <Button
-            color=""
-            onClick={() => handleEdit(row)}
-            style={{ padding: "0.25rem", marginRight: "0.5rem" }}
-          >
-            <i className="icon-pencil"></i>
-          </Button>
+            <Button
+        color=""
+        onClick={() => handleEdit(row)}
+        style={{ padding: "0.25rem", marginRight: "0.5rem" }}
+      >
+        <i className="icon-pencil"></i>
+      </Button>
           <Button
             color=""
             onClick={() => handleDelete(row)}

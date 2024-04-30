@@ -97,6 +97,11 @@ export const AdminRoutes = [
     path: `/deals/create`,
     Component: <CreateDeal />,
   },
+
+  {
+    path: `/deals/edit/:id`,
+    Component: <CreateDeal />,
+  },
   {
     path: `/deals/send-deals`,
     Component: <SendDeals />,

@@ -19,6 +19,7 @@ import { FaTrash } from "react-icons/fa";
 import "./comp/multi.css";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useParams } from "react-router";
 
 const CreateDeal = () => {
   const {
@@ -30,22 +31,41 @@ const CreateDeal = () => {
     control,
     reset,
   } = useForm(); // Initialize form
+  const { id } = useParams(); // Get the ID parameter from the URL
+
+  const [dealData, setDealData] = useState(null); // State to store deal details
+  console.log("🚀 ~ CreateDeal ~ dealData:", dealData);
+
+  useEffect(() => {
+    const fetchDealById = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:5000/api/v1/deals/${id}`
+        );
+        setDealData(response.data); // Update dealData state with fetched data
+      } catch (error) {
+        console.error("Error fetching deal by ID:", error);
+      }
+    };
+
+    if (id) {
+      // If ID parameter exists, fetch deal details
+      fetchDealById();
+    }
+  }, [id]);
+
   const formData = watch();
   const [images, setImages] = useState([]);
   const [client, setClient] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false); // State to track form submission
   const [selectedOptions, setSelectedOptions] = useState([]); // State to store selected options
+  console.log("🚀 ~ CreateDeal ~ selectedOptions:", selectedOptions);
   const [useEmail, setUseEmail] = useState(false);
   const [email, setEmail] = useState("");
-  console.log("🚀 ~ CreateDeal ~ useEmail:", useEmail);
+  console.log("🚀 ~ CreateDeal ~ email:", email);
 
   const handleEmailChange = (event) => {
-    // Check if the email input field is not empty
-    console.log(
-      "🚀 ~ handleEmailChange ~ event.target.value:",
-      event.target.value
-    );
-    if (event.target.value.trim() !== "") {
+    if (event.target.value?.trim() !== "") {
       setUseEmail(true);
       setEmail(event.target.value);
     } else {
@@ -56,7 +76,6 @@ const CreateDeal = () => {
   const [addressOptions, setAddressOptions] = useState([]);
   const [address, setAddress] = useState("");
   const [addressSearch, setAddressSearch] = useState("");
-  console.log("🚀 ~ CreateDeal ~ addressSearch:", addressSearch);
   const [monthlyCashMin, setMonthlyCashMin] = useState(""); // State for Monthly Cash Flow Minimum
   const [monthlyCashMax, setMonthlyCashMax] = useState(""); // State for Monthly Cash Flow Maximum
   const [approxAnnualMinReturn, setApproxAnnualMinReturn] = useState(""); // State for Approx Annual Minimum Return(%)
@@ -78,8 +97,44 @@ const CreateDeal = () => {
     calculateAnnualReturns();
   }, [monthlyCashMin, monthlyCashMax, formData.price]); // Add formData.price to dependency array
 
+  useEffect(() => {
+    if (dealData) {
+      // Update form fields with dealData
+      reset({
+        title: dealData.data.title || "",
+        price: dealData.data.price || "",
+        approxPrice: dealData.data.approxPrice || "",
+        upfrontDown: dealData.data.upfrontDown || "",
+        monthly_cash_min: dealData.data.monthly_cash_min || "",
+        monthly_cash_max: dealData.data.monthly_cash_max || "",
+        closing_date: dealData.data.closing_date
+          ? dealData.data.closing_date.split("T")[0]
+          : "", // Format closing date if available
+        bedRooms: dealData.data.bedRooms || "",
+        area: dealData.data.area || "",
+        baths: dealData.data.baths || "",
+        address: dealData.data.address || "",
+        sendTo:
+          dealData.data.sendTo.map((value) => ({ value, label: value })) || [],
+        sendByEmail: dealData.data.sendByEmail || "", // Fill sendByEmail field
+      });
+
+      setEmail(dealData.data.sendByEmail);
+
+      // Update other relevant states if needed
+      setMonthlyCashMin(dealData.data.monthly_cash_min || "");
+      setMonthlyCashMax(dealData.data.monthly_cash_max || "");
+      setApproxAnnualMinReturn(dealData.data.annually_return_min || "");
+      setApproxAnnualMaxReturn(dealData.data.annually_return_max || "");
+      // Add other relevant state updates here
+
+      setImages(dealData.data.images); // Assuming images are fetched as well
+      setMonthlyCashMin(dealData.data.monthly_cash_min); // Set monthlyCashMin state
+      setMonthlyCashMax(dealData.data.monthly_cash_max); // Set monthlyCashMax state
+      setAddressSearch(dealData.data.address); // Set addressSearch state
+    }
+  }, [dealData, reset]);
   const AddProject = async (data) => {
-    console.log("🚀 ~ AddProject ~ data:", data);
     setClient(true);
     setFormSubmitted(true);
     await trigger();
@@ -129,7 +184,6 @@ const CreateDeal = () => {
           },
         }
       );
-      console.log("🚀 ~ AddProject ~ response:", response);
       if (response.data.statusCode === 200) {
         setFormSubmitted(false);
         toast.success("Successfully !..");
@@ -174,7 +228,6 @@ const CreateDeal = () => {
         `http://localhost:5000/places?input=${inputAddress}`
       );
       const candidates = response.data.candidates;
-      console.log("🚀 ~ handleAddressChange ~ candidates:", candidates);
       const formattedOptions = candidates.map((candidate) => ({
         value: candidate.formatted_address,
         label: `${candidate.name}: ${candidate.formatted_address}`,
@@ -185,10 +238,6 @@ const CreateDeal = () => {
     }
   };
   const [debouncedAddressSearch, setDebouncedAddressSearch] = useState("");
-  console.log(
-    "🚀 ~ CreateDeal ~ debouncedAddressSearch:",
-    debouncedAddressSearch
-  );
 
   // Debounce address search
   useEffect(() => {
@@ -204,7 +253,7 @@ const CreateDeal = () => {
     if (
       Array.isArray(debouncedAddressSearch)
         ? ""
-        : debouncedAddressSearch.trim() !== ""
+        : debouncedAddressSearch?.trim() !== ""
     ) {
       // Check if the search query is not empty
       handleAddressChange(debouncedAddressSearch);
@@ -495,10 +544,11 @@ const CreateDeal = () => {
                             className="form-control"
                             type="email"
                             name="sendByEmail"
-                            id="email"
+                            id="sendByEmail"
                             placeholder="Enter email"
                             disabled={selectedOptions?.length}
                             onChange={handleEmailChange}
+                            value={email}
                           />
                           {errors.sendByEmail && (
                             <span className="text-danger">
@@ -509,7 +559,10 @@ const CreateDeal = () => {
                       </Col>
 
                       <Col sm="12">
-                        <MultiDropzone setImages={setImages} />
+                        <MultiDropzone
+                          setImages={setImages}
+                          dealData={dealData}
+                        />
                       </Col>
                     </Row>
                     <Row>
@@ -534,13 +587,16 @@ const CreateDeal = () => {
 };
 
 export default CreateDeal;
-
-const MultiDropzone = ({ setImages }) => {
+const MultiDropzone = ({ setImages, dealData }) => {
   const [images, setImagesState] = useState([]);
+
+  // Handle drop of new images
   const handleDrop = (acceptedFiles) => {
     setImagesState([...images, ...acceptedFiles]);
     setImages([...images, ...acceptedFiles]); // Update parent state
   };
+
+  // Handle deletion of uploaded image
   const handleDelete = (index) => {
     const newImages = [...images];
     newImages.splice(index, 1);
@@ -550,6 +606,7 @@ const MultiDropzone = ({ setImages }) => {
 
   return (
     <div className="App2">
+      {/* Dropzone for uploading new images */}
       <Dropzone onDrop={handleDrop} accept="image/*" multiple>
         {({ getRootProps, getInputProps }) => (
           <div
@@ -563,16 +620,16 @@ const MultiDropzone = ({ setImages }) => {
               width="25"
               height="25"
               fill="green"
-              class="bi bi-cloud-upload"
+              className="bi bi-cloud-upload"
               viewBox="0 0 16 16"
               style={{ color: `var(--theme-secondary)` }}
             >
               <path
-                fill-rule="evenodd"
+                fillRule="evenodd"
                 d="M4.406 1.342A5.53 5.53 0 0 1 8 0c2.69 0 4.923 2 5.166 4.579C14.758 4.804 16 6.137 16 7.773 16 9.569 14.502 11 12.687 11H10a.5.5 0 0 1 0-1h2.688C13.979 10 15 8.988 15 7.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 2.825 10.328 1 8 1a4.53 4.53 0 0 0-2.941 1.1c-.757.652-1.153 1.438-1.153 2.055v.448l-.445.049C2.064 4.805 1 5.952 1 7.318 1 8.785 2.23 10 3.781 10H6a.5.5 0 0 1 0 1H3.781C1.708 11 0 9.366 0 7.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383"
               />
               <path
-                fill-rule="evenodd"
+                fillRule="evenodd"
                 d="M7.646 4.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V14.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708z"
               />
             </svg>
@@ -582,15 +639,28 @@ const MultiDropzone = ({ setImages }) => {
           </div>
         )}
       </Dropzone>
+      {/* Image preview section */}
       <div className="image-preview">
-        {images.map((image, index) => (
-          <div key={index} className="image-container">
-            <img src={URL.createObjectURL(image)} alt={`Image-${index}`} />
-            <div className="image-delete" onClick={() => handleDelete(index)}>
-              <FaTrash />
+        {/* Render editable images from dealData if available */}
+        {dealData &&
+          dealData.data.images.map((image, index) => (
+            <div key={index} className="image-container">
+              <img src={image.url} alt={`Image-${index}`} />
+              <div className="image-delete" onClick={() => handleDelete(index)}>
+                <FaTrash />
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        {/* Render uploaded images if dealData is not available */}
+        {!dealData &&
+          images.map((image, index) => (
+            <div key={index} className="image-container">
+              <img src={URL.createObjectURL(image)} alt={`Image-${index}`} />
+              <div className="image-delete" onClick={() => handleDelete(index)}>
+                <FaTrash />
+              </div>
+            </div>
+          ))}
       </div>
     </div>
   );
