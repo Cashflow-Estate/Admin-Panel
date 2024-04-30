@@ -56,6 +56,7 @@ const CreateDeal = () => {
 
   const formData = watch();
   const [images, setImages] = useState([]);
+  console.log("🚀 ~ :::: ~ images:", images)
   const [client, setClient] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false); // State to track form submission
   const [selectedOptions, setSelectedOptions] = useState([]); // State to store selected options
@@ -76,6 +77,7 @@ const CreateDeal = () => {
   const [addressOptions, setAddressOptions] = useState([]);
   const [address, setAddress] = useState("");
   const [addressSearch, setAddressSearch] = useState("");
+  console.log("🚀 ~ CreateDeal ~ addressSearch:", addressSearch)
   const [monthlyCashMin, setMonthlyCashMin] = useState(""); // State for Monthly Cash Flow Minimum
   const [monthlyCashMax, setMonthlyCashMax] = useState(""); // State for Monthly Cash Flow Maximum
   const [approxAnnualMinReturn, setApproxAnnualMinReturn] = useState(""); // State for Approx Annual Minimum Return(%)
@@ -134,6 +136,80 @@ const CreateDeal = () => {
       setAddressSearch(dealData.data.address); // Set addressSearch state
     }
   }, [dealData, reset]);
+  // const AddProject = async (data) => {
+  //   setClient(true);
+  //   setFormSubmitted(true);
+  //   await trigger();
+  
+  //   if (images.length === 0) {
+  //     alert("Please upload at least one image.");
+  //     return;
+  //   }
+  
+  //   // Ensure addressSearch is an array
+  //   const selectedAddress = Array.isArray(addressSearch) ? addressSearch : [addressSearch];
+  
+  //   const dealData = new FormData(); // Create a FormData object to send mixed content (text and files)
+  //   dealData.append("title", data.title);
+  //   dealData.append("price", data.price);
+  //   dealData.append("approxPrice", data.approxPrice);
+  //   dealData.append("upfrontDown", data.upfrontDown);
+  //   dealData.append("monthly_cash_min", data.monthly_cash_min);
+  //   dealData.append("monthly_cash_max", data.monthly_cash_max);
+  //   dealData.append("annually_return_min", approxAnnualMinReturn); // Fix typo here
+  //   dealData.append("annually_return_max", approxAnnualMaxReturn); // Fix typo here
+  //   dealData.append("closing_date", data.closing_date);
+  //   dealData.append("bedRooms", data.bedRooms);
+  //   dealData.append("area", data.area);
+  //   dealData.append("baths", data.baths);
+  //   dealData.append(
+  //     "address",
+  //     selectedAddress.map((val) => `${val.label}:${val.value}`)
+  //   ); // Append selected addresses to FormData
+  //   data.sendTo &&
+  //     dealData.append(
+  //       "sendTo",
+  //       data.sendTo.map((val) => val.label)
+  //     ); // Add sendTo if it exists
+  
+  //   dealData.append("sendByEmail", email);
+  //   images.forEach((image, index) => {
+  //     dealData.append(`images`, image); // Append each image to FormData with the same key "images"
+  //   });
+  
+  //   try {
+  //     setFormSubmitted(true);
+  
+  //     const response = await axios.post(
+  //       "http://localhost:5000/api/v1/deals",
+  //       dealData,
+  //       {
+  //         headers: {
+  //           "Content-Type": "multipart/form-data",
+  //         },
+  //       }
+  //     );
+  //     if (response.data.statusCode === 200) {
+  //       setFormSubmitted(false);
+  //       toast.success("Successfully !..");
+  //       reset(); // Reset the form
+  //       setImages([]); // Clear the images state
+  //       setMonthlyCashMin(""); // Clear monthlyCashMin state
+  //       setMonthlyCashMax(""); // Clear monthlyCashMax state
+  //       setApproxAnnualMinReturn(""); // Clear approxAnnualMinReturn state
+  //       setApproxAnnualMaxReturn(""); // Clear approxAnnualMaxReturn state
+  //       setAddressSearch(""); // Clear addressSearch state
+  //       setEmail(""); // Clear email state
+  //       setSelectedOptions([]); // Clear selectedOptions state
+  //       setUseEmail(false); // Reset useEmail state
+  //     }
+  //     //
+  //     // Handle response
+  //   } catch (error) {
+  //     // Handle error
+  //   }
+  // };
+  
   const AddProject = async (data) => {
     setClient(true);
     setFormSubmitted(true);
@@ -144,6 +220,9 @@ const CreateDeal = () => {
       return;
     }
 
+    // Ensure addressSearch is an array
+    const selectedAddress = Array.isArray(addressSearch) ? addressSearch : [addressSearch];
+
     const dealData = new FormData(); // Create a FormData object to send mixed content (text and files)
     dealData.append("title", data.title);
     dealData.append("price", data.price);
@@ -151,57 +230,28 @@ const CreateDeal = () => {
     dealData.append("upfrontDown", data.upfrontDown);
     dealData.append("monthly_cash_min", data.monthly_cash_min);
     dealData.append("monthly_cash_max", data.monthly_cash_max);
-    dealData.append("annually_return_min", approxAnnualMinReturn); // Fix typo here
-    dealData.append("annually_return_max", approxAnnualMaxReturn); // Fix typo here
     dealData.append("closing_date", data.closing_date);
     dealData.append("bedRooms", data.bedRooms);
     dealData.append("area", data.area);
     dealData.append("baths", data.baths);
-    dealData.append(
-      "address",
-      addressSearch.map((val) => `${val.label}:${val.value}`)
-    ); // Assuming address is a string
-    data.sendTo &&
-      dealData.append(
-        "sendTo",
-        data.sendTo.map((val) => val.label)
-      ); // Add sendTo if it exists
-
-    dealData.append("sendByEmail", email);
-    images.forEach((image, index) => {
-      dealData.append(`images`, image); // Append each image to FormData with the same key "images"
+    dealData.append("address", selectedAddress.join(", ")); // Convert selectedAddress to a comma-separated string
+    dealData.append("sendTo", JSON.stringify(selectedOptions.map((option) => option.value))); // Convert selectedOptions to JSON string
+    dealData.append("sendByEmail", useEmail ? email : ""); // Send email only if useEmail is true
+    images.forEach((image) => {
+      dealData.append("images", image); // Append each image to FormData
     });
 
-    try {
-      setFormSubmitted(true);
+    const apiUrl = id ? `http://localhost:5000/api/v1/deals/${id}` : 'http://localhost:5000/api/v1/deals';
 
-      const response = await axios.post(
-        "http://localhost:5000/api/v1/deals",
-        dealData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+    try {
+      const response = id ? await axios.patch(apiUrl, dealData) : await axios.post(apiUrl, dealData);
       if (response.data.statusCode === 200) {
-        setFormSubmitted(false);
-        toast.success("Successfully !..");
-        reset(); // Reset the form
-        setImages([]); // Clear the images state
-        setMonthlyCashMin(""); // Clear monthlyCashMin state
-        setMonthlyCashMax(""); // Clear monthlyCashMax state
-        setApproxAnnualMinReturn(""); // Clear approxAnnualMinReturn state
-        setApproxAnnualMaxReturn(""); // Clear approxAnnualMaxReturn state
-        setAddressSearch(""); // Clear addressSearch state
-        setEmail(""); // Clear email state
-        setSelectedOptions([]); // Clear selectedOptions state
-        setUseEmail(false); // Reset useEmail state
+        // Handle success
+        toast.success(response.data.message);
       }
-      //
-      // Handle response
     } catch (error) {
       // Handle error
+      toast.error("Failed to create/update deal.");
     }
   };
 
@@ -475,7 +525,7 @@ const CreateDeal = () => {
                             onChange={(e) => setAddressSearch(e.target.value)}
                             value={
                               Array.isArray(addressSearch)
-                                ? addressSearch.map(
+                                ? addressSearch?.map(
                                     (val) => `${val.label}:${val.value}`
                                   )
                                 : addressSearch
@@ -560,6 +610,7 @@ const CreateDeal = () => {
 
                       <Col sm="12">
                         <MultiDropzone
+                        images={images}
                           setImages={setImages}
                           dealData={dealData}
                         />
@@ -569,7 +620,7 @@ const CreateDeal = () => {
                       <Col>
                         <div className="text-end">
                           {/* <Btn attrBtn={{ color: "success", className: "me-3" }} onClick={AddProject}>Add</Btn> */}
-                          <Btn attrBtn={{ color: "success" }}>Add</Btn>
+                          <Btn attrBtn={{ color: "success" }}>{id?"Edit":"Add"}</Btn>
                         </div>
                       </Col>
                     </Row>
@@ -587,26 +638,30 @@ const CreateDeal = () => {
 };
 
 export default CreateDeal;
-const MultiDropzone = ({ setImages, dealData }) => {
-  const [images, setImagesState] = useState([]);
-
-  // Handle drop of new images
+const MultiDropzone = ({ setImages, dealData, images }) => {
   const handleDrop = (acceptedFiles) => {
-    setImagesState([...images, ...acceptedFiles]);
-    setImages([...images, ...acceptedFiles]); // Update parent state
+    setImages((prevImages) => [...prevImages, ...acceptedFiles]);
   };
 
-  // Handle deletion of uploaded image
   const handleDelete = (index) => {
-    const newImages = [...images];
-    newImages.splice(index, 1);
-    setImagesState(newImages);
-    setImages(newImages); // Update parent state
+    if (dealData) {
+      // Update dealData if available
+      const updatedDealData = [ ...images ];
+      console.log("🚀 ~ handleDelete ~ updatedDealData:", updatedDealData)
+      updatedDealData.splice(index, 1);
+      setImages(updatedDealData); // Assuming you have a setDealData function
+    } else {
+      // Update images if dealData is not available
+      setImages((prevImages) => {
+        const newImages = [...prevImages];
+        newImages.splice(index, 1);
+        return newImages;
+      });
+    }
   };
 
   return (
     <div className="App2">
-      {/* Dropzone for uploading new images */}
       <Dropzone onDrop={handleDrop} accept="image/*" multiple>
         {({ getRootProps, getInputProps }) => (
           <div
@@ -639,29 +694,27 @@ const MultiDropzone = ({ setImages, dealData }) => {
           </div>
         )}
       </Dropzone>
-      {/* Image preview section */}
       <div className="image-preview">
-        {/* Render editable images from dealData if available */}
-        {dealData &&
-          dealData.data.images.map((image, index) => (
-            <div key={index} className="image-container">
-              <img src={image.url} alt={`Image-${index}`} />
-              <div className="image-delete" onClick={() => handleDelete(index)}>
-                <FaTrash />
+        {dealData
+          ? images.map((image, index) => (
+              <div key={index} className="image-container">
+                <img src={image.url || URL.createObjectURL(image)} alt={`Image-${index}`} />
+                <div className="image-delete" onClick={() => handleDelete(index)}>
+                  <FaTrash />
+                </div>
               </div>
-            </div>
-          ))}
-        {/* Render uploaded images if dealData is not available */}
-        {!dealData &&
-          images.map((image, index) => (
-            <div key={index} className="image-container">
-              <img src={URL.createObjectURL(image)} alt={`Image-${index}`} />
-              <div className="image-delete" onClick={() => handleDelete(index)}>
-                <FaTrash />
+            ))
+          : images.map((image, index) => (
+              <div key={index} className="image-container">
+                <img src={URL.createObjectURL(image)} alt={`Image-${index}`} />
+                <div className="image-delete" onClick={() => handleDelete(index)}>
+                  <FaTrash />
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
       </div>
     </div>
   );
 };
+
+

@@ -92,7 +92,7 @@ const AllDealsTable = () => {
       name: "Image",
       cell: (row) => (
         <img
-          src={row.images[0].url}
+          src={row.images[0]?.url}
           alt={row.title}
           style={{ maxWidth: "100px", maxHeight: "100px" }} // Set maximum image size
         />
