@@ -1,14 +1,30 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
 import { Button } from "reactstrap";
 import iii from "../../../../src/assets/cashflowimg/apartments/a1.png";
 import { useNavigate } from "react-router";
 import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const AllDealsTable = () => {
   const [modal, setModal] = useState(false);
   const [selectedDeal, setSelectedDeal] = useState(null);
+  console.log("🚀 ~ AllDealsTable ~ selectedDeal:", selectedDeal)
+  const [dealsData, setDealsData] = useState([]);
 
+  useEffect(() => {
+    // Fetch data from the API
+    axios
+      .get("http://localhost:5000/api/v1/deals")
+      .then((response) => {
+        setDealsData(response.data.data);
+      })
+      .catch((error) => {
+        // Handle error
+        console.error("Error fetching deals:", error);
+      });
+  }, []);
   const toggleModal = () => {
     setModal(!modal);
   };
@@ -20,28 +36,37 @@ const AllDealsTable = () => {
 
   const confirmDelete = () => {
     // Perform delete operation
-    console.log("Deleting deal:", selectedDeal);
-    toggleModal(); // Close the modal after deleting
+    axios
+      .delete(`http://localhost:5000/api/v1/deals/${selectedDeal._id}`)
+      .then((response) => {
+        toast.success("Deal deleted successfully");
+        setDealsData(dealsData.filter((deal) => deal._id !== selectedDeal._id));
+        toggleModal(); // Close the modal after deleting
+      })
+      .catch((error) => {
+        console.error("Error deleting deal:", error);
+        toast.error("Error deleting deal");
+      });
   };
-  const [dealsData] = useState([
-    {
-      id: 1,
-      title: "Deal 1",
-      image: "deal1.jpg",
-      status: "Active",
-      Inquiry: <i className="fa fa-rss-square"></i>,
-      address: "123 Main St, City, Country",
-    },
-    {
-      id: 2,
-      title: "Deal 2",
-      image: "deal2.jpg",
-      status: "Inactive",
-      Inquiry: <i className="fa fa-rss-square"></i>,
-      address: "456 Elm St, City, Country",
-    },
-    // Add more deals as needed
-  ]);
+  // const [dealsData] = useState([
+  //   {
+  //     id: 1,
+  //     title: "Deal 1",
+  //     image: "deal1.jpg",
+  //     status: "Active",
+  //     Inquiry: <i className="fa fa-rss-square"></i>,
+  //     address: "123 Main St, City, Country",
+  //   },
+  //   {
+  //     id: 2,
+  //     title: "Deal 2",
+  //     image: "deal2.jpg",
+  //     status: "Inactive",
+  //     Inquiry: <i className="fa fa-rss-square"></i>,
+  //     address: "456 Elm St, City, Country",
+  //   },
+  //   // Add more deals as needed
+  // ]);
   const history = useNavigate();
 
   const handleViewDetails = (user) => {
@@ -52,8 +77,6 @@ const AllDealsTable = () => {
     history(`/deals/create`);
   };
 
-  
-
   const handleViewInquiry = (deal) => {
     history("/inquiry");
   };
@@ -63,35 +86,26 @@ const AllDealsTable = () => {
       name: "Title",
       selector: (row) => row.title,
       sortable: true,
-      center: false,
+      wrap: true, // Enable word wrap for long text
     },
     {
       name: "Image",
       cell: (row) => (
-        <img src={iii} alt={row.title} style={{ width: "50px" }} />
+        <img
+          src={row.images[0].url}
+          alt={row.title}
+          style={{ maxWidth: "100px", maxHeight: "100px" }} // Set maximum image size
+        />
       ),
       sortable: false,
       center: true,
-    },
-    {
-      name: "Status",
-      selector: (row) => (
-        <button
-          className={`btn badge-light-${
-            row.status === "Inactive" ? "light" : "primary"
-          } ${row.status === "Inactive" && "disabled"}`}
-        >
-          {row.status}
-        </button>
-      ),
-      sortable: true,
-      center: false,
+      width: "120px", // Set a fixed width for the image column
     },
     {
       name: "Address",
       selector: (row) => row.address,
       sortable: true,
-      center: false,
+      wrap: true, // Enable word wrap for long text
     },
     {
       name: "Inquiry",
@@ -105,15 +119,23 @@ const AllDealsTable = () => {
         >
           {/* Button to view Inquiry */}
           <Button color="" onClick={() => handleViewInquiry(row)}>
-            <i style={{ fontSize: "25px" }} className="icofont icofont-support-faq"></i>
+            <i
+              style={{ fontSize: "25px" }}
+              className="icofont icofont-support-faq"
+            ></i>
           </Button>
-          
+
           {/* Badge for notification count */}
-          <span className='badge rounded-pill badge-secondary' style={{ position: 'relative', top: '-10px', left: '-30px' }}>4</span>
+          <span
+            className="badge rounded-pill badge-secondary"
+            style={{ position: "relative", top: "-10px", left: "-30px" }}
+          >
+            4
+          </span>
         </div>
       ),
       sortable: true,
-      center: false,
+      wrap: true, // Enable word wrap for long text
     },
     {
       name: "Actions",
@@ -176,11 +198,16 @@ const AllDealsTable = () => {
       <Modal isOpen={modal} toggle={toggleModal}>
         <ModalHeader toggle={toggleModal}>Confirm Delete</ModalHeader>
         <ModalBody>
-          Are you sure you want to delete the deal titled "{selectedDeal?.title}"?
+          Are you sure you want to delete the deal titled "{selectedDeal?.title}
+          "?
         </ModalBody>
         <ModalFooter>
-          <Button color="danger" onClick={confirmDelete}>Delete</Button>{' '}
-          <Button color="secondary" onClick={toggleModal}>Cancel</Button>
+          <Button color="danger" onClick={confirmDelete}>
+            Delete
+          </Button>{" "}
+          <Button color="secondary" onClick={toggleModal}>
+            Cancel
+          </Button>
         </ModalFooter>
       </Modal>
     </Fragment>
