@@ -20,8 +20,24 @@ import Slider from "react-slick";
 import iimmgg from "../../../assets/cashflowimg/apartments/a1lg.png";
 import video from "../../../assets/CashflowLogos/video.mp4";
 import Logs from "./Logs";
+import axios from "axios";
 
 const ViewMore = () => {
+  const [deal, setDeal] = useState(null);
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:5000/api/v1/deals/66310b346c5b33c3910ad310"
+      );
+      setDeal(response.data.data);
+    } catch (error) {
+      console.error("Error fetching deal:", error);
+    }
+  };
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -105,104 +121,137 @@ const ViewMore = () => {
   };
 
   return (
-    <Container fluid={true}>
-      <div>
-        <Breadcrumbs mainTitle="Details" parent="Deals" title="1" />
-        <Row className="product-page-main p-0">
-          <Col xxl="7" md="6">
-            <Card>
-              <CardBody>
-                <Slider {...settings} ref={slider1}>
-                  {productItems.map((item, index) =>
-                    item.type === "image" ? (
-                      <Image
-                        attrImage={{
-                          src: item.source,
-                          alt: "",
-                          className: "img-fluid w-100",
-                        }}
-                        key={index}
-                      />
-                    ) : (
-                      <video controls key={index}>
-                        <source src={item.source} type="video/mp4" />
-                        Your browser does not support the video tag.
-                      </video>
-                    )
-                  )}
-                </Slider>
-                <Slider
-                  asNavFor={nav1}
-                  ref={slider2}
-                  slidesToShow={productItems.length}
-                  swipeToSlide={true}
-                  focusOnSelect={true}
-                  infinite={true}
-                  className="small-slick"
-                >
-                  {productItems.map((item, index) =>
-                    item.type === "image" ? (
-                      <Image
-                        attrImage={{
-                          src: item.source,
-                          alt: "",
-                          className: "img-fluid item",
-                        }}
-                        key={index}
-                      />
-                    ) : (
-                      <video controls key={index}>
-                        <source src={item.source} type="video/mp4" />
-                        Your browser does not support the video tag.
-                      </video>
-                    )
-                  )}
-                </Slider>
-              </CardBody>
-            </Card>
-          </Col>
-          <Col xxl="5" md="6" className="box-col-6">
-            <DealsDetails />
-          </Col>
-        </Row>
-        <Row>
-          <Logs />
-        </Row>
-      </div>
-    </Container>
-  );
+//     <Container fluid={true}>
+//       <div>
+//         <Breadcrumbs mainTitle="Details" parent="Deals" title="1" />
+//         <Row className="product-page-main p-0">
+//           <Col xxl="7" md="6">
+//             <Card>
+//               <CardBody>
+//                 <Slider {...settings} ref={slider1}>
+//                   {productItems.map((item, index) =>
+//                     item.type === "image" ? (
+//                       <Image
+//                         attrImage={{
+//                           src: item.source,
+//                           alt: "",
+//                           className: "img-fluid w-100",
+//                         }}
+//                         key={index}
+//                       />
+//                     ) : (
+//                       <video controls key={index}>
+//                         <source src={item.source} type="video/mp4" />
+//                         Your browser does not support the video tag.
+//                       </video>
+//                     )
+//                   )}
+//                 </Slider>
+//                 <Slider
+//                   asNavFor={nav1}
+//                   ref={slider2}
+//                   slidesToShow={productItems.length}
+//                   swipeToSlide={true}
+//                   focusOnSelect={true}
+//                   infinite={true}
+//                   className="small-slick"
+//                 >
+//                   {productItems.map((item, index) =>
+//                     item.type === "image" ? (
+//                       <Image
+//                         attrImage={{
+//                           src: item.source,
+//                           alt: "",
+//                           className: "img-fluid item",
+//                         }}
+//                         key={index}
+//                       />
+//                     ) : (
+//                       <video controls key={index}>
+//                         <source src={item.source} type="video/mp4" />
+//                         Your browser does not support the video tag.
+//                       </video>
+//                     )
+//                   )}
+//                 </Slider>
+//               </CardBody>
+//             </Card>
+//           </Col>
+//           <Col xxl="5" md="6" className="box-col-6">
+//             <DealsDetails />
+//           </Col>
+//         </Row>
+//         {/* <Row>
+//           <Logs />
+//         </Row> */}
+//       </div>
+//     </Container>
+//   );
+// };
+<Container fluid={true}>
+<div>
+  <Breadcrumbs mainTitle="Details" parent="Deals" title="1" />
+  <Row className="product-page-main p-0">
+    <Col xxl="7" md="6">
+      <Card>
+        <CardBody>
+          {deal && (
+            <Slider {...settings} ref={slider1}>
+              {deal.images.map((image, index) => (
+                <Image
+                  attrImage={{
+                    src: image.url,
+                    alt: "",
+                    className: "img-fluid w-100",
+                  }}
+                  key={index}
+                />
+              ))}
+            </Slider>
+          )}
+        </CardBody>
+      </Card>
+    </Col>
+    <Col xxl="5" md="6" className="box-col-6">
+      {deal && <DealsDetails deal={deal} />}
+    </Col>
+  </Row>
+</div>
+</Container>
+);
 };
 
 export default ViewMore;
 
-const DealsDetails = () => {
-  const house = {
-    name: "Deal name",
-    address: "798 Talbot St. Bridgewater, NJ 08807",
-    type: "House",
-    country: "Canada",
-    price: "105,212",
-    bedrooms: 3,
-    bathrooms: 4,
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-    surface: 4200,
-    availability: "no",
-    slowFlipTerms: "$111,654",
-    Interest: "$4800",
-    monthlyCashFlowRange: "$5000 - $6000",
-    annualReturnProfit: "22%",
-  };
+const DealsDetails = ({ deal }) => {
+  console.log("🚀 ~ DealsDetails ~ deal:", deal)
+  // const house = {
+  //   name: "Deal name",
+  //   address: "798 Talbot St. Bridgewater, NJ 08807",
+  //   type: "House",
+  //   country: "Canada",
+  //   price: "105,212",
+  //   bedrooms: 3,
+  //   bathrooms: 4,
+  //   description:
+  //     "Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+  //   surface: 4200,
+  //   availability: "no",
+  //   slowFlipTerms: "$111,654",
+  //   Interest: "$4800",
+  //   monthlyCashFlowRange: "$5000 - $6000",
+  //   annualReturnProfit: "22%",
+  // };
 
   return (
     <Fragment>
-      {house && (
+      {deal && (
         <Card>
           <CardBody style={{ height: "auto" }}>
             <div className="product-page-details">
-              <h3>{house.name}</h3>
-              <h6>{house.address}</h6>
-              <div className="product-price">${house.price}</div>
+              <h3>{deal.title}</h3>
+              <h6>{deal.address}</h6>
+              <div className="product-price">${deal.price}</div>
             </div>
             <div>
               <table className="product-page-width">
@@ -221,7 +270,7 @@ const DealsDetails = () => {
                         </b>
                       </div>
                     </td>
-                    <td>:{house.bedrooms}</td>
+                    <td>:{deal.bedRooms}</td>
                   </tr>
                   <tr>
                     <td>
@@ -237,7 +286,7 @@ const DealsDetails = () => {
                         </b>
                       </div>
                     </td>
-                    <td>: {house.bathrooms}</td>
+                    <td>: {deal.baths}</td>
                   </tr>
                   <tr>
                     <td>
@@ -253,9 +302,9 @@ const DealsDetails = () => {
                         </b>
                       </div>
                     </td>
-                    <td>: {house.slowFlipTerms}</td>
+                    <td>: {deal.approxPrice}</td>
                   </tr>
-                  <tr>
+                  {/* <tr>
                     <td>
                       <div className="d-flex ">
                         <CgUnavailable
@@ -269,8 +318,8 @@ const DealsDetails = () => {
                         </b>
                       </div>
                     </td>
-                    <td>: {house.availability}</td>
-                  </tr>
+                    <td>: {deal.availability}</td>
+                  </tr> */}
                   <tr>
                     <td>
                       <div className="d-flex ">
@@ -285,7 +334,7 @@ const DealsDetails = () => {
                         </b>
                       </div>
                     </td>
-                    <td>: {house.Interest}</td>
+                    <td>: {deal.upfrontDown}</td>
                   </tr>
                   <tr>
                     <td>
@@ -301,7 +350,7 @@ const DealsDetails = () => {
                         </b>
                       </div>
                     </td>
-                    <td>: {house.monthlyCashFlowRange}</td>
+                    <td>: {deal.monthly_cash_min}-{deal.monthly_cash_max}</td>
                   </tr>
                   <tr>
                     <td>
@@ -317,13 +366,13 @@ const DealsDetails = () => {
                         </b>
                       </div>
                     </td>
-                    <td>: {house.annualReturnProfit}</td>
+                    <td>:  {deal.annually_return_min}%-{deal.annually_return_max}%</td>
                   </tr>
                 </tbody>
               </table>
             </div>
             <hr />
-            <p>{house.description}</p>
+            <p>{deal.description}</p>
             <hr />
           </CardBody>
         </Card>

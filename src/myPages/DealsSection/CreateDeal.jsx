@@ -290,7 +290,7 @@ const CreateDeal = () => {
       <Breadcrumbs
         parent="Slow Flip Deals"
         title="Create Slow Flip Deals"
-        mainTitle="Slow Flip Deals"
+        mainTitle="Create Slow Flip Deals"
       />
       <Container fluid={true}>
         {!formSubmitted ? (
