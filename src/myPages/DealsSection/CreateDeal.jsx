@@ -48,7 +48,7 @@ const CreateDeal = () => {
     const fetchDealById = async () => {
       try {
         const response = await axios.get(
-          `https://cashflow-be.vercel.app/api/v1/deals/${id}`
+          `https://fyp-be.onrender.com/api/v1/deals/${id}`
         );
         setDealData(response.data);
         setAddress(false);
@@ -211,8 +211,8 @@ const CreateDeal = () => {
     });
 
     const apiUrl = id
-      ? `https://cashflow-be.vercel.app/api/v1/deals/${id}`
-      : "https://cashflow-be.vercel.app/api/v1/deals";
+      ? `https://fyp-be.onrender.com/api/v1/deals/${id}`
+      : "https://fyp-be.onrender.com/api/v1/deals";
 
     try {
       const response = id
@@ -240,7 +240,7 @@ const CreateDeal = () => {
 
     try {
       const response = await axios.get(
-        `https://cashflow-be.vercel.app/places?input=${inputAddress}`
+        `https://fyp-be.onrender.com/places?input=${inputAddress}`
       );
       const candidates = response.data.candidates;
       const formattedOptions = candidates.map((candidate) => ({
