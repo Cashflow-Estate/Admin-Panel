@@ -69,7 +69,7 @@ const AllDealsTable = () => {
   const history = useNavigate();
 
   const handleViewDetails = (user) => {
-    history(`/deals/1`);
+    history(`/deals/${user._id}`);
   };
 
   const handleEdit = (row) => {

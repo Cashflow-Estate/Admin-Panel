@@ -115,7 +115,7 @@ export const AdminRoutes = [
     Component: <Inquiry />,
   },
   {
-    path: `/deals/1`,
+    path: `/deals/:id`,
     Component: <ViewMore />,
   },
   {
