@@ -84,7 +84,6 @@ const CreateDeal = () => {
 
   const [client, setClient] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
-  console.log("🚀 ~ CreateDeal ~ formSubmitted:", formSubmitted)
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [useEmail, setUseEmail] = useState(false);
   const [email, setEmail] = useState("");
