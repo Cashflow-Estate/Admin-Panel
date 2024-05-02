@@ -20,8 +20,16 @@ import "./comp/multi.css";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router";
+import ReactGoogleAutocomplete, { Autocomplete } from "react-google-autocomplete"; // Import GoogleComponent
 
 const CreateDeal = () => {
+  const [selectedAddress, setSelectedAddress] = useState("");
+
+  // Handler for address selection
+  const handleAddressSelect = (address) => {
+    setSelectedAddress(address);
+  };
+
   const {
     register,
     handleSubmit,
@@ -34,6 +42,7 @@ const CreateDeal = () => {
   const { id } = useParams();
 
   const [dealData, setDealData] = useState(null);
+  console.log("🚀 ~ CreateDeal ~ dealData:", dealData)
 
   useEffect(() => {
     const fetchDealById = async () => {
@@ -85,6 +94,9 @@ const CreateDeal = () => {
   const [client, setClient] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState([]);
+  let opt=selectedOptions.map((val)=>val.label)
+  console.log("🚀 ~ CreateDeal ~ opt:", opt)
+  console.log("🚀 ~ CreateDeal ~ selectedOptions:", selectedOptions)
   const [useEmail, setUseEmail] = useState(false);
   const [email, setEmail] = useState("");
 
@@ -102,6 +114,7 @@ const CreateDeal = () => {
   const [address, setAddress] = useState(true);
   console.log("🚀 ~ CreateDeal ~ address:", address);
   const [addressSearch, setAddressSearch] = useState("");
+  console.log("🚀 ~ CreateDeal ~ addressSearch:", addressSearch)
   const [monthlyCashMin, setMonthlyCashMin] = useState("");
   const [monthlyCashMax, setMonthlyCashMax] = useState("");
   const [approxAnnualMinReturn, setApproxAnnualMinReturn] = useState("");
@@ -145,6 +158,7 @@ const CreateDeal = () => {
       setSelectedOptions(
         dealData.data.sendTo.map((value) => ({ value, label: value }))
       );
+      
       setEmail(dealData.data.sendByEmail);
 
       setMonthlyCashMin(dealData.data.monthly_cash_min || "");
@@ -187,11 +201,10 @@ const CreateDeal = () => {
     dealData.append("bedRooms", data.bedRooms);
     dealData.append("area", data.area);
     dealData.append("baths", data.baths);
-    dealData.append("address", selectedAddress.join(", "));
+    // dealData.append("address", selectedAddress.join(", "));
+    dealData.append("address", addressSearch);
     dealData.append(
-      "sendTo",
-      JSON.stringify(selectedOptions.map((option) => option.value))
-    );
+      "sendTo",opt);
     dealData.append("sendByEmail", useEmail ? email : "");
     files.forEach((image) => {
       dealData.append("images", image);
@@ -469,57 +482,27 @@ const CreateDeal = () => {
                           </span>
                         </FormGroup>
                       </Col>
-                      <Col sm="12">
-                        <FormGroup>
-                          <H6 className="form-label">{"Address"}</H6>
-                          <input
-                            type="text"
-                            className="form-control"
-                            name="address"
-                            placeholder="Type to search for an address"
-                            onChange={(e) => setAddressSearch(e.target.value)}
-                            value={
-                              Array.isArray(addressSearch)
-                                ? addressSearch?.map(
-                                    (val) => `${val.label}:${val.value}`
-                                  )
-                                : addressSearch
-                            } // Bind the address search value to state
-                          />
+                   
+                      <FormGroup>
+  <H6 className="form-label">{"Address"}</H6>
 
-                          <span className="text-danger">
-                            {errors.address && errors.address.message}
-                          </span>
-                          {debouncedAddressSearch.length > 0 && address && (
-                            <div
-                              style={{
-                                border: "1px solid #ccc",
-                                borderRadius: "5px",
-                                backgroundColor: "#f0f0f0",
-                              }}
-                            >
-                              {addressOptions.map((option, index, arr) => (
-                                <div
-                                  key={index}
-                                  style={{
-                                    padding: "10px",
-                                    borderBottom:
-                                      index !== arr.length - 1
-                                        ? "1px solid #ccc"
-                                        : "none",
-                                    cursor: "pointer",
-                                    transition: "background-color 0.3s ease",
-                                    backgroundColor: "inherit",
-                                  }}
-                                  onClick={() => setAddressSearch(arr)}
-                                >
-                                  {option.label}
-                                </div>
-                              ))}
-                            </div>
-                          )}
-                        </FormGroup>
-                      </Col>
+ {id ? ( <ReactGoogleAutocomplete
+    apiKey={"AIzaSyBDTYrhS8wWe85Z2yBCqMqoIqysRZjYLtE"}
+    onPlaceSelected={(place) => setAddressSearch(place.formatted_address)}
+    value={addressSearch}
+    onChange={(e) => setAddressSearch(e.target.value)}
+  />):
+
+ ( <ReactGoogleAutocomplete
+  apiKey={"AIzaSyBDTYrhS8wWe85Z2yBCqMqoIqysRZjYLtE"}
+  onPlaceSelected={(place) => setAddressSearch(place.formatted_address)}
+/>)
+}
+  <span className="text-danger">
+    {errors.address && errors.address.message}
+  </span>
+</FormGroup>
+
                       <Col sm="12">
                         <FormGroup>
                           <Label for="sendTo">Send To:</Label>
@@ -540,6 +523,7 @@ const CreateDeal = () => {
                                 options={options}
                                 isMulti
                                 onChange={(value) => {
+                                  console.log("🚀 ~ CreateDeal ~ value:", value)
                                   field.onChange(value);
                                   setSelectedOptions(value);
                                   setUseEmail(false);
