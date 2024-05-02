@@ -31,7 +31,7 @@ const ViewMore = () => {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        "https://fyp-be.onrender.com/api/v1/deals/66310b346c5b33c3910ad310"
+        "https://cashflow-be.vercel.app/api/v1/deals/66310b346c5b33c3910ad310"
       );
       setDeal(response.data.data);
     } catch (error) {

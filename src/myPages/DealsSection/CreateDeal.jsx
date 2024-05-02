@@ -40,7 +40,7 @@ const CreateDeal = () => {
     const fetchDealById = async () => {
       try {
         const response = await axios.get(
-          `https://fyp-be.onrender.com/api/v1/deals/${id}`
+          `https://cashflow-be.vercel.app/api/v1/deals/${id}`
         );
         setDealData(response.data); // Update dealData state with fetched data
       } catch (error) {
@@ -212,8 +212,8 @@ const CreateDeal = () => {
     });
 
     const apiUrl = id
-      ? `https://fyp-be.onrender.com/api/v1/deals/${id}`
-      : "https://fyp-be.onrender.com/api/v1/deals";
+      ? `https://cashflow-be.vercel.app/api/v1/deals/${id}`
+      : "https://cashflow-be.vercel.app/api/v1/deals";
 
     try {
       const response = id
@@ -251,7 +251,7 @@ const CreateDeal = () => {
   const handleAddressChange = async (inputAddress) => {
     try {
       const response = await axios.get(
-        `https://fyp-be.onrender.com/places?input=${inputAddress}`
+        `https://cashflow-be.vercel.app/places?input=${inputAddress}`
       );
       const candidates = response.data.candidates;
       const formattedOptions = candidates.map((candidate) => ({
