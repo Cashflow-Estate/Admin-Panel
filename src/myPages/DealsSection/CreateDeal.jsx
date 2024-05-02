@@ -39,7 +39,7 @@ const CreateDeal = () => {
     const fetchDealById = async () => {
       try {
         const response = await axios.get(
-          `https://cashflow-be.vercel.app/api/v1/deals/${id}`
+          `http://localhost:5000/api/v1/deals/${id}`
         );
         setDealData(response.data);
         setAddress(false);
@@ -84,6 +84,7 @@ const CreateDeal = () => {
 
   const [client, setClient] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
+  console.log("🚀 ~ CreateDeal ~ formSubmitted:", formSubmitted)
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [useEmail, setUseEmail] = useState(false);
   const [email, setEmail] = useState("");
@@ -160,6 +161,7 @@ const CreateDeal = () => {
   }, [dealData, reset]);
 
   const AddProject = async (data) => {
+    setFormSubmitted(true)
     setClient(true);
 
     await trigger();
@@ -197,14 +199,15 @@ const CreateDeal = () => {
     });
 
     const apiUrl = id
-      ? `https://cashflow-be.vercel.app/api/v1/deals/${id}`
-      : "https://cashflow-be.vercel.app/api/v1/deals";
+      ? `http://localhost:5000/api/v1/deals/${id}`
+      : "http://localhost:5000/api/v1/deals";
 
     try {
       const response = id
         ? await axios.patch(apiUrl, dealData)
         : await axios.post(apiUrl, dealData);
       if (response.data.statusCode === 200) {
+        setFormSubmitted(false)
         toast.success(response.data.message);
         history("/deals/view");
       }
@@ -225,7 +228,7 @@ const CreateDeal = () => {
 
     try {
       const response = await axios.get(
-        `https://cashflow-be.vercel.app/places?input=${inputAddress}`
+        `http://localhost:5000/places?input=${inputAddress}`
       );
       const candidates = response.data.candidates;
       const formattedOptions = candidates.map((candidate) => ({
