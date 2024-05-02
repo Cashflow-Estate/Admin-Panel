@@ -32,7 +32,7 @@
 // const fetchData = async () => {
 //   try {
 //     const response = await axios.get(
-//       `http://localhost:5000/api/v1/deals/${id}`
+//       `https://cashflow-be.vercel.app/api/v1/deals/${id}`
 //     );
 //     setDeal(response.data.data);
 //   } catch (error) {
@@ -345,7 +345,7 @@ const ViewMore = () => {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/v1/deals/${id}`
+        `https://cashflow-be.vercel.app/api/v1/deals/${id}`
       );
       setDeal(response.data.data);
     } catch (error) {

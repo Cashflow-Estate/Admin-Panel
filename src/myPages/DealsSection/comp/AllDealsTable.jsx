@@ -17,7 +17,7 @@ const AllDealsTable = () => {
   
     // Fetch data from the API
     axios
-      .get("http://localhost:5000/api/v1/deals")
+      .get("https://cashflow-be.vercel.app/api/v1/deals")
       .then((response) => {
         if (isMounted) {
           // Only update state if the component is still mounted
@@ -47,7 +47,7 @@ const AllDealsTable = () => {
   const confirmDelete = () => {
     // Perform delete operation
     axios
-      .delete(`http://localhost:5000/api/v1/deals/${selectedDeal._id}`)
+      .delete(`https://cashflow-be.vercel.app/api/v1/deals/${selectedDeal._id}`)
       .then((response) => {
         toast.success("Deal deleted successfully");
         setDealsData(dealsData.filter((deal) => deal._id !== selectedDeal._id));
