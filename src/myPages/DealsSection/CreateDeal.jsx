@@ -30,11 +30,10 @@ const CreateDeal = () => {
     watch,
     control,
     reset,
-  } = useForm(); // Initialize form
-  const { id } = useParams(); // Get the ID parameter from the URL
+  } = useForm();
+  const { id } = useParams();
 
-  const [dealData, setDealData] = useState(null); // State to store deal details
-  console.log("🚀 ~ CreateDeal ~ dealData:", dealData);
+  const [dealData, setDealData] = useState(null);
 
   useEffect(() => {
     const fetchDealById = async () => {
@@ -42,14 +41,14 @@ const CreateDeal = () => {
         const response = await axios.get(
           `https://cashflow-be.vercel.app/api/v1/deals/${id}`
         );
-        setDealData(response.data); // Update dealData state with fetched data
+        setDealData(response.data);
+        setAddress(false);
       } catch (error) {
         console.error("Error fetching deal by ID:", error);
       }
     };
 
     if (id) {
-      // If ID parameter exists, fetch deal details
       fetchDealById();
     }
   }, [id]);
@@ -57,30 +56,26 @@ const CreateDeal = () => {
   const formData = watch();
   const [images, setImages] = useState([]);
   const [files, setFiles] = useState([]);
-  console.log("🚀 ~ :::: ~ images:", files);
 
   useEffect(() => {
     const fetchFiles = async () => {
       const fileObjects = await Promise.all(
         images.map(async (file) => {
           if (file instanceof File) {
-            return file; // If already a File object, return as is
+            return file;
           } else if (
             typeof file === "object" &&
             "url" in file &&
             "filename" in file
           ) {
-            // If it's a Cloudinary object, create a new File object from it
             const response = await fetch(file.url);
             const blob = await response.blob();
             return new File([blob], file.filename, { type: file.format });
           } else {
-            // For other cases (e.g., already a Blob), return as is
             return file;
           }
         })
       );
-      console.log("🚀 ~ fileObjects ~ fileObjects:", fileObjects);
       setFiles(fileObjects);
     };
 
@@ -88,9 +83,8 @@ const CreateDeal = () => {
   }, [images]);
 
   const [client, setClient] = useState(false);
-  const [formSubmitted, setFormSubmitted] = useState(false); // State to track form submission
-  console.log("🚀 ~ CreateDeal ~ formSubmitted:", formSubmitted);
-  const [selectedOptions, setSelectedOptions] = useState([]); // State to store selected options
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [selectedOptions, setSelectedOptions] = useState([]);
   const [useEmail, setUseEmail] = useState(false);
   const [email, setEmail] = useState("");
 
@@ -103,39 +97,33 @@ const CreateDeal = () => {
     }
   };
   const history = useNavigate();
-  const [addressOptionSelected, setAddressOptionSelected] = useState(false);
 
-  // Function to handle address option selection
-  const handleAddressOptionSelect = () => {
-    setAddressOptionSelected(true);
-  };
   const [addressOptions, setAddressOptions] = useState([]);
-  const [address, setAddress] = useState("");
+  const [address, setAddress] = useState(true);
+  console.log("🚀 ~ CreateDeal ~ address:", address);
   const [addressSearch, setAddressSearch] = useState("");
-  const [monthlyCashMin, setMonthlyCashMin] = useState(""); // State for Monthly Cash Flow Minimum
-  const [monthlyCashMax, setMonthlyCashMax] = useState(""); // State for Monthly Cash Flow Maximum
-  const [approxAnnualMinReturn, setApproxAnnualMinReturn] = useState(""); // State for Approx Annual Minimum Return(%)
-  const [approxAnnualMaxReturn, setApproxAnnualMaxReturn] = useState(""); // State for Approx Annual Maximum Return(%)
+  const [monthlyCashMin, setMonthlyCashMin] = useState("");
+  const [monthlyCashMax, setMonthlyCashMax] = useState("");
+  const [approxAnnualMinReturn, setApproxAnnualMinReturn] = useState("");
+  const [approxAnnualMaxReturn, setApproxAnnualMaxReturn] = useState("");
 
-  // Function to calculate Approx Annual Minimum and Maximum Returns
   const calculateAnnualReturns = () => {
     if (monthlyCashMin && monthlyCashMax) {
       const minReturn =
         ((monthlyCashMin * 12) / parseFloat(formData.price)) * 100;
       const maxReturn =
         ((monthlyCashMax * 12) / parseFloat(formData.price)) * 100;
-      setApproxAnnualMinReturn(Math.ceil(minReturn.toFixed(2))); // Round to 2 decimal places
-      setApproxAnnualMaxReturn(Math.ceil(maxReturn.toFixed(2))); // Round to 2 decimal places
+      setApproxAnnualMinReturn(Math.ceil(minReturn.toFixed(2)));
+      setApproxAnnualMaxReturn(Math.ceil(maxReturn.toFixed(2)));
     }
   };
 
   useEffect(() => {
     calculateAnnualReturns();
-  }, [monthlyCashMin, monthlyCashMax, formData.price]); // Add formData.price to dependency array
+  }, [monthlyCashMin, monthlyCashMax, formData.price]);
 
   useEffect(() => {
     if (dealData) {
-      // Update form fields with dealData
       reset({
         title: dealData.data.title || "",
         price: dealData.data.price || "",
@@ -145,37 +133,35 @@ const CreateDeal = () => {
         monthly_cash_max: dealData.data.monthly_cash_max || "",
         closing_date: dealData.data.closing_date
           ? dealData.data.closing_date.split("T")[0]
-          : "", // Format closing date if available
+          : "",
         bedRooms: dealData.data.bedRooms || "",
         area: dealData.data.area || "",
         baths: dealData.data.baths || "",
         address: dealData.data.address || "",
         sendTo:
           dealData.data.sendTo.map((value) => ({ value, label: value })) || [],
-        sendByEmail: dealData.data.sendByEmail || "", // Fill sendByEmail field
+        sendByEmail: dealData.data.sendByEmail || "",
       });
       setSelectedOptions(
         dealData.data.sendTo.map((value) => ({ value, label: value }))
       );
       setEmail(dealData.data.sendByEmail);
 
-      // Update other relevant states if needed
       setMonthlyCashMin(dealData.data.monthly_cash_min || "");
       setMonthlyCashMax(dealData.data.monthly_cash_max || "");
       setApproxAnnualMinReturn(dealData.data.annually_return_min || "");
       setApproxAnnualMaxReturn(dealData.data.annually_return_max || "");
-      // Add other relevant state updates here
 
-      setImages(dealData.data.images); // Assuming images are fetched as well
-      setMonthlyCashMin(dealData.data.monthly_cash_min); // Set monthlyCashMin state
-      setMonthlyCashMax(dealData.data.monthly_cash_max); // Set monthlyCashMax state
-      setAddressSearch(dealData.data.address); // Set addressSearch state
+      setImages(dealData.data.images);
+      setMonthlyCashMin(dealData.data.monthly_cash_min);
+      setMonthlyCashMax(dealData.data.monthly_cash_max);
+      setAddressSearch(dealData.data.address);
     }
   }, [dealData, reset]);
 
   const AddProject = async (data) => {
     setClient(true);
-    // setFormSubmitted(true);
+
     await trigger();
 
     if (images.length === 0) {
@@ -183,12 +169,11 @@ const CreateDeal = () => {
       return;
     }
 
-    // Ensure addressSearch is an array
     const selectedAddress = Array.isArray(addressSearch)
       ? addressSearch?.map((val) => `${val.label}`)
       : [addressSearch];
 
-    const dealData = new FormData(); // Create a FormData object to send mixed content (text and files)
+    const dealData = new FormData();
     dealData.append("title", data.title);
     dealData.append("price", data.price);
     dealData.append("approxPrice", data.approxPrice);
@@ -201,14 +186,14 @@ const CreateDeal = () => {
     dealData.append("bedRooms", data.bedRooms);
     dealData.append("area", data.area);
     dealData.append("baths", data.baths);
-    dealData.append("address", selectedAddress.join(", ")); // Convert selectedAddress to a comma-separated string
+    dealData.append("address", selectedAddress.join(", "));
     dealData.append(
       "sendTo",
       JSON.stringify(selectedOptions.map((option) => option.value))
-    ); // Convert selectedOptions to JSON string
-    dealData.append("sendByEmail", useEmail ? email : ""); // Send email only if useEmail is true
+    );
+    dealData.append("sendByEmail", useEmail ? email : "");
     files.forEach((image) => {
-      dealData.append("images", image); // Append each image to FormData
+      dealData.append("images", image);
     });
 
     const apiUrl = id
@@ -220,13 +205,10 @@ const CreateDeal = () => {
         ? await axios.patch(apiUrl, dealData)
         : await axios.post(apiUrl, dealData);
       if (response.data.statusCode === 200) {
-        // Handle success
         toast.success(response.data.message);
-        // setFormSubmitted(false);
         history("/deals/view");
       }
     } catch (error) {
-      // Handle error
       toast.error("Failed to create/update deal.");
     }
   };
@@ -238,17 +220,9 @@ const CreateDeal = () => {
     { value: "free", label: "Free Customer" },
   ];
 
-  // Function to handle changes in "Send By Email" input
-  // const handleEmailChange = (e) => {
-  //   const email = e.target.value;
-  //   if (email.trim() !== "") {
-  //     setUseEmail(true);
-  //     setSelectedOptions([]); // Clear selected options when using email
-  //   } else {
-  //     setUseEmail(false);
-  //   }
-  // };
   const handleAddressChange = async (inputAddress) => {
+    setAddress(true);
+
     try {
       const response = await axios.get(
         `https://cashflow-be.vercel.app/places?input=${inputAddress}`
@@ -258,22 +232,26 @@ const CreateDeal = () => {
         value: candidate.formatted_address,
         label: `${candidate.name}: ${candidate.formatted_address}`,
       }));
-      setAddressOptions(formattedOptions); // Directly set addressOptions here
+      setAddressOptions(formattedOptions);
     } catch (error) {
       console.error("Error fetching location data:", error);
     }
   };
   const [debouncedAddressSearch, setDebouncedAddressSearch] = useState("");
+  console.log(
+    "🚀 ~ CreateDeal ~ debouncedAddressSearch:",
+    debouncedAddressSearch
+  );
 
   // Debounce address search
   useEffect(() => {
     const timer = setTimeout(() => {
       setDebouncedAddressSearch(addressSearch);
-    }, 800); // Adjust the debounce delay as needed
+    }, 800);
     return () => {
       clearTimeout(timer);
     };
-  }, [addressSearch]); // Run the effect whenever addressSearch changes
+  }, [addressSearch]);
 
   useEffect(() => {
     if (
@@ -281,7 +259,6 @@ const CreateDeal = () => {
         ? ""
         : debouncedAddressSearch?.trim() !== ""
     ) {
-      // Check if the search query is not empty
       handleAddressChange(debouncedAddressSearch);
     }
   }, [debouncedAddressSearch]);
@@ -511,32 +488,34 @@ const CreateDeal = () => {
                           <span className="text-danger">
                             {errors.address && errors.address.message}
                           </span>
-                          <div
-                            style={{
-                              border: "1px solid #ccc",
-                              borderRadius: "5px",
-                              backgroundColor: "#f0f0f0",
-                            }}
-                          >
-                            {addressOptions.map((option, index, arr) => (
-                              <div
-                                key={index}
-                                style={{
-                                  padding: "10px",
-                                  borderBottom:
-                                    index !== arr.length - 1
-                                      ? "1px solid #ccc"
-                                      : "none",
-                                  cursor: "pointer",
-                                  transition: "background-color 0.3s ease",
-                                  backgroundColor: "inherit",
-                                }}
-                                onClick={() => setAddressSearch(arr)}
-                              >
-                                {option.label}
-                              </div>
-                            ))}
-                          </div>
+                          {debouncedAddressSearch.length > 0 && address && (
+                            <div
+                              style={{
+                                border: "1px solid #ccc",
+                                borderRadius: "5px",
+                                backgroundColor: "#f0f0f0",
+                              }}
+                            >
+                              {addressOptions.map((option, index, arr) => (
+                                <div
+                                  key={index}
+                                  style={{
+                                    padding: "10px",
+                                    borderBottom:
+                                      index !== arr.length - 1
+                                        ? "1px solid #ccc"
+                                        : "none",
+                                    cursor: "pointer",
+                                    transition: "background-color 0.3s ease",
+                                    backgroundColor: "inherit",
+                                  }}
+                                  onClick={() => setAddressSearch(arr)}
+                                >
+                                  {option.label}
+                                </div>
+                              ))}
+                            </div>
+                          )}
                         </FormGroup>
                       </Col>
                       <Col sm="12">
@@ -561,7 +540,7 @@ const CreateDeal = () => {
                                 onChange={(value) => {
                                   field.onChange(value);
                                   setSelectedOptions(value);
-                                  setUseEmail(false); // Reset useEmail when 'Send To' is selected
+                                  setUseEmail(false);
                                 }}
                                 isDisabled={useEmail}
                               />
@@ -610,7 +589,6 @@ const CreateDeal = () => {
                     <Row>
                       <Col>
                         <div className="text-end">
-                          {/* <Btn attrBtn={{ color: "success", className: "me-3" }} onClick={AddProject}>Add</Btn> */}
                           <Btn attrBtn={{ color: "success" }}>
                             {id ? "Edit" : "Add"}
                           </Btn>
@@ -640,11 +618,9 @@ const MultiDropzone = ({ setImages, dealData, images }) => {
     if (dealData) {
       // Update dealData if available
       const updatedDealData = [...images];
-      console.log("🚀 ~ handleDelete ~ updatedDealData:", updatedDealData);
       updatedDealData.splice(index, 1);
-      setImages(updatedDealData); // Assuming you have a setDealData function
+      setImages(updatedDealData);
     } else {
-      // Update images if dealData is not available
       setImages((prevImages) => {
         const newImages = [...prevImages];
         newImages.splice(index, 1);

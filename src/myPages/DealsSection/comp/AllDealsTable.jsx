@@ -13,17 +13,28 @@ const AllDealsTable = () => {
   const [dealsData, setDealsData] = useState([]);
 
   useEffect(() => {
+    let isMounted = true; // Flag to track whether the component is mounted
+  
     // Fetch data from the API
     axios
       .get("https://cashflow-be.vercel.app/api/v1/deals")
       .then((response) => {
-        setDealsData(response.data.data);
+        if (isMounted) {
+          // Only update state if the component is still mounted
+          setDealsData(response.data.data);
+        }
       })
       .catch((error) => {
         // Handle error
         console.error("Error fetching deals:", error);
       });
+  
+    // Cleanup function to cancel any pending asynchronous tasks
+    return () => {
+      isMounted = false; // Set isMounted to false when the component unmounts
+    };
   }, []);
+  
   const toggleModal = () => {
     setModal(!modal);
   };
