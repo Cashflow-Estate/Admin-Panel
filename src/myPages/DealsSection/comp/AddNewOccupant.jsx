@@ -4,6 +4,7 @@ import { Breadcrumbs, Image } from "../../../AbstractElements";
 import { FaPencilAlt } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import UploadProjectFileClass from "./UploadProjectFile";
+import { Link } from "react-router-dom";
 
 const AddNewOccupant = () => {
   const { register: registerOccupant, handleSubmit: handleSubmitOccupant } =
@@ -50,6 +51,7 @@ const AddNewOccupant = () => {
   return (
     <Fragment>
       <Breadcrumbs
+      back="/crm"
         mainTitle="Create a New Occupant"
         parent="Occupant"
         title="Add Occupant"

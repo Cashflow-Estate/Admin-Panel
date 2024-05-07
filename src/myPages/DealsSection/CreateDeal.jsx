@@ -47,10 +47,11 @@ const CreateDeal = () => {
   const [dealData, setDealData] = useState(null);
 
   useEffect(() => {
+
     const fetchDealById = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/v1/deals/${id}`
+          `${process.env.REACT_APP_API_BASE_URL}/deals/${id}`
         );
         setDealData(response.data);
         setAddress(false);
@@ -217,8 +218,8 @@ const CreateDeal = () => {
     });
 
     const apiUrl = id
-      ? `http://localhost:5000/api/v1/deals/${id}`
-      : "http://localhost:5000/api/v1/deals";
+      ? `${process.env.REACT_APP_API_BASE_URL}/deals/${id}`
+      : `${process.env.REACT_APP_API_BASE_URL}/deals`;
 
     try {
       const response = id
@@ -282,6 +283,7 @@ const CreateDeal = () => {
   return (
     <Fragment>
       <Breadcrumbs
+      back="/deals/view"
         parent="Slow Flip Deals"
         title="Create Slow Flip Deals"
         mainTitle="Create Slow Flip Deals"

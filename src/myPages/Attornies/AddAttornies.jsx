@@ -46,6 +46,7 @@ const AddNewAttorney = () => {
   return (
     <Fragment>
       <Breadcrumbs
+      back="/slowflip-attorneys"
         mainTitle="Create a new attorney"
         parent="Attorneys"
         title="Create Attorney"

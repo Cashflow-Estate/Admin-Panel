@@ -34,7 +34,7 @@ const CreateBanner = () => {
 
     return (
         <Fragment>
-      <Breadcrumbs parent='Banners' title='Create Banners' mainTitle='Create Banners' />
+      <Breadcrumbs back="/banners/view" parent='Banners' title='Create Banners' mainTitle='Create Banners' />
 
             <Card>
                 <Form className="form theme-form" onSubmit={handleSubmit}>

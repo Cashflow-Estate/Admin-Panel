@@ -39,7 +39,7 @@ const CreateFaqs = () => {
 
   return (
     <Fragment>
-      <Breadcrumbs mainTitle="Create Faqs" parent="FAQ's" title="Create Faqs" />
+      <Breadcrumbs back="/faqs/view" mainTitle="Create Faqs" parent="FAQ's" title="Create Faqs" />
       <Card>
         <CardBody>
           <Form>

@@ -119,7 +119,7 @@ const Attornies = () => {
   ];
   return (
     <Fragment>
-      <Breadcrumbs mainTitle="View Attorneys" parent="Attorneys" title="View Attorneys" />
+      <Breadcrumbs  mainTitle="View Attorneys" parent="Attorneys" title="View Attorneys"  />
 
       <Table striped>
         <thead>

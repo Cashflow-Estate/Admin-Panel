@@ -42,6 +42,7 @@ const AddAgent = () => {
   return (
     <Fragment>
       <Breadcrumbs
+      back="/user-details/1"
         mainTitle="Create a new insurance agent"
         parent="Insurance Agents"
         title="Create Insurance Agent"

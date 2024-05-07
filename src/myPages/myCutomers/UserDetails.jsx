@@ -142,7 +142,7 @@ const UserDetails = () => {
 
   return (
     <Fragment>
-      <Breadcrumbs mainTitle="Abid Zaidi" parent="User" title="#1121" />
+      <Breadcrumbs back="/crm" mainTitle="Abid Zaidi" parent="User" title="#1121" />
       <Row>
         <Col sm="12">
           <Card>

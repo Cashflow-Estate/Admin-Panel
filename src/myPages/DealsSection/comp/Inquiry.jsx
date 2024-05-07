@@ -35,6 +35,7 @@ const Inquiry = () => {
     <div style={{overflow: "hidden"}}> {/* Add this container */}
       <Fragment>
         <Breadcrumbs
+        back="/inquiry"
           mainTitle="Inquiries"
           parent="Deals Inquiry"
           title="Master City"

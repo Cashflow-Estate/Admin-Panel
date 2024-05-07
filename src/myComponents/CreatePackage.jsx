@@ -36,7 +36,7 @@ const CreatePackage = () => {
   };
   return (
     <Fragment>
-      <Breadcrumbs mainTitle="Pricing" parent="Packages" title="Create a new plan" />
+      <Breadcrumbs back="/subscription-packages/view" mainTitle="Pricing" parent="Packages" title="Create a new plan" />
 
       <Card>
         <HeaderCard

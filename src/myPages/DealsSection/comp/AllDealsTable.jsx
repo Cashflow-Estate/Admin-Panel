@@ -17,7 +17,7 @@ const AllDealsTable = () => {
   
     // Fetch data from the API
     axios
-      .get("http://localhost:5000/api/v1/deals")
+      .get(`${process.env.REACT_APP_API_BASE_URL}/deals`)
       .then((response) => {
         if (isMounted) {
           // Only update state if the component is still mounted
@@ -49,7 +49,7 @@ const AllDealsTable = () => {
   const confirmDelete = () => {
     // Perform delete operation
     axios
-      .delete(`http://localhost:5000/api/v1/deals/${selectedDeal._id}`)
+      .delete(`${process.env.REACT_APP_API_BASE_URL}/deals/${selectedDeal._id}`)
       .then((response) => {
         toast.success("Deal deleted successfully");
         setDealsData(dealsData.filter((deal) => deal._id !== selectedDeal._id));
