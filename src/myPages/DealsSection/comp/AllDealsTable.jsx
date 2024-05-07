@@ -17,7 +17,7 @@ const AllDealsTable = () => {
   
     // Fetch data from the API
     axios
-      .get("https://fyp-be.onrender.com/api/v1/deals")
+      .get("http://localhost:5000/api/v1/deals")
       .then((response) => {
         if (isMounted) {
           // Only update state if the component is still mounted

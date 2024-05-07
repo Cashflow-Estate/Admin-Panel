@@ -49,7 +49,7 @@ const Signin = ({ selected }) => {
     setLoader(true);
     try {
       const response = await axios.post(
-        "https://admin-panel-zeta-two.vercel.app/api/v1/users/login",
+        "http://localhost:5000/api/v1/users/login",
         {
           email: email,
           password: password,
