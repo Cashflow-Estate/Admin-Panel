@@ -21,7 +21,8 @@ const AllDealsTable = () => {
       .then((response) => {
         if (isMounted) {
           // Only update state if the component is still mounted
-          setDealsData(response.data.data);
+          const sortedDeals = response.data.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+          setDealsData(sortedDeals);
         }
       })
       .catch((error) => {
@@ -35,6 +36,7 @@ const AllDealsTable = () => {
     };
   }, []);
   
+  
   const toggleModal = () => {
     setModal(!modal);
   };
@@ -47,7 +49,7 @@ const AllDealsTable = () => {
   const confirmDelete = () => {
     // Perform delete operation
     axios
-      .delete(`https://fyp-be.onrender.com/api/v1/deals/${selectedDeal._id}`)
+      .delete(`http://localhost:5000/api/v1/deals/${selectedDeal._id}`)
       .then((response) => {
         toast.success("Deal deleted successfully");
         setDealsData(dealsData.filter((deal) => deal._id !== selectedDeal._id));

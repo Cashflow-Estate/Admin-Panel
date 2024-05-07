@@ -96,9 +96,12 @@ const CreateDeal = () => {
   const [client, setClient] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState([]);
+  console.log("🚀 ~ CreateDeal ~ selectedOptions:", selectedOptions)
   let opt = selectedOptions.map((val) => val.label);
- 
+  console.log("🚀 ~ CreateDeal ~ opt:", opt);
+
   const [useEmail, setUseEmail] = useState(false);
+  console.log("🚀 ~ CreateDeal ~ useEmail:", useEmail)
   const [email, setEmail] = useState("");
 
   const handleEmailChange = (event) => {
@@ -174,7 +177,7 @@ const CreateDeal = () => {
   }, [dealData, reset]);
 
   const AddProject = async (data) => {
-    setFormSubmitted(true);
+    // setFormSubmitted(true);
     setClient(true);
 
     await trigger();
@@ -185,28 +188,30 @@ const CreateDeal = () => {
     }
 
     const selectedAddress = Array.isArray(addressSearch)
-      ? addressSearch?.map((val) => `${val.label}`)
-      : [addressSearch];
+    ? addressSearch?.map((val) => `${val.label}`)
+    : [addressSearch];
 
-    const dealData = new FormData();
-    dealData.append("title", data.title);
-    dealData.append("price", data.price);
-    dealData.append("approxPrice", data.approxPrice);
-    dealData.append("upfrontDown", data.upfrontDown);
-    dealData.append("monthly_cash_min", data.monthly_cash_min);
-    dealData.append("monthly_cash_max", data.monthly_cash_max);
-    dealData.append("annually_return_min", approxAnnualMinReturn);
-    dealData.append("annually_return_max", approxAnnualMaxReturn);
-    dealData.append("closing_date", data.closing_date);
-    dealData.append("bedRooms", data.bedRooms);
-    dealData.append("area", data.area);
-    dealData.append("baths", data.baths);
-    // dealData.append("address", selectedAddress.join(", "));
-    dealData.append("address", addressSearch);
-    if (opt.length > 0) {
-      dealData.append("sendTo", opt);
-    }
-    dealData.append("sendByEmail", useEmail ? email : "");
+  const dealData = new FormData();
+  dealData.append("title", data.title);
+  dealData.append("price", data.price);
+  dealData.append("approxPrice", data.approxPrice);
+  dealData.append("upfrontDown", data.upfrontDown);
+  dealData.append("monthly_cash_min", data.monthly_cash_min);
+  dealData.append("monthly_cash_max", data.monthly_cash_max);
+  dealData.append("annually_return_min", approxAnnualMinReturn);
+  dealData.append("annually_return_max", approxAnnualMaxReturn);
+  dealData.append("closing_date", data.closing_date);
+  dealData.append("bedRooms", data.bedRooms);
+  dealData.append("area", data.area);
+  dealData.append("baths", data.baths);
+  // dealData.append("address", selectedAddress.join(", "));
+  dealData.append("address", addressSearch);
+  if (opt.length > 0 && selectedOptions.length) {
+    dealData.append("sendTo", opt); // Append sendTo only if opt has values
+  }
+  // dealData.append("sendByEmail", useEmail ? email : "");
+
+    dealData.append("sendByEmail", email ? email : "");
     files.forEach((image) => {
       dealData.append("images", image);
     });
@@ -220,9 +225,9 @@ const CreateDeal = () => {
         ? await axios.patch(apiUrl, dealData)
         : await axios.post(apiUrl, dealData);
       if (response.data.statusCode === 200) {
-        setFormSubmitted(false);
+        // setFormSubmitted(false);
         toast.success(response.data.message);
-        history("/deals/view");
+        // history("/deals/view");
       }
     } catch (error) {
       toast.error("Failed to create/update deal.");
@@ -527,7 +532,11 @@ const CreateDeal = () => {
                             control={control}
                             rules={{
                               validate: () => {
-                                if (!useEmail && !selectedOptions.length &&!email.length>0 ) {
+                                if (
+                                  !useEmail &&
+                                  !selectedOptions.length &&
+                                  !email.length > 0
+                                ) {
                                   return "Please select either 'Send To' or provide an email";
                                 }
                                 return true;
@@ -539,12 +548,11 @@ const CreateDeal = () => {
                                 options={options}
                                 isMulti
                                 onChange={(value) => {
-                            
                                   field.onChange(value);
                                   setSelectedOptions(value);
                                   setUseEmail(false);
                                 }}
-                                isDisabled={useEmail }
+                                isDisabled={useEmail}
                               />
                             )}
                           />
@@ -559,7 +567,7 @@ const CreateDeal = () => {
                     </Row>
 
                     <Row>
-                    <Col sm="6">
+                      <Col sm="6">
                         <FormGroup>
                           <h6 style={{ color: "black" }}>OR Send By Email:</h6>
                           <input
@@ -572,7 +580,7 @@ const CreateDeal = () => {
                             onChange={handleEmailChange}
                             value={email}
                           />
-                          
+
                           {errors.sendByEmail && (
                             <span className="text-danger">
                               {errors.sendByEmail.message}
@@ -580,7 +588,7 @@ const CreateDeal = () => {
                           )}
                         </FormGroup>
                       </Col>
-                    {/* <Col sm="6">
+                      {/* <Col sm="6">
   <FormGroup>
     <h6 style={{ color: "black" }}>OR Send By Email:</h6>
     <input
@@ -600,7 +608,6 @@ const CreateDeal = () => {
     )}
   </FormGroup>
 </Col> */}
-
 
                       <Col sm="12">
                         <MultiDropzone
