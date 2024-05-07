@@ -98,15 +98,16 @@ const CreateDeal = () => {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState([]);
   let opt = selectedOptions.map((val) => val.label);
-  console.log("🚀 ~ CreateDeal ~ opt:", opt);
+  console.log("🚀 ~ CreateDeal ~ opt:", opt.length);
   console.log("🚀 ~ CreateDeal ~ selectedOptions:", selectedOptions);
   const [useEmail, setUseEmail] = useState(false);
   const [email, setEmail] = useState("");
 
   const handleEmailChange = (event) => {
+    setEmail(event.target.value);
+    console.log("🚀 ~ handleEmailChange ~ event.target.value:", event.target.value)
     if (event.target.value?.trim() !== "") {
       setUseEmail(true);
-      setEmail(event.target.value);
     } else {
       setUseEmail(false);
     }
@@ -207,7 +208,9 @@ const CreateDeal = () => {
     dealData.append("baths", data.baths);
     // dealData.append("address", selectedAddress.join(", "));
     dealData.append("address", addressSearch);
-    dealData.append("sendTo", opt);
+    if (opt.length > 0) {
+      dealData.append("sendTo", opt);
+    }
     dealData.append("sendByEmail", useEmail ? email : "");
     files.forEach((image) => {
       dealData.append("images", image);
@@ -533,7 +536,7 @@ const CreateDeal = () => {
                             control={control}
                             rules={{
                               validate: () => {
-                                if (!useEmail && !selectedOptions.length) {
+                                if (!useEmail && !selectedOptions.length &&!email.length>0 ) {
                                   return "Please select either 'Send To' or provide an email";
                                 }
                                 return true;
@@ -545,15 +548,12 @@ const CreateDeal = () => {
                                 options={options}
                                 isMulti
                                 onChange={(value) => {
-                                  console.log(
-                                    "🚀 ~ CreateDeal ~ value:",
-                                    value
-                                  );
+                            
                                   field.onChange(value);
                                   setSelectedOptions(value);
                                   setUseEmail(false);
                                 }}
-                                isDisabled={useEmail}
+                                isDisabled={useEmail }
                               />
                             )}
                           />
@@ -568,7 +568,7 @@ const CreateDeal = () => {
                     </Row>
 
                     <Row>
-                      <Col sm="6">
+                    <Col sm="6">
                         <FormGroup>
                           <h6 style={{ color: "black" }}>OR Send By Email:</h6>
                           <input
@@ -581,6 +581,7 @@ const CreateDeal = () => {
                             onChange={handleEmailChange}
                             value={email}
                           />
+                          
                           {errors.sendByEmail && (
                             <span className="text-danger">
                               {errors.sendByEmail.message}
@@ -588,6 +589,27 @@ const CreateDeal = () => {
                           )}
                         </FormGroup>
                       </Col>
+                    {/* <Col sm="6">
+  <FormGroup>
+    <h6 style={{ color: "black" }}>OR Send By Email:</h6>
+    <input
+      className="form-control"
+      type="email"
+      name="sendByEmail"
+      id="sendByEmail"
+      placeholder="Enter email"
+      disabled={selectedOptions?.length > 0 || !useEmail} // Adjusted condition
+      onChange={handleEmailChange}
+      value={email}
+    />
+    {errors.sendByEmail && (
+      <span className="text-danger">
+        {errors.sendByEmail.message}
+      </span>
+    )}
+  </FormGroup>
+</Col> */}
+
 
                       <Col sm="12">
                         <MultiDropzone
