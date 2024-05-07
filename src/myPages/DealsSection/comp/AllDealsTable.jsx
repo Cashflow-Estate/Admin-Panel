@@ -213,10 +213,10 @@ const AllDealsTable = () => {
           "?
         </ModalBody>
         <ModalFooter>
-          <Button color="danger" onClick={confirmDelete}>
+          <Button color="success" onClick={confirmDelete}>
             Delete
           </Button>{" "}
-          <Button color="secondary" onClick={toggleModal}>
+          <Button color="warning" onClick={toggleModal}>
             Cancel
           </Button>
         </ModalFooter>

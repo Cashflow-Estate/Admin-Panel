@@ -12,6 +12,7 @@ import {
   FormGroup,
   Label,
   Input,
+  Button,
 } from "reactstrap";
 
 import Select from "react-select";
@@ -20,7 +21,9 @@ import "./comp/multi.css";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router";
-import ReactGoogleAutocomplete, { Autocomplete } from "react-google-autocomplete"; // Import GoogleComponent
+import ReactGoogleAutocomplete, {
+  Autocomplete,
+} from "react-google-autocomplete"; // Import GoogleComponent
 
 const CreateDeal = () => {
   const [selectedAddress, setSelectedAddress] = useState("");
@@ -42,13 +45,13 @@ const CreateDeal = () => {
   const { id } = useParams();
 
   const [dealData, setDealData] = useState(null);
-  console.log("🚀 ~ CreateDeal ~ dealData:", dealData)
+  console.log("🚀 ~ CreateDeal ~ dealData:", dealData);
 
   useEffect(() => {
     const fetchDealById = async () => {
       try {
         const response = await axios.get(
-          `https://fyp-be.onrender.com/api/v1/deals/${id}`
+          `http://localhost:5000/api/v1/deals/${id}`
         );
         setDealData(response.data);
         setAddress(false);
@@ -94,9 +97,9 @@ const CreateDeal = () => {
   const [client, setClient] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState([]);
-  let opt=selectedOptions.map((val)=>val.label)
-  console.log("🚀 ~ CreateDeal ~ opt:", opt)
-  console.log("🚀 ~ CreateDeal ~ selectedOptions:", selectedOptions)
+  let opt = selectedOptions.map((val) => val.label);
+  console.log("🚀 ~ CreateDeal ~ opt:", opt);
+  console.log("🚀 ~ CreateDeal ~ selectedOptions:", selectedOptions);
   const [useEmail, setUseEmail] = useState(false);
   const [email, setEmail] = useState("");
 
@@ -114,11 +117,12 @@ const CreateDeal = () => {
   const [address, setAddress] = useState(true);
   console.log("🚀 ~ CreateDeal ~ address:", address);
   const [addressSearch, setAddressSearch] = useState("");
-  console.log("🚀 ~ CreateDeal ~ addressSearch:", addressSearch)
+  console.log("🚀 ~ CreateDeal ~ addressSearch:", addressSearch);
   const [monthlyCashMin, setMonthlyCashMin] = useState("");
   const [monthlyCashMax, setMonthlyCashMax] = useState("");
   const [approxAnnualMinReturn, setApproxAnnualMinReturn] = useState("");
   const [approxAnnualMaxReturn, setApproxAnnualMaxReturn] = useState("");
+  const [addressError, setAddressError] = useState("");
 
   const calculateAnnualReturns = () => {
     if (monthlyCashMin && monthlyCashMax) {
@@ -158,7 +162,7 @@ const CreateDeal = () => {
       setSelectedOptions(
         dealData.data.sendTo.map((value) => ({ value, label: value }))
       );
-      
+
       setEmail(dealData.data.sendByEmail);
 
       setMonthlyCashMin(dealData.data.monthly_cash_min || "");
@@ -174,7 +178,7 @@ const CreateDeal = () => {
   }, [dealData, reset]);
 
   const AddProject = async (data) => {
-    setFormSubmitted(true)
+    setFormSubmitted(true);
     setClient(true);
 
     await trigger();
@@ -203,23 +207,22 @@ const CreateDeal = () => {
     dealData.append("baths", data.baths);
     // dealData.append("address", selectedAddress.join(", "));
     dealData.append("address", addressSearch);
-    dealData.append(
-      "sendTo",opt);
+    dealData.append("sendTo", opt);
     dealData.append("sendByEmail", useEmail ? email : "");
     files.forEach((image) => {
       dealData.append("images", image);
     });
 
     const apiUrl = id
-      ? `https://fyp-be.onrender.com/api/v1/deals/${id}`
-      : "https://fyp-be.onrender.com/api/v1/deals";
+      ? `http://localhost:5000/api/v1/deals/${id}`
+      : "http://localhost:5000/api/v1/deals";
 
     try {
       const response = id
         ? await axios.patch(apiUrl, dealData)
         : await axios.post(apiUrl, dealData);
       if (response.data.statusCode === 200) {
-        setFormSubmitted(false)
+        setFormSubmitted(false);
         toast.success(response.data.message);
         history("/deals/view");
       }
@@ -240,7 +243,7 @@ const CreateDeal = () => {
 
     try {
       const response = await axios.get(
-        `https://fyp-be.onrender.com/places?input=${inputAddress}`
+        `http://localhost:5000/places?input=${inputAddress}`
       );
       const candidates = response.data.candidates;
       const formattedOptions = candidates.map((candidate) => ({
@@ -482,26 +485,45 @@ const CreateDeal = () => {
                           </span>
                         </FormGroup>
                       </Col>
-                   
-                      <FormGroup>
-  <H6 className="form-label">{"Address"}</H6>
-
- {id ? ( <ReactGoogleAutocomplete
-    apiKey={"AIzaSyBDTYrhS8wWe85Z2yBCqMqoIqysRZjYLtE"}
-    onPlaceSelected={(place) => setAddressSearch(place.formatted_address)}
-    value={addressSearch}
-    onChange={(e) => setAddressSearch(e.target.value)}
-  />):
-
- ( <ReactGoogleAutocomplete
-  apiKey={"AIzaSyBDTYrhS8wWe85Z2yBCqMqoIqysRZjYLtE"}
-  onPlaceSelected={(place) => setAddressSearch(place.formatted_address)}
-/>)
-}
-  <span className="text-danger">
-    {errors.address && errors.address.message}
-  </span>
-</FormGroup>
+                      <Row>
+                        <Col sm="12">
+                          <FormGroup>
+                            <h6 style={{ color: "black" }}>Address</h6>
+                            {id ? (
+                              <ReactGoogleAutocomplete
+                                apiKey={
+                                  "AIzaSyBDTYrhS8wWe85Z2yBCqMqoIqysRZjYLtE"
+                                }
+                                onPlaceSelected={(place) =>
+                                  setAddressSearch(place.formatted_address)
+                                }
+                                value={addressSearch}
+                                onChange={(e) =>
+                                  setAddressSearch(e.target.value)
+                                }
+                                style={{ width: "100%" }} // Inline style for width
+                                className="form-control" // Add className for styling
+                              />
+                            ) : (
+                              <ReactGoogleAutocomplete
+                                apiKey={
+                                  "AIzaSyBDTYrhS8wWe85Z2yBCqMqoIqysRZjYLtE"
+                                }
+                                onPlaceSelected={(place) =>
+                                  setAddressSearch(place.formatted_address)
+                                }
+                                style={{ width: "100%" }} // Inline style for width
+                                className="form-control" // Add className for styling
+                              />
+                            )}
+                            {!addressSearch.length && (
+                              <span style={{ color: "red" }}>
+                                Address is required
+                              </span>
+                            )}
+                          </FormGroup>
+                        </Col>
+                      </Row>
 
                       <Col sm="12">
                         <FormGroup>
@@ -523,7 +545,10 @@ const CreateDeal = () => {
                                 options={options}
                                 isMulti
                                 onChange={(value) => {
-                                  console.log("🚀 ~ CreateDeal ~ value:", value)
+                                  console.log(
+                                    "🚀 ~ CreateDeal ~ value:",
+                                    value
+                                  );
                                   field.onChange(value);
                                   setSelectedOptions(value);
                                   setUseEmail(false);
@@ -571,13 +596,27 @@ const CreateDeal = () => {
                           dealData={dealData}
                         />
                       </Col>
+                      {images.length === 0 && (
+                        <p style={{ color: "red" }}>
+                          Please upload at least one image.
+                        </p>
+                      )}
                     </Row>
                     <Row>
                       <Col>
                         <div className="text-end">
-                          <Btn attrBtn={{ color: "success" }}>
+                          <Button
+                            color="success"
+                            disabled={
+                              !addressSearch.length && images.length === 0
+                            }
+                          >
                             {id ? "Edit" : "Add"}
-                          </Btn>
+                          </Button>
+
+                          {/* <Btn attrBtn={{ color: "success" }}>
+                            {id ? "Edit" : "Add"}
+                          </Btn> */}
                         </div>
                       </Col>
                     </Row>
