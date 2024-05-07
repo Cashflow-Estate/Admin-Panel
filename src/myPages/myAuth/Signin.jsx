@@ -20,10 +20,8 @@ import { setUserInfo } from "../../features/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const Signin = ({ selected }) => {
-  const [email, setEmail] = useState("test@gmail.com");
-  console.log("🚀 ~ Signin ~ email:", email);
+  const [email, setEmail] = useState("admin@gmail.com");
   const [password, setPassword] = useState("test123");
-  console.log("🚀 ~ Signin ~ password:", password);
   const [togglePassword, setTogglePassword] = useState(false);
   const [loader, setLoader] = useState(false);
   const navigate = useNavigate();

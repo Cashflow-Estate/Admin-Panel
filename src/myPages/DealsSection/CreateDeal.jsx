@@ -45,7 +45,6 @@ const CreateDeal = () => {
   const { id } = useParams();
 
   const [dealData, setDealData] = useState(null);
-  console.log("🚀 ~ CreateDeal ~ dealData:", dealData);
 
   useEffect(() => {
     const fetchDealById = async () => {
@@ -98,14 +97,12 @@ const CreateDeal = () => {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState([]);
   let opt = selectedOptions.map((val) => val.label);
-  console.log("🚀 ~ CreateDeal ~ opt:", opt.length);
-  console.log("🚀 ~ CreateDeal ~ selectedOptions:", selectedOptions);
+ 
   const [useEmail, setUseEmail] = useState(false);
   const [email, setEmail] = useState("");
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
-    console.log("🚀 ~ handleEmailChange ~ event.target.value:", event.target.value)
     if (event.target.value?.trim() !== "") {
       setUseEmail(true);
     } else {
@@ -116,9 +113,7 @@ const CreateDeal = () => {
 
   const [addressOptions, setAddressOptions] = useState([]);
   const [address, setAddress] = useState(true);
-  console.log("🚀 ~ CreateDeal ~ address:", address);
   const [addressSearch, setAddressSearch] = useState("");
-  console.log("🚀 ~ CreateDeal ~ addressSearch:", addressSearch);
   const [monthlyCashMin, setMonthlyCashMin] = useState("");
   const [monthlyCashMax, setMonthlyCashMax] = useState("");
   const [approxAnnualMinReturn, setApproxAnnualMinReturn] = useState("");
@@ -259,10 +254,6 @@ const CreateDeal = () => {
     }
   };
   const [debouncedAddressSearch, setDebouncedAddressSearch] = useState("");
-  console.log(
-    "🚀 ~ CreateDeal ~ debouncedAddressSearch:",
-    debouncedAddressSearch
-  );
 
   // Debounce address search
   useEffect(() => {

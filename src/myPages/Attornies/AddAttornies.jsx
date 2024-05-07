@@ -37,7 +37,6 @@ const AddNewAttorney = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log("🚀 ~ handleChange ~ value:", value)
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,

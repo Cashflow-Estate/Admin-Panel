@@ -591,7 +591,6 @@ const OccupantDetail = ({ register, errors }) => {
   ];
 
   const [selectedOccupant, setSelectedOccupant] = useState(null);
-  console.log("🚀 ~ OccupantDetail ~ selectedOccupant:", selectedOccupant);
 
   const handleOccupantSelect = (e) => {
     const selectedName = e.target.value;

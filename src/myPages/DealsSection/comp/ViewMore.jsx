@@ -337,7 +337,6 @@ import axios from "axios";
 const ViewMore = () => {
   const { id } = useParams();
   const [deal, setDeal] = useState(null);
-  console.log("🚀 ~ ViewMore ~ deal:", deal);
   useEffect(() => {
     fetchData();
   }, []);
