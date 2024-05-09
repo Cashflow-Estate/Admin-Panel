@@ -2,6 +2,8 @@ import Dropzone from "react-dropzone";
 import React, { Fragment, useEffect, useState } from "react";
 import { Breadcrumbs, Btn, H6 } from "../../AbstractElements";
 import { useForm, Controller } from "react-hook-form";
+import { Spinner } from "react-bootstrap";
+
 import {
   Container,
   Row,
@@ -23,12 +25,11 @@ import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router";
 import ReactGoogleAutocomplete, {
   Autocomplete,
-} from "react-google-autocomplete"; // Import GoogleComponent
+} from "react-google-autocomplete"; 
 
 const CreateDeal = () => {
   const [selectedAddress, setSelectedAddress] = useState("");
 
-  // Handler for address selection
   const handleAddressSelect = (address) => {
     setSelectedAddress(address);
   };
@@ -47,7 +48,6 @@ const CreateDeal = () => {
   const [dealData, setDealData] = useState(null);
 
   useEffect(() => {
-
     const fetchDealById = async () => {
       try {
         const response = await axios.get(
@@ -97,12 +97,9 @@ const CreateDeal = () => {
   const [client, setClient] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState([]);
-  console.log("🚀 ~ CreateDeal ~ selectedOptions:", selectedOptions)
   let opt = selectedOptions.map((val) => val.label);
-  console.log("🚀 ~ CreateDeal ~ opt:", opt);
 
   const [useEmail, setUseEmail] = useState(false);
-  console.log("🚀 ~ CreateDeal ~ useEmail:", useEmail)
   const [email, setEmail] = useState("");
 
   const handleEmailChange = (event) => {
@@ -189,28 +186,26 @@ const CreateDeal = () => {
     }
 
     const selectedAddress = Array.isArray(addressSearch)
-    ? addressSearch?.map((val) => `${val.label}`)
-    : [addressSearch];
+      ? addressSearch?.map((val) => `${val.label}`)
+      : [addressSearch];
 
-  const dealData = new FormData();
-  dealData.append("title", data.title);
-  dealData.append("price", data.price);
-  dealData.append("approxPrice", data.approxPrice);
-  dealData.append("upfrontDown", data.upfrontDown);
-  dealData.append("monthly_cash_min", data.monthly_cash_min);
-  dealData.append("monthly_cash_max", data.monthly_cash_max);
-  dealData.append("annually_return_min", approxAnnualMinReturn);
-  dealData.append("annually_return_max", approxAnnualMaxReturn);
-  dealData.append("closing_date", data.closing_date);
-  dealData.append("bedRooms", data.bedRooms);
-  dealData.append("area", data.area);
-  dealData.append("baths", data.baths);
-  // dealData.append("address", selectedAddress.join(", "));
-  dealData.append("address", addressSearch);
-  if (opt.length > 0 && selectedOptions.length) {
-    dealData.append("sendTo", opt); // Append sendTo only if opt has values
-  }
-  // dealData.append("sendByEmail", useEmail ? email : "");
+    const dealData = new FormData();
+    dealData.append("title", data.title);
+    dealData.append("price", data.price);
+    dealData.append("approxPrice", data.approxPrice);
+    dealData.append("upfrontDown", data.upfrontDown);
+    dealData.append("monthly_cash_min", data.monthly_cash_min);
+    dealData.append("monthly_cash_max", data.monthly_cash_max);
+    dealData.append("annually_return_min", approxAnnualMinReturn);
+    dealData.append("annually_return_max", approxAnnualMaxReturn);
+    dealData.append("closing_date", data.closing_date);
+    dealData.append("bedRooms", data.bedRooms);
+    dealData.append("area", data.area);
+    dealData.append("baths", data.baths);
+    dealData.append("address", addressSearch);
+    if (opt.length > 0 && selectedOptions.length) {
+      dealData.append("sendTo", opt);
+    }
 
     dealData.append("sendByEmail", email ? email : "");
     files.forEach((image) => {
@@ -283,7 +278,7 @@ const CreateDeal = () => {
   return (
     <Fragment>
       <Breadcrumbs
-      back="/deals/view"
+        back="/deals/view"
         parent="Slow Flip Deals"
         title="Create Slow Flip Deals"
         mainTitle="Create Slow Flip Deals"
@@ -346,7 +341,6 @@ const CreateDeal = () => {
                       </Col>
                     </Row>
                     <Row>
-                    
                       <Col sm="4">
                         <FormGroup>
                           <H6>{"Monthly Cash Flow Minimum"}</H6>
@@ -420,7 +414,6 @@ const CreateDeal = () => {
                             name="closing_date"
                             {...register("closing_date")}
                           />
-                        
                         </FormGroup>
                       </Col>
                     </Row>
@@ -440,7 +433,7 @@ const CreateDeal = () => {
                           </span>
                         </FormGroup>
                       </Col>
-                   
+
                       <Col sm="4">
                         <H6>{"Total Baths"}</H6>
                         <FormGroup>
@@ -487,8 +480,8 @@ const CreateDeal = () => {
                                 onChange={(e) =>
                                   setAddressSearch(e.target.value)
                                 }
-                                style={{ width: "100%" }} // Inline style for width
-                                className="form-control" // Add className for styling
+                                style={{ width: "100%" }}
+                                className="form-control"
                               />
                             ) : (
                               <ReactGoogleAutocomplete
@@ -498,8 +491,8 @@ const CreateDeal = () => {
                                 onPlaceSelected={(place) =>
                                   setAddressSearch(place.formatted_address)
                                 }
-                                style={{ width: "100%" }} // Inline style for width
-                                className="form-control" // Add className for styling
+                                style={{ width: "100%" }}
+                                className="form-control"
                               />
                             )}
                             {!addressSearch.length && (
@@ -575,26 +568,6 @@ const CreateDeal = () => {
                           )}
                         </FormGroup>
                       </Col>
-                      {/* <Col sm="6">
-  <FormGroup>
-    <h6 style={{ color: "black" }}>OR Send By Email:</h6>
-    <input
-      className="form-control"
-      type="email"
-      name="sendByEmail"
-      id="sendByEmail"
-      placeholder="Enter email"
-      disabled={selectedOptions?.length > 0 || !useEmail} // Adjusted condition
-      onChange={handleEmailChange}
-      value={email}
-    />
-    {errors.sendByEmail && (
-      <span className="text-danger">
-        {errors.sendByEmail.message}
-      </span>
-    )}
-  </FormGroup>
-</Col> */}
 
                       <Col sm="12">
                         <MultiDropzone
@@ -620,10 +593,6 @@ const CreateDeal = () => {
                           >
                             {id ? "Edit" : "Add"}
                           </Button>
-
-                          {/* <Btn attrBtn={{ color: "success" }}>
-                            {id ? "Edit" : "Add"}
-                          </Btn> */}
                         </div>
                       </Col>
                     </Row>
@@ -633,7 +602,17 @@ const CreateDeal = () => {
             </Col>
           </Row>
         ) : (
-          "Loading..........."
+          <div
+            style={{
+              flex: 1,
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Spinner />
+            "Loading..........."
+          </div>
         )}
       </Container>
     </Fragment>
