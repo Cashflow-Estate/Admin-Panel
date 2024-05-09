@@ -323,6 +323,7 @@ const CreateDeal = () => {
     }
     return true;
   };
+  const [bedError, setBedError] = useState("");
   const [priceError, setPriceError] = useState("");
   const [approxPriceError, setapproxPriceError] = useState("");
   const [monthMaxError, setMonMaxErr] = useState("");
@@ -334,10 +335,22 @@ const CreateDeal = () => {
     approxPrice: "",
     monthly_cash_max: "",
     monthly_cash_min: "",
+    bedRooms:""
 
     // Add other form fields here
   });
 
+  const handleBedChange = (e) => {
+    const price = parseFloat(e.target.value);
+    // Validate price
+    if (price <= 0) {
+      setBedError("Value must be greater than 0");
+      setFormData({ ...fomDat, bedRooms: "" }); // Reset price in form data
+    } else {
+      setBedError("");
+      setFormData({ ...fomDat, bedRooms: e.target.value }); // Update price in form data
+    }
+  };
   const handlePriceChange = (e) => {
     const price = parseFloat(e.target.value);
     // Validate price
@@ -596,11 +609,18 @@ const CreateDeal = () => {
                             type="number"
                             name="bedRooms"
                             placeholder="Total Bed Rooms"
-                            {...register("bedRooms", { required: true })}
+                            value={
+                              fomDat.bedRooms > 0
+                                ? fomDat.bedRooms
+                                : ""
+                            }
+                            onChange={handleBedChange}
                           />
-                          <span style={{ color: "red" }}>
-                            {errors.bedRooms && "Total Bed Rooms is required"}
-                          </span>
+                             {fomDat.bedRooms < 1 && bedError && (
+                            <span style={{ color: "red" }}>
+                              {bedError}
+                            </span>
+                          )}
                         </FormGroup>
                       </Col>
 
