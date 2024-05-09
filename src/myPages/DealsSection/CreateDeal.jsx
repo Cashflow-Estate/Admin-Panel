@@ -346,21 +346,7 @@ const CreateDeal = () => {
                       </Col>
                     </Row>
                     <Row>
-                      <Col sm="4">
-                        <FormGroup>
-                          <H6>{"Interest"}</H6>
-                          <input
-                            className="form-control"
-                            type="number"
-                            name="upfrontDown"
-                            placeholder="Upfront Down"
-                            {...register("upfrontDown", { required: true })}
-                          />
-                          <span style={{ color: "red" }}>
-                            {errors.upfrontDown && "Interest is required"}
-                          </span>
-                        </FormGroup>
-                      </Col>
+                    
                       <Col sm="4">
                         <FormGroup>
                           <H6>{"Monthly Cash Flow Minimum"}</H6>
@@ -432,11 +418,9 @@ const CreateDeal = () => {
                             className="form-control"
                             type="date"
                             name="closing_date"
-                            {...register("closing_date", { required: true })}
+                            {...register("closing_date")}
                           />
-                          <span style={{ color: "red" }}>
-                            {errors.closing_date && "Closing Date is required"}
-                          </span>
+                        
                         </FormGroup>
                       </Col>
                     </Row>
@@ -456,21 +440,7 @@ const CreateDeal = () => {
                           </span>
                         </FormGroup>
                       </Col>
-                      <Col sm="4">
-                        <H6>{"Area in Sqft"}</H6>
-                        <FormGroup>
-                          <input
-                            className="form-control"
-                            type="number"
-                            name="area"
-                            placeholder="Area in Sqft"
-                            {...register("area", { required: true })}
-                          />
-                          <span style={{ color: "red" }}>
-                            {errors.area && "Area in Sqft is required"}
-                          </span>
-                        </FormGroup>
-                      </Col>
+                   
                       <Col sm="4">
                         <H6>{"Total Baths"}</H6>
                         <FormGroup>
@@ -483,6 +453,21 @@ const CreateDeal = () => {
                           />
                           <span style={{ color: "red" }}>
                             {errors.baths && "Total Baths is required"}
+                          </span>
+                        </FormGroup>
+                      </Col>
+                      <Col sm="4">
+                        <H6>{"Area in Sqft"}</H6>
+                        <FormGroup>
+                          <input
+                            className="form-control"
+                            type="number"
+                            name="area"
+                            placeholder="Area in Sqft"
+                            {...register("area", { required: true })}
+                          />
+                          <span style={{ color: "red" }}>
+                            {errors.area && "Area in Sqft is required"}
                           </span>
                         </FormGroup>
                       </Col>
