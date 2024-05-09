@@ -609,6 +609,23 @@ const CreateDeal = () => {
                         )}
                       />
                     )}
+                              <br></br>
+                    <input
+                      type="checkbox"
+                      id="sendToSpecificExistingCustomer"
+                      checked={sendToSpecificExistingCustomer}
+                      onChange={handleSpecificExistingCustomer}
+                    />
+                    <label htmlFor="sendToSpecificExistingCustomer">
+                      Send To Specific Existing Customer
+                    </label>
+                    {sendToSpecificExistingCustomer && (
+                      <>
+                        {" "}
+                     
+                        <CustomSelect  name="sendToSpecificExistingCustomer"/>
+                      </>
+                    )}
                     <br></br>
                     <input
                       type="checkbox"
@@ -629,24 +646,19 @@ const CreateDeal = () => {
                         value={email}
                       />
                     )}
-                    <br></br>
-                    <input
-                      type="checkbox"
-                      id="sendToSpecificExistingCustomer"
-                      checked={sendToSpecificExistingCustomer}
-                      onChange={handleSpecificExistingCustomer}
-                    />
-                    <label htmlFor="sendToSpecificExistingCustomer">
-                      Send To Specific Existing Customer
-                    </label>
-                    {sendToSpecificExistingCustomer && (
-                      <>
-                        {" "}
-                     
-                        <CustomSelect  name="sendToSpecificExistingCustomer"/>
-                      </>
-                    )}
-           
+          
+                  <Col sm="12">
+                        <MultiDropzone
+                          images={images}
+                          setImages={setImages}
+                          dealData={dealData}
+                        />
+                      </Col>
+                      {images.length === 0 && (
+                        <p style={{ color: "red" }}>
+                          Please upload at least one gallery image.
+                        </p>
+                      )}
                     <Row>
                       <Col>
                         <div className="text-end">
