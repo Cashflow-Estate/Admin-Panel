@@ -325,6 +325,25 @@ const CreateDeal = () => {
     }
     return true;
   };
+  const [priceError, setPriceError] = useState("");
+  // State to manage form submission
+  // State to manage form data
+  const [fomDat, setFormData] = useState({
+    price: "",
+    // Add other form fields here
+  });
+
+  const handlePriceChange = (e) => {
+    const price = parseFloat(e.target.value);
+    // Validate price
+    if (price <= 0) {
+      setPriceError("Price must be greater than 0");
+      setFormData({ ...fomDat, price: "" }); // Reset price in form data
+    } else {
+      setPriceError("");
+      setFormData({ ...fomDat, price: e.target.value }); // Update price in form data
+    }
+  };
   return (
     <Fragment>
       <Breadcrumbs
@@ -363,15 +382,15 @@ const CreateDeal = () => {
                         <FormGroup>
                           <h6 style={{ color: "black" }}>{"Price"}</h6>
                           <input
-                            className="form-control"
-                            type="number"
-                            name="price"
-                            placeholder="Deal price *"
-                            {...register("price", { required: true })}
-                          />
-                          <span style={{ color: "red" }}>
-                            {errors.price && "Price is required"}
-                          </span>
+  className="form-control"
+  type="number"
+  name="price"
+  placeholder="Deal price *"
+  value={fomDat.price > 0 ? fomDat.price : ''}
+  onChange={handlePriceChange}
+/>
+
+      {priceError && <span style={{ color: "red" }}>{priceError}</span>}
                         </FormGroup>
                       </Col>
                       <Col sm="4">
@@ -391,25 +410,23 @@ const CreateDeal = () => {
                       </Col>
                     </Row>
                     <Row>
-                      <Col sm="4">
-                        <FormGroup>
-                          <H6>{"Monthly Cash Flow Minimum"}</H6>
-                          <input
-                            className="form-control"
-                            type="number"
-                            name="monthly_cash_min"
-                            placeholder="Approximate monthly cashflow minimum"
-                            {...register("monthly_cash_min", {
-                              required: true,
-                            })}
-                            onChange={(e) => setMonthlyCashMin(e.target.value)}
-                          />
-                          <span style={{ color: "red" }}>
-                            {errors.monthly_cash_min &&
-                              "Monthly Cash Flow Minimum is required"}
-                          </span>
-                        </FormGroup>
-                      </Col>
+                    <Col sm="4">
+  <FormGroup>
+    <H6>{"Slow Flip Total Price"}</H6>
+    <input
+      className="form-control"
+      type="number"
+      name="approxPrice"
+      placeholder="Total Price"
+      value={formData.approxPrice > 0 ? formData.approxPrice : ''}
+      onChange={(e) => setFormData({ ...fomDat, approxPrice: e.target.value })}
+    />
+    <span style={{ color: "red" }}>
+      {errors.approxPrice && "Total Price is required"}
+    </span>
+  </FormGroup>
+</Col>
+
                       <Col sm="4">
                         <FormGroup>
                           <H6>{"Monthly Cash Flow Maximum"}</H6>
