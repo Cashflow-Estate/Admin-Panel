@@ -99,7 +99,7 @@ const AllDealsTable = () => {
       name: "Title",
       selector: (row) => row.title,
       sortable: true,
-      wrap: true, // Enable word wrap for long text
+      center: false,
     },
     {
       name: "Image",
@@ -107,12 +107,12 @@ const AllDealsTable = () => {
         <img
           src={row.images[0]?.url}
           alt={row.title}
-          style={{ maxWidth: "100px", maxHeight: "100px" }} // Set maximum image size
+          style={{ maxWidth: "70px", maxHeight: "80px" }} // Set maximum image size
         />
       ),
       sortable: false,
       center: true,
-      width: "120px", // Set a fixed width for the image column
+      // width: "120px", // Set a fixed width for the image column
     },
     {
       name: "Address",
@@ -160,33 +160,34 @@ const AllDealsTable = () => {
             justifyContent: "flex-start",
           }}
         >
-            <Button
-        color=""
-        onClick={() => handleEdit(row)}
-        style={{ padding: "0.25rem", marginRight: "0.5rem" }}
-      >
-        <i className="icon-pencil"></i>
-      </Button>
           <Button
-            color=""
-            onClick={() => handleDelete(row)}
+            color="dark"
+            onClick={() => handleEdit(row)}
             style={{ padding: "0.25rem", marginRight: "0.5rem" }}
           >
-            <i className="icon-trash"></i>
+            Edit
           </Button>
           <Button
-            color=""
+            color="red"
+            onClick={() => handleDelete(row)}
+            style={{color:"red", padding: "0.25rem", marginRight: "0.5rem" }}
+          >
+            Delete
+          </Button>
+          <Button
+            color="orange"
             onClick={() => handleViewDetails(row)}
             style={{ padding: "0.25rem" }}
           >
-            <i className="icon-more-alt"></i>
+            More
           </Button>
         </div>
       ),
       button: true,
       width: "20%",
       center: true,
-    },
+    }
+    
   ];
 
   return (
