@@ -276,7 +276,7 @@ const CreateDeal = () => {
   }, [debouncedAddressSearch]);
   const [sendToALLCheckbox, setSendToALLCheckbox] = useState(false);
   const [sendToSpecificExistingCustomer, setSendToSpecificExistingCustomer] =
-  useState(false);
+    useState(false);
   const [sendByEmail, setSendByEmail] = useState(false);
   const [emails, setEmails] = useState([]);
 
@@ -284,12 +284,10 @@ const CreateDeal = () => {
     setSendByEmail(!sendByEmail);
   };
 
-
-
   const handleAddEmail = () => {
-    if (email.trim() !== '') {
+    if (email.trim() !== "") {
       setEmails([...emails, email]);
-      setEmail(''); // Clear the input field after adding email
+      setEmail(""); // Clear the input field after adding email
     }
   };
 
@@ -326,10 +324,17 @@ const CreateDeal = () => {
     return true;
   };
   const [priceError, setPriceError] = useState("");
+  const [approxPriceError, setapproxPriceError] = useState("");
+  const [monthMaxError, setMonMaxErr] = useState("");
+  const [monthMinError, setMonMinErr] = useState("");
   // State to manage form submission
   // State to manage form data
   const [fomDat, setFormData] = useState({
     price: "",
+    approxPrice: "",
+    monthly_cash_max: "",
+    monthly_cash_min: "",
+
     // Add other form fields here
   });
 
@@ -344,6 +349,41 @@ const CreateDeal = () => {
       setFormData({ ...fomDat, price: e.target.value }); // Update price in form data
     }
   };
+  const handleMonthMAxErrorChange = (e) => {
+    const price = parseFloat(e.target.value);
+    // Validate price
+    if (price <= 0) {
+      setMonMaxErr("Value must be greater than 0");
+      setFormData({ ...fomDat, monthly_cash_max: "" }); // Reset price in form data
+    } else {
+      setMonMaxErr("");
+      setFormData({ ...fomDat, monthly_cash_max: e.target.value }); // Update price in form data
+    }
+  };
+  const handleMonthMinErrorChange = (e) => {
+    const price = parseFloat(e.target.value);
+    // Validate price
+    if (price <= 0) {
+      setMonMinErr("Value must be greater than 0");
+      setFormData({ ...fomDat, monthly_cash_min: "" }); // Reset price in form data
+    } else {
+      setMonMinErr("");
+      setFormData({ ...fomDat, monthly_cash_min: e.target.value }); // Update price in form data
+    }
+  };
+
+  const handleapproxPriceErrorChange = (e) => {
+    const price = parseFloat(e.target.value);
+    // Validate price
+    if (price <= 0) {
+      setapproxPriceError("Total price must be greater than 0");
+      setFormData({ ...fomDat, approxPrice: "" }); // Reset price in form data
+    } else {
+      setPriceError("");
+      setFormData({ ...fomDat, approxPrice: e.target.value }); // Update price in form data
+    }
+  };
+
   return (
     <Fragment>
       <Breadcrumbs
@@ -382,15 +422,17 @@ const CreateDeal = () => {
                         <FormGroup>
                           <h6 style={{ color: "black" }}>{"Price"}</h6>
                           <input
-  className="form-control"
-  type="number"
-  name="price"
-  placeholder="Deal price *"
-  value={fomDat.price > 0 ? fomDat.price : ''}
-  onChange={handlePriceChange}
-/>
+                            className="form-control"
+                            type="number"
+                            name="price"
+                            placeholder="Deal price *"
+                            value={fomDat.price > 0 ? fomDat.price : ""}
+                            onChange={handlePriceChange}
+                          />
 
-      {priceError && <span style={{ color: "red" }}>{priceError}</span>}
+                          {fomDat.price < 1 && priceError && (
+                            <span style={{ color: "red" }}>{priceError}</span>
+                          )}
                         </FormGroup>
                       </Col>
                       <Col sm="4">
@@ -401,32 +443,63 @@ const CreateDeal = () => {
                             type="number"
                             name="approxPrice"
                             placeholder="Total Price"
-                            {...register("approxPrice", { required: true })}
+                            value={
+                              fomDat.approxPrice > 0 ? fomDat.approxPrice : ""
+                            }
+                            onChange={handleapproxPriceErrorChange}
                           />
-                          <span style={{ color: "red" }}>
-                            {errors.approxPrice && "Total Price is required"}
-                          </span>
+                          {fomDat.approxPrice < 1 && approxPriceError && (
+                            <span style={{ color: "red" }}>
+                              {approxPriceError}
+                            </span>
+                          )}
                         </FormGroup>
                       </Col>
                     </Row>
                     <Row>
-                    <Col sm="4">
-  <FormGroup>
-    <H6>{"Slow Flip Total Price"}</H6>
-    <input
-      className="form-control"
-      type="number"
-      name="approxPrice"
-      placeholder="Total Price"
-      value={formData.approxPrice > 0 ? formData.approxPrice : ''}
-      onChange={(e) => setFormData({ ...fomDat, approxPrice: e.target.value })}
-    />
-    <span style={{ color: "red" }}>
-      {errors.approxPrice && "Total Price is required"}
-    </span>
-  </FormGroup>
-</Col>
+                      {/* <Col>
+                    <FormGroup>
+                          <H6>{"Monthly Cash Flow Minimum"}</H6>
+                          <input
+                            className="form-control"
+                            type="number"
+                            name="monthly_cash_min"
+                            placeholder="Approximate monthly cashflow minimum"
+                            value={
+                              fomDat.monthly_cash_min > 0 ? fomDat.monthly_cash_min : ""
+                            }
+                            onChange={handleMonthMimErrorChange}
+                          />
+                           {fomDat.monthly_cash_min < 1 && monthMinError && (
+                            <span style={{ color: "red" }}>
+                              {monthMinError}
+                            </span>
+                          )}
+                        </FormGroup>
+                      </Col> */}
 
+                      <Col sm="4">
+                        <FormGroup>
+                          <H6>{"Monthly Cash Flow Minimum"}</H6>
+                          <input
+                            className="form-control"
+                            type="number"
+                            name="monthly_cash_min"
+                            placeholder="Approximate monthly cashflow Minimum"
+                            value={
+                              fomDat.monthly_cash_min > 0
+                                ? fomDat.monthly_cash_min
+                                : ""
+                            }
+                            onChange={handleMonthMinErrorChange}
+                          />
+                          {fomDat.monthly_cash_min < 1 && monthMinError && (
+                            <span style={{ color: "red" }}>
+                              {monthMinError}
+                            </span>
+                          )}
+                        </FormGroup>
+                      </Col>
                       <Col sm="4">
                         <FormGroup>
                           <H6>{"Monthly Cash Flow Maximum"}</H6>
@@ -434,16 +507,19 @@ const CreateDeal = () => {
                             className="form-control"
                             type="number"
                             name="monthly_cash_max"
-                            placeholder="Approximate monthly cashflow maximum"
-                            {...register("monthly_cash_max", {
-                              required: true,
-                            })}
-                            onChange={(e) => setMonthlyCashMax(e.target.value)}
+                            placeholder="Approximate monthly cashflow Maximum"
+                            value={
+                              fomDat.monthly_cash_max > 0
+                                ? fomDat.monthly_cash_max
+                                : ""
+                            }
+                            onChange={handleMonthMAxErrorChange}
                           />
-                          <span style={{ color: "red" }}>
-                            {errors.monthly_cash_max &&
-                              "Monthly Cash Flow Maximum is required"}
-                          </span>
+                          {fomDat.monthly_cash_max < 1 && monthMaxError && (
+                            <span style={{ color: "red" }}>
+                              {monthMaxError}
+                            </span>
+                          )}
                         </FormGroup>
                       </Col>
                       <Col sm="4">
@@ -618,9 +694,11 @@ const CreateDeal = () => {
                       checked={sendToALLCheckbox}
                       onChange={handleSendToALLCheckbox}
                     />
-                    <label htmlFor="
+                    <label
+                      htmlFor="
                     sendToALLCheckbox
-                    sendToALLCheckbox">
+                    sendToALLCheckbox"
+                    >
                       Send to specific customer type
                     </label>
                     {sendToALLCheckbox && (
@@ -641,7 +719,7 @@ const CreateDeal = () => {
                         )}
                       />
                     )}
-                              <br></br>
+                    <br></br>
                     <input
                       type="checkbox"
                       id="sendToSpecificExistingCustomer"
@@ -654,62 +732,69 @@ const CreateDeal = () => {
                     {sendToSpecificExistingCustomer && (
                       <>
                         {" "}
-                     
-                        <CustomSelect  name="sendToSpecificExistingCustomer"/>
+                        <CustomSelect name="sendToSpecificExistingCustomer" />
                       </>
                     )}
                     <br></br>
                     <input
-        type="checkbox"
-        id="sendByEmailCheckbox"
-        checked={sendByEmail}
-        onChange={handleSendByEmailToggle}
-      />
-      <label htmlFor="sendByEmailCheckbox">Send to new customers</label>
-      {sendByEmail && (
-        <div>
-          <input
-            className="form-control"
-            type="email"
-            placeholder="Enter email"
-            onChange={handleEmailChange}
-            value={email}
-          />
-          <br></br>
-          <Button color="success" onClick={handleAddEmail}>Add Email</Button>
-        </div>
-      )}
-      <br></br>
-      {emails.length > 0 && (
-        <div>
-          {emails.length > 0 && (
-        <div>
-          <h5>Added Emails:</h5>
-          <ul>
-            {emails.map((email, index) => (
-              <li key={index}>
-                {email}
-                <button onClick={() => handleRemoveEmail(index)}>Delete</button>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-        </div>
-      )}
-          
-                  <Col sm="12">
-                        <MultiDropzone
-                          images={images}
-                          setImages={setImages}
-                          dealData={dealData}
+                      type="checkbox"
+                      id="sendByEmailCheckbox"
+                      checked={sendByEmail}
+                      onChange={handleSendByEmailToggle}
+                    />
+                    <label htmlFor="sendByEmailCheckbox">
+                      Send to new customers
+                    </label>
+                    {sendByEmail && (
+                      <div>
+                        <input
+                          className="form-control"
+                          type="email"
+                          placeholder="Enter email"
+                          onChange={handleEmailChange}
+                          value={email}
                         />
-                      </Col>
-                      {images.length === 0 && (
-                        <p style={{ color: "red" }}>
-                          Please upload at least one gallery image.
-                        </p>
-                      )}
+                        <br></br>
+                        <Button color="success" onClick={handleAddEmail}>
+                          Add Email
+                        </Button>
+                      </div>
+                    )}
+                    <br></br>
+                    {emails.length > 0 && (
+                      <div>
+                        {emails.length > 0 && (
+                          <div>
+                            <h5>Added Emails:</h5>
+                            <ul>
+                              {emails.map((email, index) => (
+                                <li key={index}>
+                                  {email}
+                                  <button
+                                    onClick={() => handleRemoveEmail(index)}
+                                  >
+                                    Delete
+                                  </button>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+                      </div>
+                    )}
+
+                    <Col sm="12">
+                      <MultiDropzone
+                        images={images}
+                        setImages={setImages}
+                        dealData={dealData}
+                      />
+                    </Col>
+                    {images.length === 0 && (
+                      <p style={{ color: "red" }}>
+                        Please upload at least one gallery image.
+                      </p>
+                    )}
                     <Row>
                       <Col>
                         <div className="text-end">
@@ -749,8 +834,6 @@ const CreateDeal = () => {
 
 export default CreateDeal;
 
-
-
 const CustomSelect = () => {
   const [selectedOptions, setSelectedOptions] = useState([]);
 
@@ -759,9 +842,13 @@ const CustomSelect = () => {
   };
 
   const options = [
-    { value: '1', label: 'John Doe || john@example.com', color: 'green' },
-    { value: '2', label: 'Jane Smith || jane@example.com', color: 'red' },
-    { value: '3', label: 'Michael Johnson || michael@example.com', color: 'green' },
+    { value: "1", label: "John Doe || john@example.com", color: "green" },
+    { value: "2", label: "Jane Smith || jane@example.com", color: "red" },
+    {
+      value: "3",
+      label: "Michael Johnson || michael@example.com",
+      color: "green",
+    },
     // Add more options as needed
   ];
 
