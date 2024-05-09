@@ -31,8 +31,7 @@ const CreateDeal = () => {
   const [selectedAddress, setSelectedAddress] = useState("");
 
   const handleAddressSelect = (address) => {
-    setSelectedAddress(address);
-  };
+    setSelectedAddress(address);}
 
   const {
     register,
