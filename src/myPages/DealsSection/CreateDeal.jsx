@@ -274,12 +274,27 @@ const CreateDeal = () => {
       handleAddressChange(debouncedAddressSearch);
     }
   }, [debouncedAddressSearch]);
-  const [sendByEmail, setSendByEmail] = useState(false);
   const [sendToALLCheckbox, setSendToALLCheckbox] = useState(false);
   const [sendToSpecificExistingCustomer, setSendToSpecificExistingCustomer] =
-    useState(false);
+  useState(false);
+  const [sendByEmail, setSendByEmail] = useState(false);
+  const [emails, setEmails] = useState([]);
+
   const handleSendByEmailToggle = () => {
     setSendByEmail(!sendByEmail);
+  };
+
+
+
+  const handleAddEmail = () => {
+    if (email.trim() !== '') {
+      setEmails([...emails, email]);
+      setEmail(''); // Clear the input field after adding email
+    }
+  };
+
+  const handleRemoveEmail = (index) => {
+    setEmails(emails.filter((_, i) => i !== index));
   };
   const handleSendToALLCheckbox = () => {
     setSendToALLCheckbox(!sendToALLCheckbox);
@@ -316,7 +331,7 @@ const CreateDeal = () => {
         back="/deals/view"
         parent="Slow Flip Deals"
         title="Create Slow Flip Deals"
-        mainTitle="Create Slow Flip Deals"
+        mainTitle="Create Slow Flip Deal"
       />
       <Container fluid={true}>
         {!formSubmitted ? (
@@ -628,24 +643,43 @@ const CreateDeal = () => {
                     )}
                     <br></br>
                     <input
-                      type="checkbox"
-                      id="sendByEmailCheckbox"
-                      checked={sendByEmail}
-                      onChange={handleSendByEmailToggle}
-                    />
-                    <label htmlFor="sendByEmailCheckbox">
-                      Send to a new customer
-                    </label>
-                    {sendByEmail && (
-                      <input
-                        className="form-control"
-                        type="email"
-                        name="sendByEmail"
-                        placeholder="Enter email"
-                        onChange={handleEmailChange}
-                        value={email}
-                      />
-                    )}
+        type="checkbox"
+        id="sendByEmailCheckbox"
+        checked={sendByEmail}
+        onChange={handleSendByEmailToggle}
+      />
+      <label htmlFor="sendByEmailCheckbox">Send to new customers</label>
+      {sendByEmail && (
+        <div>
+          <input
+            className="form-control"
+            type="email"
+            placeholder="Enter email"
+            onChange={handleEmailChange}
+            value={email}
+          />
+          <br></br>
+          <Button color="success" onClick={handleAddEmail}>Add Email</Button>
+        </div>
+      )}
+      <br></br>
+      {emails.length > 0 && (
+        <div>
+          {emails.length > 0 && (
+        <div>
+          <h5>Added Emails:</h5>
+          <ul>
+            {emails.map((email, index) => (
+              <li key={index}>
+                {email}
+                <button onClick={() => handleRemoveEmail(index)}>Delete</button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+        </div>
+      )}
           
                   <Col sm="12">
                         <MultiDropzone
@@ -698,6 +732,34 @@ const CreateDeal = () => {
 
 export default CreateDeal;
 
+
+
+const CustomSelect = () => {
+  const [selectedOptions, setSelectedOptions] = useState([]);
+
+  const handleChange = (selectedValues) => {
+    setSelectedOptions(selectedValues);
+  };
+
+  const options = [
+    { value: '1', label: 'John Doe || john@example.com', color: 'green' },
+    { value: '2', label: 'Jane Smith || jane@example.com', color: 'red' },
+    { value: '3', label: 'Michael Johnson || michael@example.com', color: 'green' },
+    // Add more options as needed
+  ];
+
+  return (
+    <div>
+      <Select
+        isMulti
+        options={options}
+        value={selectedOptions}
+        onChange={handleChange}
+        placeholder="Search..."
+      />
+    </div>
+  );
+};
 const MultiDropzone = ({ setImages, dealData, images }) => {
   const handleDrop = (acceptedFiles) => {
     setImages((prevImages) => [...prevImages, ...acceptedFiles]);
@@ -841,83 +903,3 @@ const SingleDropzone = ({ setImages, dealData, images }) => {
     </div>
   );
 };
-
-const CustomSelect = () => {
-  const [selectedOptions, setSelectedOptions] = useState([]);
-
-  const handleChange = (selectedValues) => {
-    setSelectedOptions(selectedValues);
-  };
-
-  const options = [
-    { value: '1', label: 'John Doe || john@example.com', color: 'green' },
-    { value: '2', label: 'Jane Smith || jane@example.com', color: 'red' },
-    { value: '3', label: 'Michael Johnson || michael@example.com', color: 'green' },
-    // Add more options as needed
-  ];
-
-  return (
-    <div>
-      <Select
-        isMulti
-        options={options}
-        value={selectedOptions}
-        onChange={handleChange}
-        placeholder="Search..."
-      />
-    </div>
-  );
-};
-
-// const CustomSelect = () => {
-//   const [selectedOptions, setSelectedOptions] = useState([]);
-
-//   const handleChange = (selectedValues) => {
-//     setSelectedOptions(selectedValues);
-//   };
-
-//   const options = [
-//     { value: '1', label: 'John Doe || john@example.com', color: 'green' },
-//     { value: '2', label: 'Jane Smith || jane@example.com', color: 'red' },
-//     { value: '3', label: 'Michael Johnson || michael@example.com', color: 'green' },
-//     // Add more options as needed
-//   ];
-
-//   const customStyles = {
-//     option: (provided, state) => ({
-//       ...provided,
-//       display: 'flex',
-//       alignItems: 'center',
-//     }),
-//     dot: (color) => ({
-//       height: 10,
-//       width: 10,
-//       borderRadius: '50%',
-//       backgroundColor: color,
-//       marginRight: 8,
-//     }),
-//   };
-
-//   const customOptionLabel = ({ label, color }) => (
-//     <div style={{ display: 'flex', alignItems: 'center' }}>
-//       <span style={customStyles.dot(color)}></span>
-//       {label}
-//     </div>
-//   );
-
-//   return (
-//     <div>
-//       <Select
-//         isMulti
-//         options={options}
-//         value={selectedOptions}
-//         onChange={handleChange}
-//         placeholder="Search..."
-//         styles={customStyles}
-//         getOptionLabel={customOptionLabel}
-//         getOptionValue={(option) => option.value}
-//         isSearchable={true} // Ensure search functionality is enabled
-//       />
-//     </div>
-//   );
-// };
