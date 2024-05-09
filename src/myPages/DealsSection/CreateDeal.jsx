@@ -178,7 +178,7 @@ const CreateDeal = () => {
   }, [dealData, reset]);
 
   const AddProject = async (data) => {
-    // setFormSubmitted(true);
+    setFormSubmitted(true);
     setClient(true);
 
     await trigger();
@@ -226,9 +226,9 @@ const CreateDeal = () => {
         ? await axios.patch(apiUrl, dealData)
         : await axios.post(apiUrl, dealData);
       if (response.data.statusCode === 200) {
-        // setFormSubmitted(false);
+        setFormSubmitted(false);
         toast.success(response.data.message);
-        // history("/deals/view");
+        history("/deals/view");
       }
     } catch (error) {
       toast.error("Failed to create/update deal.");
