@@ -93,7 +93,7 @@ const CreateDeal = () => {
   const [files, setFiles] = useState([]);
   function handleImageUpload(event) {
     const file = event.target.files[0];
-    // Now you have the file, you can do whatever you want with it, like uploading it to a server.
+    setFeatureImages(file)
   }
 
   useEffect(() => {
@@ -809,7 +809,7 @@ const CreateDeal = () => {
                           <input type="file" onChange={handleImageUpload} />
                         </Col>
 
-                        {images.length === 0 && (
+                        {featureimage.length === 0 && (
                           <p style={{ color: "red" }}>
                             Please upload primary image.
                           </p>
