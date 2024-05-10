@@ -835,6 +835,8 @@ const CreateDeal = () => {
                       </Col>
 
                       <Row>
+                      <H6>{"Primary Image"}</H6>
+
                         <Col sm="12">
                           <input
                             className="form-control"
@@ -864,7 +866,7 @@ const CreateDeal = () => {
                       </p>
                     )}
 
-                    <Label className="d-block" for="chk-ani">
+                    <Label className="d-block" for="sendToALLCheckbox">
                       <Input
                         className="checkbox_animated"
                         id="sendToALLCheckbox"
@@ -872,7 +874,7 @@ const CreateDeal = () => {
                         checked={sendToALLCheckbox}
                         onChange={handleSendToALLCheckbox}
                       />
-                      {Option} {"Send to specific customer type"}
+                       {"Send to specific customer type"}
                     </Label>
 
                     {sendToALLCheckbox && (
@@ -895,7 +897,7 @@ const CreateDeal = () => {
                     )}
                     <br></br>
 
-                    <Label className="d-block" for="chk-ani">
+                    <Label className="d-block" for="sendToSpecificExistingCustomer">
                       <Input
                         className="checkbox_animated"
                         id="sendToSpecificExistingCustomer"
@@ -904,12 +906,11 @@ const CreateDeal = () => {
                         onChange={() => {
                           handleSpecificExistingCustomer();
                           // Empty related checkboxes' states
-                          setSendToALLCheckbox(false);
-                          setSendByEmail(false);
+                        
                           setEmails([]);
                         }}
                       />
-                      {Option} {" Send To Specific Existing Customer"}
+                       {" Send To Specific Existing Customer"}
                     </Label>
                     {sendToSpecificExistingCustomer && (
                       <>
@@ -919,7 +920,7 @@ const CreateDeal = () => {
                     )}
                     <br></br>
 
-                    <Label className="d-block" for="chk-ani">
+                    <Label className="d-block" for="sendByEmailCheckbox">
                       <Input
                         className="checkbox_animated"
                         id="sendByEmailCheckbox"
@@ -927,13 +928,11 @@ const CreateDeal = () => {
                         checked={sendByEmail}
                         onChange={() => {
                           handleSendByEmailToggle();
-                          // Empty related checkboxes' states
-                          setSendToALLCheckbox(false);
-                          setSendToSpecificExistingCustomer(false);
+                      
                           setEmails([]);
                         }}
                       />
-                      {Option} {" Send to new customers"}
+                       {" Send to new customers"}
                     </Label>
                     {sendByEmail && (
                       <div>
