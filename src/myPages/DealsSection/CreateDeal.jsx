@@ -33,7 +33,7 @@ import ReactGoogleAutocomplete from "react-google-autocomplete";
 
 const CreateDeal = () => {
   const [selectedAddress, setSelectedAddress] = useState("");
-  
+
   const handleAddressSelect = (address) => {
     setSelectedAddress(address);
   };
@@ -50,26 +50,47 @@ const CreateDeal = () => {
   const { id } = useParams();
   const [dealData, setDealData] = useState(null);
   const [propertyType, setPropertyType] = useState(""); // State to hold selected property type
+  console.log("🚀 ~ CreateDeal ~ propertyType:", propertyType);
   const [images, setImages] = useState([]);
+  console.log("🚀 ~ CreateDeal ~ images:", images);
   const [featureimage, setFeatureImages] = useState([]);
+  console.log("🚀 ~ CreateDeal ~ featureimage:", featureimage);
   const [files, setFiles] = useState([]);
   const [client, setClient] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
+  console.log("🚀 ~ CreateDeal ~ formSubmitted:", formSubmitted);
   const [selectedOptions, setSelectedOptions] = useState([]);
+  console.log("🚀 ~ CreateDeal ~ selectedOptions:", selectedOptions);
   const [useEmail, setUseEmail] = useState(false);
   const [email, setEmail] = useState("");
   const [addressOptions, setAddressOptions] = useState([]);
   const [address, setAddress] = useState(true);
   const [addressSearch, setAddressSearch] = useState("");
+  console.log("🚀 ~ CreateDeal ~ addressSearch:", addressSearch);
   const [monthlyCashMin, setMonthlyCashMin] = useState("");
+  console.log("🚀 ~ CreateDeal ~ monthlyCashMin:", monthlyCashMin);
   const [monthlyCashMax, setMonthlyCashMax] = useState("");
+  console.log("🚀 ~ CreateDeal ~ monthlyCashMax:", monthlyCashMax);
   const [approxAnnualMinReturn, setApproxAnnualMinReturn] = useState("");
+  console.log(
+    "🚀 ~ CreateDeal ~ approxAnnualMinReturn:",
+    approxAnnualMinReturn
+  );
   const [approxAnnualMaxReturn, setApproxAnnualMaxReturn] = useState("");
+  console.log(
+    "🚀 ~ CreateDeal ~ approxAnnualMaxReturn:",
+    approxAnnualMaxReturn
+  );
   const [debouncedAddressSearch, setDebouncedAddressSearch] = useState("");
   const [sendByEmail, setSendByEmail] = useState(false);
   const [emails, setEmails] = useState([]);
+  console.log("🚀 ~ CreateDeal ~ emails:", emails);
   const [sendToSpecificExistingCustomer, setSendToSpecificExistingCustomer] =
-  useState(false);
+    useState(false);
+  console.log(
+    "🚀 ~ CreateDeal ~ sendToSpecificExistingCustomer:",
+    sendToSpecificExistingCustomer
+  );
 
   const [sendToALLCheckbox, setSendToALLCheckbox] = useState(false);
   const [bedError, setBedError] = useState("");
@@ -81,6 +102,7 @@ const CreateDeal = () => {
   const [approxPriceError, setapproxPriceError] = useState("");
   const [monthMaxError, setMonMaxErr] = useState("");
   const [monthMinError, setMonMinErr] = useState("");
+  const [btn, setBtn] = useState(false);
   const [fomDat, setFormData] = useState({
     title: "",
     price: "",
@@ -91,23 +113,32 @@ const CreateDeal = () => {
     baths: "",
     area: "",
   });
+  console.log("🚀 ~::::::::::::::::::::::::::", fomDat);
 
   const handlePropertyTypeChange = (selectedType) => {
     setPropertyType(selectedType);
   };
 
+  const onSubmit = () => {
+    setBtn(true);
 
-  const validatePropertyType = () => {
-    return propertyType !== "" || "Property type is required";
-  };
-  const onSubmit = (data) => {
-    // If property type is not selected, prevent form submission
-    if (!validatePropertyType()) {
-      return;
+    if (
+      fomDat.title &&
+      fomDat.price &&
+      fomDat.approxPrice &&
+      fomDat.monthly_cash_min &&
+      fomDat.monthly_cash_max &&
+   
+      fomDat.bedRooms &&
+      fomDat.area &&
+      fomDat.baths
+    ) {
+      setTimeout(() => {
+        AddProject(fomDat);
+      }, 3000);
     }
-    // Proceed with form submission logic
-    // For example, call AddProject function
-    AddProject(data);
+
+ 
   };
   useEffect(() => {
     const fetchDealById = async () => {
@@ -159,14 +190,9 @@ const CreateDeal = () => {
     fetchFiles();
   }, [images]);
 
-
   let opt = selectedOptions.map((val) => val.label);
 
- 
-
   const history = useNavigate();
-
-
 
   const calculateAnnualReturns = () => {
     if (
@@ -193,7 +219,6 @@ const CreateDeal = () => {
         title: dealData.data.title || "",
         price: dealData.data.price || "",
         approxPrice: dealData.data.approxPrice || "",
-        upfrontDown: dealData.data.upfrontDown || "",
         monthly_cash_min: dealData.data.monthly_cash_min || "",
         monthly_cash_max: dealData.data.monthly_cash_max || "",
         closing_date: dealData.data.closing_date
@@ -228,28 +253,25 @@ const CreateDeal = () => {
 
   const AddProject = async (data) => {
     setFormSubmitted(true);
-    // setClient(true);
+    setClient(true);
     await trigger();
-
-
-
+    console.log("::::::::::::::::::::::");
     const selectedAddress = Array.isArray(addressSearch)
       ? addressSearch?.map((val) => `${val.label}`)
       : [addressSearch];
 
     const dealData = new FormData();
-    dealData.append("title", data.title);
-    dealData.append("price", data.price);
-    dealData.append("approxPrice", data.approxPrice);
-    dealData.append("upfrontDown", data.upfrontDown);
-    dealData.append("monthly_cash_min", data.monthly_cash_min);
-    dealData.append("monthly_cash_max", data.monthly_cash_max);
+    dealData.append("title", fomDat.title);
+    dealData.append("price", fomDat.price);
+    dealData.append("approxPrice", fomDat.approxPrice);
+    dealData.append("monthly_cash_min", fomDat.monthly_cash_min);
+    dealData.append("monthly_cash_max", fomDat.monthly_cash_max);
     dealData.append("annually_return_min", approxAnnualMinReturn);
     dealData.append("annually_return_max", approxAnnualMaxReturn);
-    dealData.append("closing_date", data.closing_date);
-    dealData.append("bedRooms", data.bedRooms);
-    dealData.append("area", data.area);
-    dealData.append("baths", data.baths);
+    dealData.append("closing_date", fomDat.closing_date);
+    dealData.append("bedRooms", fomDat.bedRooms);
+    dealData.append("area", fomDat.area);
+    dealData.append("baths", fomDat.baths);
     dealData.append("address", addressSearch);
     if (opt?.length > 0 && selectedOptions?.length) {
       dealData.append("sendTo", opt);
@@ -328,9 +350,6 @@ const CreateDeal = () => {
     }
   }, [!sendToALLCheckbox]);
 
-
- 
-
   const handleSendByEmailToggle = () => {
     setSendByEmail(!sendByEmail);
   };
@@ -362,8 +381,6 @@ const CreateDeal = () => {
     }
     return true;
   };
-
-
 
   const handleTitleChange = (e) => {
     const price = parseFloat(e.target.value);
@@ -469,7 +486,7 @@ const CreateDeal = () => {
       <Breadcrumbs
         back="/deals/view"
         parent="Slow Flip Deals"
-        title="Create Slow Flip Deals"
+        title="Create Slow Flip Deal"
         mainTitle="Create Slow Flip Deal"
       />
       <Container fluid={true}>
@@ -507,7 +524,7 @@ const CreateDeal = () => {
                               className="form-control"
                             />
                           )}
-                          {!addressSearch?.length && (
+                          {!addressSearch?.length && btn && (
                             <span style={{ color: "red" }}>
                               Address is required
                             </span>
@@ -531,7 +548,9 @@ const CreateDeal = () => {
                           />
                           <span style={{ color: "red" }}>
                             {" "}
-                            {!fomDat.title?.length && "Title is required"}
+                            {!fomDat.title?.length &&
+                              btn &&
+                              "Title is required"}
                           </span>
                           <br />
                         </FormGroup>
@@ -549,7 +568,7 @@ const CreateDeal = () => {
                           />
                           <span style={{ color: "red" }}>
                             {" "}
-                            {!fomDat.price && "Price is required"}
+                            {!fomDat.price && btn && "Price is required"}
                           </span>
                           <br />
                           {fomDat.price < 1 && priceError && (
@@ -577,16 +596,19 @@ const CreateDeal = () => {
 
                           <span style={{ color: "red" }}>
                             {!fomDat.approxPrice &&
+                              btn &&
                               "Slow Flip Total is required"}
                           </span>
                           <br />
-                          {fomDat.approxPrice < 1 && approxPriceError && (
-                            <span style={{ color: "red" }}>
-                              {" "}
-                              {approxPriceError?.length &&
-                                "Value must be greater than 0"}
-                            </span>
-                          )}
+                          {fomDat.approxPrice &&
+                            btn < 1 &&
+                            approxPriceError && (
+                              <span style={{ color: "red" }}>
+                                {" "}
+                                {approxPriceError?.length &&
+                                  "Value must be greater than 0"}
+                              </span>
+                            )}
                         </FormGroup>
                       </Col>
                     </Row>
@@ -609,6 +631,7 @@ const CreateDeal = () => {
 
                           <span style={{ color: "red" }}>
                             {!fomDat.monthly_cash_min &&
+                              btn &&
                               "Monthly Cash Min is required"}
                           </span>
                           <br />
@@ -647,6 +670,7 @@ const CreateDeal = () => {
 
                           <span style={{ color: "red" }}>
                             {!fomDat.monthly_cash_max &&
+                              btn &&
                               "Monthly Cash Max is required"}
                           </span>
                           <br />
@@ -692,6 +716,7 @@ const CreateDeal = () => {
                           <span style={{ color: "red" }}>
                             {" "}
                             {!propertyType?.length &&
+                              btn &&
                               "plz Select Property Type"}
                           </span>
                         </FormGroup>
@@ -748,7 +773,7 @@ const CreateDeal = () => {
                             onChange={handleBedChange}
                           />
                           <span style={{ color: "red" }}>
-                            {!fomDat.bedRooms && "Bedroom is required"}
+                            {!fomDat.bedRooms && btn && "Bedroom is required"}
                           </span>
                           <br />
                           {fomDat.bedRooms < 1 && bedError && (
@@ -772,7 +797,7 @@ const CreateDeal = () => {
                             onChange={handleBathChange}
                           />
                           <span style={{ color: "red" }}>
-                            {!fomDat.baths && "Bedroom is required"}
+                            {!fomDat.baths && btn && "Bedroom is required"}
                           </span>
                           <br />
                           {fomDat.baths < 1 && bathError && (
@@ -796,7 +821,7 @@ const CreateDeal = () => {
                             onChange={handleAreaChange}
                           />
                           <span style={{ color: "red" }}>
-                            {!fomDat.area && "Area is required"}
+                            {!fomDat.area && btn && "Area is required"}
                           </span>
                           <br />
                           {fomDat.area < 1 && areaError && (
@@ -818,7 +843,7 @@ const CreateDeal = () => {
                           />
                         </Col>
 
-                        {featureimage?.length === 0 && (
+                        {featureimage?.length === 0 && btn && (
                           <p style={{ color: "red" }}>
                             Please upload primary image.
                           </p>
@@ -833,7 +858,7 @@ const CreateDeal = () => {
                         dealData={dealData}
                       />
                     </Col>
-                    {images?.length === 0 && (
+                    {images?.length === 0 && btn && (
                       <p style={{ color: "red" }}>
                         Please upload at least one gallery image.
                       </p>
@@ -962,7 +987,8 @@ const CreateDeal = () => {
                     )}
                     {!sendByEmail &&
                       !sendToALLCheckbox &&
-                      !sendToSpecificExistingCustomer && (
+                      !sendToSpecificExistingCustomer &&
+                      btn && (
                         <span style={{ color: "red" }}>
                           {"Plz pick at least one"}
                         </span>
@@ -972,6 +998,7 @@ const CreateDeal = () => {
                         <div className="text-end">
                           <Button
                             color="success"
+                            // onClick={()=>{}}
                             // disabled={
                             //   !addressSearch?.length && images?.length === 0
                             // }
