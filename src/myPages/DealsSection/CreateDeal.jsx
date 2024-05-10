@@ -29,9 +29,7 @@ import "./comp/multi.css";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router";
-import ReactGoogleAutocomplete, {
-  Autocomplete,
-} from "react-google-autocomplete";
+import ReactGoogleAutocomplete from "react-google-autocomplete";
 
 const CreateDeal = () => {
   const [selectedAddress, setSelectedAddress] = useState("");
@@ -355,10 +353,10 @@ const CreateDeal = () => {
     // Validate price
     if (price <= 0) {
       setBedError("Value must be greater than 0");
-      setFormData({ ...fomDat, bedRooms: "" }); // Reset price in form data
+      setFormData({ ...fomDat, bedRooms: "" });
     } else {
       setBedError("");
-      setFormData({ ...fomDat, bedRooms: e.target.value }); // Update price in form data
+      setFormData({ ...fomDat, bedRooms: e.target.value });
     }
   };
   const handlePriceChange = (e) => {
@@ -366,10 +364,10 @@ const CreateDeal = () => {
     // Validate price
     if (price <= 0) {
       setPriceError("Price must be greater than 0");
-      setFormData({ ...fomDat, price: "" }); // Reset price in form data
+      setFormData({ ...fomDat, price: "" });
     } else {
       setPriceError("");
-      setFormData({ ...fomDat, price: e.target.value }); // Update price in form data
+      setFormData({ ...fomDat, price: e.target.value });
     }
   };
   const handleMonthMAxErrorChange = (e) => {
@@ -377,10 +375,10 @@ const CreateDeal = () => {
     // Validate price
     if (price <= 0) {
       setMonMaxErr("Value must be greater than 0");
-      setFormData({ ...fomDat, monthly_cash_max: "" }); // Reset price in form data
+      setFormData({ ...fomDat, monthly_cash_max: "" });
     } else {
       setMonMaxErr("");
-      setFormData({ ...fomDat, monthly_cash_max: e.target.value }); // Update price in form data
+      setFormData({ ...fomDat, monthly_cash_max: e.target.value });
     }
   };
   const handleMonthMinErrorChange = (e) => {
@@ -388,10 +386,10 @@ const CreateDeal = () => {
     // Validate price
     if (price <= 0) {
       setMonMinErr("Value must be greater than 0");
-      setFormData({ ...fomDat, monthly_cash_min: "" }); // Reset price in form data
+      setFormData({ ...fomDat, monthly_cash_min: "" });
     } else {
       setMonMinErr("");
-      setFormData({ ...fomDat, monthly_cash_min: e.target.value }); // Update price in form data
+      setFormData({ ...fomDat, monthly_cash_min: e.target.value });
     }
   };
 
@@ -400,10 +398,10 @@ const CreateDeal = () => {
     // Validate price
     if (price <= 0) {
       setapproxPriceError("Total price must be greater than 0");
-      setFormData({ ...fomDat, approxPrice: "" }); // Reset price in form data
+      setFormData({ ...fomDat, approxPrice: "" });
     } else {
       setPriceError("");
-      setFormData({ ...fomDat, approxPrice: e.target.value }); // Update price in form data
+      setFormData({ ...fomDat, approxPrice: e.target.value });
     }
   };
 
@@ -513,27 +511,6 @@ const CreateDeal = () => {
                       </Col>
                     </Row>
                     <Row>
-                      {/* <Col>
-                    <FormGroup>
-                          <H6>{"Monthly Cash Flow Minimum"}</H6>
-                          <input
-                            className="form-control"
-                            type="number"
-                            name="monthly_cash_min"
-                            placeholder="Approximate monthly cashflow minimum"
-                            value={
-                              fomDat.monthly_cash_min > 0 ? fomDat.monthly_cash_min : ""
-                            }
-                            onChange={handleMonthMimErrorChange}
-                          />
-                           {fomDat.monthly_cash_min < 1 && monthMinError && (
-                            <span style={{ color: "red" }}>
-                              {monthMinError}
-                            </span>
-                          )}
-                        </FormGroup>
-                      </Col> */}
-
                       <Col sm="4">
                         <FormGroup>
                           <H6>{"Monthly Cash Flow Minimum"}</H6>
@@ -581,17 +558,6 @@ const CreateDeal = () => {
                       <Col sm="4">
                         <FormGroup>
                           <H6>{"Property Type"}</H6>
-
-                          {/* <div className="dropdown-basic">
-            <Dropdown className="dropdown">
-              <Button attrBtn={{ color: 'primary', className: 'dropbtn' }} >{"DropdownButton"} <span><i className="icofont icofont-arrow-down"></i></span></Button>
-              <DropdownMenu className="dropdown-content">
-                <DropdownItem href="#">{"Action"}</DropdownItem>
-                <DropdownItem href="#">{"AnotherAction"}</DropdownItem>
-                <DropdownItem href="#">{"SomethingElseHere"}</DropdownItem>
-              </DropdownMenu>
-            </Dropdown>
-          </div> */}
 
                           <Dropdown
                             className="dropdown"
@@ -743,18 +709,7 @@ const CreateDeal = () => {
                       />
                       {Option} {"Send to specific customer type"}
                     </Label>
-                    {/* <input
-                      type="checkbox"
-                      id="sendToALLCheckbox"
-                     
-                    /> */}
-                    {/* <label
-                      htmlFor="
-                    sendToALLCheckbox
-                    sendToALLCheckbox"
-                    >
-                      Send to specific customer type
-                    </label> */}
+
                     {sendToALLCheckbox && (
                       <Controller
                         name="sendTo"
@@ -910,7 +865,6 @@ const CustomSelect = () => {
       label: "Michael Johnson || michael@example.com",
       color: "green",
     },
-    // Add more options as needed
   ];
 
   return (
@@ -991,7 +945,7 @@ const MultiDropzone = ({ setImages, dealData, images }) => {
                   className="image-delete"
                   onClick={() => handleDelete(index)}
                 >
-                <i className="fa fa-trash-o"></i>
+                  <i className="fa fa-trash-o"></i>
                 </div>
               </div>
             ))
