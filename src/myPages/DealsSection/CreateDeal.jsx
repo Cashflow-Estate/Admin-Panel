@@ -49,7 +49,6 @@ const CreateDeal = () => {
   } = useForm();
   const { id } = useParams();
   const [propertyType, setPropertyType] = useState(""); // State to hold selected property type
-  console.log("🚀 ~ CreateDeal ~ propertyType:", propertyType);
 
   const handlePropertyTypeChange = (selectedType) => {
     setPropertyType(selectedType);
@@ -124,7 +123,6 @@ const CreateDeal = () => {
   const [client, setClient] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState([]);
-  console.log("🚀 ~ CreateDeal ~ selectedOptions:", selectedOptions);
   let opt = selectedOptions.map((val) => val.label);
 
   const [useEmail, setUseEmail] = useState(false);
@@ -142,15 +140,15 @@ const CreateDeal = () => {
   const [addressError, setAddressError] = useState("");
 
   const calculateAnnualReturns = () => {
-    if (monthlyCashMin && monthlyCashMax) {
+    if (fomDat.price>0 && fomDat.monthly_cash_min > 0 && fomDat.monthly_cash_max > 0) {
       const minReturn =
-        ((monthlyCashMin * 12) / parseFloat(formData.price)) * 100;
+      ((fomDat.monthly_cash_min * 12) / parseFloat(fomDat.price)) * 100;
       const maxReturn =
-        ((monthlyCashMax * 12) / parseFloat(formData.price)) * 100;
+      ((fomDat.monthly_cash_max * 12) / parseFloat(fomDat.price)) * 100;
       setApproxAnnualMinReturn(Math.ceil(minReturn.toFixed(2)));
-      setApproxAnnualMaxReturn(Math.ceil(maxReturn.toFixed(2)));
-    }
+      setApproxAnnualMaxReturn(Math.ceil(maxReturn.toFixed(2)));}
   };
+
 
   useEffect(() => {
     calculateAnnualReturns();
@@ -201,7 +199,7 @@ const CreateDeal = () => {
     setPriceError1("Price is require");
     await trigger();
 
-    if (images.length === 0) {
+    if (images?.length === 0) {
       alert("Please upload at least one image.");
       return;
     }
@@ -224,7 +222,7 @@ const CreateDeal = () => {
     dealData.append("area", data.area);
     dealData.append("baths", data.baths);
     dealData.append("address", addressSearch);
-    if (opt.length > 0 && selectedOptions.length) {
+    if (opt?.length > 0 && selectedOptions?.length) {
       dealData.append("sendTo", opt);
     }
 
@@ -297,7 +295,6 @@ const CreateDeal = () => {
     }
   }, [debouncedAddressSearch]);
   const [sendToALLCheckbox, setSendToALLCheckbox] = useState(false);
-  console.log("🚀 ~ CreateDeal ~ sendToALLCheckbox:", sendToALLCheckbox);
   useEffect(() => {
     if (!sendToALLCheckbox) {
       setSelectedOptions([]);
@@ -305,12 +302,8 @@ const CreateDeal = () => {
   }, [!sendToALLCheckbox]);
   const [sendToSpecificExistingCustomer, setSendToSpecificExistingCustomer] =
     useState(false);
-  console.log(
-    "🚀 ~ CreateDeal ~ sendToSpecificExistingCustomer:",
-    sendToSpecificExistingCustomer
-  );
+
   const [sendByEmail, setSendByEmail] = useState(false);
-  console.log("🚀 ~ CreateDeal ~ sendByEmail:", sendByEmail);
   const [emails, setEmails] = useState([]);
 
   const handleSendByEmailToggle = () => {
@@ -338,9 +331,8 @@ const CreateDeal = () => {
     setEmail(event.target.value);
   };
 
-  // Validation function to ensure either "Send To" or email is provided
   const validateSendOptions = () => {
-    if (!sendByEmail && selectedOptions.length === 0 && !email) {
+    if (!sendByEmail && selectedOptions?.length === 0 && !email) {
       return "Please select either 'Send To' or provide an email";
     }
     return true;
@@ -459,17 +451,14 @@ const CreateDeal = () => {
     }
   };
 
-  // const handleapproxPriceErrorChange = (e) => {
-  //   const price = parseFloat(e.target.value);
-  //   // Validate price
-  //   if (price <= 0) {
-  //     setapproxPriceError("Total price must be greater than 0");
-  //     setFormData({ ...fomDat, approxPrice: "" });
-  //   } else {
-  //     setPriceError("");
-  //     setFormData({ ...fomDat, approxPrice: e.target.value });
-  //   }
-  // };
+ 
+
+
+
+  useEffect(() => {
+    calculateAnnualReturns();
+  }, [monthlyCashMin, monthlyCashMax, fomDat.monthly_cash_max,fomDat.monthly_cash_min]);
+
 
   return (
     <Fragment>
@@ -514,7 +503,7 @@ const CreateDeal = () => {
                               className="form-control"
                             />
                           )}
-                          {!addressSearch.length && (
+                          {!addressSearch?.length && (
                             <span style={{ color: "red" }}>
                               Address is required
                             </span>
@@ -538,7 +527,7 @@ const CreateDeal = () => {
                           />
                           <span style={{ color: "red" }}>
                             {" "}
-                            {!fomDat.title.length && "Title is required"}
+                            {!fomDat.title?.length && "Title is required"}
                           </span>
                           <br />
                         </FormGroup>
@@ -562,7 +551,7 @@ const CreateDeal = () => {
                           {fomDat.price < 1 && priceError && (
                             <span style={{ color: "red" }}>
                               {" "}
-                              {priceError.length &&
+                              {priceError?.length &&
                                 "Price must be greater than 0"}
                             </span>
                           )}
@@ -590,7 +579,7 @@ const CreateDeal = () => {
                           {fomDat.approxPrice < 1 && approxPriceError && (
                             <span style={{ color: "red" }}>
                               {" "}
-                              {approxPriceError.length &&
+                              {approxPriceError?.length &&
                                 "Value must be greater than 0"}
                             </span>
                           )}
@@ -622,7 +611,7 @@ const CreateDeal = () => {
                           {fomDat.monthly_cash_min < 1 && monthMinError && (
                             <span style={{ color: "red" }}>
                               {" "}
-                              {monthMinError.length &&
+                              {monthMinError?.length &&
                                 "Value must be greater than 0"}
                             </span>
                           )}
@@ -630,7 +619,7 @@ const CreateDeal = () => {
                           {/* {fomDat.approxPrice < 1 && approxPriceError && (
                             <span style={{ color: "red" }}>
                               {" "}
-                              {approxPriceError.length &&
+                              {approxPriceError?.length &&
                                 "Value must be greater than 0"}
                             </span>
                           )} */}
@@ -661,7 +650,7 @@ const CreateDeal = () => {
                           {fomDat.monthly_cash_max < 1 && monthMaxError && (
                             <span style={{ color: "red" }}>
                               {" "}
-                              {monthMaxError.length &&
+                              {monthMaxError?.length &&
                                 "Value must be greater than 0"}
                             </span>
                           )}
@@ -698,7 +687,7 @@ const CreateDeal = () => {
                           </Dropdown>
                           <span style={{ color: "red" }}>
                             {" "}
-                            {!propertyType.length && "plz Select Property Type"}
+                            {!propertyType?.length && "plz Select Property Type"}
                           </span>
                         </FormGroup>
                       </Col>
@@ -760,7 +749,7 @@ const CreateDeal = () => {
                           {fomDat.bedRooms < 1 && bedError && (
                             <span style={{ color: "red" }}>
                               {" "}
-                              {bedError.length &&
+                              {bedError?.length &&
                                 "Value must be greater than 0"}
                             </span>
                           )}
@@ -784,7 +773,7 @@ const CreateDeal = () => {
                           {fomDat.baths < 1 && bathError && (
                             <span style={{ color: "red" }}>
                               {" "}
-                              {bathError.length &&
+                              {bathError?.length &&
                                 "Value must be greater than 0"}
                             </span>
                           )}
@@ -808,7 +797,7 @@ const CreateDeal = () => {
                           {fomDat.area < 1 && areaError && (
                             <span style={{ color: "red" }}>
                               {" "}
-                              {areaError.length &&
+                              {areaError?.length &&
                                 "Value must be greater than 0"}
                             </span>
                           )}
@@ -820,7 +809,7 @@ const CreateDeal = () => {
                           <input type="file" onChange={handleImageUpload} />
                         </Col>
 
-                        {featureimage.length === 0 && (
+                        {featureimage?.length === 0 && (
                           <p style={{ color: "red" }}>
                             Please upload primary image.
                           </p>
@@ -835,7 +824,7 @@ const CreateDeal = () => {
                         dealData={dealData}
                       />
                     </Col>
-                    {images.length === 0 && (
+                    {images?.length === 0 && (
                       <p style={{ color: "red" }}>
                         Please upload at least one gallery image.
                       </p>
@@ -919,9 +908,9 @@ const CreateDeal = () => {
                       </div>
                     )}
                     <br></br>
-                    {emails.length > 0 && (
+                    {emails?.length > 0 && (
                       <div>
-                        {emails.length > 0 && (
+                        {emails?.length > 0 && (
                           <div>
                             <h5>Added Emails:</h5>
                             <ul>
@@ -1040,9 +1029,9 @@ const CreateDeal = () => {
                       </div>
                     )}
                     <br></br>
-                    {emails.length > 0 && (
+                    {emails?.length > 0 && (
                       <div>
-                        {emails.length > 0 && (
+                        {emails?.length > 0 && (
                           <div>
                             <h5>Added Emails:</h5>
                             <ul>
@@ -1087,7 +1076,7 @@ const CreateDeal = () => {
                           <Button
                             color="success"
                             // disabled={
-                            //   !addressSearch.length && images.length === 0
+                            //   !addressSearch?.length && images?.length === 0
                             // }
                           >
                             {id ? "Edit" : "Add"}
@@ -1279,7 +1268,7 @@ const SingleDropzone = ({ setImages, dealData, images }) => {
         )}
       </Dropzone>
       <div className="image-preview">
-        {images.length > 0 && (
+        {images?.length > 0 && (
           <div className="image-container">
             <img src={URL.createObjectURL(images[0])} alt="Feature Image" />
             <div className="image-delete" onClick={handleDelete}>
