@@ -184,7 +184,7 @@ const CreateDeal = () => {
   const AddProject = async (data) => {
     setFormSubmitted(true);
     setClient(true);
-
+    setPriceError1("Price is require");
     await trigger();
 
     if (images.length === 0) {
@@ -332,7 +332,10 @@ const CreateDeal = () => {
     return true;
   };
   const [bedError, setBedError] = useState("");
+  const [areaError, setAreaError] = useState("");
+  const [bathError, setBathError] = useState("");
   const [priceError, setPriceError] = useState("");
+  const [priceError1, setPriceError1] = useState("");
   const [approxPriceError, setapproxPriceError] = useState("");
   const [monthMaxError, setMonMaxErr] = useState("");
   const [monthMinError, setMonMinErr] = useState("");
@@ -344,10 +347,34 @@ const CreateDeal = () => {
     monthly_cash_max: "",
     monthly_cash_min: "",
     bedRooms: "",
+    baths: "",
+    area: "",
 
     // Add other form fields here
   });
 
+  const handleAreaChange = (e) => {
+    const price = parseFloat(e.target.value);
+    // Validate price
+    if (price <= 0) {
+      setAreaError("Value must be greater than 0");
+      setFormData({ ...fomDat, area: "" });
+    } else {
+      setAreaError("");
+      setFormData({ ...fomDat, area: e.target.value });
+    }
+  };
+  const handleBathChange = (e) => {
+    const price = parseFloat(e.target.value);
+    // Validate price
+    if (price <= 0) {
+      setBathError("Value must be greater than 0");
+      setFormData({ ...fomDat, baths: "" });
+    } else {
+      setBathError("");
+      setFormData({ ...fomDat, baths: e.target.value });
+    }
+  };
   const handleBedChange = (e) => {
     const price = parseFloat(e.target.value);
     // Validate price
@@ -483,9 +510,17 @@ const CreateDeal = () => {
                             value={fomDat.price > 0 ? fomDat.price : ""}
                             onChange={handlePriceChange}
                           />
-
+                          <span style={{ color: "red" }}>
+                            {" "}
+                            {!fomDat.price && "Price is required"}
+                          </span>
+                          <br />
                           {fomDat.price < 1 && priceError && (
-                            <span style={{ color: "red" }}>{priceError}</span>
+                            <span style={{ color: "red" }}>
+                              {" "}
+                              {priceError.length &&
+                                "Price must be greater than 0"}
+                            </span>
                           )}
                         </FormGroup>
                       </Col>
@@ -502,9 +537,16 @@ const CreateDeal = () => {
                             }
                             onChange={handleapproxPriceErrorChange}
                           />
+                          <span style={{ color: "red" }}>
+                            {!formData.approxPrice &&
+                              "Slow Flip Total is required"}
+                          </span>
+                          <br />
                           {fomDat.approxPrice < 1 && approxPriceError && (
                             <span style={{ color: "red" }}>
-                              {approxPriceError}
+                              {" "}
+                              {approxPriceError.length &&
+                                "Value must be greater than 0"}
                             </span>
                           )}
                         </FormGroup>
@@ -526,9 +568,18 @@ const CreateDeal = () => {
                             }
                             onChange={handleMonthMinErrorChange}
                           />
+
+                          <span style={{ color: "red" }}>
+                          {!fomDat.monthly_cash_min &&
+
+                              "Monthly Cash Min is required"}
+                          </span>
+                          <br />
                           {fomDat.monthly_cash_min < 1 && monthMinError && (
                             <span style={{ color: "red" }}>
-                              {monthMinError}
+                              {" "}
+                              {!monthMinError.length &&
+                                "Value must be greater than 0"}
                             </span>
                           )}
                         </FormGroup>
@@ -548,9 +599,18 @@ const CreateDeal = () => {
                             }
                             onChange={handleMonthMAxErrorChange}
                           />
+
+                          <span style={{ color: "red" }}>
+                            {!fomDat.monthly_cash_max  &&
+                              "Monthly Cash Max is required"}
+                          </span>
+                          <br />
+                          
                           {fomDat.monthly_cash_max < 1 && monthMaxError && (
                             <span style={{ color: "red" }}>
-                              {monthMaxError}
+                              {" "}
+                              {!monthMaxError.length &&
+                                "Value must be greater than 0"}
                             </span>
                           )}
                         </FormGroup>
@@ -625,24 +685,80 @@ const CreateDeal = () => {
                       </Col>
                     </Row>
                     <Row>
-                      <Col sm="4">
-                        <H6>{"Total Bed Rooms"}</H6>
+                      <Col sm={4}>
                         <FormGroup>
+                          <h6 style={{ color: "black" }}>{"Bedooms"}</h6>
                           <input
                             className="form-control"
                             type="number"
                             name="bedRooms"
-                            placeholder="Total Bed Rooms"
+                            placeholder="Total Bedrooms"
                             value={fomDat.bedRooms > 0 ? fomDat.bedRooms : ""}
                             onChange={handleBedChange}
                           />
+                          <span style={{ color: "red" }}>
+                            {!formData.bedRooms && "Bedroom is required"}
+                          </span>
+                          <br />
                           {fomDat.bedRooms < 1 && bedError && (
-                            <span style={{ color: "red" }}>{bedError}</span>
+                            <span style={{ color: "red" }}>
+                              {" "}
+                              {bedError.length &&
+                                "Value must be greater than 0"}
+                            </span>
+                          )}
+                        </FormGroup>
+                      </Col>
+                      <Col sm={4}>
+                        <FormGroup>
+                          <h6 style={{ color: "black" }}>{"Total Baths"}</h6>
+                          <input
+                            className="form-control"
+                            type="number"
+                            name="baths"
+                            placeholder="Total Baths"
+                            value={fomDat.baths > 0 ? fomDat.baths : ""}
+                            onChange={handleBathChange}
+                          />
+                          <span style={{ color: "red" }}>
+                            {!formData.baths && "Bedroom is required"}
+                          </span>
+                          <br />
+                          {fomDat.baths < 1 && bathError && (
+                            <span style={{ color: "red" }}>
+                              {" "}
+                              {bathError.length &&
+                                "Value must be greater than 0"}
+                            </span>
+                          )}
+                        </FormGroup>
+                      </Col>
+                      <Col sm={4}>
+                        <FormGroup>
+                          <h6 style={{ color: "black" }}>{"Area in Sqft"}</h6>
+                          <input
+                            className="form-control"
+                            type="number"
+                            name="area"
+                            placeholder="Total Area in Sqft"
+                            value={fomDat.area > 0 ? fomDat.area : ""}
+                            onChange={handleAreaChange}
+                          />
+                          <span style={{ color: "red" }}>
+                            {!formData.area && "Area is required"}
+                          </span>
+                          <br />
+                          {fomDat.area < 1 && areaError && (
+                            <span style={{ color: "red" }}>
+                              {" "}
+                              {areaError.length &&
+                                "Value must be greater than 0"}
+                            </span>
                           )}
                         </FormGroup>
                       </Col>
 
-                      <Col sm="4">
+                      {/* <Col sm="4">
                         <H6>{"Total Baths"}</H6>
                         <FormGroup>
                           <input
@@ -656,8 +772,8 @@ const CreateDeal = () => {
                             {errors.baths && "Total Baths is required"}
                           </span>
                         </FormGroup>
-                      </Col>
-                      <Col sm="4">
+                      </Col> */}
+                      {/* <Col sm="4">
                         <H6>{"Area in Sqft"}</H6>
                         <FormGroup>
                           <input
@@ -671,7 +787,7 @@ const CreateDeal = () => {
                             {errors.area && "Area in Sqft is required"}
                           </span>
                         </FormGroup>
-                      </Col>
+                      </Col> */}
                       <Row>
                         <Col sm="12">
                           <input type="file" onChange={handleImageUpload} />
@@ -816,9 +932,9 @@ const CreateDeal = () => {
                         <div className="text-end">
                           <Button
                             color="success"
-                            disabled={
-                              !addressSearch.length && images.length === 0
-                            }
+                            // disabled={
+                            //   !addressSearch.length && images.length === 0
+                            // }
                           >
                             {id ? "Edit" : "Add"}
                           </Button>
