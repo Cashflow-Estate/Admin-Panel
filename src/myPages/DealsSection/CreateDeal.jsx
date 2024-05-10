@@ -336,12 +336,14 @@ const CreateDeal = () => {
   const [bathError, setBathError] = useState("");
   const [priceError, setPriceError] = useState("");
   const [priceError1, setPriceError1] = useState("");
+  const [titleError, setTitleError] = useState("");
   const [approxPriceError, setapproxPriceError] = useState("");
   const [monthMaxError, setMonMaxErr] = useState("");
   const [monthMinError, setMonMinErr] = useState("");
   // State to manage form submission
   // State to manage form data
   const [fomDat, setFormData] = useState({
+    title:"",
     price: "",
     approxPrice: "",
     monthly_cash_max: "",
@@ -353,6 +355,17 @@ const CreateDeal = () => {
     // Add other form fields here
   });
 
+  const handleTitleChange = (e) => {
+    const price = parseFloat(e.target.value);
+    // Validate price
+    if (price <= 0) {
+      setTitleError("Value must be greater than 0");
+      setFormData({ ...fomDat, title: "" });
+    } else {
+      setTitleError("");
+      setFormData({ ...fomDat, title: e.target.value });
+    }
+  };
   const handleAreaChange = (e) => {
     const price = parseFloat(e.target.value);
     // Validate price
@@ -492,11 +505,15 @@ const CreateDeal = () => {
                             type="text"
                             name="title"
                             placeholder="Deal name *"
-                            {...register("title", { required: true })}
+                            value={fomDat?.title?.length > 0 ? fomDat.title : ""}
+                            onChange={handleTitleChange}
                           />
                           <span style={{ color: "red" }}>
-                            {errors.title && "Title is required"}
+                            {" "}
+                            {!fomDat.title.length && "Title is required"}
                           </span>
+                          <br />
+                     
                         </FormGroup>
                       </Col>
                       <Col sm={4}>
