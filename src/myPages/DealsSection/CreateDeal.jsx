@@ -2,7 +2,13 @@ import Dropzone from "react-dropzone";
 import React, { Fragment, useEffect, useState } from "react";
 import { Breadcrumbs, Btn, H6 } from "../../AbstractElements";
 import { useForm, Controller } from "react-hook-form";
-import { Dropdown, FormLabel, Spinner } from "react-bootstrap";
+import {
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  FormLabel,
+  Spinner,
+} from "react-bootstrap";
 
 import {
   Container,
@@ -73,6 +79,10 @@ const CreateDeal = () => {
   const [images, setImages] = useState([]);
   const [featureimage, setFeatureImages] = useState([]);
   const [files, setFiles] = useState([]);
+  function handleImageUpload(event) {
+    const file = event.target.files[0];
+    // Now you have the file, you can do whatever you want with it, like uploading it to a server.
+  }
 
   useEffect(() => {
     const fetchFiles = async () => {
@@ -335,7 +345,7 @@ const CreateDeal = () => {
     approxPrice: "",
     monthly_cash_max: "",
     monthly_cash_min: "",
-    bedRooms:""
+    bedRooms: "",
 
     // Add other form fields here
   });
@@ -415,6 +425,39 @@ const CreateDeal = () => {
                     className="theme-form"
                     onSubmit={handleSubmit(AddProject)}
                   >
+                    <Row>
+                      <Col sm="12">
+                        <FormGroup>
+                          <h6 style={{ color: "black" }}>Address</h6>
+                          {id ? (
+                            <ReactGoogleAutocomplete
+                              apiKey={"AIzaSyA2m2ueygCpSjOTT2FSIl9YbZj2zGaNqRA"}
+                              onPlaceSelected={(place) =>
+                                setAddressSearch(place.formatted_address)
+                              }
+                              value={addressSearch}
+                              onChange={(e) => setAddressSearch(e.target.value)}
+                              style={{ width: "100%" }}
+                              className="form-control"
+                            />
+                          ) : (
+                            <ReactGoogleAutocomplete
+                              apiKey={"AIzaSyA2m2ueygCpSjOTT2FSIl9YbZj2zGaNqRA"}
+                              onPlaceSelected={(place) =>
+                                setAddressSearch(place.formatted_address)
+                              }
+                              style={{ width: "100%" }}
+                              className="form-control"
+                            />
+                          )}
+                          {!addressSearch.length && (
+                            <span style={{ color: "red" }}>
+                              Address is required
+                            </span>
+                          )}
+                        </FormGroup>
+                      </Col>
+                    </Row>
                     <Row>
                       <Col sm={4}>
                         <FormGroup>
@@ -538,8 +581,23 @@ const CreateDeal = () => {
                       <Col sm="4">
                         <FormGroup>
                           <H6>{"Property Type"}</H6>
-                          <Dropdown onSelect={handlePropertyTypeChange}>
-                            <Dropdown.Toggle variant="" id="dropdown-basic">
+
+                          {/* <div className="dropdown-basic">
+            <Dropdown className="dropdown">
+              <Button attrBtn={{ color: 'primary', className: 'dropbtn' }} >{"DropdownButton"} <span><i className="icofont icofont-arrow-down"></i></span></Button>
+              <DropdownMenu className="dropdown-content">
+                <DropdownItem href="#">{"Action"}</DropdownItem>
+                <DropdownItem href="#">{"AnotherAction"}</DropdownItem>
+                <DropdownItem href="#">{"SomethingElseHere"}</DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
+          </div> */}
+
+                          <Dropdown
+                            className="dropdown"
+                            onSelect={handlePropertyTypeChange}
+                          >
+                            <Dropdown.Toggle variant="">
                               {propertyType
                                 ? propertyType
                                 : "Select Property Type"}
@@ -609,17 +667,11 @@ const CreateDeal = () => {
                             type="number"
                             name="bedRooms"
                             placeholder="Total Bed Rooms"
-                            value={
-                              fomDat.bedRooms > 0
-                                ? fomDat.bedRooms
-                                : ""
-                            }
+                            value={fomDat.bedRooms > 0 ? fomDat.bedRooms : ""}
                             onChange={handleBedChange}
                           />
-                             {fomDat.bedRooms < 1 && bedError && (
-                            <span style={{ color: "red" }}>
-                              {bedError}
-                            </span>
+                          {fomDat.bedRooms < 1 && bedError && (
+                            <span style={{ color: "red" }}>{bedError}</span>
                           )}
                         </FormGroup>
                       </Col>
@@ -656,71 +708,53 @@ const CreateDeal = () => {
                       </Col>
                       <Row>
                         <Col sm="12">
-                          <SingleDropzone
-                            images={featureimage}
-                            setImages={setFeatureImages}
-                            dealData={dealData}
-                          />
+                          <input type="file" onChange={handleImageUpload} />
                         </Col>
+
                         {images.length === 0 && (
                           <p style={{ color: "red" }}>
-                            Please upload feature image.
+                            Please upload primary image.
                           </p>
                         )}
                       </Row>
-                      <Row>
-                        <Col sm="12">
-                          <FormGroup>
-                            <h6 style={{ color: "black" }}>Address</h6>
-                            {id ? (
-                              <ReactGoogleAutocomplete
-                                apiKey={
-                                  "AIzaSyBDTYrhS8wWe85Z2yBCqMqoIqysRZjYLtE"
-                                }
-                                onPlaceSelected={(place) =>
-                                  setAddressSearch(place.formatted_address)
-                                }
-                                value={addressSearch}
-                                onChange={(e) =>
-                                  setAddressSearch(e.target.value)
-                                }
-                                style={{ width: "100%" }}
-                                className="form-control"
-                              />
-                            ) : (
-                              <ReactGoogleAutocomplete
-                                apiKey={
-                                  "AIzaSyBDTYrhS8wWe85Z2yBCqMqoIqysRZjYLtE"
-                                }
-                                onPlaceSelected={(place) =>
-                                  setAddressSearch(place.formatted_address)
-                                }
-                                style={{ width: "100%" }}
-                                className="form-control"
-                              />
-                            )}
-                            {!addressSearch.length && (
-                              <span style={{ color: "red" }}>
-                                Address is required
-                              </span>
-                            )}
-                          </FormGroup>
-                        </Col>
-                      </Row>
                     </Row>
-                    <input
+
+                    <Col sm="12">
+                      <MultiDropzone
+                        images={images}
+                        setImages={setImages}
+                        dealData={dealData}
+                      />
+                    </Col>
+                    {images.length === 0 && (
+                      <p style={{ color: "red" }}>
+                        Please upload at least one gallery image.
+                      </p>
+                    )}
+
+                    <Label className="d-block" for="chk-ani">
+                      <Input
+                        className="checkbox_animated"
+                        id="sendToALLCheckbox"
+                        type="checkbox"
+                        defaultChecked
+                        checked={sendToALLCheckbox}
+                        onChange={handleSendToALLCheckbox}
+                      />
+                      {Option} {"Send to specific customer type"}
+                    </Label>
+                    {/* <input
                       type="checkbox"
                       id="sendToALLCheckbox"
-                      checked={sendToALLCheckbox}
-                      onChange={handleSendToALLCheckbox}
-                    />
-                    <label
+                     
+                    /> */}
+                    {/* <label
                       htmlFor="
                     sendToALLCheckbox
                     sendToALLCheckbox"
                     >
                       Send to specific customer type
-                    </label>
+                    </label> */}
                     {sendToALLCheckbox && (
                       <Controller
                         name="sendTo"
@@ -740,15 +774,18 @@ const CreateDeal = () => {
                       />
                     )}
                     <br></br>
-                    <input
-                      type="checkbox"
-                      id="sendToSpecificExistingCustomer"
-                      checked={sendToSpecificExistingCustomer}
-                      onChange={handleSpecificExistingCustomer}
-                    />
-                    <label htmlFor="sendToSpecificExistingCustomer">
-                      Send To Specific Existing Customer
-                    </label>
+
+                    <Label className="d-block" for="chk-ani">
+                      <Input
+                        className="checkbox_animated"
+                        id="sendToSpecificExistingCustomer"
+                        type="checkbox"
+                        defaultChecked
+                        checked={sendToSpecificExistingCustomer}
+                        onChange={handleSpecificExistingCustomer}
+                      />
+                      {Option} {" Send To Specific Existing Customer"}
+                    </Label>
                     {sendToSpecificExistingCustomer && (
                       <>
                         {" "}
@@ -756,15 +793,18 @@ const CreateDeal = () => {
                       </>
                     )}
                     <br></br>
-                    <input
-                      type="checkbox"
-                      id="sendByEmailCheckbox"
-                      checked={sendByEmail}
-                      onChange={handleSendByEmailToggle}
-                    />
-                    <label htmlFor="sendByEmailCheckbox">
-                      Send to new customers
-                    </label>
+
+                    <Label className="d-block" for="chk-ani">
+                      <Input
+                        className="checkbox_animated"
+                        id="sendByEmailCheckbox"
+                        type="checkbox"
+                        defaultChecked
+                        checked={sendByEmail}
+                        onChange={handleSendByEmailToggle}
+                      />
+                      {Option} {" Send to new customers"}
+                    </Label>
                     {sendByEmail && (
                       <div>
                         <input
@@ -788,13 +828,26 @@ const CreateDeal = () => {
                             <h5>Added Emails:</h5>
                             <ul>
                               {emails.map((email, index) => (
-                                <li key={index}>
+                                <li
+                                  key={index}
+                                  style={{
+                                    margin: "5px 0",
+                                    padding: "5px",
+                                    fontFamily: "Arial, sans-serif",
+                                    fontSize: "16px",
+                                  }}
+                                >
                                   {email}
-                                  <button
+                                  <span
+                                    style={{
+                                      color: "red",
+                                      marginLeft: "5px",
+                                      cursor: "pointer",
+                                    }}
                                     onClick={() => handleRemoveEmail(index)}
                                   >
-                                    Delete
-                                  </button>
+                                    <i className="fa fa-trash-o"></i>
+                                  </span>
                                 </li>
                               ))}
                             </ul>
@@ -803,18 +856,6 @@ const CreateDeal = () => {
                       </div>
                     )}
 
-                    <Col sm="12">
-                      <MultiDropzone
-                        images={images}
-                        setImages={setImages}
-                        dealData={dealData}
-                      />
-                    </Col>
-                    {images.length === 0 && (
-                      <p style={{ color: "red" }}>
-                        Please upload at least one gallery image.
-                      </p>
-                    )}
                     <Row>
                       <Col>
                         <div className="text-end">
@@ -950,7 +991,7 @@ const MultiDropzone = ({ setImages, dealData, images }) => {
                   className="image-delete"
                   onClick={() => handleDelete(index)}
                 >
-                  <FaTrash />
+                <i className="fa fa-trash-o"></i>
                 </div>
               </div>
             ))
