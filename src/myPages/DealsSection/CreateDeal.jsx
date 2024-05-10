@@ -93,7 +93,7 @@ const CreateDeal = () => {
   const [files, setFiles] = useState([]);
   function handleImageUpload(event) {
     const file = event.target.files[0];
-    setFeatureImages(file)
+    setFeatureImages(file);
   }
 
   useEffect(() => {
@@ -297,9 +297,20 @@ const CreateDeal = () => {
     }
   }, [debouncedAddressSearch]);
   const [sendToALLCheckbox, setSendToALLCheckbox] = useState(false);
+  console.log("🚀 ~ CreateDeal ~ sendToALLCheckbox:", sendToALLCheckbox);
+  useEffect(() => {
+    if (!sendToALLCheckbox) {
+      setSelectedOptions([]);
+    }
+  }, [!sendToALLCheckbox]);
   const [sendToSpecificExistingCustomer, setSendToSpecificExistingCustomer] =
     useState(false);
+  console.log(
+    "🚀 ~ CreateDeal ~ sendToSpecificExistingCustomer:",
+    sendToSpecificExistingCustomer
+  );
   const [sendByEmail, setSendByEmail] = useState(false);
+  console.log("🚀 ~ CreateDeal ~ sendByEmail:", sendByEmail);
   const [emails, setEmails] = useState([]);
 
   const handleSendByEmailToggle = () => {
@@ -830,7 +841,7 @@ const CreateDeal = () => {
                       </p>
                     )}
 
-                    <Label className="d-block" for="chk-ani">
+                    {/* <Label className="d-block" for="chk-ani">
                       <Input
                         className="checkbox_animated"
                         id="sendToALLCheckbox"
@@ -941,8 +952,135 @@ const CreateDeal = () => {
                           </div>
                         )}
                       </div>
-                    )}
+                    )} */}
+                    <Label className="d-block" for="chk-ani">
+                      <Input
+                        className="checkbox_animated"
+                        id="sendToALLCheckbox"
+                        type="checkbox"
+                        checked={sendToALLCheckbox}
+                        onChange={handleSendToALLCheckbox}
+                      />
+                      {Option} {"Send to specific customer type"}
+                    </Label>
 
+                    {sendToALLCheckbox && (
+                      <Controller
+                        name="sendTo"
+                        control={control}
+                        rules={{ validate: validateSendOptions }}
+                        render={({ field }) => (
+                          <Select
+                            {...field}
+                            options={options}
+                            isMulti
+                            onChange={(value) => {
+                              field.onChange(value);
+                              setSelectedOptions(value);
+                            }}
+                          />
+                        )}
+                      />
+                    )}
+                    <br></br>
+
+                    <Label className="d-block" for="chk-ani">
+                      <Input
+                        className="checkbox_animated"
+                        id="sendToSpecificExistingCustomer"
+                        type="checkbox"
+                        checked={sendToSpecificExistingCustomer}
+                        onChange={() => {
+                          handleSpecificExistingCustomer();
+                          // Empty related checkboxes' states
+                          setSendToALLCheckbox(false);
+                          setSendByEmail(false);
+                          setEmails([]);
+                        }}
+                      />
+                      {Option} {" Send To Specific Existing Customer"}
+                    </Label>
+                    {sendToSpecificExistingCustomer && (
+                      <>
+                        {" "}
+                        <CustomSelect name="sendToSpecificExistingCustomer" />
+                      </>
+                    )}
+                    <br></br>
+
+                    <Label className="d-block" for="chk-ani">
+                      <Input
+                        className="checkbox_animated"
+                        id="sendByEmailCheckbox"
+                        type="checkbox"
+                        checked={sendByEmail}
+                        onChange={() => {
+                          handleSendByEmailToggle();
+                          // Empty related checkboxes' states
+                          setSendToALLCheckbox(false);
+                          setSendToSpecificExistingCustomer(false);
+                          setEmails([]);
+                        }}
+                      />
+                      {Option} {" Send to new customers"}
+                    </Label>
+                    {sendByEmail && (
+                      <div>
+                        <input
+                          className="form-control"
+                          type="email"
+                          placeholder="Enter email"
+                          onChange={handleEmailChange}
+                          value={email}
+                        />
+                        <br></br>
+                        <Button color="success" onClick={handleAddEmail}>
+                          Add Email
+                        </Button>
+                      </div>
+                    )}
+                    <br></br>
+                    {emails.length > 0 && (
+                      <div>
+                        {emails.length > 0 && (
+                          <div>
+                            <h5>Added Emails:</h5>
+                            <ul>
+                              {emails.map((email, index) => (
+                                <li
+                                  key={index}
+                                  style={{
+                                    margin: "5px 0",
+                                    padding: "5px",
+                                    fontFamily: "Arial, sans-serif",
+                                    fontSize: "16px",
+                                  }}
+                                >
+                                  {email}
+                                  <span
+                                    style={{
+                                      color: "red",
+                                      marginLeft: "5px",
+                                      cursor: "pointer",
+                                    }}
+                                    onClick={() => handleRemoveEmail(index)}
+                                  >
+                                    <i className="fa fa-trash-o"></i>
+                                  </span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+                      </div>
+                    )}
+                    {!sendByEmail &&
+                      !sendToALLCheckbox &&
+                      !sendToSpecificExistingCustomer && (
+                        <span style={{ color: "red" }}>
+                          {"Plz pick at least one"}
+                        </span>
+                      )}
                     <Row>
                       <Col>
                         <div className="text-end">
@@ -972,7 +1110,6 @@ const CreateDeal = () => {
             }}
           >
             <Spinner />
-            "Loading..........."
           </div>
         )}
       </Container>
