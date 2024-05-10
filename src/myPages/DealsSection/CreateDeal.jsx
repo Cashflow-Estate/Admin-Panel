@@ -33,7 +33,7 @@ import ReactGoogleAutocomplete from "react-google-autocomplete";
 
 const CreateDeal = () => {
   const [selectedAddress, setSelectedAddress] = useState("");
-
+  
   const handleAddressSelect = (address) => {
     setSelectedAddress(address);
   };
@@ -48,13 +48,54 @@ const CreateDeal = () => {
     reset,
   } = useForm();
   const { id } = useParams();
+  const [dealData, setDealData] = useState(null);
   const [propertyType, setPropertyType] = useState(""); // State to hold selected property type
+  const [images, setImages] = useState([]);
+  const [featureimage, setFeatureImages] = useState([]);
+  const [files, setFiles] = useState([]);
+  const [client, setClient] = useState(false);
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [selectedOptions, setSelectedOptions] = useState([]);
+  const [useEmail, setUseEmail] = useState(false);
+  const [email, setEmail] = useState("");
+  const [addressOptions, setAddressOptions] = useState([]);
+  const [address, setAddress] = useState(true);
+  const [addressSearch, setAddressSearch] = useState("");
+  const [monthlyCashMin, setMonthlyCashMin] = useState("");
+  const [monthlyCashMax, setMonthlyCashMax] = useState("");
+  const [approxAnnualMinReturn, setApproxAnnualMinReturn] = useState("");
+  const [approxAnnualMaxReturn, setApproxAnnualMaxReturn] = useState("");
+  const [debouncedAddressSearch, setDebouncedAddressSearch] = useState("");
+  const [sendByEmail, setSendByEmail] = useState(false);
+  const [emails, setEmails] = useState([]);
+  const [sendToSpecificExistingCustomer, setSendToSpecificExistingCustomer] =
+  useState(false);
+
+  const [sendToALLCheckbox, setSendToALLCheckbox] = useState(false);
+  const [bedError, setBedError] = useState("");
+  const [areaError, setAreaError] = useState("");
+  const [bathError, setBathError] = useState("");
+  const [priceError, setPriceError] = useState("");
+  const [priceError1, setPriceError1] = useState("");
+  const [titleError, setTitleError] = useState("");
+  const [approxPriceError, setapproxPriceError] = useState("");
+  const [monthMaxError, setMonMaxErr] = useState("");
+  const [monthMinError, setMonMinErr] = useState("");
+  const [fomDat, setFormData] = useState({
+    title: "",
+    price: "",
+    approxPrice: "",
+    monthly_cash_max: "",
+    monthly_cash_min: "",
+    bedRooms: "",
+    baths: "",
+    area: "",
+  });
 
   const handlePropertyTypeChange = (selectedType) => {
     setPropertyType(selectedType);
   };
 
-  const [dealData, setDealData] = useState(null);
 
   const validatePropertyType = () => {
     return propertyType !== "" || "Property type is required";
@@ -87,9 +128,7 @@ const CreateDeal = () => {
   }, [id]);
 
   const formData = watch();
-  const [images, setImages] = useState([]);
-  const [featureimage, setFeatureImages] = useState([]);
-  const [files, setFiles] = useState([]);
+
   function handleImageUpload(event) {
     const file = event.target.files[0];
     setFeatureImages(file);
@@ -120,35 +159,29 @@ const CreateDeal = () => {
     fetchFiles();
   }, [images]);
 
-  const [client, setClient] = useState(false);
-  const [formSubmitted, setFormSubmitted] = useState(false);
-  const [selectedOptions, setSelectedOptions] = useState([]);
+
   let opt = selectedOptions.map((val) => val.label);
 
-  const [useEmail, setUseEmail] = useState(false);
-  const [email, setEmail] = useState("");
+ 
 
   const history = useNavigate();
 
-  const [addressOptions, setAddressOptions] = useState([]);
-  const [address, setAddress] = useState(true);
-  const [addressSearch, setAddressSearch] = useState("");
-  const [monthlyCashMin, setMonthlyCashMin] = useState("");
-  const [monthlyCashMax, setMonthlyCashMax] = useState("");
-  const [approxAnnualMinReturn, setApproxAnnualMinReturn] = useState("");
-  const [approxAnnualMaxReturn, setApproxAnnualMaxReturn] = useState("");
-  const [addressError, setAddressError] = useState("");
+
 
   const calculateAnnualReturns = () => {
-    if (fomDat.price>0 && fomDat.monthly_cash_min > 0 && fomDat.monthly_cash_max > 0) {
+    if (
+      fomDat.price > 0 &&
+      fomDat.monthly_cash_min > 0 &&
+      fomDat.monthly_cash_max > 0
+    ) {
       const minReturn =
-      ((fomDat.monthly_cash_min * 12) / parseFloat(fomDat.price)) * 100;
+        ((fomDat.monthly_cash_min * 12) / parseFloat(fomDat.price)) * 100;
       const maxReturn =
-      ((fomDat.monthly_cash_max * 12) / parseFloat(fomDat.price)) * 100;
+        ((fomDat.monthly_cash_max * 12) / parseFloat(fomDat.price)) * 100;
       setApproxAnnualMinReturn(Math.ceil(minReturn.toFixed(2)));
-      setApproxAnnualMaxReturn(Math.ceil(maxReturn.toFixed(2)));}
+      setApproxAnnualMaxReturn(Math.ceil(maxReturn.toFixed(2)));
+    }
   };
-
 
   useEffect(() => {
     calculateAnnualReturns();
@@ -195,14 +228,10 @@ const CreateDeal = () => {
 
   const AddProject = async (data) => {
     setFormSubmitted(true);
-    setClient(true);
-    setPriceError1("Price is require");
+    // setClient(true);
     await trigger();
 
-    if (images?.length === 0) {
-      alert("Please upload at least one image.");
-      return;
-    }
+
 
     const selectedAddress = Array.isArray(addressSearch)
       ? addressSearch?.map((val) => `${val.label}`)
@@ -273,7 +302,6 @@ const CreateDeal = () => {
       console.error("Error fetching location data:", error);
     }
   };
-  const [debouncedAddressSearch, setDebouncedAddressSearch] = useState("");
 
   // Debounce address search
   useEffect(() => {
@@ -294,17 +322,14 @@ const CreateDeal = () => {
       handleAddressChange(debouncedAddressSearch);
     }
   }, [debouncedAddressSearch]);
-  const [sendToALLCheckbox, setSendToALLCheckbox] = useState(false);
   useEffect(() => {
     if (!sendToALLCheckbox) {
       setSelectedOptions([]);
     }
   }, [!sendToALLCheckbox]);
-  const [sendToSpecificExistingCustomer, setSendToSpecificExistingCustomer] =
-    useState(false);
 
-  const [sendByEmail, setSendByEmail] = useState(false);
-  const [emails, setEmails] = useState([]);
+
+ 
 
   const handleSendByEmailToggle = () => {
     setSendByEmail(!sendByEmail);
@@ -337,29 +362,8 @@ const CreateDeal = () => {
     }
     return true;
   };
-  const [bedError, setBedError] = useState("");
-  const [areaError, setAreaError] = useState("");
-  const [bathError, setBathError] = useState("");
-  const [priceError, setPriceError] = useState("");
-  const [priceError1, setPriceError1] = useState("");
-  const [titleError, setTitleError] = useState("");
-  const [approxPriceError, setapproxPriceError] = useState("");
-  const [monthMaxError, setMonMaxErr] = useState("");
-  const [monthMinError, setMonMinErr] = useState("");
-  // State to manage form submission
-  // State to manage form data
-  const [fomDat, setFormData] = useState({
-    title: "",
-    price: "",
-    approxPrice: "",
-    monthly_cash_max: "",
-    monthly_cash_min: "",
-    bedRooms: "",
-    baths: "",
-    area: "",
 
-    // Add other form fields here
-  });
+
 
   const handleTitleChange = (e) => {
     const price = parseFloat(e.target.value);
@@ -451,14 +455,14 @@ const CreateDeal = () => {
     }
   };
 
- 
-
-
-
   useEffect(() => {
     calculateAnnualReturns();
-  }, [monthlyCashMin, monthlyCashMax, fomDat.monthly_cash_max,fomDat.monthly_cash_min]);
-
+  }, [
+    monthlyCashMin,
+    monthlyCashMax,
+    fomDat.monthly_cash_max,
+    fomDat.monthly_cash_min,
+  ]);
 
   return (
     <Fragment>
@@ -687,7 +691,8 @@ const CreateDeal = () => {
                           </Dropdown>
                           <span style={{ color: "red" }}>
                             {" "}
-                            {!propertyType?.length && "plz Select Property Type"}
+                            {!propertyType?.length &&
+                              "plz Select Property Type"}
                           </span>
                         </FormGroup>
                       </Col>
@@ -806,7 +811,11 @@ const CreateDeal = () => {
 
                       <Row>
                         <Col sm="12">
-                          <input type="file" onChange={handleImageUpload} />
+                          <input
+                            className="form-control"
+                            type="file"
+                            onChange={handleImageUpload}
+                          />
                         </Col>
 
                         {featureimage?.length === 0 && (
@@ -830,118 +839,6 @@ const CreateDeal = () => {
                       </p>
                     )}
 
-                    {/* <Label className="d-block" for="chk-ani">
-                      <Input
-                        className="checkbox_animated"
-                        id="sendToALLCheckbox"
-                        type="checkbox"
-                        defaultChecked
-                        checked={sendToALLCheckbox}
-                        onChange={handleSendToALLCheckbox}
-                      />
-                      {Option} {"Send to specific customer type"}
-                    </Label>
-
-                    {sendToALLCheckbox && (
-                      <Controller
-                        name="sendTo"
-                        control={control}
-                        rules={{ validate: validateSendOptions }}
-                        render={({ field }) => (
-                          <Select
-                            {...field}
-                            options={options}
-                            isMulti
-                            onChange={(value) => {
-                              field.onChange(value);
-                              setSelectedOptions(value);
-                            }}
-                          />
-                        )}
-                      />
-                    )}
-                    <br></br>
-
-                    <Label className="d-block" for="chk-ani">
-                      <Input
-                        className="checkbox_animated"
-                        id="sendToSpecificExistingCustomer"
-                        type="checkbox"
-                        defaultChecked
-                        checked={sendToSpecificExistingCustomer}
-                        onChange={handleSpecificExistingCustomer}
-                      />
-                      {Option} {" Send To Specific Existing Customer"}
-                    </Label>
-                    {sendToSpecificExistingCustomer && (
-                      <>
-                        {" "}
-                        <CustomSelect name="sendToSpecificExistingCustomer" />
-                      </>
-                    )}
-                    <br></br>
-
-                    <Label className="d-block" for="chk-ani">
-                      <Input
-                        className="checkbox_animated"
-                        id="sendByEmailCheckbox"
-                        type="checkbox"
-                        defaultChecked
-                        checked={sendByEmail}
-                        onChange={handleSendByEmailToggle}
-                      />
-                      {Option} {" Send to new customers"}
-                    </Label>
-                    {sendByEmail && (
-                      <div>
-                        <input
-                          className="form-control"
-                          type="email"
-                          placeholder="Enter email"
-                          onChange={handleEmailChange}
-                          value={email}
-                        />
-                        <br></br>
-                        <Button color="success" onClick={handleAddEmail}>
-                          Add Email
-                        </Button>
-                      </div>
-                    )}
-                    <br></br>
-                    {emails?.length > 0 && (
-                      <div>
-                        {emails?.length > 0 && (
-                          <div>
-                            <h5>Added Emails:</h5>
-                            <ul>
-                              {emails.map((email, index) => (
-                                <li
-                                  key={index}
-                                  style={{
-                                    margin: "5px 0",
-                                    padding: "5px",
-                                    fontFamily: "Arial, sans-serif",
-                                    fontSize: "16px",
-                                  }}
-                                >
-                                  {email}
-                                  <span
-                                    style={{
-                                      color: "red",
-                                      marginLeft: "5px",
-                                      cursor: "pointer",
-                                    }}
-                                    onClick={() => handleRemoveEmail(index)}
-                                  >
-                                    <i className="fa fa-trash-o"></i>
-                                  </span>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        )}
-                      </div>
-                    )} */}
                     <Label className="d-block" for="chk-ani">
                       <Input
                         className="checkbox_animated"
