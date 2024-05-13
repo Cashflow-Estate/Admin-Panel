@@ -49,55 +49,37 @@ const CreateDeal = () => {
   } = useForm();
   const { id } = useParams();
   const [dealData, setDealData] = useState(null);
+  console.log("🚀 ~ CreateDeal ~ dealData:", dealData)
   const [propertyType, setPropertyType] = useState(""); // State to hold selected property type
-  console.log("🚀 ~ CreateDeal ~ propertyType:", propertyType);
   const [images, setImages] = useState([]);
-  console.log("🚀 ~ CreateDeal ~ images:", images);
   const [featureimage, setFeatureImages] = useState([]);
-  console.log("🚀 ~ CreateDeal ~ featureimage:", featureimage);
   const [files, setFiles] = useState([]);
   const [client, setClient] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
-  console.log("🚀 ~ CreateDeal ~ formSubmitted:", formSubmitted);
   const [selectedOptions, setSelectedOptions] = useState([]);
-  console.log("🚀 ~ CreateDeal ~ selectedOptions:", selectedOptions);
-  const [useEmail, setUseEmail] = useState(false);
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState([]);
+  console.log("🚀 ~ CreateDeal ~ email:", email)
   const [addressOptions, setAddressOptions] = useState([]);
   const [address, setAddress] = useState(true);
   const [addressSearch, setAddressSearch] = useState("");
-  console.log("🚀 ~ CreateDeal ~ addressSearch:", addressSearch);
   const [monthlyCashMin, setMonthlyCashMin] = useState("");
-  console.log("🚀 ~ CreateDeal ~ monthlyCashMin:", monthlyCashMin);
   const [monthlyCashMax, setMonthlyCashMax] = useState("");
-  console.log("🚀 ~ CreateDeal ~ monthlyCashMax:", monthlyCashMax);
   const [approxAnnualMinReturn, setApproxAnnualMinReturn] = useState("");
-  console.log(
-    "🚀 ~ CreateDeal ~ approxAnnualMinReturn:",
-    approxAnnualMinReturn
-  );
   const [approxAnnualMaxReturn, setApproxAnnualMaxReturn] = useState("");
-  console.log(
-    "🚀 ~ CreateDeal ~ approxAnnualMaxReturn:",
-    approxAnnualMaxReturn
-  );
+
   const [debouncedAddressSearch, setDebouncedAddressSearch] = useState("");
   const [sendByEmail, setSendByEmail] = useState(false);
   const [emails, setEmails] = useState([]);
-  console.log("🚀 ~ CreateDeal ~ emails:", emails);
+  console.log("🚀 ~ CreateDeal ~ emails:", emails)
+
   const [sendToSpecificExistingCustomer, setSendToSpecificExistingCustomer] =
     useState(false);
-  console.log(
-    "🚀 ~ CreateDeal ~ sendToSpecificExistingCustomer:",
-    sendToSpecificExistingCustomer
-  );
 
   const [sendToALLCheckbox, setSendToALLCheckbox] = useState(false);
   const [bedError, setBedError] = useState("");
   const [areaError, setAreaError] = useState("");
   const [bathError, setBathError] = useState("");
   const [priceError, setPriceError] = useState("");
-  const [priceError1, setPriceError1] = useState("");
   const [titleError, setTitleError] = useState("");
   const [approxPriceError, setapproxPriceError] = useState("");
   const [monthMaxError, setMonMaxErr] = useState("");
@@ -112,11 +94,22 @@ const CreateDeal = () => {
     bedRooms: "",
     baths: "",
     area: "",
+    closing_date: "",
   });
-  console.log("🚀 ~::::::::::::::::::::::::::", fomDat);
-
+  useEffect(() => {
+    // Scroll to the top of the page whenever the component updates
+    window.scrollTo(0, 0);
+  }, []);
   const handlePropertyTypeChange = (selectedType) => {
     setPropertyType(selectedType);
+  };
+  const handleClosingDate = (e) => {
+    // Validate price
+    if (fomDat.closing_date.length > 0) {
+      setFormData({ ...fomDat, closing_date: "" });
+    } else {
+      setFormData({ ...fomDat, closing_date: e.target.value });
+    }
   };
 
   const onSubmit = () => {
@@ -128,7 +121,6 @@ const CreateDeal = () => {
       fomDat.approxPrice &&
       fomDat.monthly_cash_min &&
       fomDat.monthly_cash_max &&
-   
       fomDat.bedRooms &&
       fomDat.area &&
       fomDat.baths
@@ -137,8 +129,6 @@ const CreateDeal = () => {
         AddProject(fomDat);
       }, 3000);
     }
-
- 
   };
   useEffect(() => {
     const fetchDealById = async () => {
@@ -190,7 +180,7 @@ const CreateDeal = () => {
     fetchFiles();
   }, [images]);
 
-  let opt = selectedOptions.map((val) => val.label);
+  let opt = selectedOptions.map((val) => val.value);
 
   const history = useNavigate();
 
@@ -229,7 +219,7 @@ const CreateDeal = () => {
         baths: dealData.data.baths || "",
         address: dealData.data.address || "",
         sendTo:
-          dealData.data.sendTo.map((value) => ({ value, label: value })) || [],
+          dealData.data.sendTo.map((value) => ({ value, value: value })) || [],
         sendByEmail: dealData.data.sendByEmail || "",
       });
       setSelectedOptions(
@@ -252,13 +242,9 @@ const CreateDeal = () => {
   }, [dealData, reset]);
 
   const AddProject = async (data) => {
-    setFormSubmitted(true);
-    setClient(true);
+    // setFormSubmitted(true);
+    // setClient(true);
     await trigger();
-    console.log("::::::::::::::::::::::");
-    const selectedAddress = Array.isArray(addressSearch)
-      ? addressSearch?.map((val) => `${val.label}`)
-      : [addressSearch];
 
     const dealData = new FormData();
     dealData.append("title", fomDat.title);
@@ -269,6 +255,7 @@ const CreateDeal = () => {
     dealData.append("annually_return_min", approxAnnualMinReturn);
     dealData.append("annually_return_max", approxAnnualMaxReturn);
     dealData.append("closing_date", fomDat.closing_date);
+
     dealData.append("bedRooms", fomDat.bedRooms);
     dealData.append("area", fomDat.area);
     dealData.append("baths", fomDat.baths);
@@ -277,7 +264,7 @@ const CreateDeal = () => {
       dealData.append("sendTo", opt);
     }
 
-    dealData.append("sendByEmail", email ? email : "");
+    dealData.append("sendByEmail", emails ? emails : "");
     files.forEach((image) => {
       dealData.append("images", image);
     });
@@ -291,9 +278,9 @@ const CreateDeal = () => {
         ? await axios.patch(apiUrl, dealData)
         : await axios.post(apiUrl, dealData);
       if (response.data.statusCode === 200) {
-        setFormSubmitted(false);
+        // setFormSubmitted(false);
         toast.success(response.data.message);
-        history("/deals/view");
+        // history("/deals/view");
       }
     } catch (error) {
       toast.error("Failed to create/update deal.");
@@ -301,10 +288,10 @@ const CreateDeal = () => {
   };
 
   const options = [
-    { value: "all", label: "All Users" },
-    { value: "paid", label: "Paid Customers" },
-    { value: "members", label: "Paid Members" },
-    { value: "free", label: "Free Customer" },
+    { value: "All", label: "All Users" },
+    { value: "Customer", label: "Paid Customers" },
+    { value: "Member", label: "Paid Members" },
+    { value: "Free", label: "Free Customer" },
   ];
 
   const handleAddressChange = async (inputAddress) => {
@@ -355,8 +342,8 @@ const CreateDeal = () => {
   };
 
   const handleAddEmail = () => {
-    if (email.trim() !== "") {
-      setEmails([...emails, email]);
+    if (emails) {
+      setEmails([...emails, emails]);
       setEmail(""); // Clear the input field after adding email
     }
   };
@@ -372,7 +359,7 @@ const CreateDeal = () => {
   };
 
   const handleEmailChange = (event) => {
-    setEmail(event.target.value);
+    setEmails([event.target.value]);
   };
 
   const validateSendOptions = () => {
@@ -755,7 +742,12 @@ const CreateDeal = () => {
                             className="form-control"
                             type="date"
                             name="closing_date"
-                            {...register("closing_date")}
+                            onChange={handleClosingDate}
+                            value={
+                              fomDat.closing_date.length > 0
+                                ? fomDat.closing_date
+                                : ""
+                            }
                           />
                         </FormGroup>
                       </Col>
@@ -835,7 +827,7 @@ const CreateDeal = () => {
                       </Col>
 
                       <Row>
-                      <H6>{"Primary Image"}</H6>
+                        <H6>{"Primary Image"}</H6>
 
                         <Col sm="12">
                           <input
@@ -874,7 +866,7 @@ const CreateDeal = () => {
                         checked={sendToALLCheckbox}
                         onChange={handleSendToALLCheckbox}
                       />
-                       {"Send to specific customer type"}
+                      {"Send to specific customer type"}
                     </Label>
 
                     {sendToALLCheckbox && (
@@ -897,7 +889,10 @@ const CreateDeal = () => {
                     )}
                     <br></br>
 
-                    <Label className="d-block" for="sendToSpecificExistingCustomer">
+                    <Label
+                      className="d-block"
+                      for="sendToSpecificExistingCustomer"
+                    >
                       <Input
                         className="checkbox_animated"
                         id="sendToSpecificExistingCustomer"
@@ -906,11 +901,11 @@ const CreateDeal = () => {
                         onChange={() => {
                           handleSpecificExistingCustomer();
                           // Empty related checkboxes' states
-                        
+
                           setEmails([]);
                         }}
                       />
-                       {" Send To Specific Existing Customer"}
+                      {" Send To Specific Existing Customer"}
                     </Label>
                     {sendToSpecificExistingCustomer && (
                       <>
@@ -928,11 +923,11 @@ const CreateDeal = () => {
                         checked={sendByEmail}
                         onChange={() => {
                           handleSendByEmailToggle();
-                      
+
                           setEmails([]);
                         }}
                       />
-                       {" Send to new customers"}
+                      {" Send to new customers"}
                     </Label>
                     {sendByEmail && (
                       <div>
@@ -941,7 +936,7 @@ const CreateDeal = () => {
                           type="email"
                           placeholder="Enter email"
                           onChange={handleEmailChange}
-                          value={email}
+                          value={emails}
                         />
                         <br></br>
                         <Button color="success" onClick={handleAddEmail}>
@@ -1031,22 +1026,66 @@ const CreateDeal = () => {
 
 export default CreateDeal;
 
+// const CustomSelect = () => {
+//   const [selectedOptions, setSelectedOptions] = useState([]);
+
+//   const handleChange = (selectedValues) => {
+//     setSelectedOptions(selectedValues);
+//   };
+
+//   const options = [
+//     { value: "1", label: "John Doe || john@example.com", color: "green" },
+//     { value: "2", label: "Jane Smith || jane@example.com", color: "red" },
+//     {
+//       value: "3",
+//       label: "Michael Johnson || michael@example.com",
+//       color: "green",
+//     },
+//   ];
+
+
+//   return (
+//     <div>
+//       <Select
+//         isMulti
+//         options={options}
+//         value={selectedOptions}
+//         onChange={handleChange}
+//         placeholder="Search..."
+//       />
+//     </div>
+//   );
+// };
 const CustomSelect = () => {
   const [selectedOptions, setSelectedOptions] = useState([]);
+  const [options, setOptions] = useState([]);
+
+  useEffect(() => {
+    const fetchOptions = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/api/v1/users/email-with-name");
+        const data = await response.json();
+        if (data.statusCode === 200) {
+          const fetchedOptions = data.data.map(option => ({
+            value: option,
+            label: option,
+            color: "green"
+          }));
+          setOptions(fetchedOptions);
+        } else {
+          console.error("Failed to fetch options:", data.message);
+        }
+      } catch (error) {
+        console.error("Error fetching options:", error);
+      }
+    };
+
+    fetchOptions();
+  }, []);
 
   const handleChange = (selectedValues) => {
     setSelectedOptions(selectedValues);
   };
-
-  const options = [
-    { value: "1", label: "John Doe || john@example.com", color: "green" },
-    { value: "2", label: "Jane Smith || jane@example.com", color: "red" },
-    {
-      value: "3",
-      label: "Michael Johnson || michael@example.com",
-      color: "green",
-    },
-  ];
 
   return (
     <div>
@@ -1060,6 +1099,7 @@ const CustomSelect = () => {
     </div>
   );
 };
+
 const MultiDropzone = ({ setImages, dealData, images }) => {
   const handleDrop = (acceptedFiles) => {
     setImages((prevImages) => [...prevImages, ...acceptedFiles]);

@@ -63,9 +63,10 @@ const UserDetails = () => {
     follower: "0398754326",
     following: "$897,998",
     PackageName: "Pro",
-    MemberType: "Customer",
+    MemberType: "Member",
   };
   const role = useSelector((state) => state.auth.role);
+  console.log("🚀 ~ UserDetails ~ role:", role)
   const [whatsAppUrl, setWhatsAppUrl] = useGenerateWhatsappUrl();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [dropdownOpenTrans, setDropdownOpenTrans] = useState(false);
@@ -174,7 +175,7 @@ const UserDetails = () => {
                   </NavLink>
                 </NavItem>
               )}
-              {role === "Customer" && (
+              {role === "Member" && (
                 <>
                   {" "}
                   <NavItem>
@@ -644,7 +645,7 @@ const SocialData = ({
 //     follower: "0398754326",
 //     following: "$897,998",
 //     PackageName: "Pro",
-//     MemberType: "Customer",
+//     MemberType: "Member",
 //   };
 
 //   const initialActiveTab = useMemo(() => {
@@ -691,7 +692,7 @@ const SocialData = ({
 //                   </NavLink>
 //                 </NavItem>
 //               )}
-//               {role === "Customer" && (
+//               {role === "Member" && (
 //                 <>
 //                   {" "}
 //                   <NavItem>

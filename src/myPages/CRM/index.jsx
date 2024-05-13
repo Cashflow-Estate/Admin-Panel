@@ -27,7 +27,7 @@ const CRM = () => {
               alt="User"
               style={{ width: "100px" }}
             />
-            {row.client === "Customers" && (
+            {row.client === "Member" && (
               <div className="edit-icon">
                 <SvgIcon iconId={"profile-check"} />
               </div>

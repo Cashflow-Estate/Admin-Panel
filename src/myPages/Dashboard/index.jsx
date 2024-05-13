@@ -63,7 +63,7 @@ const Dashboard = () => {
     <Fragment>
       <Breadcrumbs mainTitle="Dashboard" parent="Dashboard" />
       {userAuthRole === "Admin" && <AdminDashboard />}
-      {userAuthRole === "Customer" && <CustomerDashboard />}
+      {(userAuthRole === "Customer" || userAuthRole === "Member") && <CustomerDashboard />}
     </Fragment>
   );
 };
