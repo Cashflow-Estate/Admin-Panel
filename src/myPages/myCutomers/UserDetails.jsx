@@ -175,7 +175,7 @@ const UserDetails = () => {
                   </NavLink>
                 </NavItem>
               )}
-              {role === "Member" && (
+              {(role === "Member" || role==="Customer") && (
                 <>
                   {" "}
                   <NavItem>
