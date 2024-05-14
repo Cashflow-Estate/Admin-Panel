@@ -1,10 +1,13 @@
 import React, { Fragment, useState, useRef, useEffect } from "react";
-import { Button, Col, Media, Row, InputGroup, Form, Input } from "reactstrap";
+import { Button, Col, Media, Row, InputGroup, Form, Input, Container, Card, CardBody } from "reactstrap";
 import { Breadcrumbs, H6, Image, P, UL, LI, Btn } from "../../../AbstractElements";
 import SimpleMdeReact from "react-simplemde-editor";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css'; // Import Quill styles
 import { EditorChange } from 'quill';
+import ChatStatus from '../ChatApp/ChatStatus'
+import Chatting from "../ChatApp/Chatting";
+
 const Inquiry = () => {
   const commentContainerRef = useRef(null);
 
@@ -28,12 +31,12 @@ const Inquiry = () => {
   const handelChange = (e) => {
     setValue(e);
   };
-  const handleChange = (content,delta, source, editor) => {
+  const handleChange = (content, delta, source, editor) => {
     // Handle the change event
   };
   return (
-    <div style={{overflow: "hidden"}}> {/* Add this container */}
-      <Fragment>
+    <div style={{ overflow: "hidden" }}> {/* Add this container */}
+      {/* <Fragment>
         <Breadcrumbs
         back="/inquiry"
           mainTitle="Inquiries"
@@ -74,7 +77,28 @@ const Inquiry = () => {
           Send
         </Btn>
    
-    </Fragment>
+    </Fragment> */}
+      <Fragment>
+        <Breadcrumbs mainTitle='Chat App' parent='Chat' title='Chat App' />
+        <Container fluid={true}>
+          <Row>
+            <Col className='call-chat-sidebar'>
+              <Card>
+                <CardBody className='chat-body'>
+                  <ChatStatus />
+                </CardBody>
+              </Card>
+            </Col>
+            <Col className='call-chat-body'>
+              <Card>
+                <CardBody className='p-0'>
+                  <Chatting />
+                </CardBody>
+              </Card>
+            </Col>
+          </Row>
+        </Container>
+      </Fragment>
     </div>
   );
 };
@@ -319,4 +343,3 @@ const Comments = () => {
     </div>
   );
 };
-

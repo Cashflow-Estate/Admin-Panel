@@ -17,11 +17,13 @@ const rootReducer = {
 
 export const store = configureStore({
   reducer: rootReducer,
-middleware: (getDefaultMiddleware) => getDefaultMiddleware( {serializableCheck: {
-    ignoredActions: ['persist/PERSIST'], // Ignore the persist action
-  },})
-   
-  
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+    serializableCheck: {
+      ignoredActions: ['persist/PERSIST'], // Ignore the persist action
+    },
+  })
+
+
 });
 
 export const persistor = persistStore(store);
