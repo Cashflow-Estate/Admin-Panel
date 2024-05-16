@@ -1,36 +1,29 @@
 import React, { Fragment, useContext } from 'react';
-// import ChatAppContext from '../../../../_helper/Chat';
-// import { Link } from 'react-router-dom';
-// import { Image } from '../../../../AbstractElements';
-// import CustomizerContext from '../../../../_helper/Customizer';
+import iii from "../../../../src/assets/images/user/5.jpg";
+import { Image } from '../../../AbstractElements';
+import { Link } from 'react-router-dom';
 
 const CurrentUser = () => {
-  // const { currentUserr } = useContext(ChatAppContext);
-  // const { layoutURL } = useContext(CustomizerContext);
-  // var images = require.context('../../../../assets/images', true);
-  // const dynamicImage = (image) => {
-  //   return images(`./${image}`);
-  // };
 
   return (
     <Fragment>
-      {/* {currentUserr && (
+      { (
         <div className='media'>
           <Image
             attrImage={{
-              src: `${dynamicImage(currentUserr.thumb)}`,
+              src: `${iii}`,
               className: 'rounded-circle user-image',
               alt: '',
             }}
           />
           <div className='about'>
-            <Link to={`${process.env.PUBLIC_URL}/app/users/profile/${layoutURL}`}>
-              <div className='name f-w-600'>{currentUserr.name}</div>
+            <Link to={"/dashboard"}>
+              <div className='name f-w-600'>Vincent Porter</div>
             </Link>
-            <div className='status'>{currentUserr.status}</div>
+            <div className='status'>Live</div>
           </div>
         </div>
-      )} */}
+      )}
     </Fragment>
   );
 };

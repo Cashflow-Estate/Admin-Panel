@@ -1,35 +1,35 @@
 import React, { Fragment, useContext, useState } from 'react';
-// import { Col, Form, FormGroup, Input, Media, Nav, NavItem, NavLink, Row, TabContent, TabPane } from 'reactstrap';
+import { Col, Form, FormGroup, Input, Media, Nav, NavItem, NavLink, Row, TabContent, TabPane } from 'reactstrap';
 // import ChatAppContext from '../../../../_helper/Chat';
-// import { CALL, STATUS, PROFILE, Active, ChataApp_p1, ChataApp_p2, Following, Follower, MarkJecno } from '../../../../Constant';
-// import two from '../../../../assets/images/user/2.png';
-// import { H5, Image, LI, P, UL } from '../../../../AbstractElements';
+import { CALL, STATUS, PROFILE, Active, ChataApp_p1, ChataApp_p2, Following, Follower, MarkJecno } from '../../../Constant';
+import two from '../../../../src/assets/images/user/5.jpg';
+import { H5, Image, LI, P, UL } from '../../../AbstractElements';
 
 const ChatMenu = () => {
   // const { allMemberss } = useContext(ChatAppContext);
   const [activeTab, setActiveTab] = useState('1');
   return (
     <Fragment>
-      {/* <Nav tabs className='border-tab nav-primary'>
-        <NavItem id='myTab' role='tablist'>
+      <Nav tabs className='border-tab nav-primary'>
+        {/* <NavItem id='myTab' role='tablist'>
           <NavLink tag='a' className={activeTab === '1' ? 'active' : ''} onClick={() => setActiveTab('1')}>
             {' '}
             {CALL}
           </NavLink>
-        </NavItem>
-        <NavItem id='myTab' role='tablist'>
+        </NavItem> */}
+        {/* <NavItem id='myTab' role='tablist'>
           <NavLink tag='a' className={activeTab === '2' ? 'active' : ''} onClick={() => setActiveTab('2')}>
             {STATUS}
           </NavLink>
-        </NavItem>
+        </NavItem> */}
         <NavItem id='myTab' role='tablist'>
           <NavLink tag='a' className={activeTab === '3' ? 'active' : ''} onClick={() => setActiveTab('3')}>
             {PROFILE}
           </NavLink>
         </NavItem>
       </Nav>
-      <TabContent activeTab={activeTab}>
-        <TabPane tabId='1'>
+      {/* <TabContent activeTab={activeTab}> */}
+        {/* <TabPane tabId='1'>
           <div className='people-list'>
             <UL attrUL={{ className: 'simple-list list digits custom-scrollbar' }}>
               {allMemberss.map((member, i) => {
@@ -81,8 +81,8 @@ const ChatMenu = () => {
             </P>
             <hr />
           </div>
-        </TabPane>
-        <TabPane tabId='3'>
+        </TabPane> */}
+        {/* <TabPane tabId='3'> */}
           <div className='user-profile'>
             <div className='image'>
               <div className='avatar text-center'>
@@ -143,8 +143,8 @@ const ChatMenu = () => {
               </div>
             </div>
           </div>
-        </TabPane>
-      </TabContent> */}
+        {/* </TabPane> */}
+      {/* </TabContent> */}
     </Fragment>
   );
 };

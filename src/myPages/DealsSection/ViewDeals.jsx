@@ -66,12 +66,13 @@ const ViewDeals = ({ AddProperty }) => {
   return (
     <Fragment>
       <Breadcrumbs mainTitle="Slow Flip Deals" parent="Deals" title="All Deals" />
+      <ProductContain AddProperty={AddProperty} />
 
-      {userRole === "Admin" ? (
+      {/* {userRole === "Admin" ? (
         <AllDealsTable />
       ) : (
         <ProductContain AddProperty={AddProperty} />
-      )}
+      )} */}
     </Fragment>
   );
 };
@@ -98,11 +99,11 @@ const ProductContain = ({ AddProperty }) => {
             setPhotoIndexSlider={callback}
             photoIndexSlider={photoIndex}
           />
-          <SingleImage
+          {/* <SingleImage
             photoIndex={photoIndex}
             setPhotoIndex={callback}
             images={images}
-          />
+          /> */}
         </div>
       </Container>
     </Fragment>
@@ -282,7 +283,7 @@ const ProductGrid = ({ photoIndexSlider, setPhotoIndexSlider }) => {
 
   const [openModal, setOpenModal] = useState(false);
 
-  const addWishList = () => {};
+  const addWishList = () => { };
   var images = require.context("../../../src/assets//images", true);
 
   const products = [
@@ -725,6 +726,12 @@ const ProductGrid = ({ photoIndexSlider, setPhotoIndexSlider }) => {
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = products.slice(indexOfFirstItem, indexOfLastItem);
 
+  const history = useNavigate();
+
+  const handleViewInquiry = (deal) => {
+    history("/inquiry");
+  };
+
   return (
     <Fragment>
       <div className="product-wrapper-grid" id="product-wrapper-grid">
@@ -734,11 +741,10 @@ const ProductGrid = ({ photoIndexSlider, setPhotoIndexSlider }) => {
               return (
                 <div
                   id="gridId"
-                  className={`${
-                    layoutColumns === 3
+                  className={`${layoutColumns === 3
                       ? "col-xl-3 col-lg-6 col-sm-6 xl-4 box-col-4"
                       : "col-xl-" + layoutColumns
-                  }`}
+                    }`}
                   key={item.id}
                 >
                   <Card>
@@ -835,6 +841,12 @@ const ProductGrid = ({ photoIndexSlider, setPhotoIndexSlider }) => {
                             </P>
                           </Link>
                         </>
+                        <Button color="" onClick={() => handleViewInquiry()}>
+                          <i
+                            style={{ fontSize: "25px" }}
+                            className="icofont icofont-support-faq"
+                          ></i>
+                        </Button>
                         <div className="d-flex flex-grow-2">
                           {" "}
                           <Link color="" to={"/new-property"}>
@@ -846,7 +858,7 @@ const ProductGrid = ({ photoIndexSlider, setPhotoIndexSlider }) => {
                           </span>
                         </div>
                       </div>
-                      <P>
+                      {/* <P>
                         {item.availability === "Available" ? (
                           <span
                             style={{
@@ -870,7 +882,7 @@ const ProductGrid = ({ photoIndexSlider, setPhotoIndexSlider }) => {
                             {item.availability}
                           </span>
                         ) : null}
-                      </P>
+                      </P> */}
                     </div>
                   </Card>
                 </div>

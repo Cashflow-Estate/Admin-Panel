@@ -10,6 +10,12 @@ export const MENUITEMS_FOR_Admin = [
         icon: "user",
       },
       {
+        path: `/crm`,
+        type: "link",
+        title: "CRM",
+        icon: "user",
+      },
+      {
         path: `/account/profile`,
         type: "link",
         title: "Profile",
@@ -43,7 +49,7 @@ export const MENUITEMS_FOR_Admin = [
       {
         path: `/inquiry`,
         type: "link",
-        title: "Inquiry",
+        title: "Messages",
         icon: "user",
       },
       {
@@ -115,12 +121,7 @@ export const MENUITEMS_FOR_Admin = [
           },
         ],
       },
-      {
-        path: `/crm`,
-        type: "link",
-        title: "CRM",
-        icon: "user",
-      },
+      
  
       {
         title: "Transactions",
@@ -196,6 +197,12 @@ export const MENUITEMS_FOR_User = [
         path: `/dashboard`,
         type: "link",
         title: "Dashboard",
+        icon: "user",
+      },
+      {
+        path: `/crm`,
+        type: "link",
+        title: "CRM",
         icon: "user",
       },
     
@@ -281,12 +288,7 @@ export const MENUITEMS_FOR_User = [
         icon: "user",
       },
   
-      {
-        path: `/crm`,
-        type: "link",
-        title: "CRM",
-        icon: "user",
-      },
+      
       {
         title: "Attorneys",
         icon: "icons",

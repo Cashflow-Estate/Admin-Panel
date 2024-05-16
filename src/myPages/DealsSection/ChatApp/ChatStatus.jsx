@@ -5,7 +5,7 @@ import React, { Fragment, useContext } from 'react';
 import SearchChatList from './SearchChatList';
 import CurrentUser from './CurrentUser';
 import { Image, LI, UL } from '../../../AbstractElements';
-import iii from "../../../../src/assets/images/avtar/11.jpg";
+import iii from "../../../../src/assets/images/user/5.jpg";
 
 const ChatStatus = () => {
   // const { selectedUserr, members, currentUserr, chatss, changeChat, createNewChatAsyn } = useContext(ChatAppContext);
@@ -25,8 +25,8 @@ const ChatStatus = () => {
 
   // var activeChat = 0;
   // if (selectedUserr != null) activeChat = selectedUserr.id;
-const members=[
-  {
+  const members = [
+    {
       "id": 0,
       "name": "Johan Deo",
       "thumb": "user/1.jpg",
@@ -36,8 +36,8 @@ const members=[
       "typing": true,
       "time": " 5 May, 5:30 PM",
       "reply": "fa fa-reply font-danger"
-  },
-  {
+    },
+    {
       "id": 1,
       "name": "Vincent Porter",
       "thumb": "user/2.png",
@@ -47,8 +47,8 @@ const members=[
       "typing": false,
       "time": " 5 May, 5:30 PM",
       "reply": "fa fa-reply font-success"
-  },
-  {
+    },
+    {
       "id": 2,
       "name": "Aiden Chavez",
       "thumb": "user/3.png",
@@ -58,8 +58,8 @@ const members=[
       "typing": false,
       "time": " 5 May, 5:30 PM",
       "reply": "fa fa-reply font-success"
-  },
-  {
+    },
+    {
       "id": 3,
       "name": "Ginger Johnston",
       "thumb": "user/6.jpg",
@@ -69,8 +69,8 @@ const members=[
       "typing": false,
       "time": " 5 May, 5:30 PM",
       "reply": "fa fa-reply font-danger"
-  },
-  {
+    },
+    {
       "id": 4,
       "name": "Kori Thomas",
       "thumb": "user/7.jpg",
@@ -80,8 +80,8 @@ const members=[
       "typing": true,
       "time": " 5 May, 5:30 PM",
       "reply": "fa fa-reply font-success"
-  },
-  {
+    },
+    {
       "id": 5,
       "name": "Kori Thomas",
       "thumb": "user/9.jpg",
@@ -91,8 +91,8 @@ const members=[
       "typing": false,
       "time": " 5 May, 5:30 PM",
       "reply": "fa fa-reply font-danger"
-  },
-  {
+    },
+    {
       "id": 6,
       "name": "Erica Hughes",
       "thumb": "user/10.jpg",
@@ -102,8 +102,8 @@ const members=[
       "typing": true,
       "time": " 5 May, 5:30 PM",
       "reply": "fa fa-reply font-danger"
-  },
-  {
+    },
+    {
       "id": 7,
       "name": "Porter Ginger",
       "thumb": "user/11.png",
@@ -113,8 +113,8 @@ const members=[
       "typing": false,
       "time": " 5 May, 5:30 PM",
       "reply": "fa fa-reply font-success"
-  }
-]
+    }
+  ]
   return (
     <Fragment>
       <div className='chat-box'>
@@ -125,8 +125,8 @@ const members=[
             {members && members.length > 0 ? (
               <UL attrUL={{ className: 'simple-list list custom-scrollbar' }}>
                 {members
-                  .filter((x) => x.id !==  0,
-)
+                  .filter((x) => x.id !== 0,
+                  )
                   .map((item) => {
                     return (
                       <LI
