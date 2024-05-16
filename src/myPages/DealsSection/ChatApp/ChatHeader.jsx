@@ -120,7 +120,7 @@ const ChatHeader = () => {
               {/* {location.state3 ? <span className='font-primary f-12'> Typing...</span> : ''} */}
             </div>
             {/* <div className='status digits'>{members ? members.lastSeenDate : '5 May, 5:30 PM'}</div> */}
-            <div className='status digits'>15 May, 5:30 PM</div>
+            <div className='status digits'>Last seen 17 May, 10:30 AM</div>
           </div>
         </div>
         {/* <UL attrUL={{ className: 'simple-list list-inline float-start float-sm-end chat-menu-icons d-flex flex-row' }}>

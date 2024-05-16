@@ -1,7 +1,7 @@
 import React, { Fragment, useContext, useState } from 'react';
 import { Col, Form, FormGroup, Input, Media, Nav, NavItem, NavLink, Row, TabContent, TabPane } from 'reactstrap';
 // import ChatAppContext from '../../../../_helper/Chat';
-import { CALL, STATUS, PROFILE, Active, ChataApp_p1, ChataApp_p2, Following, Follower, MarkJecno } from '../../../Constant';
+import { CALL, STATUS, PROFILE, Active, ChataApp_p1, ChataApp_p2, Following, Follower, MarkJecno, VincentPorter, Email, Phone } from '../../../Constant';
 import two from '../../../../src/assets/images/user/5.jpg';
 import { H5, Image, LI, P, UL } from '../../../AbstractElements';
 
@@ -16,8 +16,8 @@ const ChatMenu = () => {
             {' '}
             {CALL}
           </NavLink>
-        </NavItem> */}
-        {/* <NavItem id='myTab' role='tablist'>
+        </NavItem>
+        <NavItem id='myTab' role='tablist'>
           <NavLink tag='a' className={activeTab === '2' ? 'active' : ''} onClick={() => setActiveTab('2')}>
             {STATUS}
           </NavLink>
@@ -88,14 +88,14 @@ const ChatMenu = () => {
               <div className='avatar text-center'>
                 <Media body alt='' src={two} />
               </div>
-              <div className='icon-wrapper'>
+              {/* <div className='icon-wrapper'>
                 <i className='icofont icofont-pencil-alt-5'></i>
-              </div>
+              </div> */}
             </div>
             <div className='user-content text-center'>
-              <H5 attrH5={{ className: 'text-center text-uppercase' }}>{MarkJecno}</H5>
+              <H5 attrH5={{ className: 'text-center text-uppercase' }}>{VincentPorter}</H5>
               <div className='social-media'>
-                <UL attrUL={{ horizontal: true, className: 'list-inline d-flex justify-content-center' }}>
+                {/* <UL attrUL={{ horizontal: true, className: 'list-inline d-flex justify-content-center' }}>
                   <LI attrLI={{ className: 'list-inline-item' }}>
                     <a href='https://www.facebook.com/'>
                       <i className='fa fa-facebook'></i>
@@ -121,10 +121,10 @@ const ChatMenu = () => {
                       <i className='fa fa-rss'></i>
                     </a>
                   </LI>
-                </UL>
+                </UL> */}
               </div>
               <hr />
-              <div className='follow text-center'>
+              {/* <div className='follow text-center'>
                 <Row>
                   <Col className='border-end'>
                     <span>{Following}</span>
@@ -134,13 +134,33 @@ const ChatMenu = () => {
                     <span>{Follower}</span> <div className='follow-num'>{'3691k'}</div>
                   </Col>
                 </Row>
+              </div> */}
+              <div className='follow text-center'>
+                <Row>
+                  <Col className='d-flex gap-3 ps-4'>
+                    <div>{Email}:</div>
+                    <div className='follow-num'>Mark.jecno23@gmail.com</div>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col className='d-flex gap-3 ps-4 pt-3'>
+                    <div>{Phone}:</div>
+                    <div className='follow-num'>+91 365 - 658 - 1236</div>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col className='d-flex gap-3 ps-4 pt-3'>
+                    <div>Customer:</div>
+                    <div className='follow-num'>Paid Customer</div>
+                  </Col>
+                </Row>
               </div>
               <hr />
-              <div className='text-center digits'>
+              {/* <div className='text-center digits'>
                 <P attrPara={{ className: 'mb-0' }}>{'Mark.jecno23@gmail.com'}</P>
                 <P attrPara={{ className: 'mb-0' }}>{'+91 365 - 658 - 1236'}</P>
                 <P attrPara={{ className: 'mb-0' }}>{'Fax: 123-4560'}</P>
-              </div>
+              </div> */}
             </div>
           </div>
         {/* </TabPane> */}
