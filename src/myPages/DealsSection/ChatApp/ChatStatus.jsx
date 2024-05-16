@@ -6,6 +6,7 @@ import SearchChatList from './SearchChatList';
 import CurrentUser from './CurrentUser';
 import { Image, LI, UL } from '../../../AbstractElements';
 import iii from "../../../../src/assets/images/user/5.jpg";
+import { Overflow } from '../../../Constant';
 
 const ChatStatus = () => {
   // const { selectedUserr, members, currentUserr, chatss, changeChat, createNewChatAsyn } = useContext(ChatAppContext);
@@ -113,7 +114,40 @@ const ChatStatus = () => {
       "typing": false,
       "time": " 5 May, 5:30 PM",
       "reply": "fa fa-reply font-success"
-    }
+    },
+    {
+      "id": 8,
+      "name": "Porter Ginger",
+      "thumb": "user/11.png",
+      "status": "  Change for anyone.",
+      "lastSeenDate": "Last seen yesterday 14:14",
+      "online": false,
+      "typing": false,
+      "time": " 5 May, 5:30 PM",
+      "reply": "fa fa-reply font-success"
+    },
+    {
+      "id": 9,
+      "name": "Porter Ginger",
+      "thumb": "user/11.png",
+      "status": "  Change for anyone.",
+      "lastSeenDate": "Last seen yesterday 14:14",
+      "online": false,
+      "typing": false,
+      "time": " 5 May, 5:30 PM",
+      "reply": "fa fa-reply font-success"
+    },
+    {
+      "id": 10,
+      "name": "Porter Ginger",
+      "thumb": "user/11.png",
+      "status": "  Change for anyone.",
+      "lastSeenDate": "Last seen yesterday 14:14",
+      "online": false,
+      "typing": false,
+      "time": " 5 May, 5:30 PM",
+      "reply": "fa fa-reply font-success"
+    },
   ]
   return (
     <Fragment>
@@ -123,35 +157,41 @@ const ChatStatus = () => {
           <div className='people-list' id='people-list'>
             <SearchChatList />
             {members && members.length > 0 ? (
-              <UL attrUL={{ className: 'simple-list list custom-scrollbar' }}>
-                {members
-                  .filter((x) => x.id !== 0,
-                  )
-                  .map((item) => {
-                    return (
-                      <LI
-                        attrLI={{
-                          style: { backgroundColor: 'transparent' },
-                          className: `clearfix border-0 ${0 === item.id ? 'active' : ''}`,
-                          // onClick: (e) => changeChatClick(e, item.id),
-                        }}
-                        key={item.id}>
-                        <Image
-                          attrImage={{
-                            src: `${iii}`,
-                            className: 'rounded-circle user-image',
-                            alt: '',
-                          }}
-                        />
-                        <div className={`status-circle ${item.online === true ? 'online' : 'offline'}`}></div>
-                        <div className='about'>
-                          <div className='name'>{item.name}</div>
-                          <div className='status'>{item.status}</div>
-                        </div>
-                      </LI>
-                    );
-                  })}
-              </UL>
+              <div style={{ height: '560px', overflowY: 'auto' }} className='custom-scrollbar'>
+                <UL
+                  attrUL={{
+                    className: 'simple-list list '
+                  }}
+                >
+                  {members
+                    .filter((x) => x.id !== 0,
+                    )
+                    .map((item) => {
+                        return (
+                          <LI
+                            attrLI={{
+                              style: { backgroundColor: 'transparent' },
+                              className: `clearfix border-0 ${0 === item.id ? 'active' : ''}`,
+                              // onClick: (e) => changeChatClick(e, item.id),
+                            }}
+                            key={item.id}>
+                            <Image
+                              attrImage={{
+                                src: `${iii}`,
+                                className: 'rounded-circle user-image',
+                                alt: '',
+                              }}
+                            />
+                            <div className={`status-circle ${item.online ? 'online' : 'offline'}`}></div>
+                            <div className='about'>
+                              <div className='name'>{item.name}</div>
+                              <div className='status'>{item.status}</div>
+                            </div>
+                          </LI>
+                        );
+                    })}
+                </UL>
+              </div>
             ) : (
               <Image
                 attrImage={{

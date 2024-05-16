@@ -66,13 +66,13 @@ const ViewDeals = ({ AddProperty }) => {
   return (
     <Fragment>
       <Breadcrumbs mainTitle="Slow Flip Deals" parent="Deals" title="All Deals" />
-      <ProductContain AddProperty={AddProperty} />
+      {/* <ProductContain AddProperty={AddProperty} /> */}
 
-      {/* {userRole === "Admin" ? (
+      {userRole === "Admin" ? (
         <AllDealsTable />
       ) : (
         <ProductContain AddProperty={AddProperty} />
-      )} */}
+      )}
     </Fragment>
   );
 };
