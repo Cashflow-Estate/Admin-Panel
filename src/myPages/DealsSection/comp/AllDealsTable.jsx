@@ -14,7 +14,7 @@
 
 //   useEffect(() => {
 //     let isMounted = true; // Flag to track whether the component is mounted
-  
+
 //     // Fetch data from the API
 //     axios
 //       .get(`${process.env.REACT_APP_API_BASE_URL}/deals`)
@@ -29,14 +29,14 @@
 //         // Handle error
 //         console.error("Error fetching deals:", error);
 //       });
-  
+
 //     // Cleanup function to cancel any pending asynchronous tasks
 //     return () => {
 //       isMounted = false; // Set isMounted to false when the component unmounts
 //     };
 //   }, []);
-  
-  
+
+
 //   const toggleModal = () => {
 //     setModal(!modal);
 //   };
@@ -88,7 +88,7 @@
 //   const handleEdit = (row) => {
 //     history(`/deals/edit/${row._id}`); // Assuming _id is the unique identifier for each deal
 //   };
-  
+
 
 //   const handleViewInquiry = (deal) => {
 //     history("/inquiry");
@@ -187,7 +187,7 @@
 //       width: "20%",
 //       center: true,
 //     }
-    
+
 //   ];
 
 //   return (
@@ -256,17 +256,21 @@ import {
   ModalBody,
   ModalFooter,
 } from "reactstrap";
+import axios from "axios";
+import { toast } from "react-toastify";
 import { Pagination, PaginationItem, PaginationLink } from "reactstrap";
-
 import GalleryContext from "../../../_helper/Gallery";
 import iii from "../../../../src/assets/cashflowimg/immmmggg.jpg";
 import FilterContext from "../../../_helper/Ecommerce/Filter";
 import { ChevronDown, Grid, List } from "react-feather";
-
 import { Link, useNavigate } from "react-router-dom";
 import { Card, Button } from "reactstrap";
-
 import Lightbox from "react-18-image-lightbox";
+import { IoBed } from "react-icons/io5";
+import { FaBath } from "react-icons/fa";
+import { FaHouseUser } from "react-icons/fa";
+import { IoLocationSharp } from "react-icons/io5";
+
 const ProductContainAdmin = ({ AddProperty }) => {
   const { images } = useContext(GalleryContext);
   const [photoIndex, setPhotoIndex] = useState({ index: 0, isOpen: false });
@@ -544,7 +548,39 @@ const getVisibleproducts = (
     });
 };
 const ProductGrid = ({ photoIndexSlider, setPhotoIndexSlider }) => {
+
+  const [modal, setModal] = useState(false);
+  const [dealDel, setDealDel] = useState(false);
+  const [dealsData, setDealsData] = useState([]);
+  console.log("🚀 ~ ProductGrid ~ dealsData:", dealsData)
+
   const layoutColumns = 3;
+  useEffect(() => {
+    let isMounted = true;
+
+    axios
+      .get(`${process.env.REACT_APP_API_BASE_URL}/app/v1/deals/fetch-all-deals`, {
+        headers: {
+          'x-user-id': 'user-95c63296-c866-4221-8961-198fb8d81567',
+          'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXItOTVjNjMyOTYtYzg2Ni00MjIxLTg5NjEtMTk4ZmI4ZDgxNTY3IiwiaWF0IjoxNzE2Mjg0NDQyLCJleHAiOjE3MTYyODgwNDJ9.v44iROxFfDtdnfG7xHRw5cW12FX471TWOHmSWwkrHLs`
+
+        }
+      })
+      .then((response) => {
+        if (isMounted) {
+          setDealsData(response.data.response.data);
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching deals:", error);
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, [dealDel]);
+
+ 
 
   const [openModal, setOpenModal] = useState(false);
 
@@ -989,26 +1025,64 @@ const ProductGrid = ({ photoIndexSlider, setPhotoIndexSlider }) => {
   // Calculate the indexes for slicing the products array
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = products.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = dealsData.slice(indexOfFirstItem, indexOfLastItem);
 
   const history = useNavigate();
 
+  const toggleModal = () => {
+    setModal(!modal);
+  };
+
+  const handleEdit = (id) => {
+    history(`/deals/edit/${id}`); // Assuming _id is the unique identifier for each deal
+  };
+
+  // const handleDelete = (deal) => {
+  //   setSelectedDeal(deal);
+  //   toggleModal();
+  // };
+  const handleDelete = async (dealID) => {
+    console.log("🚀 ~ handleDelete ~ dealID:", dealID)
+    try {
+      const response = await axios.delete(`http://localhost:5000/api/app/v1/deals/?dealID=${dealID}`, {
+        headers: {
+          'x-user-id': 'user-95c63296-c866-4221-8961-198fb8d81567',
+          'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXItOTVjNjMyOTYtYzg2Ni00MjIxLTg5NjEtMTk4ZmI4ZDgxNTY3IiwiaWF0IjoxNzE2Mjg0NDQyLCJleHAiOjE3MTYyODgwNDJ9.v44iROxFfDtdnfG7xHRw5cW12FX471TWOHmSWwkrHLs`
+        }
+      });
+
+      if (response.status === 200) {
+        setDealDel(!dealDel)
+        toast.success(response.data.message);
+        setDealsData(dealsData.filter(deal => deal.dealID !== dealID));
+      }
+    } catch (error) {
+      console.error("Error deleting deal:", error);
+      toast.error("Failed to delete deal.");
+    }
+  };
+
+  const handleViewDetails = (user) => {
+    history(`/deals/${user._id}`);
+  };
+
   const handleViewInquiry = (deal) => {
-    history("/inquiry");
+    history("/customer/Inquiry");
   };
 
   return (
     <Fragment>
       <div className="product-wrapper-grid" id="product-wrapper-grid">
         <Row className="gridRow" id="gridRow">
-          {products &&
+          {dealsData &&
             currentItems.map((item, index) => {
+              console.log("🚀 ~ currentItems.map ~ item:", item.dealID)
               return (
                 <div
                   id="gridId"
                   className={`${layoutColumns === 3
-                      ? "col-xl-3 col-lg-6 col-sm-6 xl-4 box-col-4"
-                      : "col-xl-" + layoutColumns
+                    ? "col-xl-3 col-lg-6 col-sm-6 xl-4 box-col-4"
+                    : "col-xl-" + layoutColumns
                     }`}
                   key={item.id}
                 >
@@ -1094,33 +1168,44 @@ const ProductGrid = ({ photoIndexSlider, setPhotoIndexSlider }) => {
                           </UL>
                         </div>
                       </div>
-                      <div className="d-flex product-details">
-                        <>
-                          {" "}
-                          <Link to={"/deals/1"}>
-                            <H4>{"Master City Deals"}</H4>
-
-                            <P>{"3 bds1 | 1 bath, |200 sqft - Active"}</P>
-                            <P>
-                              {"10737 Evanston Avenue N, Seattle, WA 98133"}
-                            </P>
-                          </Link>
-                        </>
-                        <Button color="" onClick={() => handleViewInquiry()}>
-                          <i
+                      <div className="d-flex justify-content-between align-items-center w-100 product-details">
+                 
+                      
+        <Link to={`/deals/${item.itemID}`} key={item._id}>
+          <h4>{item.title}</h4>
+          <div className="d-flex">
+            <p><IoBed className="mt-2" style={{ color: "#49A8D8" }} /> {`${item.bedRooms} bds | `}</p>
+            <p><FaBath className="mt-2" style={{ color: "#49A8D8" }} /> {`${item.baths} bath | `}</p>
+            <p><FaHouseUser className="mt-2" style={{ color: "#49A8D8" }} /> {`${item.area} sqft - Active`}</p>
+          </div>
+          <p><IoLocationSharp className="mt-2" style={{ color: "#49A8D8" }} /> {item.address}</p>
+        </Link>
+      
+                        <Button color="" onClick={() => handleViewInquiry()} style={{ background: "#49A8D8", height: "33px", borderRadius: "10%", fontSize: "14px", color: "white" }}>
+                          {/* <i
                             style={{ fontSize: "25px" }}
                             className="icofont icofont-support-faq"
-                          ></i>
+                          ></i> */}
+                          Messages
                         </Button>
-                        <div className="d-flex flex-grow-2">
+                        <div className="d-flex flex-grow-2 gap-2">
                           {" "}
-                          <Link color="" to={"/new-property"}>
-                            <i className="icon-pencil"></i>
+                          <Button color="" to={"/new-property"} className="d-flex align-items-center justify-content-center" style={{ background: "#49A8D8", height: "30px", width: "50px", borderRadius: "10%", fontSize: "14px", color: "white" }} onClick={() => handleEdit(item.dealID)}>
+                            {/* <i className="icon-pencil"></i> */}
+                            Edit
+                          </Button>
+                          <Button color="" onClick={()=>handleDelete(item.dealID)} className="d-flex align-items-center justify-content-center" style={{ background: "#49A8D8", height: "30px", width: "70px", borderRadius: "10%", fontSize: "14px", color: "white" }} >
+                            {/* <i className="icon-pencil"></i> */}
+                            Delete
+                          </Button>
+                          <Link color="" to={"/new-property"} className="d-flex align-items-center justify-content-center" style={{ background: "#49A8D8", height: "30px", width: "70px", borderRadius: "10%", fontSize: "14px", color: "white" }} onClick={() => handleViewDetails()}>
+                            {/* <i className="icon-pencil"></i> */}
+                            More
                           </Link>
-                          <span>
+                          {/* <span>
                             {" "}
                             <i className="icon-trash"></i>
-                          </span>
+                          </span> */}
                         </div>
                       </div>
                       {/* <P>
@@ -1174,7 +1259,7 @@ const ProductGrid = ({ photoIndexSlider, setPhotoIndexSlider }) => {
             />
           </PaginationItem>
           {Array.from({
-            length: Math.ceil(products.length / itemsPerPage),
+            length: Math.ceil(dealsData.length / itemsPerPage),
           }).map((_, index) => (
             <PaginationItem key={index} active={index + 1 === currentPage}>
               <PaginationLink onClick={() => paginate(index + 1)}>
@@ -1187,7 +1272,7 @@ const ProductGrid = ({ photoIndexSlider, setPhotoIndexSlider }) => {
               next
               onClick={() => paginate(currentPage + 1)}
               disabled={
-                currentPage === Math.ceil(products.length / itemsPerPage)
+                currentPage === Math.ceil(dealsData.length / itemsPerPage)
               }
             />
           </PaginationItem>

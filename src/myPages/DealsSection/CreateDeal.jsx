@@ -30,6 +30,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router";
 import ReactGoogleAutocomplete from "react-google-autocomplete";
+import axiosInstance from "../../servicesAxios/httpServices";
 
 const CreateDeal = () => {
   const [selectedAddress, setSelectedAddress] = useState("");
@@ -48,6 +49,7 @@ const CreateDeal = () => {
     reset,
   } = useForm();
   const { id } = useParams();
+  console.log("🚀 ~ CreateDeal ~ id:", id)
   const [dealData, setDealData] = useState(null);
   console.log("🚀 ~ CreateDeal ~ dealData:", dealData)
   const [propertyType, setPropertyType] = useState(""); // State to hold selected property type
@@ -58,7 +60,6 @@ const CreateDeal = () => {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [email, setEmail] = useState([]);
-  console.log("🚀 ~ CreateDeal ~ email:", email)
   const [addressOptions, setAddressOptions] = useState([]);
   const [address, setAddress] = useState(true);
   const [addressSearch, setAddressSearch] = useState("");
@@ -70,7 +71,6 @@ const CreateDeal = () => {
   const [debouncedAddressSearch, setDebouncedAddressSearch] = useState("");
   const [sendByEmail, setSendByEmail] = useState(false);
   const [emails, setEmails] = useState([]);
-  console.log("🚀 ~ CreateDeal ~ emails:", emails)
 
   const [sendToSpecificExistingCustomer, setSendToSpecificExistingCustomer] =
     useState(false);
@@ -130,24 +130,49 @@ const CreateDeal = () => {
       }, 3000);
     }
   };
+  // useEffect(() => {
+  //   const fetchDealById = async () => {
+  //     try {
+  //       const response = await axios.get(
+  //         `${process.env.REACT_APP_API_BASE_URL}/app/v1/deals/?dealID=${id}`
+  //       );
+  //       console.log("🚀 ~ fetchDealById ~ response:", response)
+  //       setDealData(response.data);
+  //       setAddress(false);
+  //     } catch (error) {
+  //       console.error("Error fetching deal by ID:", error);
+  //     }
+  //   };
+
+  //   if (id) {
+  //     fetchDealById();
+  //   }
+  // }, [id]);
   useEffect(() => {
     const fetchDealById = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_API_BASE_URL}/deals/${id}`
+          `${process.env.REACT_APP_API_BASE_URL}/app/v1/deals/?dealID=${id}`, 
+          {
+            headers: {
+              'x-user-id': 'user-95c63296-c866-4221-8961-198fb8d81567',
+              'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXItOTVjNjMyOTYtYzg2Ni00MjIxLTg5NjEtMTk4ZmI4ZDgxNTY3IiwiaWF0IjoxNzE2Mjg0NDQyLCJleHAiOjE3MTYyODgwNDJ9.v44iROxFfDtdnfG7xHRw5cW12FX471TWOHmSWwkrHLs`
+            }
+          }
         );
+        console.log("🚀 ~ fetchDealById ~ response:", response);
         setDealData(response.data);
         setAddress(false);
       } catch (error) {
         console.error("Error fetching deal by ID:", error);
       }
     };
-
+  
     if (id) {
       fetchDealById();
     }
   }, [id]);
-
+  
   const formData = watch();
 
   function handleImageUpload(event) {
@@ -241,52 +266,179 @@ const CreateDeal = () => {
     }
   }, [dealData, reset]);
 
+  // const AddProject = async (data) => {
+  //   // setFormSubmitted(true);
+  //   // setClient(true);
+  //   await trigger();
+
+  //   const dealData = new FormData();
+  //   dealData.append("title", fomDat.title);
+  //   dealData.append("price", fomDat.price);
+  //   dealData.append("approxPrice", fomDat.approxPrice);
+  //   dealData.append("monthly_cash_min", fomDat.monthly_cash_min);
+  //   dealData.append("monthly_cash_max", fomDat.monthly_cash_max);
+  //   dealData.append("annually_return_min", approxAnnualMinReturn);
+  //   dealData.append("annually_return_max", approxAnnualMaxReturn);
+  //   dealData.append("closing_date", fomDat.closing_date);
+
+  //   dealData.append("bedRooms", fomDat.bedRooms);
+  //   dealData.append("area", fomDat.area);
+  //   dealData.append("baths", fomDat.baths);
+  //   dealData.append("address", addressSearch);
+  //   if (opt?.length > 0 && selectedOptions?.length) {
+  //     dealData.append("sendTo", opt);
+  //   }
+
+  //   dealData.append("sendByEmail", emails ? emails : "");
+  //   files.forEach((image) => {
+  //     dealData.append("images", image);
+  //   });
+
+  //   const apiUrl = id
+  //     ? `${process.env.REACT_APP_API_BASE_URL}/deals/${id}`
+  //     : `${process.env.REACT_APP_API_BASE_URL}/app/v1/deals`;
+
+  //   try {
+  //     const response = id
+  //     ? await axiosInstance.patch(apiUrl, dealData)
+  //     : await axiosInstance.post(apiUrl, dealData);
+  //     if (response.data.statusCode === 200) {
+  //       // setFormSubmitted(false);
+  //       toast.success(response.data.message);
+  //       // history("/deals/view");
+  //     }
+  //   } catch (error) {
+  //     toast.error("Failed to create/update deal.");
+  //   }
+  // };
+  // const AddProject = async (data) => {
+  //   await trigger();
+  
+  //   const dealData = {
+  //     title: fomDat.title,
+  //     price: fomDat.price,
+  //     totlaPrice: fomDat.approxPrice,
+  //     monthlyCashFlowMin: fomDat.monthly_cash_min,
+  //     monthlyCashFlowMax: fomDat.monthly_cash_max,
+  //     approxAnualMinReturn: approxAnnualMinReturn,
+  //     approxAnualMaxReturn: approxAnnualMaxReturn,
+  //     closingDate: "12-05-2024",
+  //     bedRooms: fomDat.bedRooms,
+  //     area: fomDat.area,
+  //     baths: fomDat.baths,
+  //     address: addressSearch,
+  //     primaryImage: {
+  //       url: "google.com", // Replace with actual primary image details if available
+  //       name: "image",
+  //       type: "image",
+  //     },
+  //     images: files.map((file) => ({
+  //       url: file.url || "https://asset.cloudinary.com/dtdl7dbwk/3bf9f3f4ee727e0cf57ba4bf81893c69", // Replace with actual file URL if available
+  //       name: file.name,
+  //       type: file.type,
+  //     })),
+  //     sendToByType: selectedOptions || [],
+  //     sendToExistingCustomer: opt || [],
+  //     sendByEmail: emails || [],
+  //   };
+  
+  //   const apiUrl = id
+  //     ? `${process.env.REACT_APP_API_BASE_URL}/deals/${id}`
+  //     // : `${process.env.REACT_APP_API_BASE_URL}/app/v1/deals/`;
+  //     : `http://localhost:5000/api/app/v1/deals`;
+  
+  //     try {
+  //       const response = id
+  //         ? await axios.patch(apiUrl, dealData, {
+  //             headers: {
+  //               'Content-Type': 'application/json',
+  //               'x-user-id': 'user-95c63296-c866-4221-8961-198fb8d81567',
+  //               'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXItOTVjNjMyOTYtYzg2Ni00MjIxLTg5NjEtMTk4ZmI4ZDgxNTY3IiwiaWF0IjoxNzE2Mjg0NDQyLCJleHAiOjE3MTYyODgwNDJ9.v44iROxFfDtdnfG7xHRw5cW12FX471TWOHmSWwkrHLs',
+  //             }
+  //           })
+  //         : await axios.post(apiUrl, dealData, {
+  //             headers: {
+  //               'Content-Type': 'application/json',
+  //               'x-user-id': 'user-95c63296-c866-4221-8961-198fb8d81567',
+  //               'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXItOTVjNjMyOTYtYzg2Ni00MjIxLTg5NjEtMTk4ZmI4ZDgxNTY3IiwiaWF0IjoxNzE2Mjg0NDQyLCJleHAiOjE3MTYyODgwNDJ9.v44iROxFfDtdnfG7xHRw5cW12FX471TWOHmSWwkrHLs',
+  //             }
+  //           });
+    
+  //     if (response.data.statusCode === 200) {
+  //       toast.success(response.data.message);
+  //       history("/deals/view");
+  //     }
+  //   } catch (error) {
+  //     toast.error("Failed to create/update deal.");
+  //   }
+  // };
   const AddProject = async (data) => {
-    // setFormSubmitted(true);
-    // setClient(true);
+    setFormSubmitted(true);
+
     await trigger();
+  
+    const dealData = {
+      title: fomDat.title,
+      price: fomDat.price,
+      totlaPrice: fomDat.approxPrice,
+      monthlyCashFlowMin: fomDat.monthly_cash_min,
+      monthlyCashFlowMax: fomDat.monthly_cash_max,
+      approxAnualMinReturn: approxAnnualMinReturn,
+      approxAnualMaxReturn: approxAnnualMaxReturn,
+      propertyType: "condo",
 
-    const dealData = new FormData();
-    dealData.append("title", fomDat.title);
-    dealData.append("price", fomDat.price);
-    dealData.append("approxPrice", fomDat.approxPrice);
-    dealData.append("monthly_cash_min", fomDat.monthly_cash_min);
-    dealData.append("monthly_cash_max", fomDat.monthly_cash_max);
-    dealData.append("annually_return_min", approxAnnualMinReturn);
-    dealData.append("annually_return_max", approxAnnualMaxReturn);
-    dealData.append("closing_date", fomDat.closing_date);
-
-    dealData.append("bedRooms", fomDat.bedRooms);
-    dealData.append("area", fomDat.area);
-    dealData.append("baths", fomDat.baths);
-    dealData.append("address", addressSearch);
-    if (opt?.length > 0 && selectedOptions?.length) {
-      dealData.append("sendTo", opt);
-    }
-
-    dealData.append("sendByEmail", emails ? emails : "");
-    files.forEach((image) => {
-      dealData.append("images", image);
-    });
-
+      closingDate: "12-05-2024",
+      bedRooms: fomDat.bedRooms,
+      area: fomDat.area,
+      baths: fomDat.baths,
+      address: addressSearch,
+      primaryImage: {
+        url: "google.com", // Replace with actual primary image details if available
+        name: "image",
+        type: "image",
+      },
+      images: files.map((file) => ({
+        url: file.url || "https://asset.cloudinary.com/dtdl7dbwk/3bf9f3f4ee727e0cf57ba4bf81893c69", // Replace with actual file URL if available
+        name: file.name,
+        type: file.type,
+      })),
+      sendToByType: selectedOptions || [],
+      sendToExistingCustomer: opt || [],
+      sendByEmail: emails || [],
+    };
+  
     const apiUrl = id
       ? `${process.env.REACT_APP_API_BASE_URL}/deals/${id}`
-      : `${process.env.REACT_APP_API_BASE_URL}/deals`;
-
+      : `http://localhost:5000/api/app/v1/deals/`;
+  
     try {
       const response = id
-        ? await axios.patch(apiUrl, dealData)
-        : await axios.post(apiUrl, dealData);
-      if (response.data.statusCode === 200) {
-        // setFormSubmitted(false);
-        toast.success(response.data.message);
-        // history("/deals/view");
+      ? await axios.patch(apiUrl, dealData, {
+          headers: {
+            'Content-Type': 'application/json',
+            'x-user-id': 'user-95c63296-c866-4221-8961-198fb8d81567',
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXItOTVjNjMyOTYtYzg2Ni00MjIxLTg5NjEtMTk4ZmI4ZDgxNTY3IiwiaWF0IjoxNzE2Mjg0NDQyLCJleHAiOjE3MTYyODgwNDJ9.v44iROxFfDtdnfG7xHRw5cW12FX471TWOHmSWwkrHLs`,
+          }
+        })
+      : await axios.post(apiUrl, dealData, {
+          headers: {
+            'Content-Type': 'application/json',
+            'x-user-id': 'user-95c63296-c866-4221-8961-198fb8d81567',
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXItOTVjNjMyOTYtYzg2Ni00MjIxLTg5NjEtMTk4ZmI4ZDgxNTY3IiwiaWF0IjoxNzE2Mjg0NDQyLCJleHAiOjE3MTYyODgwNDJ9.v44iROxFfDtdnfG7xHRw5cW12FX471TWOHmSWwkrHLs`,
+          }
+        });
+  
+      if (response.status === 200) {
+        await new Promise((resolve) => setTimeout(resolve, 100));
+        setFormSubmitted(false);
+        toast.success(response.data.response.message);
+        history("/deals/view");
       }
     } catch (error) {
       toast.error("Failed to create/update deal.");
     }
   };
-
+  
   const options = [
     { value: "All", label: "All Users" },
     { value: "Customer", label: "Paid Customers" },
@@ -1185,61 +1337,4 @@ const MultiDropzone = ({ setImages, dealData, images }) => {
     </div>
   );
 };
-const SingleDropzone = ({ setImages, dealData, images }) => {
-  const handleDrop = (acceptedFiles) => {
-    // Only allow one image to be selected for feature image
-    const selectedImage = acceptedFiles[0];
-    setImages([selectedImage]);
-  };
 
-  const handleDelete = () => {
-    setImages([]);
-  };
-
-  return (
-    <div className="App2">
-      <Dropzone onDrop={handleDrop} accept="image/*" multiple={false}>
-        {({ getRootProps, getInputProps }) => (
-          <div
-            className="dropzone"
-            {...getRootProps()}
-            style={{ border: `2px dashed var(--theme-deafult)` }}
-          >
-            <input {...getInputProps()} />
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="25"
-              height="25"
-              fill="green"
-              className="bi bi-cloud-upload"
-              viewBox="0 0 16 16"
-              style={{ color: `var(--theme-secondary)` }}
-            >
-              <path
-                fillRule="evenodd"
-                d="M4.406 1.342A5.53 5.53 0 0 1 8 0c2.69 0 4.923 2 5.166 4.579C14.758 4.804 16 6.137 16 7.773 16 9.569 14.502 11 12.687 11H10a.5.5 0 0 1 0-1h2.688C13.979 10 15 8.988 15 7.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 2.825 10.328 1 8 1a4.53 4.53 0 0 0-2.941 1.1c-.757.652-1.153 1.438-1.153 2.055v.448l-.445.049C2.064 4.805 1 5.952 1 7.318 1 8.785 2.23 10 3.781 10H6a.5.5 0 0 1 0 1H3.781C1.708 11 0 9.366 0 7.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383"
-              />
-              <path
-                fillRule="evenodd"
-                d="M7.646 4.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V14.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708z"
-              />
-            </svg>
-            <p style={{ color: `var(--theme-deafult)` }}>
-              Drag & drop an image here, or click to select a file
-            </p>
-          </div>
-        )}
-      </Dropzone>
-      <div className="image-preview">
-        {images?.length > 0 && (
-          <div className="image-container">
-            <img src={URL.createObjectURL(images[0])} alt="Feature Image" />
-            <div className="image-delete" onClick={handleDelete}>
-              <FaTrash />
-            </div>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-};

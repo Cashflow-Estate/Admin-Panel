@@ -140,6 +140,16 @@ export const OrderStatus = 'Order Status';
 export const LiveProducts = 'Live Products';
 export const Turnover = 'Turnover';
 export const MonthlySales = 'Monthly Sales';
+export const SlowFlipTotalPrice = 'Slow Flip Total Price';
+export const MonthlyCashFlowMinimum = 'Monthly Cash Flow Minimum'
+export const MonthlyCashFlowMaximum = 'Monthly Cash Flow Maximum'
+export const PropertyType = 'Property Type'
+export const ApproxAnnualMinimumReturn = 'Approx Annual Minimum Return(%)'
+export const ApproxAnnualMaximumReturn = 'Approx Annual Maximum Return(%)'
+export const ClosingDate = 'Closing Date'
+export const Bedrooms = 'Bedrooms'
+export const TotalBaths = 'Total Baths'
+export const AreainSqft = 'Area in Sqft'
 
 export const Uses = 'Uses';
 export const BrowserUses = 'Browser Uses';

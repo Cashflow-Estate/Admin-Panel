@@ -810,11 +810,11 @@
                   transition: all 0.3s ease;
                   &.stroke-icon {
                     // stroke: var(--theme-deafult);
-                    stroke: green;
+                    stroke: white;
                   }
                   &.fill-icon {
                     // fill: var(--theme-deafult);
-                    fill: green;
+                    fill: white;
                   }
                 }
               }
@@ -1305,7 +1305,7 @@
 
           .logo-wrapper,
           .logo-icon-wrapper {
-            padding: 1px 30px;
+            padding: 11px 30px;
             box-shadow: -9px 0 20px rgba($semi-dark, 0.1);
           }
 
@@ -1473,7 +1473,8 @@
             }
 
             .sidebar-links {
-              height: $sidebar-height;
+              // height: $sidebar-height;
+              height: 100vh;
               left: -300px;
               z-index: 99;
               transition: color 1s ease;
@@ -1583,7 +1584,7 @@
                     > a {
                       &:hover {
                         // background-color: rgba($primary-color, 0.07);
-                        background-color: #dfefda;
+                        background-color: #49A8D8;
                         transition: all 0.3s ease;
                       }
                     }
@@ -1595,7 +1596,7 @@
                     &:hover {
                       svg {
                         fill: rgba($primary-color, 0.1%);
-                        stroke: var(--theme-deafult);
+                        stroke: white;
                         transition: all 0.3s ease;
                         &.fill-icon {
                           fill: var(--theme-deafult);
@@ -1604,13 +1605,13 @@
                       }
 
                       span {
-                        color: var(--theme-deafult);
+                        color: white;
                         transition: all 0.3s ease;
                       }
 
                       .according-menu {
                         i {
-                          color: var(--theme-deafult);
+                          color: white;
                           transition: all 0.3s ease;
                         }
                       }
@@ -1620,7 +1621,7 @@
                 .sidebar-link.active {
                   &:hover {
                     span {
-                      color: green;
+                      color: white;
                       transition: all 0.3s ease;
                     }
                   }
@@ -1678,7 +1679,14 @@
                   li {
                     &:hover {
                       > a {
-                        color: var(--theme-deafult);
+                        color: #49A8D8;
+                        transition: all 0.3s ease;
+                      }
+                    }
+
+                    &:active {
+                      > a {
+                        color: #49A8D8;
                         transition: all 0.3s ease;
                       }
                     }
@@ -1870,7 +1878,7 @@
                     right: 0;
                     top: 50%;
                     transform: translateY(-50%);
-                    background-color: $primary-color;
+                    background-color: white;
                     border-radius: 5px 0px 0px 5px;
                     opacity: 0;
                     visibility: hidden;
@@ -1884,7 +1892,7 @@
                     position: relative;
                     margin-bottom: 10px;
                     // background-color: lighten($primary-color, 27%);
-                    background-color:var(--theme-deafult);
+                    background-color:#49A8D8;
                     &::after {
                       opacity: 1;
                       visibility: visible;
