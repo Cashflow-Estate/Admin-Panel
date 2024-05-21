@@ -327,6 +327,7 @@ import { BiBed, BiBath, BiArea } from "react-icons/bi";
 import { CgUnavailable } from "react-icons/cg";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { Breadcrumbs, H3, Image, LI, P, UL } from "../../../AbstractElements";
+import { Title, Price, SlowFlipTotalPrice, MonthlyCashFlowMinimum, MonthlyCashFlowMaximum, PropertyType, ApproxAnnualMaximumReturn, ClosingDate, Bedrooms, TotalBaths, AreainSqft, ApproxAnnualMinimumReturn } from "../../../Constant";
 import { Card, CardBody, Media } from "reactstrap";
 import Slider from "react-slick";
 import iimmgg from "../../../assets/cashflowimg/apartments/a1lg.png";
@@ -334,6 +335,12 @@ import video from "../../../assets/CashflowLogos/video.mp4";
 import Logs from "./Logs";
 import { useParams } from "react-router";
 import axios from "axios";
+import Home from '../../../../src/assets/images/house.jpg'
+import house1 from '../../../../src/assets/images/house.jpg'
+import house2 from '../../../../src/assets/images/house.jpg'
+import house3 from '../../../../src/assets/images/house.jpg'
+import house4 from '../../../../src/assets/images/house.jpg'
+
 const ViewMore = () => {
   const { id } = useParams();
   const [deal, setDeal] = useState(null);
@@ -425,7 +432,6 @@ const ViewMore = () => {
   // };
   const settings = {
     className: "product-slider",
-
     asNavFor: nav2,
     infinite: false,
     speed: 1000,
@@ -466,7 +472,21 @@ const ViewMore = () => {
       <div>
         <Breadcrumbs mainTitle="Details" parent="Deals" title="1" />
         <Row className="product-page-main p-0">
-          <Col xxl="7" md="6">
+          <Col xxl='6' md='6' className='box-col-12'>
+            <Card>
+              <CardBody>
+                <ImageSlider />
+              </CardBody>
+            </Card>
+          </Col>
+          <Col xxl='6' md='6' className='box-col-12'>
+            <Card>
+              <CardBody style={{ height: "61vh" }}>
+                <ProductDetails />
+              </CardBody>
+            </Card>
+          </Col>
+          {/* <Col xxl="7" md="6">
             <Card>
               <CardBody>
                 <Slider {...settings} ref={slider1}>
@@ -489,7 +509,7 @@ const ViewMore = () => {
                       )
                     )}
                 </Slider>
-                {/* <Row className="max-height-100">
+                <Row className="max-height-100">
                   <Col xs={4} className="max-width-100">
                     <Slider
                       asNavFor={nav1}
@@ -520,13 +540,13 @@ const ViewMore = () => {
                         )}
                     </Slider>
                   </Col>
-                </Row> */}
+                </Row>
               </CardBody>
             </Card>
-          </Col>
-          <Col xxl="5" md="6" className="box-col-6">
+          </Col> */}
+          {/* <Col xxl="5" md="6" className="box-col-6">
             <DealsDetails deal={deal} />
-          </Col>
+          </Col> */}
         </Row>
         {/* <Row>
           <Logs />
@@ -537,6 +557,230 @@ const ViewMore = () => {
 };
 
 export default ViewMore;
+
+const ImageSlider = () => {
+
+  const [state, setState] = useState({ nav1: null, nav2: null });
+  const { nav1, nav2 } = state;
+  const slider1 = useRef();
+  const slider2 = useRef();
+
+  useEffect(() => {
+    setState({
+      nav1: slider1.current,
+      nav2: slider2.current,
+    });
+  }, []);
+
+  const ChevronLeft = () => {
+    return (
+      <svg
+        width={"8"}
+        height={"14"}
+        viewBox="0 0 8 14"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M7.67505 0.641687C7.83061 0.836131 7.91325 1.05002 7.92297 1.28335C7.93269 1.51669 7.85005 1.72085 7.67505 1.89585L2.54172 7.02919L7.70422 12.1917C7.85978 12.3472 7.93269 12.5563 7.92297 12.8188C7.91325 13.0813 7.83061 13.2903 7.67505 13.4459C7.48061 13.6403 7.27158 13.7327 7.04797 13.7229C6.82436 13.7132 6.62505 13.6209 6.45005 13.4459L0.645887 7.64169C0.548665 7.54447 0.480609 7.44724 0.44172 7.35002C0.402831 7.2528 0.383387 7.14585 0.383387 7.02919C0.383387 6.91252 0.402831 6.80558 0.44172 6.70835C0.480609 6.61113 0.548665 6.51391 0.645887 6.41669L6.42089 0.641687C6.59589 0.466687 6.80005 0.384048 7.03339 0.393771C7.26672 0.403493 7.48061 0.486132 7.67505 0.641687Z"
+          fill={"black"}
+        />
+      </svg>
+    );
+  };
+
+  const ChevronRight = () => {
+    return (
+      <svg
+        width={"8"}
+        height={"14"}
+        viewBox="0 0 8 14"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M0.324947 13.3583C0.169391 13.1639 0.0867519 12.95 0.0770297 12.7166C0.0673075 12.4833 0.149947 12.2791 0.324947 12.1041L5.45828 6.97081L0.29578 1.80831C0.140224 1.65276 0.0673075 1.44373 0.0770297 1.18123C0.0867519 0.918728 0.169391 0.7097 0.324947 0.554145C0.519391 0.3597 0.728419 0.267339 0.95203 0.277062C1.17564 0.286784 1.37495 0.379145 1.54995 0.554145L7.35411 6.35831C7.45134 6.45553 7.51939 6.55276 7.55828 6.64998C7.59717 6.7472 7.61661 6.85415 7.61661 6.97081C7.61661 7.08748 7.59717 7.19442 7.55828 7.29165C7.51939 7.38887 7.45134 7.48609 7.35411 7.58331L1.57911 13.3583C1.40411 13.5333 1.19995 13.616 0.966613 13.6062C0.733279 13.5965 0.519391 13.5139 0.324947 13.3583Z"
+          fill={"black"}
+        />
+      </svg>
+    );
+  };
+
+  const settings = {
+    className: "product-slider",
+    asNavFor: nav2,
+    infinite: true,
+    speed: 1000,
+    autoplaySpeed: 2000,
+    autoplay: true,
+    slidesToScroll: 1,
+    arrows: true, // Enable arrows
+
+    nextArrow: (
+      <button>
+        <ChevronRight />
+      </button>
+    ),
+    prevArrow: (
+      <button>
+        <ChevronLeft />
+      </button>
+    ),
+    dots: true,
+    customPaging: function (i) {
+      return <button className="slick-dot"></button>;
+    },
+  };
+
+  const productItem = [
+    {
+      "id": 0,
+      "img": "house1.jpg",
+    },
+    {
+      "id": 1,
+      "img": "house2.jpg",
+    },
+    {
+      "id": 2,
+      "img": "house3.jpg",
+    },
+    {
+      "id": 3,
+      "img": "house4.jpg",
+    },
+  ];
+
+  return (
+    <Fragment>
+      <Slider {...settings} asNavFor={nav2} className='product-slider' arrows={false} ref={slider1}>
+        {productItem.map((item) => (
+          <Image
+            attrImage={{
+              src: `${Home}`,
+              alt: '',
+              className: 'img-fluid w-100'
+            }}
+            key={item.id}
+          />
+        ))}
+      </Slider>
+      <div className="pt-4">
+        <Slider asNavFor={nav1} ref={slider2} slidesToShow={4} swipeToSlide={true} focusOnSelect={true} infinite={true} className='small-slick'>
+          {productItem.map((item) => (
+            <Image
+              attrImage={{
+                src: `${Home}`,
+                alt: '',
+                className: 'img-fluid w-100'
+              }}
+              key={item.id}
+            />
+          ))}
+        </Slider>
+
+      </div>
+
+
+    </Fragment>
+  );
+};
+
+const ProductDetails = () => {
+
+  return (
+    <Fragment>
+      {/* <Col xxl="12" className="box-col-6 order-xxl-0 order-1"> */}
+      {/* <Card> */}
+      {/* <CardBody style={{height: "80vh"}}> */}
+      <div className="product-page-details">
+        <H3>{"10737 Evanston Avenue N, Seattle, WA 98133"}</H3>
+      </div>
+      <hr />
+      <div>
+        <table className="product-page-width">
+          <tbody>
+            <tr>
+              <td>
+                <b>{Title} &nbsp;&nbsp;&nbsp;:</b>
+              </td>
+              <td>{"Pixelstrap"}</td>
+            </tr>
+            <tr>
+              <td>
+                <b>{Price} &nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;&nbsp;</b>
+              </td>
+              <td className="txt-success">{"in stock"}</td>
+            </tr>
+            <tr>
+              <td>
+                <b>{SlowFlipTotalPrice} &nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;&nbsp;</b>
+              </td>
+              <td>{"ABC"}</td>
+            </tr>
+            <tr>
+              <td>
+                <b>{MonthlyCashFlowMinimum} &nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;&nbsp;</b>
+              </td>
+              <td>{"Cotton"}</td>
+            </tr>
+            <tr>
+              <td>
+                <b>{MonthlyCashFlowMaximum} &nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;&nbsp;</b>
+              </td>
+              <td>{"Cotton"}</td>
+            </tr>
+            <tr>
+              <td>
+                <b>{PropertyType} &nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;&nbsp;</b>
+              </td>
+              <td>{"Cotton"}</td>
+            </tr>
+            <tr>
+              <td>
+                <b>{ApproxAnnualMinimumReturn} &nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;&nbsp;</b>
+              </td>
+              <td>{"Cotton"}</td>
+            </tr>
+            <tr>
+              <td>
+                <b>ApproxAnnualMaximumReturn(%) &nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;&nbsp;</b>
+              </td>
+              <td>{"Cotton"}</td>
+            </tr>
+            <tr>
+              <td>
+                <b>{ClosingDate} &nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;&nbsp;</b>
+              </td>
+              <td>{"Cotton"}</td>
+            </tr>
+            <tr>
+              <td>
+                <b>{Bedrooms} &nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;&nbsp;</b>
+              </td>
+              <td>{"Cotton"}</td>
+            </tr>
+            <tr>
+              <td>
+                <b>{TotalBaths} &nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;&nbsp;</b>
+              </td>
+              <td>{"Cotton"}</td>
+            </tr>
+            <tr>
+              <td>
+                <b>{AreainSqft} &nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;&nbsp;</b>
+              </td>
+              <td>{"Cotton"}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      {/* </CardBody> */}
+      {/* </Card> */}
+      {/* </Col> */}
+    </Fragment>
+  );
+};
 
 const DealsDetails = ({ deal }) => {
   const house = deal;

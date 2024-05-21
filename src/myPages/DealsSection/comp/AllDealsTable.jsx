@@ -14,7 +14,7 @@
 
 //   useEffect(() => {
 //     let isMounted = true; // Flag to track whether the component is mounted
-  
+
 //     // Fetch data from the API
 //     axios
 //       .get(`${process.env.REACT_APP_API_BASE_URL}/deals`)
@@ -29,14 +29,14 @@
 //         // Handle error
 //         console.error("Error fetching deals:", error);
 //       });
-  
+
 //     // Cleanup function to cancel any pending asynchronous tasks
 //     return () => {
 //       isMounted = false; // Set isMounted to false when the component unmounts
 //     };
 //   }, []);
-  
-  
+
+
 //   const toggleModal = () => {
 //     setModal(!modal);
 //   };
@@ -88,7 +88,7 @@
 //   const handleEdit = (row) => {
 //     history(`/deals/edit/${row._id}`); // Assuming _id is the unique identifier for each deal
 //   };
-  
+
 
 //   const handleViewInquiry = (deal) => {
 //     history("/inquiry");
@@ -187,7 +187,7 @@
 //       width: "20%",
 //       center: true,
 //     }
-    
+
 //   ];
 
 //   return (
@@ -256,17 +256,21 @@ import {
   ModalBody,
   ModalFooter,
 } from "reactstrap";
+import axios from "axios";
+import { toast } from "react-toastify";
 import { Pagination, PaginationItem, PaginationLink } from "reactstrap";
-
 import GalleryContext from "../../../_helper/Gallery";
 import iii from "../../../../src/assets/cashflowimg/immmmggg.jpg";
 import FilterContext from "../../../_helper/Ecommerce/Filter";
 import { ChevronDown, Grid, List } from "react-feather";
-
 import { Link, useNavigate } from "react-router-dom";
 import { Card, Button } from "reactstrap";
-
 import Lightbox from "react-18-image-lightbox";
+import { IoBed } from "react-icons/io5";
+import { FaBath } from "react-icons/fa";
+import { FaHouseUser } from "react-icons/fa";
+import { IoLocationSharp } from "react-icons/io5";
+
 const ProductContainAdmin = ({ AddProperty }) => {
   const { images } = useContext(GalleryContext);
   const [photoIndex, setPhotoIndex] = useState({ index: 0, isOpen: false });
@@ -544,7 +548,36 @@ const getVisibleproducts = (
     });
 };
 const ProductGrid = ({ photoIndexSlider, setPhotoIndexSlider }) => {
+
+  const [modal, setModal] = useState(false);
+  const [selectedDeal, setSelectedDeal] = useState(null);
+  const [dealsData, setDealsData] = useState([]);
+  console.log(dealsData, ">>>>>")
   const layoutColumns = 3;
+
+  useEffect(() => {
+    let isMounted = true; // Flag to track whether the component is mounted
+
+    // Fetch data from the API
+    axios
+      .get(`${process.env.REACT_APP_API_BASE_URL}/deals`)
+      .then((response) => {
+        if (isMounted) {
+          // Only update state if the component is still mounted
+          const sortedDeals = response.data.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+          setDealsData(sortedDeals);
+        }
+      })
+      .catch((error) => {
+        // Handle error
+        console.error("Error fetching deals:", error);
+      });
+
+    // Cleanup function to cancel any pending asynchronous tasks
+    return () => {
+      isMounted = false; // Set isMounted to false when the component unmounts
+    };
+  }, []);
 
   const [openModal, setOpenModal] = useState(false);
 
@@ -993,8 +1026,25 @@ const ProductGrid = ({ photoIndexSlider, setPhotoIndexSlider }) => {
 
   const history = useNavigate();
 
+  const toggleModal = () => {
+    setModal(!modal);
+  };
+
+  const handleEdit = (row) => {
+    history(`/deals/edit/${row._id}`); // Assuming _id is the unique identifier for each deal
+  };
+
+  const handleDelete = (deal) => {
+    setSelectedDeal(deal);
+    toggleModal();
+  };
+
+  const handleViewDetails = (user) => {
+    history(`/deals/${user._id}`);
+  };
+
   const handleViewInquiry = (deal) => {
-    history("/inquiry");
+    history("/customer/Inquiry");
   };
 
   return (
@@ -1007,8 +1057,8 @@ const ProductGrid = ({ photoIndexSlider, setPhotoIndexSlider }) => {
                 <div
                   id="gridId"
                   className={`${layoutColumns === 3
-                      ? "col-xl-3 col-lg-6 col-sm-6 xl-4 box-col-4"
-                      : "col-xl-" + layoutColumns
+                    ? "col-xl-3 col-lg-6 col-sm-6 xl-4 box-col-4"
+                    : "col-xl-" + layoutColumns
                     }`}
                   key={item.id}
                 >
@@ -1094,33 +1144,47 @@ const ProductGrid = ({ photoIndexSlider, setPhotoIndexSlider }) => {
                           </UL>
                         </div>
                       </div>
-                      <div className="d-flex product-details">
+                      <div className="d-flex justify-content-between align-items-center w-100 product-details">
                         <>
                           {" "}
                           <Link to={"/deals/1"}>
                             <H4>{"Master City Deals"}</H4>
-
-                            <P>{"3 bds1 | 1 bath, |200 sqft - Active"}</P>
-                            <P>
-                              {"10737 Evanston Avenue N, Seattle, WA 98133"}
+                            <div className="d-flex">
+                              <P><IoBed className="mt-2" style={{color: "#49A8D8"}} />{" 3 bds1 | "}</P>
+                              <P> <FaBath className="mt-2" style={{color: "#49A8D8"}}/>{" 1 bath | "}</P>
+                              <P> <FaHouseUser className="mt-2" style={{color: "#49A8D8"}} />{" 200 sqft - Active"}</P>
+                            </div>
+                            {/* <P><IoBedOutline />{" 3 bds1 | <LuBath /> 1 bath, | <MdOutlineHouse /> 200 sqft - Active"}</P> */}
+                            <P><IoLocationSharp className="mt-2" style={{color: "#49A8D8"}}/>
+                              {" 10737 Evanston Avenue N, Seattle, WA 98133"}
                             </P>
                           </Link>
                         </>
-                        <Button color="" onClick={() => handleViewInquiry()}>
-                          <i
+                        <Button color="" onClick={() => handleViewInquiry()} style={{ background: "#49A8D8", height: "33px", borderRadius: "10%", fontSize: "14px", color: "white" }}>
+                          {/* <i
                             style={{ fontSize: "25px" }}
                             className="icofont icofont-support-faq"
-                          ></i>
+                          ></i> */}
+                          Messages
                         </Button>
-                        <div className="d-flex flex-grow-2">
+                        <div className="d-flex flex-grow-2 gap-2">
                           {" "}
-                          <Link color="" to={"/new-property"}>
-                            <i className="icon-pencil"></i>
+                          <Link color="" to={"/new-property"} className="d-flex align-items-center justify-content-center" style={{ background: "#49A8D8", height: "30px", width: "50px", borderRadius: "10%", fontSize: "14px", color: "white" }} onClick={() => handleEdit()}>
+                            {/* <i className="icon-pencil"></i> */}
+                            Edit
                           </Link>
-                          <span>
+                          <Link color="" to={"/new-property"} className="d-flex align-items-center justify-content-center" style={{ background: "#49A8D8", height: "30px", width: "70px", borderRadius: "10%", fontSize: "14px", color: "white" }} onClick={() => handleDelete()}>
+                            {/* <i className="icon-pencil"></i> */}
+                            Delete
+                          </Link>
+                          <Link color="" to={"/new-property"} className="d-flex align-items-center justify-content-center" style={{ background: "#49A8D8", height: "30px", width: "70px", borderRadius: "10%", fontSize: "14px", color: "white" }} onClick={() => handleViewDetails()}>
+                            {/* <i className="icon-pencil"></i> */}
+                            More
+                          </Link>
+                          {/* <span>
                             {" "}
                             <i className="icon-trash"></i>
-                          </span>
+                          </span> */}
                         </div>
                       </div>
                       {/* <P>
