@@ -21,7 +21,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 const Signin = ({ selected }) => {
   const [email, setEmail] = useState("admin@gmail.com");
-  const [password, setPassword] = useState("test123");
+  const [password, setPassword] = useState("admin");
   const [togglePassword, setTogglePassword] = useState(false);
   const [loader, setLoader] = useState(false);
   const navigate = useNavigate();
@@ -49,7 +49,7 @@ const Signin = ({ selected }) => {
     setLoader(true);
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_API_BASE_URL}/users/login`,
+        `${process.env.REACT_APP_API_BASE_URL}/auth/v1/user/signin`,
         {
           email: email,
           password: password,
@@ -57,8 +57,8 @@ const Signin = ({ selected }) => {
       );
 
       if (response.status === 200) {
-        dispatch(setUserInfo(response.data.data));
-
+        console.log("ok")
+        dispatch(setUserInfo(response.data.response.data));
         await new Promise((resolve) => setTimeout(resolve, 100));
         toast.success("Successfully logged in!..");
         setLoader(false);
@@ -71,7 +71,6 @@ const Signin = ({ selected }) => {
     } catch (error) {
       toast.error("You entered the wrong password or username!..");
 
-      console.error("Error:", error);
       setLoader(false);
     }
   };
