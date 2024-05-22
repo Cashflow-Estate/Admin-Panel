@@ -243,7 +243,7 @@ export const MonthlyProfitsChartData = {
         },
       },
     },
-    colors: ['#54BA4A', 'var(--theme-deafult)', '#FFA941'],
+    colors: ['#49A8D8', 'var(--theme-deafult)', '#FFA941'],
     responsive: [
       {
         breakpoint: 1630,
@@ -359,7 +359,7 @@ export const OptionsOverView = {
         columnWidth: '50%',
       },
     },
-    colors: ['#7064F5', '#54BA4A', '#FF3364'],
+    colors: ['#7064F5', '#49A8D8', '#FF3364'],
     fill: {
       type: 'gradient',
       gradient: {
@@ -384,7 +384,7 @@ export const OptionsOverView = {
         {
           seriesIndex: 1,
           dataPointIndex: 2,
-          fillColor: '#54BA4A',
+          fillColor: '#49A8D8',
           strokeColor: 'var(--white)',
           size: 5,
         },
@@ -406,7 +406,7 @@ export const OptionsOverView = {
         {
           seriesIndex: 1,
           dataPointIndex: 5,
-          fillColor: '#54BA4A',
+          fillColor: '#49A8D8',
           strokeColor: 'var(--white)',
           size: 5,
         },
@@ -428,7 +428,7 @@ export const OptionsOverView = {
         {
           seriesIndex: 1,
           dataPointIndex: 9,
-          fillColor: '#54BA4A',
+          fillColor: '#49A8D8',
           strokeColor: 'var(--white)',
           size: 5,
         },

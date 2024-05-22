@@ -63,6 +63,7 @@ const CreateDeal = () => {
   const [monthlyCashMin, setMonthlyCashMin] = useState("");
   const [monthlyCashMax, setMonthlyCashMax] = useState("");
   const [approxAnnualMinReturn, setApproxAnnualMinReturn] = useState("");
+  console.log("🚀 ~ CreateDeal ~ approxAnnualMinReturn:", approxAnnualMinReturn)
   const [approxAnnualMaxReturn, setApproxAnnualMaxReturn] = useState("");
 
   const [debouncedAddressSearch, setDebouncedAddressSearch] = useState("");
@@ -571,8 +572,10 @@ const CreateDeal = () => {
       totlaPrice: fomDat.approxPrice,
       monthlyCashFlowMin: fomDat.monthly_cash_min,
       monthlyCashFlowMax: fomDat.monthly_cash_max,
-      approxAnualMinReturn: approxAnnualMinReturn,
-      approxAnualMaxReturn: approxAnnualMaxReturn,
+      // approxAnualMinReturn: approxAnnualMinReturn,
+      // approxAnualMaxReturn: approxAnnualMaxReturn,
+      approxAnualMinReturn: approxAnnualMinReturn.replace("%", ""),
+      approxAnualMaxReturn: approxAnnualMaxReturn.replace("%", ""),
       propertyType: "condo",
 
       closingDate: "12-05-2024",
@@ -822,6 +825,80 @@ const CreateDeal = () => {
                           {!addressSearch?.length && btn && (
                             <span style={{ color: "red" }}>
                               Address is required
+                            </span>
+                          )}
+                        </FormGroup>
+                      </Col>
+                    </Row>
+                    <Row>
+                    <Col sm={4}>
+                        <FormGroup>
+                          <h6 style={{ color: "black" }}>{"Bedooms"}</h6>
+                          <input
+                            className="form-control"
+                            type="number"
+                            name="bedRooms"
+                            placeholder="Total Bedrooms"
+                            value={fomDat.bedRooms > 0 ? fomDat.bedRooms : ""}
+                            onChange={handleBedChange}
+                          />
+                          <span style={{ color: "red" }}>
+                            {!fomDat.bedRooms && btn && "Bedroom is required"}
+                          </span>
+                          <br />
+                          {fomDat.bedRooms < 1 && bedError && (
+                            <span style={{ color: "red" }}>
+                              {" "}
+                              {bedError?.length &&
+                                "Value must be greater than 0"}
+                            </span>
+                          )}
+                        </FormGroup>
+                      </Col>
+                      <Col sm={4}>
+                        <FormGroup>
+                          <h6 style={{ color: "black" }}>{"Total Baths"}</h6>
+                          <input
+                            className="form-control"
+                            type="number"
+                            name="baths"
+                            placeholder="Total Baths"
+                            value={fomDat.baths > 0 ? fomDat.baths : ""}
+                            onChange={handleBathChange}
+                          />
+                          <span style={{ color: "red" }}>
+                            {!fomDat.baths && btn && "Bedroom is required"}
+                          </span>
+                          <br />
+                          {fomDat.baths < 1 && bathError && (
+                            <span style={{ color: "red" }}>
+                              {" "}
+                              {bathError?.length &&
+                                "Value must be greater than 0"}
+                            </span>
+                          )}
+                        </FormGroup>
+                      </Col>
+                      <Col sm={4}>
+                        <FormGroup>
+                          <h6 style={{ color: "black" }}>{"Area in Sqft"}</h6>
+                          <input
+                            className="form-control"
+                            type="number"
+                            name="area"
+                            placeholder="Total Area in Sqft"
+                            value={fomDat.area > 0 ? fomDat.area : ""}
+                            onChange={handleAreaChange}
+                          />
+                          <span style={{ color: "red" }}>
+                            {!fomDat.area && btn && "Area is required"}
+                          </span>
+                          <br />
+                          {fomDat.area < 1 && areaError && (
+                            <span style={{ color: "red" }}>
+                              {" "}
+                              {areaError?.length &&
+                                "Value must be greater than 0"}
                             </span>
                           )}
                         </FormGroup>
@@ -1174,7 +1251,7 @@ const CreateDeal = () => {
                         </FormGroup>
                       </Col>
                     </Row>
-                    <Row>
+                    {/* <Row>
                       <Col sm={4}>
                         <FormGroup>
                           <h6 style={{ color: "black" }}>{"BedRooms"}</h6>
@@ -1265,8 +1342,25 @@ const CreateDeal = () => {
                           </p>
                         )}
                       </Row>
-                    </Row>
+                    </Row> */}
+           <Row>
+                        <H6>{"Primary Image"}</H6>
 
+                        <Col sm="12">
+                          <input
+                            className="form-control"
+                            type="file"
+                            onChange={handleImageUpload}
+                          />
+                        </Col>
+
+                        {featureimage?.length === 0 && btn && (
+                          <p style={{ color: "red" }}>
+                            Please upload primary image.
+                          </p>
+                        )}
+                      </Row>
+                    
                     <Col sm="12">
                       <MultiDropzone
                         images={images}

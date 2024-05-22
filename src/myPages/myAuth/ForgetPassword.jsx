@@ -112,6 +112,7 @@ const ForgetPassword = ({ logoClassMain }) => {
                           className: "img-fluid for-light",
                           src: logoWhite,
                           alt: "loginpage",
+                          style: { width: "30%" }
                         }}
                       />
                       <Image

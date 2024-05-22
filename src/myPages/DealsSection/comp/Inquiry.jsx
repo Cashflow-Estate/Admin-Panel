@@ -80,7 +80,7 @@ const Inquiry = () => {
     </Fragment> */}
       <Fragment>
         <Breadcrumbs mainTitle='Chat App' parent='Chat' title='Chat App' />
-        <Container fluid={true}>
+        <Container fluid={true} className="pb-3">
           <Row>
             <Col className='call-chat-sidebar'>
               <Card>

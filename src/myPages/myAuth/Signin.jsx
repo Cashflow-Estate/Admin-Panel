@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect, useContext } from "react";
 import { Col, Container, Form, FormGroup, Input, Label, Row } from "reactstrap";
-import { Btn, H4, H5, P, Spinner } from "../../AbstractElements";
+import { Btn, H4, H5, P, Spinner, Image } from "../../AbstractElements";
 import {
   CreateNewAccount,
   EmailAddress,
@@ -12,14 +12,15 @@ import {
 
 import { Link, useNavigate } from "react-router-dom";
 import man from "../../assets/images/dashboard/profile.png";
-
 import CustomizerContext from "../../_helper/Customizer";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 import { setUserInfo } from "../../features/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
+import logoWhite from "../../assets/images/logo/logo.png";
+import logoDark from "../../assets/images/logo/logo_dark.png";
 
-const Signin = ({ selected }) => {
+const Signin = ({ selected, logoClassMain }) => {
   const [email, setEmail] = useState("admin@gmail.com");
   const [password, setPassword] = useState("admin");
   const [togglePassword, setTogglePassword] = useState(false);
@@ -57,7 +58,7 @@ const Signin = ({ selected }) => {
       );
 
       if (response.status === 200) {
-        console.log("ok")
+        console.log(response)
         dispatch(setUserInfo(response.data.response.data));
         await new Promise((resolve) => setTimeout(resolve, 100));
         toast.success("Successfully logged in!..");
@@ -82,7 +83,29 @@ const Signin = ({ selected }) => {
         {" "}
         <Row>
           <Col xs="12">
-            <div className="login-card">
+            <div className="login-card" style={{flexDirection: "column"}}>
+              <div>
+                <Link
+                  className={`logo ${logoClassMain ? logoClassMain : ""}`}
+                  to={process.env.PUBLIC_URL}
+                >
+                  <Image
+                    attrImage={{
+                      className: "img-fluid for-light",
+                      src: logoWhite,
+                      alt: "loginpage",
+                      style: { width: "30%" }
+                    }}
+                  />
+                  <Image
+                    attrImage={{
+                      className: "img-fluid for-dark",
+                      src: logoDark,
+                      alt: "loginpage",
+                    }}
+                  />
+                </Link>
+              </div>
               <div className="login-main login-tab">
                 <Form className="theme-form">
                   <h4 className="text-center">

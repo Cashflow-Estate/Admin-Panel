@@ -59,14 +59,14 @@
   color: #fc4438;
 }
 .todo .todo-list-wrapper .mark-all-tasks .mark-all-btn#mark-all-incomplete {
-  color: #54ba4a;
+  color: #49A8D8;
 }
 .todo .todo-list-wrapper .mark-all-tasks .mark-all-btn#mark-all-incomplete .action-box {
-  border: 2px solid #54ba4a;
+  border: 2px solid #49A8D8;
   border-radius: 4px;
 }
 .todo .todo-list-wrapper .mark-all-tasks .mark-all-btn#mark-all-incomplete .action-box .icon {
-  color: #54ba4a;
+  color: #49A8D8;
 }
 .todo .todo-list-wrapper .mark-all-tasks .mark-all-btn.move-up {
   transform: translateY(-30px);
@@ -227,7 +227,7 @@
 }
 .todo .todo-list-wrapper #todo-list li.completed .task-container .complete-btn:hover {
   background: #fff;
-  border: 1px solid #54ba4a;
+  border: 1px solid #49A8D8;
 }
 .todo .todo-list-wrapper #todo-list li.completed .task-container .complete-btn:hover .icon {
   color: #fff;
@@ -250,8 +250,8 @@
   right: 10px;
   width: 300px;
   display: inline-block;
-  background: #54ba4a;
-  border: 1px solid #54ba4a;
+  background: #49A8D8;
+  border: 1px solid #49A8D8;
   color: #fff;
   padding: 20px;
   opacity: 0.9;
@@ -260,8 +260,8 @@
   transition: all 300ms ease;
 }
 .todo .notification-popup.success {
-  background: #54ba4a;
-  border: 1px solid #54ba4a;
+  background: #49A8D8;
+  border: 1px solid #49A8D8;
 }
 .todo .notification-popup p {
   margin-top: 0;

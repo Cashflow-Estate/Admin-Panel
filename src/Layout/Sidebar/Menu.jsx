@@ -47,9 +47,15 @@ export const MENUITEMS_FOR_Admin = [
       },
   
       {
-        path: `/inquiry`,
+        path: `/customer/Inquiry`,
         type: "link",
         title: "Messages",
+        icon: "user",
+      },
+      {
+        path: `/email`,
+        type: "link",
+        title: "Email",
         icon: "user",
       },
       {

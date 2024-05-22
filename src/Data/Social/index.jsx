@@ -115,7 +115,7 @@ export const SmallWidgetsData = [
           data: [10, 12, 41, 36, 60, 58],
         },
       ],
-      color: '#54BA4A',
+      color: '#49A8D8',
     },
   },
   {

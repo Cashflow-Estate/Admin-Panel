@@ -33,6 +33,8 @@ import Attornies from "../myPages/Attornies/Attornies";
 import AddAttornies from "../myPages/Attornies/AddAttornies";
 import AddEviction from "../myPages/myCutomers/AddEviction";
 import AddAgent from "../myPages/myInsurance/AddAgent";
+import MailInboxContain from "../myPages/DealsSection/comp/EmailInboxContain";
+
 
 export const AdminRoutes = [
   {
@@ -109,6 +111,10 @@ export const AdminRoutes = [
   {
     path: `/inquiry`,
     Component: <DealsInquiry />,
+  },
+  {
+    path: `/email`,
+    Component: <MailInboxContain />,
   },
   {
     path: `/customer/Inquiry`,

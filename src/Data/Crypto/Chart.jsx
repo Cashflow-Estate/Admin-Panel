@@ -77,7 +77,7 @@ export const myPortfolioChartOption = {
         },
       },
     },
-    colors: ['#54BA4A', '#FFA539', '#31a911'],
+    colors: ['#49A8D8', '#FFA539', '#31a911'],
     labels: ['USD', 'BTC', 'ETH'],
     fill: {
       type: 'gradient',
