@@ -50,6 +50,7 @@ const CreateDeal = () => {
   } = useForm();
   const { id } = useParams();
   const [dealData, setDealData] = useState(null);
+  console.log("🚀 ~ CreateDeal ~ dealData:", dealData)
   const [propertyType, setPropertyType] = useState(""); // State to hold selected property type
   const [images, setImages] = useState([]);
   const [featureimage, setFeatureImages] = useState([]);
@@ -181,7 +182,9 @@ const CreateDeal = () => {
   };
 
   useEffect(() => {
-    const fetchDealById = async () => {
+    const fetchDealById = async (id) => {
+      console.log("🚀 ~ fetchDealById ~ id:", id)
+      
       try {
         const response = await axios.get(
           `${process.env.REACT_APP_API_BASE_URL}/app/v1/deals/?dealID=${id}`,
@@ -192,7 +195,7 @@ const CreateDeal = () => {
             },
           }
         );
-        setDealData(response.data);
+        setDealData(response.data.response);
         setAddress(false);
       } catch (error) {
         console.error("Error fetching deal by ID:", error);
@@ -200,7 +203,7 @@ const CreateDeal = () => {
     };
 
     if (id) {
-      fetchDealById();
+      fetchDealById(id);
     }
   }, [id]);
 
@@ -212,9 +215,44 @@ const CreateDeal = () => {
   }
 
   useEffect(() => {
+    const images = [
+      {
+          path: 'Screenshot 2024-05-14 053809.png',
+          name: 'Screenshot 2024-05-14 053809.png',
+          lastModified: 1715647089457,
+          lastModifiedDate: new Date('Tue May 14 2024 05:38:09 GMT+0500 (Pakistan Standard Time)'),
+          webkitRelativePath: '',
+          // other properties...
+      },
+      {
+          path: 'Screenshot 2024-05-14 054657.png',
+          name: 'Screenshot 2024-05-14 054657.png',
+          lastModified: 1715647617154,
+          lastModifiedDate: new Date('Tue May 14 2024 05:46:57 GMT+0500 (Pakistan Standard Time)'),
+          webkitRelativePath: '',
+          // other properties...
+      },
+      {
+          path: 'Screenshot 2024-05-14 062837.png',
+          name: 'Screenshot 2024-05-14 062837.png',
+          lastModified: 1715650117201,
+          lastModifiedDate: new Date('Tue May 14 2024 06:28:37 GMT+0500 (Pakistan Standard Time)'),
+          webkitRelativePath: '',
+          // other properties...
+      },
+      {
+          path: 'Screenshot 2024-05-16 123614.png',
+          name: 'Screenshot 2024-05-16 123614.png',
+          lastModified: 1715844974847,
+          lastModifiedDate: new Date('Thu May 16 2024 12:36:14 GMT+0500 (Pakistan Standard Time)'),
+          webkitRelativePath: '',
+          // other properties...
+      }
+  ];
+  
     const fetchFiles = async () => {
       const fileObjects = await Promise.all(
-        images.map(async (file) => {
+        images?.map(async (file) => {
           if (file instanceof File) {
             return file;
           } else if (
@@ -236,7 +274,7 @@ const CreateDeal = () => {
     fetchFiles();
   }, [images]);
 
-  let opt = selectedOptions.map((val) => val.value);
+  let opt = selectedOptions?.map((val) => val.value);
 
   const history = useNavigate();
 
@@ -259,44 +297,74 @@ const CreateDeal = () => {
     calculateAnnualReturns();
   }, [monthlyCashMin, monthlyCashMax, formData.price]);
 
+  // useEffect(() => {
+  //   if (dealData) {
+  //     reset({
+  //       title: dealData?.data?.title || "",
+  //       price: dealData?.data?.price || "",
+  //       approxPrice: dealData?.data?.approxPrice || "",
+  //       monthly_cash_min: dealData?.data?.monthly_cash_min || "",
+  //       monthly_cash_max: dealData?.data?.monthly_cash_max || "",
+  //       closing_date: dealData?.data?.closing_date
+  //         ? dealData?.data?.closing_date.split("T")[0]
+  //         : "",
+  //       bedRooms: dealData?.data?.bedRooms || "",
+  //       area: dealData?.data?.area || "",
+  //       baths: dealData?.data?.baths || "",
+  //       address: dealData?.data?.address || "",
+  //       sendTo:
+  //         dealData?.data?.sendTo?.map((value) => ({ value, value: value })) || [],
+  //       sendByEmail: dealData?.data?.sendByEmail || "",
+  //     });
+  //     setSelectedOptions(
+  //       dealData?.data?.sendTo?.map((value) => ({ value, label: value }))
+  //     );
+
+  //     setEmail(dealData?.data?.sendByEmail);
+
+  //     setMonthlyCashMin(dealData?.data?.monthly_cash_min || "");
+  //     setMonthlyCashMax(dealData?.data?.monthly_cash_max || "");
+  //     setApproxAnnualMinReturn(dealData?.data?.annually_return_min || "");
+  //     setApproxAnnualMaxReturn(dealData?.data?.annually_return_max || "");
+
+  //     setFeatureImages(dealData?.data?.featureimage);
+  //     setImages(dealData?.data?.images);
+  //     setMonthlyCashMin(dealData?.data?.monthly_cash_min);
+  //     setMonthlyCashMax(dealData?.data?.monthly_cash_max);
+  //     setAddressSearch(dealData?.data?.address);
+  //   }
+  // }, [dealData, reset]);
   useEffect(() => {
     if (dealData) {
-      reset({
-        title: dealData.data.title || "",
-        price: dealData.data.price || "",
-        approxPrice: dealData.data.approxPrice || "",
-        monthly_cash_min: dealData.data.monthly_cash_min || "",
-        monthly_cash_max: dealData.data.monthly_cash_max || "",
-        closing_date: dealData.data.closing_date
-          ? dealData.data.closing_date.split("T")[0]
-          : "",
-        bedRooms: dealData.data.bedRooms || "",
-        area: dealData.data.area || "",
-        baths: dealData.data.baths || "",
-        address: dealData.data.address || "",
-        sendTo:
-          dealData.data.sendTo.map((value) => ({ value, value: value })) || [],
-        sendByEmail: dealData.data.sendByEmail || "",
+      setFormData({
+        title: dealData?.data?.title || "",
+        price: dealData?.data?.price || "",
+        approxPrice: dealData?.data?.totlaPrice || "",
+        monthly_cash_min: dealData?.data?.monthlyCashFlowMin || "",
+        monthly_cash_max: dealData?.data?.monthlyCashFlowMax || "",
+        closing_date: dealData?.data?.closing_date ? dealData?.data?.closing_date.split("T")[0] : "",
+        bedRooms: dealData?.data?.bedRooms || "",
+        area: dealData?.data?.area || "",
+        baths: dealData?.data?.baths || "",
+        address: dealData?.data?.address || "",
+        sendTo: dealData?.data?.sendTo?.map((value) => ({ value, label: value })) || [],
+        sendByEmail: dealData?.data?.sendByEmail || "",
       });
-      setSelectedOptions(
-        dealData.data.sendTo.map((value) => ({ value, label: value }))
-      );
-
-      setEmail(dealData.data.sendByEmail);
-
-      setMonthlyCashMin(dealData.data.monthly_cash_min || "");
-      setMonthlyCashMax(dealData.data.monthly_cash_max || "");
-      setApproxAnnualMinReturn(dealData.data.annually_return_min || "");
-      setApproxAnnualMaxReturn(dealData.data.annually_return_max || "");
-
+  
+      setSelectedOptions(dealData?.data?.sendTo?.map((value) => ({ value, label: value })));
+      setEmail(dealData?.data?.sendByEmail);
+  
+      setMonthlyCashMin(dealData?.data?.monthly_cash_min || "");
+      setMonthlyCashMax(dealData?.data?.monthly_cash_max || "");
+      setApproxAnnualMinReturn(dealData?.data?.approxAnualMinReturn || "");
+      setApproxAnnualMaxReturn(dealData?.data?.approxAnualMaxReturn || "");
+  
       setFeatureImages(dealData?.data?.featureimage);
-      setImages(dealData.data.images);
-      setMonthlyCashMin(dealData.data.monthly_cash_min);
-      setMonthlyCashMax(dealData.data.monthly_cash_max);
-      setAddressSearch(dealData.data.address);
+      setImages(dealData?.data?.images);
+      setAddressSearch(dealData?.data?.address);
     }
-  }, [dealData, reset]);
-
+  }, [dealData]);
+  
   const AddProject = async (data) => {
     setFormSubmitted(true);
 
@@ -323,7 +391,7 @@ const CreateDeal = () => {
         name: "image",
         type: "image",
       },
-      images: files.map((file) => ({
+      images: files?.map((file) => ({
         url:
           file.url ||
           "https://asset.cloudinary.com/dtdl7dbwk/3bf9f3f4ee727e0cf57ba4bf81893c69", // Replace with actual file URL if available
@@ -341,20 +409,21 @@ const CreateDeal = () => {
 
     try {
       const response = id
-        ? await axios.patch(apiUrl, dealData, {
-            headers: {
-              "Content-Type": "application/json",
-              "x-user-id": "user-95c63296-c866-4221-8961-198fb8d81567",
-              Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXItOTVjNjMyOTYtYzg2Ni00MjIxLTg5NjEtMTk4ZmI4ZDgxNTY3IiwiaWF0IjoxNzE2Mjg0NDQyLCJleHAiOjE3MTYyODgwNDJ9.v44iROxFfDtdnfG7xHRw5cW12FX471TWOHmSWwkrHLs`,
-            },
-          })
-        : await axios.post(apiUrl, dealData, {
-            headers: {
-              "Content-Type": "application/json",
-              "x-user-id": "user-95c63296-c866-4221-8961-198fb8d81567",
-              Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXItOTVjNjMyOTYtYzg2Ni00MjIxLTg5NjEtMTk4ZmI4ZDgxNTY3IiwiaWF0IjoxNzE2Mjg0NDQyLCJleHAiOjE3MTYyODgwNDJ9.v44iROxFfDtdnfG7xHRw5cW12FX471TWOHmSWwkrHLs`,
-            },
-          });
+      ? await axios.patch(apiUrl, dealData, {
+        headers: {
+          "Content-Type": "application/json",
+          "x-user-id": "user-95c63296-c866-4221-8961-198fb8d81567",
+          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXItOTVjNjMyOTYtYzg2Ni00MjIxLTg5NjEtMTk4ZmI4ZDgxNTY3IiwiaWF0IjoxNzE2Mjg0NDQyLCJleHAiOjE3MTYyODgwNDJ9.v44iROxFfDtdnfG7xHRw5cW12FX471TWOHmSWwkrHLs`,
+        },
+      })
+      : await axios.post(apiUrl, dealData, {
+        headers: {
+          "Content-Type": "application/json",
+          "x-user-id": "user-95c63296-c866-4221-8961-198fb8d81567",
+          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXItOTVjNjMyOTYtYzg2Ni00MjIxLTg5NjEtMTk4ZmI4ZDgxNTY3IiwiaWF0IjoxNzE2Mjg0NDQyLCJleHAiOjE3MTYyODgwNDJ9.v44iROxFfDtdnfG7xHRw5cW12FX471TWOHmSWwkrHLs`,
+        },
+      });
+      console.log("🚀 ~ AddProject ~ response:", response)
 
       if (response.status === 200) {
         await new Promise((resolve) => setTimeout(resolve, 100));
@@ -382,7 +451,7 @@ const CreateDeal = () => {
         `http://localhost:5000/places?input=${inputAddress}`
       );
       const candidates = response.data.candidates;
-      const formattedOptions = candidates.map((candidate) => ({
+      const formattedOptions = candidates?.map((candidate) => ({
         value: candidate.formatted_address,
         label: `${candidate.name}: ${candidate.formatted_address}`,
       }));
@@ -993,7 +1062,7 @@ const CreateDeal = () => {
                           <div>
                             <h5>Added Emails:</h5>
                             <ul>
-                              {emails.map((email, index) => (
+                              {emails?.map((email, index) => (
                                 <li
                                   key={index}
                                   style={{
@@ -1080,7 +1149,7 @@ const CustomSelect = () => {
         );
         const data = await response.json();
         if (data.statusCode === 200) {
-          const fetchedOptions = data.data.map((option) => ({
+          const fetchedOptions = data.data?.map((option) => ({
             value: option,
             label: option,
             color: "green",
@@ -1170,7 +1239,7 @@ const MultiDropzone = ({ setImages, dealData, images }) => {
       </Dropzone>
       <div className="image-preview">
         {dealData
-          ? images.map((image, index) => (
+          ? images?.map((image, index) => (
               <div key={index} className="image-container">
                 <img
                   src={image.url || URL.createObjectURL(image)}
@@ -1184,7 +1253,7 @@ const MultiDropzone = ({ setImages, dealData, images }) => {
                 </div>
               </div>
             ))
-          : images.map((image, index) => (
+          : images?.map((image, index) => (
               <div key={index} className="image-container">
                 <img src={URL.createObjectURL(image)} alt={`Image-${index}`} />
                 <div
