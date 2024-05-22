@@ -63,7 +63,10 @@ const CreateDeal = () => {
   const [monthlyCashMin, setMonthlyCashMin] = useState("");
   const [monthlyCashMax, setMonthlyCashMax] = useState("");
   const [approxAnnualMinReturn, setApproxAnnualMinReturn] = useState("");
-  console.log("🚀 ~ CreateDeal ~ approxAnnualMinReturn:", approxAnnualMinReturn)
+  console.log(
+    "🚀 ~ CreateDeal ~ approxAnnualMinReturn:",
+    approxAnnualMinReturn
+  );
   const [approxAnnualMaxReturn, setApproxAnnualMaxReturn] = useState("");
 
   const [debouncedAddressSearch, setDebouncedAddressSearch] = useState("");
@@ -78,72 +81,6 @@ const CreateDeal = () => {
   const [sendToALLCheckbox, setSendToALLCheckbox] = useState(false);
   const [bedError, setBedError] = useState("");
 
-  // const [areaError, setAreaError] = useState("");
-  // const [bathError, setBathError] = useState("");
-  // const [priceError, setPriceError] = useState("");
-  // const [titleError, setTitleError] = useState("");
-  // const [approxPriceError, setapproxPriceError] = useState("");
-  // const [monthMaxError, setMonMaxErr] = useState("");
-  // const [monthMinError, setMonMinErr] = useState("");
-  // const [btn, setBtn] = useState(false);
-  // const [fomDat, setFormData] = useState({
-  //   title: "",
-  //   price: "",
-  //   approxPrice: "",
-  //   monthly_cash_max: "",
-  //   monthly_cash_min: "",
-  //   bedRooms: "",
-  //   baths: "",
-  //   area: "",
-  //   closing_date: "",
-  // });
-  // console.log("🚀 ~ handlePriceChange ~ handlePriceChange:", fomDat)
-
-  // const handlePriceChange = (e) => {
-  //   const price = parseFloat(e.target.value);
-  //   console.log("🚀 ~ handlePriceChange ~ price:", price)
-  //   // Validate price
-  //   if (price <= 0) {
-  //     setPriceError("Price must be greater than 0");
-  //     setFormData({ ...fomDat, price: "" });
-  //   } else {
-  //     setPriceError("");
-  //     setFormData({ ...fomDat, price: e.target.value });
-  //   }
-  // };
-  // const handleMonthMAxErrorChange = (e) => {
-  //   const price = parseFloat(e.target.value);
-  //   // Validate price
-  //   if (price <= 0) {
-  //     setMonMaxErr("Value must be greater than 0");
-  //     setFormData({ ...fomDat, monthly_cash_max: "" });
-  //   } else {
-  //     setMonMaxErr("");
-  //     setFormData({ ...fomDat, monthly_cash_max: e.target.value });
-  //   }
-  // };
-  // const handleMonthMinErrorChange = (e) => {
-  //   const price = parseFloat(e.target.value);
-  //   // Validate price
-  //   if (price <= 0) {
-  //     setMonMinErr("Value must be greater than 0");
-  //     setFormData({ ...fomDat, monthly_cash_min: "" });
-  //   } else {
-  //     setMonMinErr("");
-  //     setFormData({ ...fomDat, monthly_cash_min: e.target.value });
-  //   }
-  // };
-  // const handleapproxPriceErrorChange = (e) => {
-  //   const price = parseFloat(e.target.value);
-  //   // Validate price
-  //   if (price <= 0) {
-  //     setapproxPriceError("Value must be greater than 0");
-  //     setFormData({ ...fomDat, approxPrice: "" });
-  //   } else {
-  //     setapproxPriceError("");
-  //     setFormData({ ...fomDat, approxPrice: e.target.value });
-  //   }
-  // };
   const [areaError, setAreaError] = useState("");
   const [bathError, setBathError] = useState("");
   const [priceError, setPriceError] = useState("");
@@ -163,7 +100,6 @@ const CreateDeal = () => {
     area: "",
     closing_date: "",
   });
-  console.log("🚀 ~ handlePriceChange ~ handlePriceChange:", fomDat)
 
   const handlePriceChange = (values) => {
     const { floatValue, value } = values;
@@ -208,70 +144,7 @@ const CreateDeal = () => {
       setFormData({ ...fomDat, approxPrice: value });
     }
   };
-  // const [bedError, setBedError] = useState("");
-  // const [areaError, setAreaError] = useState("");
-  // const [bathError, setBathError] = useState("");
-  // const [priceError, setPriceError] = useState("");
-  // const [titleError, setTitleError] = useState("");
-  // const [approxPriceError, setApproxPriceError] = useState("");
-  // const [monthMaxError, setMonthMaxError] = useState("");
-  // const [monthMinError, setMonthMinError] = useState("");
-  // const [btn, setBtn] = useState(false);
-  // const [fomDat, setFormData] = useState({
-  //   title: "",
-  //   price: "",
-  //   approxPrice: "",
-  //   monthly_cash_max: "",
-  //   monthly_cash_min: "",
-  //   bedRooms: "",
-  //   baths: "",
-  //   area: "",
-  //   closing_date: "",
-  // });
 
-  // const handlePriceChange = (e) => {
-  //   const price = parseFloat(e.floatValue);
-  //   if (price <= 0) {
-  //     setPriceError("Price must be greater than 0");
-  //     setFormData({ ...formData, price: "" });
-  //   } else {
-  //     setPriceError("");
-  //     setFormData({ ...formData, price: e.value });
-  //   }
-  // };
-
-  // const handleMonthMaxErrorChange = (e) => {
-  //   const price = parseFloat(e.floatValue);
-  //   if (price <= 0) {
-  //     setMonthMaxError("Value must be greater than 0");
-  //     setFormData({ ...formData, monthly_cash_max: "" });
-  //   } else {
-  //     setMonthMaxError("");
-  //     setFormData({ ...formData, monthly_cash_max: e.value });
-  //   }
-  // };
-
-  // const handleMonthMinErrorChange = (e) => {
-  //   const price = parseFloat(e.floatValue);
-  //   if (price <= 0) {
-  //     setMonthMinError("Value must be greater than 0");
-  //     setFormData({ ...formData, monthly_cash_min: "" });
-  //   } else {
-  //     setMonthMinError("");
-  //     setFormData({ ...formData, monthly_cash_min: e.value });
-  //   }
-  // };
-
-  // const handleApproxPriceErrorChange = (e) => {
-  //   const price = parseFloat(e.floatValue);
-  //   if (price <= 0) {
-  //     setApproxPriceError("Value must be greater than 0");
-  //     setFormData({ ...formData, approxPrice: "" });
-  //   } else {
-  //     setApproxPriceError("");
-  //     setFormData({ ...formData, approxPrice: e.value });
-  //   }
-  // };
   useEffect(() => {
     // Scroll to the top of the page whenever the component updates
     window.scrollTo(0, 0);
@@ -306,24 +179,7 @@ const CreateDeal = () => {
       }, 3000);
     }
   };
-  // useEffect(() => {
-  //   const fetchDealById = async () => {
-  //     try {
-  //       const response = await axios.get(
-  //         `${process.env.REACT_APP_API_BASE_URL}/app/v1/deals/?dealID=${id}`
-  //       );
-  //       console.log("🚀 ~ fetchDealById ~ response:", response)
-  //       setDealData(response.data);
-  //       setAddress(false);
-  //     } catch (error) {
-  //       console.error("Error fetching deal by ID:", error);
-  //     }
-  //   };
 
-  //   if (id) {
-  //     fetchDealById();
-  //   }
-  // }, [id]);
   useEffect(() => {
     const fetchDealById = async () => {
       try {
@@ -384,20 +240,6 @@ const CreateDeal = () => {
 
   const history = useNavigate();
 
-  // const calculateAnnualReturns = () => {
-  //   if (
-  //     fomDat.price > 0 &&
-  //     fomDat.monthly_cash_min > 0 &&
-  //     fomDat.monthly_cash_max > 0
-  //   ) {
-  //     const minReturn =
-  //       ((fomDat.monthly_cash_min * 12) / parseFloat(fomDat.price)) * 100;
-  //     const maxReturn =
-  //       ((fomDat.monthly_cash_max * 12) / parseFloat(fomDat.price)) * 100;
-  //     setApproxAnnualMinReturn(Math.ceil(minReturn.toFixed(2)));
-  //     setApproxAnnualMaxReturn(Math.ceil(maxReturn.toFixed(2)));
-  //   }
-  // };
   const calculateAnnualReturns = () => {
     if (
       fomDat.price > 0 &&
@@ -412,7 +254,7 @@ const CreateDeal = () => {
       setApproxAnnualMaxReturn(`${Math.ceil(maxReturn.toFixed(2))}%`);
     }
   };
-  
+
   useEffect(() => {
     calculateAnnualReturns();
   }, [monthlyCashMin, monthlyCashMax, formData.price]);
@@ -455,112 +297,6 @@ const CreateDeal = () => {
     }
   }, [dealData, reset]);
 
-  // const AddProject = async (data) => {
-  //   // setFormSubmitted(true);
-  //   // setClient(true);
-  //   await trigger();
-
-  //   const dealData = new FormData();
-  //   dealData.append("title", fomDat.title);
-  //   dealData.append("price", fomDat.price);
-  //   dealData.append("approxPrice", fomDat.approxPrice);
-  //   dealData.append("monthly_cash_min", fomDat.monthly_cash_min);
-  //   dealData.append("monthly_cash_max", fomDat.monthly_cash_max);
-  //   dealData.append("annually_return_min", approxAnnualMinReturn);
-  //   dealData.append("annually_return_max", approxAnnualMaxReturn);
-  //   dealData.append("closing_date", fomDat.closing_date);
-
-  //   dealData.append("bedRooms", fomDat.bedRooms);
-  //   dealData.append("area", fomDat.area);
-  //   dealData.append("baths", fomDat.baths);
-  //   dealData.append("address", addressSearch);
-  //   if (opt?.length > 0 && selectedOptions?.length) {
-  //     dealData.append("sendTo", opt);
-  //   }
-
-  //   dealData.append("sendByEmail", emails ? emails : "");
-  //   files.forEach((image) => {
-  //     dealData.append("images", image);
-  //   });
-
-  //   const apiUrl = id
-  //     ? `${process.env.REACT_APP_API_BASE_URL}/deals/${id}`
-  //     : `${process.env.REACT_APP_API_BASE_URL}/app/v1/deals`;
-
-  //   try {
-  //     const response = id
-  //     ? await axiosInstance.patch(apiUrl, dealData)
-  //     : await axiosInstance.post(apiUrl, dealData);
-  //     if (response.data.statusCode === 200) {
-  //       // setFormSubmitted(false);
-  //       toast.success(response.data.message);
-  //       // history("/deals/view");
-  //     }
-  //   } catch (error) {
-  //     toast.error("Failed to create/update deal.");
-  //   }
-  // };
-  // const AddProject = async (data) => {
-  //   await trigger();
-
-  //   const dealData = {
-  //     title: fomDat.title,
-  //     price: fomDat.price,
-  //     totlaPrice: fomDat.approxPrice,
-  //     monthlyCashFlowMin: fomDat.monthly_cash_min,
-  //     monthlyCashFlowMax: fomDat.monthly_cash_max,
-  //     approxAnualMinReturn: approxAnnualMinReturn,
-  //     approxAnualMaxReturn: approxAnnualMaxReturn,
-  //     closingDate: "12-05-2024",
-  //     bedRooms: fomDat.bedRooms,
-  //     area: fomDat.area,
-  //     baths: fomDat.baths,
-  //     address: addressSearch,
-  //     primaryImage: {
-  //       url: "google.com", // Replace with actual primary image details if available
-  //       name: "image",
-  //       type: "image",
-  //     },
-  //     images: files.map((file) => ({
-  //       url: file.url || "https://asset.cloudinary.com/dtdl7dbwk/3bf9f3f4ee727e0cf57ba4bf81893c69", // Replace with actual file URL if available
-  //       name: file.name,
-  //       type: file.type,
-  //     })),
-  //     sendToByType: selectedOptions || [],
-  //     sendToExistingCustomer: opt || [],
-  //     sendByEmail: emails || [],
-  //   };
-
-  //   const apiUrl = id
-  //     ? `${process.env.REACT_APP_API_BASE_URL}/deals/${id}`
-  //     // : `${process.env.REACT_APP_API_BASE_URL}/app/v1/deals/`;
-  //     : `http://localhost:5000/api/app/v1/deals`;
-
-  //     try {
-  //       const response = id
-  //         ? await axios.patch(apiUrl, dealData, {
-  //             headers: {
-  //               'Content-Type': 'application/json',
-  //               'x-user-id': 'user-95c63296-c866-4221-8961-198fb8d81567',
-  //               'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXItOTVjNjMyOTYtYzg2Ni00MjIxLTg5NjEtMTk4ZmI4ZDgxNTY3IiwiaWF0IjoxNzE2Mjg0NDQyLCJleHAiOjE3MTYyODgwNDJ9.v44iROxFfDtdnfG7xHRw5cW12FX471TWOHmSWwkrHLs',
-  //             }
-  //           })
-  //         : await axios.post(apiUrl, dealData, {
-  //             headers: {
-  //               'Content-Type': 'application/json',
-  //               'x-user-id': 'user-95c63296-c866-4221-8961-198fb8d81567',
-  //               'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXItOTVjNjMyOTYtYzg2Ni00MjIxLTg5NjEtMTk4ZmI4ZDgxNTY3IiwiaWF0IjoxNzE2Mjg0NDQyLCJleHAiOjE3MTYyODgwNDJ9.v44iROxFfDtdnfG7xHRw5cW12FX471TWOHmSWwkrHLs',
-  //             }
-  //           });
-
-  //     if (response.data.statusCode === 200) {
-  //       toast.success(response.data.message);
-  //       history("/deals/view");
-  //     }
-  //   } catch (error) {
-  //     toast.error("Failed to create/update deal.");
-  //   }
-  // };
   const AddProject = async (data) => {
     setFormSubmitted(true);
 
@@ -572,8 +308,7 @@ const CreateDeal = () => {
       totlaPrice: fomDat.approxPrice,
       monthlyCashFlowMin: fomDat.monthly_cash_min,
       monthlyCashFlowMax: fomDat.monthly_cash_max,
-      // approxAnualMinReturn: approxAnnualMinReturn,
-      // approxAnualMaxReturn: approxAnnualMaxReturn,
+
       approxAnualMinReturn: approxAnnualMinReturn.replace("%", ""),
       approxAnualMaxReturn: approxAnnualMaxReturn.replace("%", ""),
       propertyType: "condo",
@@ -831,7 +566,7 @@ const CreateDeal = () => {
                       </Col>
                     </Row>
                     <Row>
-                    <Col sm={4}>
+                      <Col sm={4}>
                         <FormGroup>
                           <h6 style={{ color: "black" }}>{"Bedooms"}</h6>
                           <input
@@ -927,62 +662,7 @@ const CreateDeal = () => {
                           <br />
                         </FormGroup>
                       </Col>
-                      {/* <Col sm={4}>
-                        <FormGroup>
-                          <h6 style={{ color: "black" }}>{"Price"}</h6>
-                          <input
-                            className="form-control"
-                            type="number"
-                            name="price"
-                            placeholder="Deal price *"
-                            value={fomDat.price > 0 ? fomDat.price : ""}
-                            onChange={handlePriceChange}
-                          />
-                          <span style={{ color: "red" }}>
-                            {" "}
-                            {!fomDat.price && btn && "Price is required"}
-                          </span>
-                          <br />
-                          {fomDat.price < 1 && priceError && (
-                            <span style={{ color: "red" }}>
-                              {" "}
-                              {priceError?.length &&
-                                "Price must be greater than 0"}
-                            </span>
-                          )}
-                        </FormGroup>
-                      </Col>
-                      <Col sm="4">
-                        <FormGroup>
-                          <H6>{"Slow Flip Total Price"}</H6>
-                          <input
-                            className="form-control"
-                            type="number"
-                            name="approxPrice"
-                            placeholder="Total Price"
-                            value={
-                              fomDat.approxPrice > 0 ? fomDat.approxPrice : ""
-                            }
-                            onChange={handleapproxPriceErrorChange}
-                          />
 
-                          <span style={{ color: "red" }}>
-                            {!fomDat.approxPrice &&
-                              btn &&
-                              "Slow Flip Total is required"}
-                          </span>
-                          <br />
-                          {fomDat.approxPrice &&
-                            btn < 1 &&
-                            approxPriceError && (
-                              <span style={{ color: "red" }}>
-                                {" "}
-                                {approxPriceError?.length &&
-                                  "Value must be greater than 0"}
-                              </span>
-                            )}
-                        </FormGroup>
-                      </Col> */}
                       <Col sm={4}>
                         <FormGroup>
                           <h6 style={{ color: "black" }}>Price</h6>
@@ -1039,70 +719,6 @@ const CreateDeal = () => {
                       </Col>
                     </Row>
                     <Row>
-                      {/* <Col sm="4">
-                        <FormGroup>
-                          <H6>{"Monthly Cash Flow Minimum"}</H6>
-                          <input
-                            className="form-control"
-                            type="number"
-                            name="monthly_cash_min"
-                            placeholder="Approximate monthly cashflow Minimum"
-                            value={
-                              fomDat.monthly_cash_min > 0
-                                ? fomDat.monthly_cash_min
-                                : ""
-                            }
-                            onChange={handleMonthMinErrorChange}
-                          />
-
-                          <span style={{ color: "red" }}>
-                            {!fomDat.monthly_cash_min &&
-                              btn &&
-                              "Monthly Cash Min is required"}
-                          </span>
-                          <br />
-                          {fomDat.monthly_cash_min < 1 && monthMinError && (
-                            <span style={{ color: "red" }}>
-                              {" "}
-                              {monthMinError?.length &&
-                                "Value must be greater than 0"}
-                            </span>
-                          )}
-
-                        </FormGroup>
-                      </Col>
-                      <Col sm="4">
-                        <FormGroup>
-                          <H6>{"Monthly Cash Flow Maximum"}</H6>
-                          <input
-                            className="form-control"
-                            type="number"
-                            name="monthly_cash_max"
-                            placeholder="Approximate monthly cashflow Maximum"
-                            value={
-                              fomDat.monthly_cash_max > 0
-                                ? fomDat.monthly_cash_max
-                                : ""
-                            }
-                            onChange={handleMonthMAxErrorChange}
-                          />
-
-                          <span style={{ color: "red" }}>
-                            {!fomDat.monthly_cash_max &&
-                              btn &&
-                              "Monthly Cash Max is required"}
-                          </span>
-                          <br />
-
-                          {fomDat.monthly_cash_max < 1 && monthMaxError && (
-                            <span style={{ color: "red" }}>
-                              {" "}
-                              {monthMaxError?.length &&
-                                "Value must be greater than 0"}
-                            </span>
-                          )}
-                        </FormGroup>
-                      </Col> */}
                       <Col sm={4}>
                         <FormGroup>
                           <h6>Monthly Cash Flow Minimum</h6>
@@ -1229,7 +845,6 @@ const CreateDeal = () => {
                             name="annually_cash_max"
                             value={approxAnnualMaxReturn}
                             prefix="%"
-
                             readOnly
                           />
                         </FormGroup>
@@ -1251,116 +866,25 @@ const CreateDeal = () => {
                         </FormGroup>
                       </Col>
                     </Row>
-                    {/* <Row>
-                      <Col sm={4}>
-                        <FormGroup>
-                          <h6 style={{ color: "black" }}>{"BedRooms"}</h6>
-                          <input
-                            className="form-control"
-                            type="number"
-                            name="bedRooms"
-                            placeholder="Total Bedrooms"
-                            value={fomDat.bedRooms > 0 ? fomDat.bedRooms : ""}
-                            onChange={handleBedChange}
-                          />
-                          <span style={{ color: "red" }}>
-                            {!fomDat.bedRooms && btn && "Bedroom is required"}
-                          </span>
-                          <br />
-                          {fomDat.bedRooms < 1 && bedError && (
-                            <span style={{ color: "red" }}>
-                              {" "}
-                              {bedError?.length &&
-                                "Value must be greater than 0"}
-                            </span>
-                          )}
-                        </FormGroup>
-                      </Col>
-                      <Col sm={4}>
-                        <FormGroup>
-                          <h6 style={{ color: "black" }}>{"Total Baths"}</h6>
-                          <input
-                            className="form-control"
-                            type="number"
-                            name="baths"
-                            placeholder="Total Baths"
-                            value={fomDat.baths > 0 ? fomDat.baths : ""}
-                            onChange={handleBathChange}
-                          />
-                          <span style={{ color: "red" }}>
-                            {!fomDat.baths && btn && "Bedroom is required"}
-                          </span>
-                          <br />
-                          {fomDat.baths < 1 && bathError && (
-                            <span style={{ color: "red" }}>
-                              {" "}
-                              {bathError?.length &&
-                                "Value must be greater than 0"}
-                            </span>
-                          )}
-                        </FormGroup>
-                      </Col>
-                      <Col sm={4}>
-                        <FormGroup>
-                          <h6 style={{ color: "black" }}>{"Area in Sqft"}</h6>
-                          <input
-                            className="form-control"
-                            type="number"
-                            name="area"
-                            placeholder="Total Area in Sqft"
-                            value={fomDat.area > 0 ? fomDat.area : ""}
-                            onChange={handleAreaChange}
-                          />
-                          <span style={{ color: "red" }}>
-                            {!fomDat.area && btn && "Area is required"}
-                          </span>
-                          <br />
-                          {fomDat.area < 1 && areaError && (
-                            <span style={{ color: "red" }}>
-                              {" "}
-                              {areaError?.length &&
-                                "Value must be greater than 0"}
-                            </span>
-                          )}
-                        </FormGroup>
+
+                    <Row>
+                      <H6>{"Primary Image"}</H6>
+
+                      <Col sm="12">
+                        <input
+                          className="form-control"
+                          type="file"
+                          onChange={handleImageUpload}
+                        />
                       </Col>
 
-                      <Row>
-                        <H6>{"Primary Image"}</H6>
+                      {featureimage?.length === 0 && btn && (
+                        <p style={{ color: "red" }}>
+                          Please upload primary image.
+                        </p>
+                      )}
+                    </Row>
 
-                        <Col sm="12">
-                          <input
-                            className="form-control"
-                            type="file"
-                            onChange={handleImageUpload}
-                          />
-                        </Col>
-
-                        {featureimage?.length === 0 && btn && (
-                          <p style={{ color: "red" }}>
-                            Please upload primary image.
-                          </p>
-                        )}
-                      </Row>
-                    </Row> */}
-           <Row>
-                        <H6>{"Primary Image"}</H6>
-
-                        <Col sm="12">
-                          <input
-                            className="form-control"
-                            type="file"
-                            onChange={handleImageUpload}
-                          />
-                        </Col>
-
-                        {featureimage?.length === 0 && btn && (
-                          <p style={{ color: "red" }}>
-                            Please upload primary image.
-                          </p>
-                        )}
-                      </Row>
-                    
                     <Col sm="12">
                       <MultiDropzone
                         images={images}
@@ -1544,35 +1068,6 @@ const CreateDeal = () => {
 
 export default CreateDeal;
 
-// const CustomSelect = () => {
-//   const [selectedOptions, setSelectedOptions] = useState([]);
-
-//   const handleChange = (selectedValues) => {
-//     setSelectedOptions(selectedValues);
-//   };
-
-//   const options = [
-//     { value: "1", label: "John Doe || john@example.com", color: "green" },
-//     { value: "2", label: "Jane Smith || jane@example.com", color: "red" },
-//     {
-//       value: "3",
-//       label: "Michael Johnson || michael@example.com",
-//       color: "green",
-//     },
-//   ];
-
-//   return (
-//     <div>
-//       <Select
-//         isMulti
-//         options={options}
-//         value={selectedOptions}
-//         onChange={handleChange}
-//         placeholder="Search..."
-//       />
-//     </div>
-//   );
-// };
 const CustomSelect = () => {
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [options, setOptions] = useState([]);
