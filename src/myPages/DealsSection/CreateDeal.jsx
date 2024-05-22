@@ -520,6 +520,80 @@ const CreateDeal = () => {
                       </Col>
                     </Row>
                     <Row>
+                    <Col sm={4}>
+                        <FormGroup>
+                          <h6 style={{ color: "black" }}>{"Bedooms"}</h6>
+                          <input
+                            className="form-control"
+                            type="number"
+                            name="bedRooms"
+                            placeholder="Total Bedrooms"
+                            value={fomDat.bedRooms > 0 ? fomDat.bedRooms : ""}
+                            onChange={handleBedChange}
+                          />
+                          <span style={{ color: "red" }}>
+                            {!fomDat.bedRooms && btn && "Bedroom is required"}
+                          </span>
+                          <br />
+                          {fomDat.bedRooms < 1 && bedError && (
+                            <span style={{ color: "red" }}>
+                              {" "}
+                              {bedError?.length &&
+                                "Value must be greater than 0"}
+                            </span>
+                          )}
+                        </FormGroup>
+                      </Col>
+                      <Col sm={4}>
+                        <FormGroup>
+                          <h6 style={{ color: "black" }}>{"Total Baths"}</h6>
+                          <input
+                            className="form-control"
+                            type="number"
+                            name="baths"
+                            placeholder="Total Baths"
+                            value={fomDat.baths > 0 ? fomDat.baths : ""}
+                            onChange={handleBathChange}
+                          />
+                          <span style={{ color: "red" }}>
+                            {!fomDat.baths && btn && "Bedroom is required"}
+                          </span>
+                          <br />
+                          {fomDat.baths < 1 && bathError && (
+                            <span style={{ color: "red" }}>
+                              {" "}
+                              {bathError?.length &&
+                                "Value must be greater than 0"}
+                            </span>
+                          )}
+                        </FormGroup>
+                      </Col>
+                      <Col sm={4}>
+                        <FormGroup>
+                          <h6 style={{ color: "black" }}>{"Area in Sqft"}</h6>
+                          <input
+                            className="form-control"
+                            type="number"
+                            name="area"
+                            placeholder="Total Area in Sqft"
+                            value={fomDat.area > 0 ? fomDat.area : ""}
+                            onChange={handleAreaChange}
+                          />
+                          <span style={{ color: "red" }}>
+                            {!fomDat.area && btn && "Area is required"}
+                          </span>
+                          <br />
+                          {fomDat.area < 1 && areaError && (
+                            <span style={{ color: "red" }}>
+                              {" "}
+                              {areaError?.length &&
+                                "Value must be greater than 0"}
+                            </span>
+                          )}
+                        </FormGroup>
+                      </Col>
+                    </Row>
+                    <Row>
                       <Col sm={4}>
                         <FormGroup>
                           <h6 style={{ color: "black" }}>{"Title"}</h6>
@@ -753,78 +827,7 @@ const CreateDeal = () => {
                       </Col>
                     </Row>
                     <Row>
-                      <Col sm={4}>
-                        <FormGroup>
-                          <h6 style={{ color: "black" }}>{"Bedooms"}</h6>
-                          <input
-                            className="form-control"
-                            type="number"
-                            name="bedRooms"
-                            placeholder="Total Bedrooms"
-                            value={fomDat.bedRooms > 0 ? fomDat.bedRooms : ""}
-                            onChange={handleBedChange}
-                          />
-                          <span style={{ color: "red" }}>
-                            {!fomDat.bedRooms && btn && "Bedroom is required"}
-                          </span>
-                          <br />
-                          {fomDat.bedRooms < 1 && bedError && (
-                            <span style={{ color: "red" }}>
-                              {" "}
-                              {bedError?.length &&
-                                "Value must be greater than 0"}
-                            </span>
-                          )}
-                        </FormGroup>
-                      </Col>
-                      <Col sm={4}>
-                        <FormGroup>
-                          <h6 style={{ color: "black" }}>{"Total Baths"}</h6>
-                          <input
-                            className="form-control"
-                            type="number"
-                            name="baths"
-                            placeholder="Total Baths"
-                            value={fomDat.baths > 0 ? fomDat.baths : ""}
-                            onChange={handleBathChange}
-                          />
-                          <span style={{ color: "red" }}>
-                            {!fomDat.baths && btn && "Bedroom is required"}
-                          </span>
-                          <br />
-                          {fomDat.baths < 1 && bathError && (
-                            <span style={{ color: "red" }}>
-                              {" "}
-                              {bathError?.length &&
-                                "Value must be greater than 0"}
-                            </span>
-                          )}
-                        </FormGroup>
-                      </Col>
-                      <Col sm={4}>
-                        <FormGroup>
-                          <h6 style={{ color: "black" }}>{"Area in Sqft"}</h6>
-                          <input
-                            className="form-control"
-                            type="number"
-                            name="area"
-                            placeholder="Total Area in Sqft"
-                            value={fomDat.area > 0 ? fomDat.area : ""}
-                            onChange={handleAreaChange}
-                          />
-                          <span style={{ color: "red" }}>
-                            {!fomDat.area && btn && "Area is required"}
-                          </span>
-                          <br />
-                          {fomDat.area < 1 && areaError && (
-                            <span style={{ color: "red" }}>
-                              {" "}
-                              {areaError?.length &&
-                                "Value must be greater than 0"}
-                            </span>
-                          )}
-                        </FormGroup>
-                      </Col>
+                      
 
                       <Row>
                         <H6>{"Primary Image"}</H6>

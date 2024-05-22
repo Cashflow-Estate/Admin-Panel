@@ -285,7 +285,7 @@ const MonthlyProfitsChartData = {
         },
       },
     },
-    colors: ["#54BA4A", "var(--theme-default)", "#FFA941"],
+    colors: ["#49A8D8", "var(--theme-default)", "#FFA941"],
     responsive: [
       {
         breakpoint: 1630,

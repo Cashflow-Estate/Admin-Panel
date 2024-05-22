@@ -29,7 +29,7 @@ export const RadialProgressWidgetData = [
     subTitle: 'The point of using Lorem Ipsum',
     chart: {
       series: [48],
-      color: '#54BA4A',
+      color: '#49A8D8',
     },
   },
 ];
@@ -265,7 +265,7 @@ export const CurrenciesWidgets = [
     price: '2,198',
     gros: 73,
     chart: {
-      color: ['#54BA4A'],
+      color: ['#49A8D8'],
       label: ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov'],
       series: [30, 25, 36, 30, 64, 50, 45, 62, 60, 64],
     },

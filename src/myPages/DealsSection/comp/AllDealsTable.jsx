@@ -1039,8 +1039,8 @@ const ProductGrid = ({ photoIndexSlider, setPhotoIndexSlider }) => {
     toggleModal();
   };
 
-  const handleViewDetails = (user) => {
-    history(`/deals/${user._id}`);
+  const handleViewDetails = () => {
+    history(`/deals/1`);
   };
 
   const handleViewInquiry = (deal) => {

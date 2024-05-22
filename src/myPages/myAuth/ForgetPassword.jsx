@@ -6,6 +6,7 @@ import logoWhite from "../../assets/images/logo/logo.png";
 import logoDark from "../../assets/images/logo/logo_dark.png";
 import { SignIn } from "../../myConstants";
 import axios from 'axios';
+import styled from "styled-components";
 
 const ForgetPassword = ({ logoClassMain }) => {
   const [togglePassword, setTogglePassword] = useState(false);
@@ -112,6 +113,7 @@ const ForgetPassword = ({ logoClassMain }) => {
                           className: "img-fluid for-light",
                           src: logoWhite,
                           alt: "loginpage",
+                          style: { width: "30%" }
                         }}
                       />
                       <Image

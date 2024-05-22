@@ -220,7 +220,7 @@ export const LearningOverviewChartData = {
         },
       },
     },
-    colors: ['var(--theme-deafult)', '#F47DEA', '#FFA941', '#FFC200', '#54BA4A', '#3DA831', '#57B9F6', '#FF3377', '#773ACE', '#945CFF', '#31a911'],
+    colors: ['var(--theme-deafult)', '#F47DEA', '#FFA941', '#FFC200', '#49A8D8', '#3DA831', '#57B9F6', '#FF3377', '#773ACE', '#945CFF', '#31a911'],
     stroke: {
       width: 1.5,
       curve: 'smooth',
@@ -428,7 +428,7 @@ export const UpcomingOptionsChartData = {
         {
           x: 'Theme Development',
           y: [new Date('2022-01-8').getTime(), new Date('2022-02-30').getTime()],
-          strokeColor: '#54BA4A',
+          strokeColor: '#49A8D8',
           fillColor: 'var(--white)',
         },
         {

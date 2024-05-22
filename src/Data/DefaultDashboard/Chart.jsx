@@ -1027,7 +1027,7 @@ export const TimeLineChart = {
         {
           x: 'Design',
           y: [new Date('2022-02-20').getTime(), new Date('2022-04-08').getTime()],
-          fillColor: '#54BA4A',
+          fillColor: '#49A8D8',
         },
         {
           x: 'Coding',
