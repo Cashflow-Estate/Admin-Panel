@@ -14,7 +14,7 @@ import { ToastContainer, toast } from "react-toastify";
 
 const Signup = ({ selected }) => {
   const [email, setEmail] = useState("zaidiabid51472@gmail.com");
-  const [userName, setUsername] = useState("Abid Zaidi");
+  const [name, setname] = useState("Abid Zaidi");
   const [password, setPassword] = useState("test123");
   const [confirmPassword, setConfirmPassword] = useState("test123");
   const [phoneNumber, setPhoneNumber] = useState("+92123456789");
@@ -24,10 +24,10 @@ const Signup = ({ selected }) => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_API_BASE_URL}/users/register`,
+        `${process.env.REACT_APP_API_BASE_URL}/auth/v1/user/signup`,
         {
           email,
-          userName,
+          name,
           password,
           phoneNumber,
         }
@@ -41,7 +41,7 @@ const Signup = ({ selected }) => {
           "signupData",
           JSON.stringify({
             email,
-            userName,
+            name,
             password,
             phoneNumber,
           })
@@ -68,8 +68,8 @@ const Signup = ({ selected }) => {
                     <Input
                       className="form-control"
                       type="text"
-                      onChange={(e) => setUsername(e.target.value)}
-                      value={userName}
+                      onChange={(e) => setname(e.target.value)}
+                      value={name}
                     />
                   </FormGroup>
                   <FormGroup>
@@ -171,7 +171,7 @@ export default Signup;
 
 // const Signup = ({ selected }) => {
 //   const [email, setEmail] = useState("test@gmail.com");
-//   const [username, setUsername] = useState("Abid Zaidi");
+//   const [name, setname] = useState("Abid Zaidi");
 //   const [password, setPassword] = useState("test123");
 //   const [confirmPassword, setConfirmPassword] = useState("test123");
 //   const [phoneNumber, setPhoneNumber] = useState("+92123456789");
@@ -192,8 +192,8 @@ export default Signup;
 //                     <Input
 //                       className="form-control"
 //                       type="text"
-//                       onChange={(e) => setUsername(e.target.value)}
-//                       value={username}
+//                       onChange={(e) => setname(e.target.value)}
+//                       value={name}
 //                     />
 //                   </FormGroup>
 //                   <FormGroup>
